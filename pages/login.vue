@@ -91,7 +91,7 @@ const { $pinia } = useNuxtApp()
 const authStore = useAuthStore($pinia)
 const translationStore = useTranslationStore($pinia)
 
-const t = (key: string, params?: Record<string, any>) => translationStore.t(key, params)
+const t = (key, params) => translationStore.t(key, params)
 
 const username = ref('')
 const password = ref('')
