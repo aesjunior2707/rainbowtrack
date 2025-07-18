@@ -8,7 +8,10 @@
           <div class="flex items-center">
             <NuxtLink to="/" class="flex items-center">
               <div class="w-8 h-8 bg-gradient-to-r from-primary-600 to-secondary-500 rounded-full mr-3"></div>
-              <span class="text-xl font-bold text-primary-600">Rainbow Sales</span>
+              <div class="text-xl font-bold text-primary-600">
+                <div>Rainbow</div>
+                <div class="-mt-1">Track</div>
+              </div>
             </NuxtLink>
           </div>
 
@@ -118,10 +121,10 @@ const showUserMenu = ref(false)
 const mobileMenuOpen = ref(false)
 
 const navigation = [
-  { name: 'Dashboard', href: '/', icon: Home },
-  { name: 'Negócios', href: '/deals', icon: ShoppingCart },
+  { name: 'Painel', href: '/', icon: Home },
+  { name: 'Rastreamento', href: '/deals', icon: ShoppingCart },
   { name: 'Clientes', href: '/customers', icon: Users },
-  { name: 'Produtos', href: '/products', icon: Package }
+  { name: 'Catálogo', href: '/products', icon: Package }
 ]
 
 const handleLogout = async () => {

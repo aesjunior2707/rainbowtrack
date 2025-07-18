@@ -13,6 +13,7 @@ export default defineNuxtConfig({
     manifest: {
       name: 'Rainbow Track',
       short_name: 'Rainbow Track',
+      description: 'Sistema de Rastreamento e Vendas Agrícolas',
       theme_color: '#006E68',
       background_color: '#ffffff',
       display: 'standalone',

@@ -6,11 +6,11 @@
         <div class="flex justify-between items-center">
           <div>
             <h1 class="text-2xl font-bold text-gray-900">
-              Dashboard
+              Dashboard - Rainbow Track
             </h1>
             <ClientOnly>
               <p class="text-gray-600">
-                Bem-vindo, {{ authStore.user?.name }}!
+                Bem-vindo ao Rainbow Track, {{ authStore.user?.name }}!
               </p>
             </ClientOnly>
           </div>

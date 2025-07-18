@@ -5,7 +5,7 @@
         <!-- Header -->
         <div class="flex justify-between items-center">
           <h1 class="text-2xl font-bold text-gray-900">
-            Novo Negócio
+            Novo Rastreamento
           </h1>
           <NuxtLink
             to="/deals"

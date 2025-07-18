@@ -9,7 +9,7 @@
 useHead({
   title: 'Rainbow Track',
   meta: [
-    { name: 'description', content: 'Sistema de Vendas Agrícolas' }
+    { name: 'description', content: 'Sistema de Rastreamento e Vendas Agrícolas' }
   ]
 })
 </script>

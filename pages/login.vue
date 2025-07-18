@@ -8,7 +8,7 @@
             <div>Track</div>
           </h1>
           <p class="text-gray-600">
-            Sistema de Vendas Agrícolas
+            Sistema de Rastreamento e Vendas
           </p>
         </div>
 

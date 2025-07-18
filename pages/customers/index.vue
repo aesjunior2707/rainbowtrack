@@ -5,7 +5,7 @@
         <!-- Header -->
         <div class="flex justify-between items-center">
           <h1 class="text-2xl font-bold text-gray-900">
-            Clientes
+            Clientes - Rainbow Track
           </h1>
           <button
             @click="showNewCustomerModal = true"

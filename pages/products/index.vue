@@ -5,7 +5,7 @@
         <!-- Header -->
         <div class="flex justify-between items-center">
           <h1 class="text-2xl font-bold text-gray-900">
-            Produtos
+            Catálogo de Produtos
           </h1>
         </div>
 
