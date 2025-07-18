@@ -8,33 +8,33 @@
             <div>Track</div>
           </h1>
           <p class="text-gray-600">
-            {{ $t('app.description') }}
+            {{ t('app.description') }}
           </p>
         </div>
 
         <form @submit.prevent="handleLogin" class="space-y-6">
           <div>
             <label class="block text-sm font-medium text-gray-700 mb-2">
-              {{ $t('auth.username') }}
+              {{ t('auth.username') }}
             </label>
             <input
               v-model="username"
               type="text"
               class="input-field"
-              :placeholder="$t('auth.username')"
+              :placeholder="t('auth.username')"
               required
             />
           </div>
 
           <div>
             <label class="block text-sm font-medium text-gray-700 mb-2">
-              {{ $t('auth.password') }}
+              {{ t('auth.password') }}
             </label>
             <input
               v-model="password"
               type="password"
               class="input-field"
-              :placeholder="$t('auth.password')"
+              :placeholder="t('auth.password')"
               required
             />
           </div>
@@ -42,10 +42,10 @@
           <div class="flex items-center justify-between">
             <label class="flex items-center">
               <input type="checkbox" class="mr-2" />
-              <span class="text-sm text-gray-600">{{ $t('auth.remember') }}</span>
+              <span class="text-sm text-gray-600">{{ t('auth.remember') }}</span>
             </label>
             <a href="#" class="text-sm text-primary-600 hover:text-primary-500">
-              {{ $t('auth.forgot_password') }}
+              {{ t('auth.forgot_password') }}
             </a>
           </div>
 
@@ -54,8 +54,8 @@
             class="btn-primary w-full"
             :disabled="loading"
           >
-            <span v-if="loading">{{ $t('auth.loading') }}</span>
-            <span v-else>{{ $t('auth.login') }}</span>
+            <span v-if="loading">{{ t('auth.loading') }}</span>
+            <span v-else>{{ t('auth.login') }}</span>
           </button>
 
           <div v-if="error" class="text-red-600 text-sm text-center">
@@ -65,7 +65,7 @@
 
         <div class="mt-8 text-center">
           <div class="text-sm text-gray-600 mb-4">
-            {{ $t('auth.demo_users') }}
+            {{ t('auth.demo_users') }}
           </div>
           <div class="text-xs text-gray-500 space-y-1">
             <div>leonardo.campos / senha123</div>
@@ -89,6 +89,9 @@ definePageMeta({
 
 const { $pinia } = useNuxtApp()
 const authStore = useAuthStore($pinia)
+const translationStore = useTranslationStore($pinia)
+
+const t = (key: string, params?: Record<string, any>) => translationStore.t(key, params)
 
 const username = ref('')
 const password = ref('')
@@ -105,12 +108,17 @@ const handleLogin = async () => {
     if (success) {
       await navigateTo('/')
     } else {
-      error.value = 'Invalid username or password'
+      error.value = t('auth.invalid_credentials')
     }
   } catch (e) {
-    error.value = 'Login failed. Please try again.'
+    error.value = t('auth.login_failed')
   } finally {
     loading.value = false
   }
 }
+
+// Initialize translation store
+onMounted(() => {
+  translationStore.initLocale()
+})
 </script>

@@ -20,12 +20,12 @@
             <NuxtLink
               v-for="item in navigation"
               :key="item.name"
-              :to="localePath(item.href)"
+              :to="item.href"
               class="text-gray-700 hover:text-primary-600 px-3 py-2 rounded-md text-sm font-medium transition-colors"
               :class="{ 'text-primary-600 bg-primary-50': $route.path === item.href }"
             >
               <component :is="item.icon" class="w-4 h-4 inline mr-2" />
-              {{ $t(item.nameKey) }}
+              {{ t(item.nameKey) }}
             </NuxtLink>
           </div>
 
@@ -60,7 +60,7 @@
                     class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 flex items-center"
                   >
                     <LogOut class="w-4 h-4 mr-2" />
-                    {{ $t('auth.logout') }}
+                    {{ t('auth.logout') }}
                   </button>
                 </div>
               </div>
@@ -83,15 +83,12 @@
           <NuxtLink
             v-for="item in navigation"
             :key="item.name"
-            :to="localePath(item.href)"
+            :to="item.href"
             class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-primary-600 hover:bg-gray-50"
             :class="{ 'text-primary-600 bg-primary-50': $route.path === item.href }"
           >
             <component :is="item.icon" class="w-4 h-4 inline mr-2" />
-            {{ $t(item.nameKey) }}
-              <div>Rainbow</div>
-              <div class="-mt-1">Track</div>
-            </div>
+            {{ t(item.nameKey) }}
           </NuxtLink>
         </div>
       </div>
@@ -117,7 +114,9 @@ import {
 
 const { $pinia } = useNuxtApp()
 const authStore = useAuthStore($pinia)
-const localePath = useLocalePath()
+const translationStore = useTranslationStore($pinia)
+
+const t = (key: string, params?: Record<string, any>) => translationStore.t(key, params)
 
 const showUserMenu = ref(false)
 const mobileMenuOpen = ref(false)
@@ -141,5 +140,8 @@ onMounted(() => {
       showUserMenu.value = false
     }
   })
+  
+  // Initialize translation store
+  translationStore.initLocale()
 })
 </script>
