@@ -437,8 +437,5 @@ const handleSubmit = () => {
 onMounted(() => {
   const today = new Date()
   reportDate.value = today.toISOString().split('T')[0]
-  
-  // Initialize translation store
-  translationStore.initLocale()
 })
 </script>

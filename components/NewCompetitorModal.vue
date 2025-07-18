@@ -145,8 +145,4 @@ const handleSubmit = () => {
 }
 
 // Initialize translation store
-onMounted(() => {
-  translationStore.initLocale()
-})
 </script>
-</template>

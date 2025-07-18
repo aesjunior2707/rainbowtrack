@@ -43,11 +43,6 @@ const switchLanguage = (locale) => {
   showLanguages.value = false
 }
 
-// Initialize locale on mount
-onMounted(() => {
-  translationStore.initLocale()
-})
-
 // Close dropdown when clicking outside
 onMounted(() => {
   document.addEventListener('click', (e) => {

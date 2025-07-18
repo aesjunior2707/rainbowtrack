@@ -191,8 +191,4 @@ const handleCompetitorCreated = () => {
   showNewCompetitorModal.value = false
 }
 
-// Initialize translation store
-onMounted(() => {
-  translationStore.initLocale()
-})
 </script>

@@ -296,8 +296,4 @@ const getPriceDifferenceText = (report) => {
   return `${currency} 0.00`
 }
 
-// Initialize translation store
-onMounted(() => {
-  translationStore.initLocale()
-})
 </script>

@@ -117,8 +117,4 @@ const handleLogin = async () => {
   }
 }
 
-// Initialize translation store
-onMounted(() => {
-  translationStore.initLocale()
-})
 </script>

@@ -31,7 +31,9 @@
 
           <!-- User Menu -->
           <div class="flex items-center space-x-4">
-            <LanguageSelector />
+            <ClientOnly>
+              <LanguageSelector />
+            </ClientOnly>
             <ClientOnly>
               <div class="relative">
                 <button
@@ -142,8 +144,5 @@ onMounted(() => {
       showUserMenu.value = false
     }
   })
-  
-  // Initialize translation store
-  translationStore.initLocale()
 })
 </script>

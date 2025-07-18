@@ -263,8 +263,4 @@ const getPriceDifferenceColor = (report) => {
   if (difference < 0) return 'text-green-600' // We're cheaper
   return 'text-gray-600' // Same price
 }
-// Initialize translation store
-onMounted(() => {
-  translationStore.initLocale()
-})
 </script>
