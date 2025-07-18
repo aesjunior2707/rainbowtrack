@@ -3,8 +3,9 @@
     <div class="max-w-md w-full mx-4">
       <div class="bg-white rounded-lg shadow-xl p-8">
         <div class="text-center mb-8">
-          <h1 class="text-3xl font-bold text-primary-600 mb-2">
-            Rainbow Sales
+          <h1 class="text-3xl font-bold text-primary-600 mb-2 leading-tight">
+            <div>Rainbow</div>
+            <div>Track</div>
           </h1>
           <p class="text-gray-600">
             Sistema de Vendas Agrícolas

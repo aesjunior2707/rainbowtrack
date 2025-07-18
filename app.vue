@@ -7,9 +7,9 @@
 <script setup>
 // Global setup
 useHead({
-  title: 'Rainbow Sales',
+  title: 'Rainbow Track',
   meta: [
-    { name: 'description', content: 'Agricultural Sales Management System' }
+    { name: 'description', content: 'Sistema de Vendas Agrícolas' }
   ]
 })
 </script>

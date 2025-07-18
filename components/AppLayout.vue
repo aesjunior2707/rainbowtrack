@@ -84,7 +84,10 @@
             :class="{ 'text-primary-600 bg-primary-50': $route.path === item.href }"
           >
             <component :is="item.icon" class="w-4 h-4 inline mr-2" />
-            {{ item.name }}
+            <div class="text-xl font-bold text-primary-600">
+              <div>Rainbow</div>
+              <div class="-mt-1">Track</div>
+            </div>
           </NuxtLink>
         </div>
       </div>

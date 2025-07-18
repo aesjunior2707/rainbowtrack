@@ -11,8 +11,8 @@ export default defineNuxtConfig({
   pwa: {
     registerType: 'autoUpdate',
     manifest: {
-      name: 'Rainbow Sales',
-      short_name: 'Rainbow',
+      name: 'Rainbow Track',
+      short_name: 'Rainbow Track',
       theme_color: '#006E68',
       background_color: '#ffffff',
       display: 'standalone',
