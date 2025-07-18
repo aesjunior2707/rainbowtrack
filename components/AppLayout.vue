@@ -7,7 +7,9 @@
           <!-- Logo -->
           <div class="flex items-center">
             <NuxtLink to="/" class="flex items-center">
-              <div class="w-8 h-8 bg-gradient-to-r from-primary-600 to-secondary-500 rounded-full mr-3"></div>
+              <div class="w-8 h-8 mr-3">
+                <img src="/logo.png" alt="Rainbow Track Logo" class="w-full h-full object-contain" />
+              </div>
               <div class="text-xl font-bold text-primary-600">
                 <div>Rainbow</div>
                 <div class="-mt-1">Track</div>
