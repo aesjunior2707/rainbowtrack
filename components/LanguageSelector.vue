@@ -57,32 +57,3 @@ onMounted(() => {
   })
 })
 </script>
-</template>
-
-<script setup>
-import { Globe, ChevronDown, Check } from 'lucide-vue-next'
-
-const { $pinia } = useNuxtApp()
-const translationStore = useTranslationStore($pinia)
-
-const showLanguages = ref(false)
-
-const switchLanguage = (locale) => {
-  translationStore.setLocale(locale)
-  showLanguages.value = false
-}
-
-// Initialize locale on mount
-onMounted(() => {
-  translationStore.initLocale()
-})
-
-// Close dropdown when clicking outside
-onMounted(() => {
-  document.addEventListener('click', (e) => {
-    if (!e.target.closest('.relative')) {
-      showLanguages.value = false
-    }
-  })
-})
-</script>
