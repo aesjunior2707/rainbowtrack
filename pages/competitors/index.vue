@@ -196,4 +196,3 @@ onMounted(() => {
   translationStore.initLocale()
 })
 </script>
-</template>
