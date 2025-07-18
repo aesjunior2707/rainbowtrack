@@ -1,0 +1,73 @@
+import { defineStore } from 'pinia'
+
+export const useAuthStore = defineStore('auth', {
+  state: () => ({
+    user: null as any,
+    isAuthenticated: false,
+    users: [
+      {
+        id: 1,
+        username: 'leonardo.campos',
+        password: 'senha123',
+        name: 'Leonardo Campos',
+        email: 'leonardo.campos@rainbow.com',
+        role: 'sales_rep'
+      },
+      {
+        id: 2,
+        username: 'leonardo.campos2',
+        password: 'senha123',
+        name: 'Leonardo Campos',
+        email: 'leonardo.campos2@rainbow.com',
+        role: 'sales_rep'
+      },
+      {
+        id: 3,
+        username: 'admin',
+        password: 'admin123',
+        name: 'Administrador',
+        email: 'admin@rainbow.com',
+        role: 'admin'
+      }
+    ]
+  }),
+
+  actions: {
+    async login(username: string, password: string) {
+      const user = this.users.find(u => u.username === username && u.password === password)
+      
+      if (user) {
+        this.user = user
+        this.isAuthenticated = true
+        
+        // Store in localStorage for persistence
+        if (process.client) {
+          localStorage.setItem('rainbow_user', JSON.stringify(user))
+        }
+        
+        return true
+      }
+      
+      return false
+    },
+
+    async logout() {
+      this.user = null
+      this.isAuthenticated = false
+      
+      if (process.client) {
+        localStorage.removeItem('rainbow_user')
+      }
+    },
+
+    async checkAuth() {
+      if (process.client) {
+        const stored = localStorage.getItem('rainbow_user')
+        if (stored) {
+          this.user = JSON.parse(stored)
+          this.isAuthenticated = true
+        }
+      }
+    }
+  }
+})

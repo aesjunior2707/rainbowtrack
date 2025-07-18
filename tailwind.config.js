@@ -1,0 +1,43 @@
+module.exports = {
+  content: [
+    "./components/**/*.{js,vue,ts}",
+    "./layouts/**/*.vue",
+    "./pages/**/*.vue",
+    "./plugins/**/*.{js,ts}",
+    "./nuxt.config.{js,ts}",
+    "./app.vue"
+  ],
+  theme: {
+    extend: {
+      colors: {
+        primary: {
+          50: '#f0fdfc',
+          100: '#ccfbf1',
+          200: '#99f6e4',
+          300: '#5eead4',
+          400: '#2dd4bf',
+          500: '#14b8a6',
+          600: '#006E68',
+          700: '#0f766e',
+          800: '#115e59',
+          900: '#134e4a',
+          950: '#042f2e',
+        },
+        secondary: {
+          50: '#f7fee7',
+          100: '#ecfccb',
+          200: '#d9f99d',
+          300: '#bef264',
+          400: '#a3e635',
+          500: '#63B052',
+          600: '#65a30d',
+          700: '#4d7c0f',
+          800: '#3f6212',
+          900: '#365314',
+          950: '#1a2e05',
+        }
+      }
+    },
+  },
+  plugins: [],
+}
