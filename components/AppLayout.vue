@@ -8,7 +8,7 @@
           <div class="flex items-center">
             <NuxtLink to="/" class="flex items-center">
               <div class="w-8 h-8 mr-3">
-                <img src="/logo.png" alt="Rainbow Track Logo" class="w-full h-full object-contain" />
+                <img src="/8f2f8613-ba62-409f-986d-78b711b47833.png" alt="Rainbow Track Logo" class="w-full h-full object-contain" />
               </div>
               <div class="text-xl font-bold text-primary-600">
                 <div>Rainbow</div>
