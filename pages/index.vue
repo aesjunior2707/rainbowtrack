@@ -6,11 +6,11 @@
         <div class="flex justify-between items-center">
           <div>
             <h1 class="text-2xl font-bold text-gray-900">
-              Dashboard - Rainbow Track
+              {{ $t('dashboard.title') }}
             </h1>
             <ClientOnly>
               <p class="text-gray-600">
-                Bem-vindo ao Rainbow Track, {{ authStore.user?.name }}!
+                {{ $t('dashboard.welcome', { name: authStore.user?.name }) }}
               </p>
             </ClientOnly>
           </div>
@@ -28,7 +28,7 @@
           <div class="card p-6">
             <div class="flex items-center justify-between">
               <div>
-                <p class="text-sm text-gray-600">Vendas deste Mês</p>
+                <p class="text-sm text-gray-600">{{ $t('dashboard.sales_month') }}</p>
                 <p class="text-2xl font-bold text-primary-600">R$ 45.230</p>
               </div>
               <div class="bg-primary-100 p-3 rounded-full">
@@ -40,7 +40,7 @@
           <div class="card p-6">
             <div class="flex items-center justify-between">
               <div>
-                <p class="text-sm text-gray-600">Metas Alcançadas</p>
+                <p class="text-sm text-gray-600">{{ $t('dashboard.goals_achieved') }}</p>
                 <p class="text-2xl font-bold text-secondary-500">85%</p>
               </div>
               <div class="bg-secondary-100 p-3 rounded-full">
@@ -52,7 +52,7 @@
           <div class="card p-6">
             <div class="flex items-center justify-between">
               <div>
-                <p class="text-sm text-gray-600">Negócios Ativos</p>
+                <p class="text-sm text-gray-600">{{ $t('dashboard.active_deals') }}</p>
                 <p class="text-2xl font-bold text-blue-600">12</p>
               </div>
               <div class="bg-blue-100 p-3 rounded-full">
@@ -64,7 +64,7 @@
           <div class="card p-6">
             <div class="flex items-center justify-between">
               <div>
-                <p class="text-sm text-gray-600">Clientes</p>
+                <p class="text-sm text-gray-600">{{ $t('dashboard.customers') }}</p>
                 <p class="text-2xl font-bold text-purple-600">{{ dataStore.customers.length }}</p>
               </div>
               <div class="bg-purple-100 p-3 rounded-full">
@@ -80,7 +80,7 @@
           <div class="card">
             <div class="p-6 border-b">
               <h2 class="text-lg font-semibold text-gray-900">
-                Negócios Recentes
+                {{ $t('dashboard.recent_deals') }}
               </h2>
             </div>
             <div class="divide-y">
@@ -118,7 +118,7 @@
           <div class="card">
             <div class="p-6 border-b">
               <h2 class="text-lg font-semibold text-gray-900">
-                Produtos Mais Vendidos
+                {{ $t('dashboard.top_products') }}
               </h2>
             </div>
             <div class="divide-y">
@@ -147,29 +147,29 @@
         <!-- Quick Actions -->
         <div class="card p-6">
           <h2 class="text-lg font-semibold text-gray-900 mb-4">
-            Quick Actions
+            {{ $t('dashboard.quick_actions') }}
           </h2>
           <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
             <NuxtLink
-              to="/deals/new"
+              :to="localePath('/deals/new')"
               class="btn-primary text-center py-3 px-6 rounded-lg no-underline"
             >
               <Plus class="w-5 h-5 inline mr-2" />
-              Novo Negócio
+              {{ $t('dashboard.new_deal') }}
             </NuxtLink>
             <NuxtLink
-              to="/customers/new"
+              :to="localePath('/customers')"
               class="btn-secondary text-center py-3 px-6 rounded-lg no-underline"
             >
               <UserPlus class="w-5 h-5 inline mr-2" />
-              Novo Cliente
+              {{ $t('dashboard.new_customer') }}
             </NuxtLink>
             <NuxtLink
-              to="/products"
+              :to="localePath('/products')"
               class="btn-outline text-center py-3 px-6 rounded-lg no-underline"
             >
               <Package class="w-5 h-5 inline mr-2" />
-              Produtos
+              {{ $t('dashboard.products') }}
             </NuxtLink>
           </div>
         </div>
@@ -188,6 +188,7 @@ definePageMeta({
 const { $pinia } = useNuxtApp()
 const authStore = useAuthStore($pinia)
 const dataStore = useDataStore($pinia)
+const localePath = useLocalePath()
 
 const recentDeals = computed(() => {
   return dataStore.deals.slice(0, 5)

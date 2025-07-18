@@ -1,0 +1,124 @@
+{
+  "app": {
+    "name": "Rainbow Track",
+    "description": "Agricultural Sales Tracking System"
+  },
+  "auth": {
+    "login": "Login",
+    "username": "Username",
+    "password": "Password",
+    "remember": "Remember",
+    "forgot_password": "Forgot password?",
+    "loading": "Loading...",
+    "invalid_credentials": "Invalid username or password",
+    "login_failed": "Login failed. Please try again.",
+    "demo_users": "Demo Users:",
+    "logout": "Logout"
+  },
+  "navigation": {
+    "dashboard": "Dashboard",
+    "tracking": "Tracking",
+    "customers": "Customers",
+    "catalog": "Catalog"
+  },
+  "dashboard": {
+    "title": "Dashboard - Rainbow Track",
+    "welcome": "Welcome to Rainbow Track, {name}!",
+    "sales_month": "Sales This Month",
+    "goals_achieved": "Goals Achieved",
+    "active_deals": "Active Deals",
+    "customers": "Customers",
+    "recent_deals": "Recent Deals",
+    "top_products": "Top Products",
+    "quick_actions": "Quick Actions",
+    "new_deal": "New Deal",
+    "new_customer": "New Customer",
+    "products": "Products"
+  },
+  "deals": {
+    "title": "Deal Tracking",
+    "new_deal": "New Deal",
+    "new_tracking": "New Tracking",
+    "deal_number": "Deal #{id}",
+    "order_date": "Order Date:",
+    "delivery_date": "Delivery Date:",
+    "payment_method": "Payment Method:",
+    "payment_terms": "Terms:",
+    "products": "Products:",
+    "additional_products": "+{count} additional product(s)",
+    "sent_by_email": "Sent by email",
+    "no_deals": "No deals found",
+    "create_first": "Create First Deal",
+    "back": "Back",
+    "customer": "Customer",
+    "select_customer": "Select Customer",
+    "deal_details": "Deal Details",
+    "select_payment_method": "Select Payment Method",
+    "select_payment_terms": "Select Payment Terms",
+    "send_by_email": "Send by Email",
+    "cancel": "Cancel",
+    "confirm_deal": "Confirm Deal",
+    "status": {
+      "confirmed": "Confirmed",
+      "pending": "Pending",
+      "delivered": "Delivered",
+      "cancelled": "Cancelled"
+    },
+    "payment_methods": {
+      "credit_card": "Credit Card",
+      "bank_transfer": "Bank Transfer",
+      "cash": "Cash",
+      "check": "Check"
+    },
+    "payment_terms": {
+      "immediate": "Immediate",
+      "30_days": "30 Days",
+      "60_days": "60 Days",
+      "90_days": "90 Days"
+    }
+  },
+  "customers": {
+    "title": "Customers - Rainbow Track",
+    "new_customer": "New Customer",
+    "search": "Search",
+    "no_customers": "No customers found",
+    "name": "Name",
+    "company": "Company",
+    "email": "Email",
+    "phone": "Phone",
+    "address": "Address",
+    "save": "Save",
+    "cancel": "Cancel"
+  },
+  "products": {
+    "title": "Product Catalog",
+    "category": "Category",
+    "search": "Search products...",
+    "price": "Price:",
+    "packaging": "Packaging:",
+    "registered_crops": "Registered Crops:",
+    "add_product": "Add Product",
+    "selected_products": "{count} product(s) selected",
+    "quantity": "Qty:",
+    "total": "Total: ${amount}",
+    "no_products": "No products found",
+    "categories": {
+      "fungicides": "Fungicides",
+      "insecticides": "Insecticides",
+      "herbicides": "Herbicides"
+    }
+  },
+  "common": {
+    "view": "View",
+    "edit": "Edit",
+    "delete": "Delete",
+    "close": "Close",
+    "save": "Save",
+    "cancel": "Cancel",
+    "loading": "Loading...",
+    "search": "Search",
+    "total": "Total",
+    "date": "Date",
+    "actions": "Actions"
+  }
+}

@@ -1,0 +1,124 @@
+{
+  "app": {
+    "name": "Rainbow Track",
+    "description": "Sistema de Rastreamento e Vendas"
+  },
+  "auth": {
+    "login": "Entrar",
+    "username": "Usuário",
+    "password": "Senha",
+    "remember": "Lembrar",
+    "forgot_password": "Esqueceu a senha?",
+    "loading": "Carregando...",
+    "invalid_credentials": "Usuário ou senha inválidos",
+    "login_failed": "Falha no login. Tente novamente.",
+    "demo_users": "Usuários Demo:",
+    "logout": "Sair"
+  },
+  "navigation": {
+    "dashboard": "Painel",
+    "tracking": "Rastreamento",
+    "customers": "Clientes",
+    "catalog": "Catálogo"
+  },
+  "dashboard": {
+    "title": "Dashboard - Rainbow Track",
+    "welcome": "Bem-vindo ao Rainbow Track, {name}!",
+    "sales_month": "Vendas deste Mês",
+    "goals_achieved": "Metas Alcançadas",
+    "active_deals": "Negócios Ativos",
+    "customers": "Clientes",
+    "recent_deals": "Negócios Recentes",
+    "top_products": "Produtos Mais Vendidos",
+    "quick_actions": "Ações Rápidas",
+    "new_deal": "Novo Negócio",
+    "new_customer": "Novo Cliente",
+    "products": "Produtos"
+  },
+  "deals": {
+    "title": "Rastreamento de Negócios",
+    "new_deal": "Novo Negócio",
+    "new_tracking": "Novo Rastreamento",
+    "deal_number": "Negócio #{id}",
+    "order_date": "Data do Pedido:",
+    "delivery_date": "Data de Entrega:",
+    "payment_method": "Método de Pagamento:",
+    "payment_terms": "Condições:",
+    "products": "Produtos:",
+    "additional_products": "+{count} produto(s) adicional(is)",
+    "sent_by_email": "Enviado por email",
+    "no_deals": "Nenhum negócio encontrado",
+    "create_first": "Criar Primeiro Negócio",
+    "back": "Voltar",
+    "customer": "Cliente",
+    "select_customer": "Selecionar Cliente",
+    "deal_details": "Detalhes do Negócio",
+    "select_payment_method": "Selecionar Método de Pagamento",
+    "select_payment_terms": "Selecionar Condições de Pagamento",
+    "send_by_email": "Enviar por Email",
+    "cancel": "Cancelar",
+    "confirm_deal": "Confirmar Negócio",
+    "status": {
+      "confirmed": "Confirmado",
+      "pending": "Pendente",
+      "delivered": "Entregue",
+      "cancelled": "Cancelado"
+    },
+    "payment_methods": {
+      "credit_card": "Cartão de Crédito",
+      "bank_transfer": "Transferência",
+      "cash": "Dinheiro",
+      "check": "Cheque"
+    },
+    "payment_terms": {
+      "immediate": "À Vista",
+      "30_days": "30 Dias",
+      "60_days": "60 Dias",
+      "90_days": "90 Dias"
+    }
+  },
+  "customers": {
+    "title": "Clientes - Rainbow Track",
+    "new_customer": "Novo Cliente",
+    "search": "Pesquisar",
+    "no_customers": "Nenhum cliente encontrado",
+    "name": "Nome",
+    "company": "Empresa",
+    "email": "Email",
+    "phone": "Telefone",
+    "address": "Endereço",
+    "save": "Salvar",
+    "cancel": "Cancelar"
+  },
+  "products": {
+    "title": "Catálogo de Produtos",
+    "category": "Categoria",
+    "search": "Buscar produtos...",
+    "price": "Preço:",
+    "packaging": "Embalagem:",
+    "registered_crops": "Cultivos Registrados:",
+    "add_product": "Adicionar Produto",
+    "selected_products": "{count} produto(s) selecionado(s)",
+    "quantity": "Qty:",
+    "total": "Total: R$ {amount}",
+    "no_products": "Nenhum produto encontrado",
+    "categories": {
+      "fungicides": "Fungicidas",
+      "insecticides": "Inseticidas",
+      "herbicides": "Herbicidas"
+    }
+  },
+  "common": {
+    "view": "Visualizar",
+    "edit": "Editar",
+    "delete": "Excluir",
+    "close": "Fechar",
+    "save": "Salvar",
+    "cancel": "Cancelar",
+    "loading": "Carregando...",
+    "search": "Pesquisar",
+    "total": "Total",
+    "date": "Data",
+    "actions": "Ações"
+  }
+}

@@ -20,17 +20,18 @@
             <NuxtLink
               v-for="item in navigation"
               :key="item.name"
-              :to="item.href"
+              :to="localePath(item.href)"
               class="text-gray-700 hover:text-primary-600 px-3 py-2 rounded-md text-sm font-medium transition-colors"
               :class="{ 'text-primary-600 bg-primary-50': $route.path === item.href }"
             >
               <component :is="item.icon" class="w-4 h-4 inline mr-2" />
-              {{ item.name }}
+              {{ $t(item.nameKey) }}
             </NuxtLink>
           </div>
 
           <!-- User Menu -->
           <div class="flex items-center space-x-4">
+            <LanguageSelector />
             <ClientOnly>
               <div class="relative">
                 <button
@@ -59,7 +60,7 @@
                     class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 flex items-center"
                   >
                     <LogOut class="w-4 h-4 mr-2" />
-                    Sair
+                    {{ $t('auth.logout') }}
                   </button>
                 </div>
               </div>
@@ -82,12 +83,12 @@
           <NuxtLink
             v-for="item in navigation"
             :key="item.name"
-            :to="item.href"
+            :to="localePath(item.href)"
             class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-primary-600 hover:bg-gray-50"
             :class="{ 'text-primary-600 bg-primary-50': $route.path === item.href }"
           >
             <component :is="item.icon" class="w-4 h-4 inline mr-2" />
-            <div class="text-xl font-bold text-primary-600">
+            {{ $t(item.nameKey) }}
               <div>Rainbow</div>
               <div class="-mt-1">Track</div>
             </div>
@@ -116,15 +117,16 @@ import {
 
 const { $pinia } = useNuxtApp()
 const authStore = useAuthStore($pinia)
+const localePath = useLocalePath()
 
 const showUserMenu = ref(false)
 const mobileMenuOpen = ref(false)
 
 const navigation = [
-  { name: 'Painel', href: '/', icon: Home },
-  { name: 'Rastreamento', href: '/deals', icon: ShoppingCart },
-  { name: 'Clientes', href: '/customers', icon: Users },
-  { name: 'Catálogo', href: '/products', icon: Package }
+  { nameKey: 'navigation.dashboard', href: '/', icon: Home },
+  { nameKey: 'navigation.tracking', href: '/deals', icon: ShoppingCart },
+  { nameKey: 'navigation.customers', href: '/customers', icon: Users },
+  { nameKey: 'navigation.catalog', href: '/products', icon: Package }
 ]
 
 const handleLogout = async () => {

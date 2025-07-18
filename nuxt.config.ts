@@ -6,8 +6,26 @@ export default defineNuxtConfig({
     '@nuxtjs/tailwindcss',
     '@vueuse/nuxt',
     '@pinia/nuxt',
-    '@vite-pwa/nuxt'
+    '@vite-pwa/nuxt',
+    '@nuxtjs/i18n'
   ],
+  i18n: {
+    locales: [
+      { code: 'pt-BR', name: 'Português', file: 'pt-BR.json' },
+      { code: 'en', name: 'English', file: 'en.json' },
+      { code: 'es', name: 'Español', file: 'es.json' },
+      { code: 'zh', name: '中文', file: 'zh.json' }
+    ],
+    lazy: true,
+    langDir: 'locales/',
+    defaultLocale: 'pt-BR',
+    strategy: 'prefix_except_default',
+    detectBrowserLanguage: {
+      useCookie: true,
+      cookieKey: 'i18n_redirected',
+      redirectOn: 'root'
+    }
+  },
   pwa: {
     registerType: 'autoUpdate',
     manifest: {

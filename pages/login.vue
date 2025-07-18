@@ -8,33 +8,33 @@
             <div>Track</div>
           </h1>
           <p class="text-gray-600">
-            Sistema de Rastreamento e Vendas
+            {{ $t('app.description') }}
           </p>
         </div>
 
         <form @submit.prevent="handleLogin" class="space-y-6">
           <div>
             <label class="block text-sm font-medium text-gray-700 mb-2">
-              Usuário
+              {{ $t('auth.username') }}
             </label>
             <input
               v-model="username"
               type="text"
               class="input-field"
-              placeholder="Usuário"
+              :placeholder="$t('auth.username')"
               required
             />
           </div>
 
           <div>
             <label class="block text-sm font-medium text-gray-700 mb-2">
-              Senha
+              {{ $t('auth.password') }}
             </label>
             <input
               v-model="password"
               type="password"
               class="input-field"
-              placeholder="Senha"
+              :placeholder="$t('auth.password')"
               required
             />
           </div>
@@ -42,10 +42,10 @@
           <div class="flex items-center justify-between">
             <label class="flex items-center">
               <input type="checkbox" class="mr-2" />
-              <span class="text-sm text-gray-600">Lembrar</span>
+              <span class="text-sm text-gray-600">{{ $t('auth.remember') }}</span>
             </label>
             <a href="#" class="text-sm text-primary-600 hover:text-primary-500">
-              Esqueceu a senha?
+              {{ $t('auth.forgot_password') }}
             </a>
           </div>
 
@@ -54,8 +54,8 @@
             class="btn-primary w-full"
             :disabled="loading"
           >
-            <span v-if="loading">Carregando...</span>
-            <span v-else>Entrar</span>
+            <span v-if="loading">{{ $t('auth.loading') }}</span>
+            <span v-else>{{ $t('auth.login') }}</span>
           </button>
 
           <div v-if="error" class="text-red-600 text-sm text-center">
@@ -65,7 +65,7 @@
 
         <div class="mt-8 text-center">
           <div class="text-sm text-gray-600 mb-4">
-            Demo Users:
+            {{ $t('auth.demo_users') }}
           </div>
           <div class="text-xs text-gray-500 space-y-1">
             <div>leonardo.campos / senha123</div>
@@ -74,7 +74,9 @@
           </div>
         </div>
 
-        <!-- Language Selector -->
+        <div class="mt-6 flex justify-center">
+          <LanguageSelector />
+        </div>
       </div>
     </div>
   </div>

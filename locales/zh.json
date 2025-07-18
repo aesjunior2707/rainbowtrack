@@ -1,0 +1,124 @@
+{
+  "app": {
+    "name": "Rainbow Track",
+    "description": "农业销售跟踪系统"
+  },
+  "auth": {
+    "login": "登录",
+    "username": "用户名",
+    "password": "密码",
+    "remember": "记住我",
+    "forgot_password": "忘记密码？",
+    "loading": "加载中...",
+    "invalid_credentials": "用户名或密码无效",
+    "login_failed": "登录失败。请重试。",
+    "demo_users": "演示用户：",
+    "logout": "退出"
+  },
+  "navigation": {
+    "dashboard": "仪表板",
+    "tracking": "跟踪",
+    "customers": "客户",
+    "catalog": "目录"
+  },
+  "dashboard": {
+    "title": "仪表板 - Rainbow Track",
+    "welcome": "欢迎使用 Rainbow Track，{name}！",
+    "sales_month": "本月销售额",
+    "goals_achieved": "目标达成",
+    "active_deals": "活跃交易",
+    "customers": "客户",
+    "recent_deals": "最近交易",
+    "top_products": "热门产品",
+    "quick_actions": "快速操作",
+    "new_deal": "新交易",
+    "new_customer": "新客户",
+    "products": "产品"
+  },
+  "deals": {
+    "title": "交易跟踪",
+    "new_deal": "新交易",
+    "new_tracking": "新跟踪",
+    "deal_number": "交易 #{id}",
+    "order_date": "订单日期：",
+    "delivery_date": "交付日期：",
+    "payment_method": "付款方式：",
+    "payment_terms": "付款条件：",
+    "products": "产品：",
+    "additional_products": "+{count} 个其他产品",
+    "sent_by_email": "已通过邮件发送",
+    "no_deals": "未找到交易",
+    "create_first": "创建第一个交易",
+    "back": "返回",
+    "customer": "客户",
+    "select_customer": "选择客户",
+    "deal_details": "交易详情",
+    "select_payment_method": "选择付款方式",
+    "select_payment_terms": "选择付款条件",
+    "send_by_email": "通过邮件发送",
+    "cancel": "取消",
+    "confirm_deal": "确认交易",
+    "status": {
+      "confirmed": "已确认",
+      "pending": "待处理",
+      "delivered": "已交付",
+      "cancelled": "已取消"
+    },
+    "payment_methods": {
+      "credit_card": "信用卡",
+      "bank_transfer": "银行转账",
+      "cash": "现金",
+      "check": "支票"
+    },
+    "payment_terms": {
+      "immediate": "立即",
+      "30_days": "30天",
+      "60_days": "60天",
+      "90_days": "90天"
+    }
+  },
+  "customers": {
+    "title": "客户 - Rainbow Track",
+    "new_customer": "新客户",
+    "search": "搜索",
+    "no_customers": "未找到客户",
+    "name": "姓名",
+    "company": "公司",
+    "email": "邮箱",
+    "phone": "电话",
+    "address": "地址",
+    "save": "保存",
+    "cancel": "取消"
+  },
+  "products": {
+    "title": "产品目录",
+    "category": "类别",
+    "search": "搜索产品...",
+    "price": "价格：",
+    "packaging": "包装：",
+    "registered_crops": "注册作物：",
+    "add_product": "添加产品",
+    "selected_products": "已选择 {count} 个产品",
+    "quantity": "数量：",
+    "total": "总计：¥{amount}",
+    "no_products": "未找到产品",
+    "categories": {
+      "fungicides": "杀菌剂",
+      "insecticides": "杀虫剂",
+      "herbicides": "除草剂"
+    }
+  },
+  "common": {
+    "view": "查看",
+    "edit": "编辑",
+    "delete": "删除",
+    "close": "关闭",
+    "save": "保存",
+    "cancel": "取消",
+    "loading": "加载中...",
+    "search": "搜索",
+    "total": "总计",
+    "date": "日期",
+    "actions": "操作"
+  }
+}
