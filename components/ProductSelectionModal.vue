@@ -55,7 +55,7 @@
             <div class="flex justify-between items-start">
               <div class="flex-1">
                 <h3 class="font-semibold text-gray-900 mb-1">{{ product.name }}</h3>
-                <p class="text-sm text-gray-600 mb-2">{{ product.brand }} • {{ product.packaging }}</p>
+                <p class="text-sm text-gray-600 mb-2">{{ product.brand }}</p>
                 
                 <!-- Crops -->
                 <div class="flex flex-wrap gap-1 mb-3">
