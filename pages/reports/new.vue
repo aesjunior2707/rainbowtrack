@@ -365,28 +365,7 @@ const formatPrice = (price) => {
   }).format(price)
 }
 
-const getPriceDifferenceColor = (item) => {
-  if (!item.product.ourPrice) return 'text-gray-600'
 
-  const difference = item.product.ourPrice - item.competitorPrice
-  if (difference > 0) return 'text-red-600' // We're more expensive
-  if (difference < 0) return 'text-green-600' // We're cheaper
-  return 'text-gray-600' // Same price
-}
-
-const getPriceDifferenceText = (item) => {
-  if (!item.product.ourPrice) return ''
-
-  const difference = item.product.ourPrice - item.competitorPrice
-  const percentage = Math.abs((difference / item.competitorPrice) * 100)
-
-  if (difference > 0) {
-    return `${percentage.toFixed(1)}% mais caro`
-  } else if (difference < 0) {
-    return `${percentage.toFixed(1)}% mais barato`
-  }
-  return 'Mesmo preço'
-}
 
 const canSubmit = computed(() => {
   return selectedCompetitor.value &&
