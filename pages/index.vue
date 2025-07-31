@@ -93,7 +93,7 @@
               class="btn-secondary text-center py-3 px-6 rounded-lg no-underline"
             >
               <Building2 class="w-5 h-5 inline mr-2" />
-              Concorrentes
+              {{ t('navigation.competitors') }}
             </NuxtLink>
             <NuxtLink
               to="/products"
