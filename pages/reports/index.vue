@@ -142,6 +142,7 @@
                   </button>
                   <button
                     v-if="isAdmin || report.reportedBy === authStore.user?.id"
+                    @click="handleEditReport(report)"
                     class="p-1.5 text-gray-500 hover:text-gray-700 hover:bg-gray-200 rounded transition-colors"
                     title="Editar"
                   >
@@ -173,7 +174,7 @@
         class="fixed top-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50 flex items-center space-x-2"
       >
         <CheckCircle class="w-5 h-5" />
-        <span>Captura verificada com sucesso!</span>
+        <span>{{ successMessage }}</span>
       </div>
 
       <!-- Verification Modal -->
@@ -182,6 +183,15 @@
         :report="selectedReportForModal"
         @close="showVerifyModal = false"
         @verified="handleReportVerified"
+      />
+
+      <!-- Edit Report Modal -->
+      <EditReportModal
+        v-if="showEditModal && selectedReport"
+        :report="selectedReport"
+        :data-store="dataStore"
+        @close="showEditModal = false"
+        @report-updated="handleReportUpdated"
       />
     </AppLayout>
   </div>
@@ -206,8 +216,10 @@ const filterCompetitor = ref('')
 const filterRegion = ref('')
 const filterVerified = ref('')
 const showVerifyModal = ref(false)
+const showEditModal = ref(false)
 const selectedReport = ref(null)
 const showSuccessNotification = ref(false)
+const successMessage = ref('')
 
 const isAdmin = computed(() => authStore.user?.role === 'admin')
 
@@ -346,6 +358,25 @@ const handleReportVerified = (reportId) => {
   selectedReport.value = null
 
   // Mostrar notificação de sucesso
+  successMessage.value = 'Captura verificada com sucesso!'
+  showSuccessNotification.value = true
+  setTimeout(() => {
+    showSuccessNotification.value = false
+  }, 3000)
+}
+
+const handleEditReport = (report) => {
+  selectedReport.value = report
+  showEditModal.value = true
+}
+
+const handleReportUpdated = (updatedReport) => {
+  dataStore.updatePriceReport(updatedReport.id, updatedReport)
+  showEditModal.value = false
+  selectedReport.value = null
+
+  // Mostrar notificação de sucesso
+  successMessage.value = 'Captura editada com sucesso!'
   showSuccessNotification.value = true
   setTimeout(() => {
     showSuccessNotification.value = false
