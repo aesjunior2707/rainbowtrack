@@ -54,21 +54,19 @@
               required
             >
               <option value="">{{ t('competitors.select_region') }}</option>
-              <option value="Nacional">{{ t('competitors.regions.national') }}</option>
-              <option value="Norte">{{ t('competitors.regions.north') }}</option>
-              <option value="Nordeste">{{ t('competitors.regions.northeast') }}</option>
-              <option value="Centro-Oeste">{{ t('competitors.regions.center_west') }}</option>
-              <option value="Sudeste">{{ t('competitors.regions.southeast') }}</option>
-              <option value="Sul">{{ t('competitors.regions.south') }}</option>
-              <option value="São Paulo">{{ t('competitors.regions.sao_paulo') }}</option>
-              <option value="Rio de Janeiro">{{ t('competitors.regions.rio_janeiro') }}</option>
-              <option value="Minas Gerais">{{ t('competitors.regions.minas_gerais') }}</option>
-              <option value="Rio Grande do Sul">{{ t('competitors.regions.rio_grande_sul') }}</option>
-              <option value="Paraná">{{ t('competitors.regions.parana') }}</option>
-              <option value="Santa Catarina">{{ t('competitors.regions.santa_catarina') }}</option>
-              <option value="Goiás">{{ t('competitors.regions.goias') }}</option>
-              <option value="Mato Grosso">{{ t('competitors.regions.mato_grosso') }}</option>
-              <option value="Mato Grosso do Sul">{{ t('competitors.regions.mato_grosso_sul') }}</option>
+              <option value="Minha Região">{{ t('competitors.regions.my_region') }}</option>
+              <option value="Região Norte">{{ t('competitors.regions.north_territory') }}</option>
+              <option value="Região Sul">{{ t('competitors.regions.south_territory') }}</option>
+              <option value="Região Leste">{{ t('competitors.regions.east_territory') }}</option>
+              <option value="Região Oeste">{{ t('competitors.regions.west_territory') }}</option>
+              <option value="Região Central">{{ t('competitors.regions.central_territory') }}</option>
+              <option value="Território A">{{ t('competitors.regions.territory_a') }}</option>
+              <option value="Território B">{{ t('competitors.regions.territory_b') }}</option>
+              <option value="Território C">{{ t('competitors.regions.territory_c') }}</option>
+              <option value="Zona Metropolitana">{{ t('competitors.regions.metropolitan_zone') }}</option>
+              <option value="Interior">{{ t('competitors.regions.interior') }}</option>
+              <option value="Capital">{{ t('competitors.regions.capital') }}</option>
+              <option value="Outras Regiões">{{ t('competitors.regions.other_regions') }}</option>
             </select>
           </div>
 
