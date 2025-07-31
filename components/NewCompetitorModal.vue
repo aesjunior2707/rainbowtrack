@@ -54,10 +54,6 @@
               required
             >
               <option value="">{{ t('competitors.select_region') }}</option>
-              <option value="Nacional">{{ t('competitors.regions.national') }}</option>
-              <option value="Sul/Sudeste">{{ t('competitors.regions.south_southeast') }}</option>
-              <option value="Centro-Oeste">{{ t('competitors.regions.center_west') }}</option>
-              <option value="Norte/Nordeste">{{ t('competitors.regions.north_northeast') }}</option>
               <option value="REG001">{{ t('competitors.regions.reg001') }}</option>
               <option value="REG002">{{ t('competitors.regions.reg002') }}</option>
               <option value="REG003">{{ t('competitors.regions.reg003') }}</option>
