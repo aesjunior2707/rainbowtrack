@@ -98,8 +98,7 @@ export const useDataStore = defineStore('data', {
         brand: 'BioAgro',
         packaging: '2L',
         registeredCrops: ['Soja', 'Feijão', 'Milho'],
-        description: 'Fungicida biológico de amplo espectro',
-        ourPrice: 156.00
+        description: 'Fungicida biológico de amplo espectro'
       },
 
       // Insecticides
@@ -167,6 +166,7 @@ export const useDataStore = defineStore('data', {
         productId: 1,
         customerId: 1,
         competitorId: 1,
+        competitorPrice: 142.50,
         currencyId: 1,
         reportDate: '2024-01-15',
         reportedBy: 1, // user ID
@@ -181,6 +181,7 @@ export const useDataStore = defineStore('data', {
         id: 2,
         productId: 4,
         competitorId: 2,
+        competitorPrice: 135.00,
         reportDate: '2024-01-12',
         reportedBy: 1,
         notes: 'Preço promocional válido até fim do mês',
@@ -194,6 +195,7 @@ export const useDataStore = defineStore('data', {
         id: 3,
         productId: 7,
         competitorId: 3,
+        competitorPrice: 98.75,
         reportDate: '2024-01-10',
         reportedBy: 2,
         notes: 'Concorrente oferecendo desconto por volume',
@@ -207,6 +209,7 @@ export const useDataStore = defineStore('data', {
         id: 4,
         productId: 2,
         competitorId: 4,
+        competitorPrice: 89.90,
         reportDate: '2024-01-08',
         reportedBy: 1,
         notes: 'Preço competitivo, cliente satisfeito com qualidade',
@@ -220,6 +223,7 @@ export const useDataStore = defineStore('data', {
         id: 5,
         productId: 5,
         competitorId: 1,
+        competitorPrice: 78.50,
         reportDate: '2024-01-05',
         reportedBy: 2,
         notes: 'Produto similar, embalagem diferente',
@@ -296,8 +300,18 @@ export const useDataStore = defineStore('data', {
           reportCount: reports.length
         }
       }).sort((a, b) => b.reportCount - a.reportCount)
-      
+
       return competitorReports
+    },
+
+    verifyPriceReport(reportId: number, verifiedBy: number) {
+      const report = this.priceReports.find(r => r.id === reportId)
+      if (report) {
+        report.verified = true
+        report.verifiedBy = verifiedBy
+        report.verifiedAt = new Date().toISOString()
+      }
+      return report
     }
   }
 })

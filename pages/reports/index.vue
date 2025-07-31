@@ -62,73 +62,87 @@
         </div>
 
         <!-- Reports Cards -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           <div
             v-for="report in filteredReports"
             :key="report.id"
-            class="card p-6 hover:shadow-lg transition-shadow"
+            class="card hover:shadow-lg transition-all duration-200 overflow-hidden"
           >
-            <!-- Header do Card -->
-            <div class="flex justify-between items-start mb-4">
-              <div class="flex-1">
-                <h3 class="text-lg font-semibold text-gray-900">
-                  {{ getProductName(report.productId) }}
-                </h3>
-                <p class="text-sm text-gray-500">
-                  {{ t('reports.report_number', { id: report.id }) }}
-                </p>
-              </div>
-              <div class="flex items-center space-x-2">
-                <span
-                  class="inline-flex items-center px-2 py-1 text-xs font-semibold rounded-full"
-                  :class="report.verified ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'"
-                >
-                  <CheckCircle v-if="report.verified" class="w-3 h-3 mr-1" />
-                  <Clock v-else class="w-3 h-3 mr-1" />
-                  {{ report.verified ? t('reports.verified') : 'Pendente' }}
-                </span>
-              </div>
-            </div>
-
-            <!-- Informações do Relatório -->
-            <div class="space-y-3 mb-4">
-              <div class="flex items-center justify-between">
-                <span class="text-sm text-gray-600">{{ t('reports.competitor') }}</span>
-                <span class="text-sm font-medium">{{ getCompetitorName(report.competitorId) }}</span>
-              </div>
-              
-              <div class="flex items-center justify-between">
-                <span class="text-sm text-gray-600">{{ t('reports.region') }}</span>
-                <span class="text-sm font-medium">{{ report.region }}</span>
-              </div>
-              
-              <div class="flex items-center justify-between">
-                <span class="text-sm text-gray-600">{{ t('reports.report_date') }}</span>
-                <span class="text-sm font-medium">{{ formatDate(report.reportDate) }}</span>
-              </div>
-            </div>
-
-            <!-- Observações -->
-            <div v-if="report.notes" class="mb-4">
-              <p class="text-sm text-gray-600 mb-1">{{ t('reports.notes') }}</p>
-              <p class="text-xs text-gray-500 italic">{{ report.notes }}</p>
-            </div>
-
-            <!-- Ações -->
-            <div class="border-t pt-4">
-              <div class="flex items-center justify-between">
-                <span class="text-xs text-gray-400">
-                  Por: {{ getReporterName(report.reportedBy) }}
-                </span>
+            <!-- Header com Status e Data -->
+            <div class="bg-gradient-to-r from-primary-50 to-secondary-50 px-4 py-3 border-b">
+              <div class="flex justify-between items-center">
                 <div class="flex items-center space-x-2">
+                  <span
+                    class="inline-flex items-center px-2 py-1 text-xs font-medium rounded-full"
+                    :class="report.verified ? 'bg-green-100 text-green-700' : 'bg-orange-100 text-orange-700'"
+                  >
+                    <CheckCircle v-if="report.verified" class="w-3 h-3 mr-1" />
+                    <Clock v-else class="w-3 h-3 mr-1" />
+                    {{ report.verified ? 'Verificado' : 'Pendente' }}
+                  </span>
+                </div>
+                <span class="text-xs text-gray-600">
+                  {{ formatDate(report.reportDate) }}
+                </span>
+              </div>
+            </div>
+
+            <!-- Conteúdo Principal -->
+            <div class="p-4">
+              <!-- Concorrente em Destaque -->
+              <div class="mb-3">
+                <h3 class="text-lg font-bold text-gray-900 mb-1">
+                  {{ getCompetitorName(report.competitorId) }}
+                </h3>
+                <div class="flex items-center space-x-2 text-sm text-gray-600">
+                  <MapPin class="w-4 h-4" />
+                  <span>{{ report.state || report.region }}</span>
+                </div>
+              </div>
+
+              <!-- Preço -->
+              <div class="bg-gray-50 rounded-lg p-3 mb-3">
+                <div class="text-center">
+                  <p class="text-xs text-gray-600 mb-1">Preço Capturado</p>
+                  <p class="text-2xl font-bold text-primary-600">
+                    {{ getCurrencySymbol(report.currencyId) }} {{ formatPrice(report.competitorPrice) }}
+                  </p>
+                </div>
+              </div>
+
+              <!-- Condições de Pagamento (apenas para admin) -->
+              <div v-if="isAdmin && (report.paymentCondition || report.paymentMethod)" class="text-xs text-gray-500 mb-3">
+                <div class="flex items-center space-x-2">
+                  <CreditCard class="w-3 h-3" />
+                  <span>{{ getPaymentConditionText(report.paymentCondition) }}</span>
+                  <span v-if="report.paymentMethod">• {{ getPaymentMethodText(report.paymentMethod) }}</span>
+                </div>
+              </div>
+
+              <!-- Observações (se houver) -->
+              <div v-if="report.notes" class="text-xs text-gray-600 bg-blue-50 rounded p-2 mb-3 border-l-2 border-blue-200">
+                <p class="italic">"{{ truncateText(report.notes, 60) }}"</p>
+              </div>
+            </div>
+
+            <!-- Footer com Ações -->
+            <div class="px-4 py-3 bg-gray-50 border-t">
+              <div class="flex items-center justify-between">
+                <div class="text-xs text-gray-500">
+                  <User class="w-3 h-3 inline mr-1" />
+                  {{ getReporterName(report.reportedBy) }}
+                </div>
+                <div class="flex items-center space-x-1">
                   <button
-                    class="p-2 text-primary-600 hover:text-primary-900 hover:bg-primary-50 rounded-full transition-colors"
-                    title="Visualizar"
+                    @click="handleViewReport(report)"
+                    class="p-1.5 text-primary-600 hover:text-primary-900 hover:bg-primary-100 rounded transition-colors"
+                    :title="isAdmin && !report.verified ? 'Verificar Captura' : 'Visualizar Detalhes'"
                   >
                     <Eye class="w-4 h-4" />
                   </button>
                   <button
-                    class="p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-50 rounded-full transition-colors"
+                    v-if="isAdmin || report.reportedBy === authStore.user?.id"
+                    class="p-1.5 text-gray-500 hover:text-gray-700 hover:bg-gray-200 rounded transition-colors"
                     title="Editar"
                   >
                     <Edit class="w-4 h-4" />
@@ -152,12 +166,29 @@
           </NuxtLink>
         </div>
       </div>
+
+      <!-- Success Notification -->
+      <div
+        v-if="showSuccessNotification"
+        class="fixed top-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50 flex items-center space-x-2"
+      >
+        <CheckCircle class="w-5 h-5" />
+        <span>Captura verificada com sucesso!</span>
+      </div>
+
+      <!-- Verification Modal -->
+      <VerifyReportModal
+        v-if="showVerifyModal && selectedReport"
+        :report="selectedReportForModal"
+        @close="showVerifyModal = false"
+        @verified="handleReportVerified"
+      />
     </AppLayout>
   </div>
 </template>
 
 <script setup>
-import { Plus, Eye, Edit, FileText, CheckCircle, Clock } from 'lucide-vue-next'
+import { Plus, Eye, Edit, FileText, CheckCircle, Clock, MapPin, CreditCard, User } from 'lucide-vue-next'
 
 definePageMeta({
   middleware: 'auth'
@@ -174,6 +205,11 @@ const searchTerm = ref('')
 const filterCompetitor = ref('')
 const filterRegion = ref('')
 const filterVerified = ref('')
+const showVerifyModal = ref(false)
+const selectedReport = ref(null)
+const showSuccessNotification = ref(false)
+
+const isAdmin = computed(() => authStore.user?.role === 'admin')
 
 const uniqueRegions = computed(() => {
   const regions = [...new Set(dataStore.priceReports.map(r => r.region))]
@@ -231,6 +267,89 @@ const formatDate = (dateString) => {
   if (!dateString) return ''
   const date = new Date(dateString)
   return date.toLocaleDateString('pt-BR')
+}
+
+const formatPrice = (price) => {
+  if (!price) return '0,00'
+  return new Intl.NumberFormat('pt-BR', {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  }).format(price)
+}
+
+
+
+const getPaymentConditionText = (condition) => {
+  const conditions = {
+    'A_VISTA': 'À Vista',
+    'BOLETO_30': 'Boleto 30d',
+    'BOLETO_60': 'Boleto 60d',
+    'BOLETO_90': 'Boleto 90d',
+    'BOLETO_120': 'Boleto 120d',
+    'POS_COLHEITA': 'Pós-Colheita',
+    'SAFRA': 'Safra',
+    'BARTER': 'Barter',
+    'FINANCIAMENTO': 'Financiamento',
+    'PARCELA_MENSAL': 'Parcelado',
+    'CHEQUE_PRE': 'Cheque Pré',
+    'CARTAO_CREDITO': 'Cartão Crédito',
+    'OUTRO': 'Outro'
+  }
+  return conditions[condition] || condition
+}
+
+const getPaymentMethodText = (method) => {
+  const methods = {
+    'DINHEIRO': 'Dinheiro',
+    'PIX': 'PIX',
+    'TRANSFERENCIA': 'Transferência',
+    'BOLETO': 'Boleto',
+    'CHEQUE': 'Cheque',
+    'CARTAO_CREDITO': 'Cartão Crédito',
+    'CARTAO_DEBITO': 'Cartão Débito',
+    'DEPOSITO': 'Depósito',
+    'DOCUMENTO': 'Documento',
+    'OUTRO': 'Outro'
+  }
+  return methods[method] || method
+}
+
+const truncateText = (text, maxLength) => {
+  if (!text) return ''
+  return text.length > maxLength ? text.substring(0, maxLength) + '...' : text
+}
+
+const selectedReportForModal = computed(() => {
+  if (!selectedReport.value) return null
+
+  return {
+    ...selectedReport.value,
+    competitorName: getCompetitorName(selectedReport.value.competitorId),
+    currencySymbol: getCurrencySymbol(selectedReport.value.currencyId)
+  }
+})
+
+const handleViewReport = (report) => {
+  // Se for admin e o relatório não estiver verificado, abre modal de verificação
+  if (isAdmin.value && !report.verified) {
+    selectedReport.value = report
+    showVerifyModal.value = true
+  } else {
+    // Caso contrário, apenas visualiza (aqui você pode implementar uma modal de visualização)
+    console.log('Visualizar relatório:', report)
+  }
+}
+
+const handleReportVerified = (reportId) => {
+  dataStore.verifyPriceReport(reportId, authStore.user.id)
+  showVerifyModal.value = false
+  selectedReport.value = null
+
+  // Mostrar notificação de sucesso
+  showSuccessNotification.value = true
+  setTimeout(() => {
+    showSuccessNotification.value = false
+  }, 3000)
 }
 
 </script>

@@ -54,96 +54,99 @@
 
           <!-- Product Selection -->
           <div class="card p-6">
-            <h2 class="text-lg font-semibold text-gray-900 mb-4">
-              {{ t('reports.select_product') }}
-            </h2>
-            
-            <!-- Product Categories -->
-            <div class="mb-6 space-y-4">
-              <!-- Mobile: Dropdown for categories -->
-              <div class="md:hidden">
-                <label class="block text-sm font-medium text-gray-700 mb-2">
-                  Categoria
-                </label>
-                <select v-model="selectedCategory" class="input-field">
-                  <option
-                    v-for="category in categories"
-                    :key="category"
-                    :value="category"
-                  >
-                    {{ getCategoryName(category) }}
-                  </option>
-                </select>
-              </div>
-              
-              <!-- Desktop: Buttons for categories -->
-              <div class="hidden md:flex space-x-4">
-                <button
-                  v-for="category in categories"
-                  :key="category"
-                  type="button"
-                  @click="selectedCategory = category"
-                  class="px-4 py-2 rounded-lg font-medium transition-colors"
-                  :class="selectedCategory === category ? 'bg-primary-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'"
-                >
-                  {{ getCategoryName(category) }}
-                </button>
-              </div>
-              
-              <!-- Product Search -->
-              <div class="relative">
-                <input
-                  v-model="productSearch"
-                  type="text"
-                  placeholder="Buscar produtos..."
-                  class="input-field pl-10"
-                />
-                <Search class="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
-              </div>
+            <div class="flex justify-between items-center mb-4">
+              <h2 class="text-lg font-semibold text-gray-900">
+                Produtos Selecionados
+              </h2>
+              <button
+                type="button"
+                @click="showProductModal = true"
+                class="btn-primary text-sm"
+              >
+                <Plus class="w-4 h-4 mr-2" />
+                Adicionar Produto
+              </button>
             </div>
 
-            <!-- Products List -->
-            <div class="mb-6">
-              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                <div
-                  v-for="product in filteredProducts"
-                  :key="product.id"
-                  class="border rounded-lg p-4 hover:shadow-md transition-shadow cursor-pointer"
-                  :class="selectedProduct === product.id ? 'border-primary-500 bg-primary-50' : 'border-gray-200'"
-                  @click="selectedProduct = product.id"
-                >
-                  <div class="mb-2">
-                    <h3 class="font-semibold text-gray-900">{{ product.name }}</h3>
-                    <p class="text-sm text-gray-600">{{ product.brand }}</p>
-                  </div>
-                  <div class="space-y-1 text-sm">
-                    <p><span class="font-medium">Embalagem:</span> {{ product.packaging }}</p>
-                  </div>
-                  <div class="mt-2">
-                    <div class="flex flex-wrap gap-1">
+            <!-- Selected Products List -->
+            <div v-if="selectedProducts.length > 0" class="space-y-3">
+              <div
+                v-for="(item, index) in selectedProducts"
+                :key="`${item.product.id}-${index}`"
+                class="border border-gray-200 rounded-lg p-4 bg-gray-50"
+              >
+                <div class="flex justify-between items-start">
+                  <div class="flex-1">
+                    <div class="flex items-start justify-between mb-2">
+                      <div>
+                        <h3 class="font-semibold text-gray-900">{{ item.product.name }}</h3>
+                        <p class="text-sm text-gray-600">{{ item.product.brand }} • {{ item.product.packaging }}</p>
+                      </div>
+                      <button
+                        type="button"
+                        @click="removeProduct(index)"
+                        class="ml-2 p-1 hover:bg-gray-200 rounded transition-colors"
+                      >
+                        <X class="w-4 h-4 text-gray-400" />
+                      </button>
+                    </div>
+
+                    <!-- Price Display -->
+                    <div class="mt-3">
+                      <div class="text-sm">
+                        <span class="text-gray-600">Preço Concorrente:</span>
+                        <span class="ml-2 font-semibold text-lg text-primary-600">
+                          R$ {{ formatPrice(item.competitorPrice) }}
+                        </span>
+                      </div>
+                    </div>
+
+                    <!-- Crops -->
+                    <div class="flex flex-wrap gap-1 mt-3">
                       <span
-                        v-for="crop in product.registeredCrops.slice(0, 2)"
+                        v-for="crop in item.product.registeredCrops.slice(0, 3)"
                         :key="crop"
                         class="inline-block px-2 py-1 text-xs bg-secondary-100 text-secondary-800 rounded"
                       >
                         {{ crop }}
                       </span>
                       <span
-                        v-if="product.registeredCrops.length > 2"
+                        v-if="item.product.registeredCrops.length > 3"
                         class="inline-block px-2 py-1 text-xs bg-gray-100 text-gray-600 rounded"
                       >
-                        +{{ product.registeredCrops.length - 2 }}
+                        +{{ item.product.registeredCrops.length - 3 }}
                       </span>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            
+
             <!-- Empty State -->
-            <div v-if="filteredProducts.length === 0" class="text-center py-8">
+            <div v-else class="text-center py-8 border-2 border-dashed border-gray-300 rounded-lg">
               <Package class="w-12 h-12 text-gray-400 mx-auto mb-4" />
-              <p class="text-gray-500">Nenhum produto encontrado</p>
+              <p class="text-gray-500 mb-2">Nenhum produto selecionado</p>
+              <p class="text-sm text-gray-400">Clique em "Adicionar Produto" para começar</p>
+            </div>
+          </div>
+
+          <!-- Capture Summary -->
+          <div v-if="selectedProducts.length > 0" class="card p-6 bg-gradient-to-r from-primary-50 to-secondary-50 border-primary-200">
+            <div class="flex justify-between items-center">
+              <div>
+                <h3 class="text-lg font-semibold text-gray-900 mb-1">
+                  Resumo da Captura
+                </h3>
+                <p class="text-sm text-gray-600">
+                  {{ selectedProducts.length }} produto{{ selectedProducts.length > 1 ? 's' : '' }} selecionado{{ selectedProducts.length > 1 ? 's' : '' }}
+                </p>
+              </div>
+              <div class="text-right">
+                <p class="text-sm text-gray-600 mb-1">Valor Total</p>
+                <p class="text-2xl font-bold text-primary-600">
+                  {{ selectedCurrencySymbol }} {{ formatPrice(totalCaptureValue) }}
+                </p>
+              </div>
             </div>
           </div>
 
@@ -313,12 +316,20 @@
         @close="showNewCompetitorModal = false"
         @competitor-created="handleCompetitorCreated"
       />
+
+      <!-- Product Selection Modal -->
+      <ProductSelectionModal
+        v-if="showProductModal"
+        :data-store="dataStore"
+        @close="showProductModal = false"
+        @product-selected="handleProductSelected"
+      />
     </AppLayout>
   </div>
 </template>
 
 <script setup>
-import { Plus, ArrowLeft, Search, Package } from 'lucide-vue-next'
+import { Plus, ArrowLeft, Search, Package, X } from 'lucide-vue-next'
 
 definePageMeta({
   middleware: 'auth'
@@ -332,8 +343,7 @@ const translationStore = useTranslationStore($pinia)
 const t = (key, params) => translationStore.t(key, params)
 
 const selectedCompetitor = ref('')
-const selectedProduct = ref('')
-const selectedCategory = ref('fungicides')
+const selectedProducts = ref([])
 const reportDate = ref('')
 const region = ref('')
 const state = ref('')
@@ -342,37 +352,55 @@ const paymentMethod = ref('')
 const currency = ref('')
 const notes = ref('')
 const showNewCompetitorModal = ref(false)
-const productSearch = ref('')
+const showProductModal = ref(false)
 
-const categories = ['fungicides', 'insecticides', 'herbicides']
+const handleProductSelected = (productData) => {
+  // Check if product already exists
+  const existingIndex = selectedProducts.value.findIndex(
+    item => item.product.id === productData.product.id
+  )
 
-const getCategoryName = (category) => {
-  const names = {
-    fungicides: 'Fungicidas',
-    insecticides: 'Inseticidas',
-    herbicides: 'Herbicidas'
+  if (existingIndex >= 0) {
+    // Update existing product price
+    selectedProducts.value[existingIndex].competitorPrice = productData.competitorPrice
+  } else {
+    // Add new product
+    selectedProducts.value.push({
+      product: productData.product,
+      competitorPrice: productData.competitorPrice
+    })
   }
-  return names[category] || category
+
+  showProductModal.value = false
 }
 
-const filteredProducts = computed(() => {
-  let products = dataStore.getProductsByCategory(selectedCategory.value)
-  
-  if (productSearch.value) {
-    const search = productSearch.value.toLowerCase()
-    products = products.filter(product => 
-      product.name.toLowerCase().includes(search) ||
-      product.brand.toLowerCase().includes(search) ||
-      product.registeredCrops.some(crop => crop.toLowerCase().includes(search))
-    )
-  }
-  
-  return products
+const removeProduct = (index) => {
+  selectedProducts.value.splice(index, 1)
+}
+
+const formatPrice = (price) => {
+  return new Intl.NumberFormat('pt-BR', {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  }).format(price)
+}
+
+const totalCaptureValue = computed(() => {
+  return selectedProducts.value.reduce((total, item) => {
+    return total + item.competitorPrice
+  }, 0)
 })
+
+const selectedCurrencySymbol = computed(() => {
+  const curr = dataStore.getCurrencyById(currency.value)
+  return curr ? curr.symbol : 'R$'
+})
+
+
 
 const canSubmit = computed(() => {
   return selectedCompetitor.value &&
-         selectedProduct.value &&
+         selectedProducts.value.length > 0 &&
          reportDate.value &&
          region.value &&
          state.value &&
@@ -387,20 +415,25 @@ const handleCompetitorCreated = (competitor) => {
 }
 
 const handleSubmit = () => {
-  const report = {
-    productId: selectedProduct.value,
-    competitorId: selectedCompetitor.value,
-    reportDate: reportDate.value,
-    reportedBy: authStore.user.id,
-    notes: notes.value,
-    region: region.value || 'Não informado',
-    state: state.value,
-    paymentCondition: paymentCondition.value,
-    paymentMethod: paymentMethod.value,
-    currencyId: currency.value
-  }
+  // Create a report for each selected product
+  selectedProducts.value.forEach(item => {
+    const report = {
+      productId: item.product.id,
+      competitorId: selectedCompetitor.value,
+      competitorPrice: item.competitorPrice,
+      reportDate: reportDate.value,
+      reportedBy: authStore.user.id,
+      notes: notes.value,
+      region: region.value || 'Não informado',
+      state: state.value,
+      paymentCondition: paymentCondition.value,
+      paymentMethod: paymentMethod.value,
+      currencyId: currency.value
+    }
 
-  dataStore.addPriceReport(report)
+    dataStore.addPriceReport(report)
+  })
+
   navigateTo('/reports')
 }
 
