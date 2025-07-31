@@ -80,21 +80,19 @@ export const useTranslationStore = defineStore('translation', {
             cooperative: 'Cooperativa'
           },
           regions: {
-            national: 'Nacional',
-            north: 'Norte',
-            northeast: 'Nordeste',
-            center_west: 'Centro-Oeste',
-            southeast: 'Sudeste',
-            south: 'Sul',
-            sao_paulo: 'São Paulo',
-            rio_janeiro: 'Rio de Janeiro',
-            minas_gerais: 'Minas Gerais',
-            rio_grande_sul: 'Rio Grande do Sul',
-            parana: 'Paraná',
-            santa_catarina: 'Santa Catarina',
-            goias: 'Goiás',
-            mato_grosso: 'Mato Grosso',
-            mato_grosso_sul: 'Mato Grosso do Sul'
+            my_region: 'Minha Região',
+            north_territory: 'Região Norte',
+            south_territory: 'Região Sul',
+            east_territory: 'Região Leste',
+            west_territory: 'Região Oeste',
+            central_territory: 'Região Central',
+            territory_a: 'Território A',
+            territory_b: 'Território B',
+            territory_c: 'Território C',
+            metropolitan_zone: 'Zona Metropolitana',
+            interior: 'Interior',
+            capital: 'Capital',
+            other_regions: 'Outras Regiões'
           }
         },
         products: {
@@ -203,21 +201,19 @@ export const useTranslationStore = defineStore('translation', {
             cooperative: 'Cooperative'
           },
           regions: {
-            national: 'National',
-            north: 'North',
-            northeast: 'Northeast',
-            center_west: 'Center-West',
-            southeast: 'Southeast',
-            south: 'South',
-            sao_paulo: 'São Paulo',
-            rio_janeiro: 'Rio de Janeiro',
-            minas_gerais: 'Minas Gerais',
-            rio_grande_sul: 'Rio Grande do Sul',
-            parana: 'Paraná',
-            santa_catarina: 'Santa Catarina',
-            goias: 'Goiás',
-            mato_grosso: 'Mato Grosso',
-            mato_grosso_sul: 'Mato Grosso do Sul'
+            my_region: 'My Region',
+            north_territory: 'North Territory',
+            south_territory: 'South Territory',
+            east_territory: 'East Territory',
+            west_territory: 'West Territory',
+            central_territory: 'Central Territory',
+            territory_a: 'Territory A',
+            territory_b: 'Territory B',
+            territory_c: 'Territory C',
+            metropolitan_zone: 'Metropolitan Zone',
+            interior: 'Interior',
+            capital: 'Capital',
+            other_regions: 'Other Regions'
           }
         },
         products: {
@@ -328,21 +324,19 @@ export const useTranslationStore = defineStore('translation', {
             cooperative: 'Cooperativa'
           },
           regions: {
-            national: 'Nacional',
-            north: 'Norte',
-            northeast: 'Nordeste',
-            center_west: 'Centro-Oeste',
-            southeast: 'Sudeste',
-            south: 'Sur',
-            sao_paulo: 'São Paulo',
-            rio_janeiro: 'Rio de Janeiro',
-            minas_gerais: 'Minas Gerais',
-            rio_grande_sul: 'Rio Grande do Sul',
-            parana: 'Paraná',
-            santa_catarina: 'Santa Catarina',
-            goias: 'Goiás',
-            mato_grosso: 'Mato Grosso',
-            mato_grosso_sul: 'Mato Grosso do Sul'
+            my_region: 'Mi Región',
+            north_territory: 'Territorio Norte',
+            south_territory: 'Territorio Sur',
+            east_territory: 'Territorio Este',
+            west_territory: 'Territorio Oeste',
+            central_territory: 'Territorio Central',
+            territory_a: 'Territorio A',
+            territory_b: 'Territorio B',
+            territory_c: 'Territorio C',
+            metropolitan_zone: 'Zona Metropolitana',
+            interior: 'Interior',
+            capital: 'Capital',
+            other_regions: 'Otras Regiones'
           }
         },
         products: {
@@ -451,21 +445,19 @@ export const useTranslationStore = defineStore('translation', {
             cooperative: '合作社'
           },
           regions: {
-            national: '全国',
-            north: '北部',
-            northeast: '东北部',
-            center_west: '中西部',
-            southeast: '东南部',
-            south: '南部',
-            sao_paulo: '圣保罗',
-            rio_janeiro: '里约热内卢',
-            minas_gerais: '米纳斯吉拉斯',
-            rio_grande_sul: '南里奥格兰德',
-            parana: '巴拉那',
-            santa_catarina: '圣卡塔琳娜',
-            goias: '戈亚斯',
-            mato_grosso: '马托格罗索',
-            mato_grosso_sul: '南马托格罗索'
+            my_region: '我的地区',
+            north_territory: '北部区域',
+            south_territory: '南部区域',
+            east_territory: '东部区域',
+            west_territory: '西部区域',
+            central_territory: '中央区域',
+            territory_a: '区域 A',
+            territory_b: '区域 B',
+            territory_c: '区域 C',
+            metropolitan_zone: '大都市区',
+            interior: '内陆',
+            capital: '首都',
+            other_regions: '其他地区'
           }
         },
         products: {
