@@ -134,8 +134,9 @@
                 </div>
                 <div class="flex items-center space-x-1">
                   <button
+                    @click="handleViewReport(report)"
                     class="p-1.5 text-primary-600 hover:text-primary-900 hover:bg-primary-100 rounded transition-colors"
-                    title="Visualizar Detalhes"
+                    :title="isAdmin && !report.verified ? 'Verificar Captura' : 'Visualizar Detalhes'"
                   >
                     <Eye class="w-4 h-4" />
                   </button>
@@ -165,6 +166,14 @@
           </NuxtLink>
         </div>
       </div>
+
+      <!-- Verification Modal -->
+      <VerifyReportModal
+        v-if="showVerifyModal && selectedReport"
+        :report="selectedReportForModal"
+        @close="showVerifyModal = false"
+        @verified="handleReportVerified"
+      />
     </AppLayout>
   </div>
 </template>
