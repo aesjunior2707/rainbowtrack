@@ -130,6 +130,26 @@
             </div>
           </div>
 
+          <!-- Capture Summary -->
+          <div v-if="selectedProducts.length > 0" class="card p-6 bg-gradient-to-r from-primary-50 to-secondary-50 border-primary-200">
+            <div class="flex justify-between items-center">
+              <div>
+                <h3 class="text-lg font-semibold text-gray-900 mb-1">
+                  Resumo da Captura
+                </h3>
+                <p class="text-sm text-gray-600">
+                  {{ selectedProducts.length }} produto{{ selectedProducts.length > 1 ? 's' : '' }} selecionado{{ selectedProducts.length > 1 ? 's' : '' }}
+                </p>
+              </div>
+              <div class="text-right">
+                <p class="text-sm text-gray-600 mb-1">Valor Total</p>
+                <p class="text-2xl font-bold text-primary-600">
+                  R$ {{ formatPrice(totalCaptureValue) }}
+                </p>
+              </div>
+            </div>
+          </div>
+
           <!-- Details -->
           <div class="card p-6">
             <h2 class="text-lg font-semibold text-gray-900 mb-4">
