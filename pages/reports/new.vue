@@ -413,5 +413,11 @@ onMounted(() => {
   if (authStore.user?.defaultRegion) {
     region.value = authStore.user.defaultRegion
   }
+
+  // Set default currency to BRL (Real Brasileiro)
+  const brlCurrency = dataStore.currencies.find(c => c.code === 'BRL')
+  if (brlCurrency) {
+    currency.value = brlCurrency.id
+  }
 })
 </script>
