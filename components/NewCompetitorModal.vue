@@ -48,13 +48,28 @@
             <label class="block text-sm font-medium text-gray-700 mb-2">
               {{ t('competitors.region') }}
             </label>
-            <input
+            <select
               v-model="form.region"
-              type="text"
               class="input-field"
-              placeholder="Ex: Nacional, Sul/Sudeste, São Paulo"
               required
-            />
+            >
+              <option value="">{{ t('competitors.select_region') }}</option>
+              <option value="Nacional">{{ t('competitors.regions.national') }}</option>
+              <option value="Norte">{{ t('competitors.regions.north') }}</option>
+              <option value="Nordeste">{{ t('competitors.regions.northeast') }}</option>
+              <option value="Centro-Oeste">{{ t('competitors.regions.center_west') }}</option>
+              <option value="Sudeste">{{ t('competitors.regions.southeast') }}</option>
+              <option value="Sul">{{ t('competitors.regions.south') }}</option>
+              <option value="São Paulo">{{ t('competitors.regions.sao_paulo') }}</option>
+              <option value="Rio de Janeiro">{{ t('competitors.regions.rio_janeiro') }}</option>
+              <option value="Minas Gerais">{{ t('competitors.regions.minas_gerais') }}</option>
+              <option value="Rio Grande do Sul">{{ t('competitors.regions.rio_grande_sul') }}</option>
+              <option value="Paraná">{{ t('competitors.regions.parana') }}</option>
+              <option value="Santa Catarina">{{ t('competitors.regions.santa_catarina') }}</option>
+              <option value="Goiás">{{ t('competitors.regions.goias') }}</option>
+              <option value="Mato Grosso">{{ t('competitors.regions.mato_grosso') }}</option>
+              <option value="Mato Grosso do Sul">{{ t('competitors.regions.mato_grosso_sul') }}</option>
+            </select>
           </div>
 
           <div>
