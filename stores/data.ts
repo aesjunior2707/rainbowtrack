@@ -68,13 +68,6 @@ export const useDataStore = defineStore('data', {
         name: 'Euro',
         symbol: '€',
         active: true
-      },
-      {
-        id: 4,
-        code: 'ARS',
-        name: 'Peso Argentino',
-        symbol: '$',
-        active: true
       }
     ],
 
