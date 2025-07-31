@@ -41,7 +41,7 @@
             </div>
             <div>
               <select v-model="filterRegion" class="input-field">
-                <option value="">Todas as Regiões</option>
+                <option value="">{{ t('reports.all_regions') }}</option>
                 <option
                   v-for="region in uniqueRegions"
                   :key="region"
@@ -53,9 +53,9 @@
             </div>
             <div>
               <select v-model="filterVerified" class="input-field">
-                <option value="">Todos os Status</option>
-                <option value="true">Verificados</option>
-                <option value="false">Pendentes</option>
+                <option value="">{{ t('reports.all_status') }}</option>
+                <option value="true">{{ t('reports.verified') }}</option>
+                <option value="false">{{ t('reports.pending') }}</option>
               </select>
             </div>
           </div>
