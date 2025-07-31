@@ -105,6 +105,9 @@
           </div>
         </div>
       </div>
+
+      <!-- PWA Installer -->
+      <PWAInstaller />
     </AppLayout>
   </div>
 </template>
