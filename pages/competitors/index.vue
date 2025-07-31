@@ -151,11 +151,14 @@ const uniqueRegions = computed(() => {
 })
 
 const filteredCompetitors = computed(() => {
-  let competitors = dataStore.competitors
+  // Start with competitors filtered by user region/role
+  const userRegion = authStore.user?.defaultRegion
+  const isAdmin = authStore.user?.role === 'admin'
+  let competitors = dataStore.getCompetitorsByUserRegion(userRegion, isAdmin)
 
   if (searchTerm.value) {
     const term = searchTerm.value.toLowerCase()
-    competitors = competitors.filter(competitor => 
+    competitors = competitors.filter(competitor =>
       competitor.name.toLowerCase().includes(term) ||
       competitor.type.toLowerCase().includes(term) ||
       competitor.region.toLowerCase().includes(term)
