@@ -197,6 +197,8 @@ const filterCompetitor = ref('')
 const filterRegion = ref('')
 const filterVerified = ref('')
 
+const isAdmin = computed(() => authStore.user?.role === 'admin')
+
 const uniqueRegions = computed(() => {
   const regions = [...new Set(dataStore.priceReports.map(r => r.region))]
   return regions.filter(Boolean)
