@@ -130,6 +130,29 @@
         @close="showNewCompetitorModal = false"
         @competitor-created="handleCompetitorCreated"
       />
+
+      <EditCompetitorModal
+        v-if="showEditCompetitorModal && selectedCompetitor"
+        :competitor="selectedCompetitor"
+        @close="showEditCompetitorModal = false"
+        @competitor-updated="handleCompetitorUpdated"
+      />
+
+      <ConfirmDeleteModal
+        v-if="showDeleteModal && selectedCompetitor"
+        title="Excluir Concorrente"
+        :message="'Tem certeza que deseja excluir o concorrente ' + selectedCompetitor.name + '?'"
+        :warning-text="getDeleteWarningText(selectedCompetitor)"
+        @cancel="showDeleteModal = false"
+        @confirm="confirmDeleteCompetitor"
+      />
+
+      <AnimatedNotification
+        :show="showNotification"
+        :type="notificationType"
+        :message="notificationMessage"
+        @close="showNotification = false"
+      />
     </AppLayout>
   </div>
 </template>
