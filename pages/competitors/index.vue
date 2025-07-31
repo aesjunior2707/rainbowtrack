@@ -103,10 +103,6 @@
               </div>
               
               <div class="mt-3 text-center">
-                <p class="text-sm text-gray-600">
-                  {{ t('competitors.avg_price') }}: 
-                  <span class="font-medium">R$ {{ getAveragePrice(competitor.id).toFixed(2) }}</span>
-                </p>
               </div>
             </div>
           </div>
@@ -177,14 +173,6 @@ const filteredCompetitors = computed(() => {
 
 const getCaptureCount = (competitorId) => {
   return dataStore.getPriceReportsByCompetitor(competitorId).length
-}
-
-const getAveragePrice = (competitorId) => {
-  const reports = dataStore.getPriceReportsByCompetitor(competitorId)
-  if (reports.length === 0) return 0
-  
-  const total = reports.reduce((sum, report) => sum + report.competitorPrice, 0)
-  return total / reports.length
 }
 
 const handleCompetitorCreated = () => {

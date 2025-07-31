@@ -133,8 +133,7 @@ export const useDataStore = defineStore('data', {
         brand: 'AgroTech',
         packaging: '1L',
         registeredCrops: ['Soja', 'Milho', 'Trigo'],
-        description: 'Fungicida sistêmico para controle preventivo',
-        ourPrice: 125.50
+        description: 'Fungicida sistêmico para controle preventivo'
       },
       {
         id: 2,
@@ -143,8 +142,7 @@ export const useDataStore = defineStore('data', {
         brand: 'CropGuard',
         packaging: '500ml',
         registeredCrops: ['Café', 'Algodão', 'Cana'],
-        description: 'Fungicida de contato para aplicação foliar',
-        ourPrice: 89.90
+        description: 'Fungicida de contato para aplicação foliar'
       },
       {
         id: 3,
@@ -165,8 +163,7 @@ export const useDataStore = defineStore('data', {
         brand: 'AgroTech',
         packaging: '1L',
         registeredCrops: ['Soja', 'Milho', 'Algodão'],
-        description: 'Inseticida sistêmico para controle de pragas',
-        ourPrice: 98.75
+        description: 'Inseticida sistêmico para controle de pragas'
       },
       {
         id: 5,
@@ -175,8 +172,7 @@ export const useDataStore = defineStore('data', {
         brand: 'CropGuard',
         packaging: '300ml',
         registeredCrops: ['Café', 'Citros', 'Tomate'],
-        description: 'Inseticida de contato para jardins e cultivos',
-        ourPrice: 67.50
+        description: 'Inseticida de contato para jardins e cultivos'
       },
       {
         id: 6,
@@ -185,8 +181,7 @@ export const useDataStore = defineStore('data', {
         brand: 'BioAgro',
         packaging: '1.5L',
         registeredCrops: ['Soja', 'Milho', 'Feijão'],
-        description: 'Inseticida especializado para controle de trips',
-        ourPrice: 134.20
+        description: 'Inseticida especializado para controle de trips'
       },
 
       // Herbicides
@@ -197,8 +192,7 @@ export const useDataStore = defineStore('data', {
         brand: 'AgroTech',
         packaging: '1L',
         registeredCrops: ['Soja', 'Milho', 'Cana'],
-        description: 'Herbicida pós-emergente seletivo',
-        ourPrice: 78.90
+        description: 'Herbicida pós-emergente seletivo'
       },
       {
         id: 8,
@@ -207,8 +201,7 @@ export const useDataStore = defineStore('data', {
         brand: 'CropGuard',
         packaging: '400ml',
         registeredCrops: ['Café', 'Citros', 'Eucalipto'],
-        description: 'Herbicida para controle de gramíneas',
-        ourPrice: 56.30
+        description: 'Herbicida para controle de gramíneas'
       },
       {
         id: 9,
@@ -217,8 +210,7 @@ export const useDataStore = defineStore('data', {
         brand: 'BioAgro',
         packaging: '2L',
         registeredCrops: ['Soja', 'Milho', 'Algodão'],
-        description: 'Herbicida total para pré-plantio',
-        ourPrice: 112.45
+        description: 'Herbicida total para pré-plantio'
       }
     ],
 
@@ -241,8 +233,6 @@ export const useDataStore = defineStore('data', {
         productId: 4,
         customerId: 2,
         competitorId: 2,
-        competitorPrice: 105.50,
-        currencyId: 1,
         reportDate: '2024-01-12',
         reportedBy: 1,
         notes: 'Preço promocional válido até fim do mês',
@@ -254,8 +244,6 @@ export const useDataStore = defineStore('data', {
         productId: 7,
         customerId: 3,
         competitorId: 3,
-        competitorPrice: 72.90,
-        currencyId: 1,
         reportDate: '2024-01-10',
         reportedBy: 2,
         notes: 'Concorrente oferecendo desconto por volume',
@@ -267,8 +255,6 @@ export const useDataStore = defineStore('data', {
         productId: 2,
         customerId: 4,
         competitorId: 4,
-        competitorPrice: 85.00,
-        currencyId: 1,
         reportDate: '2024-01-08',
         reportedBy: 1,
         notes: 'Preço competitivo, cliente satisfeito com qualidade',
@@ -280,8 +266,6 @@ export const useDataStore = defineStore('data', {
         productId: 5,
         customerId: 5,
         competitorId: 1,
-        competitorPrice: 64.90,
-        currencyId: 1,
         reportDate: '2024-01-05',
         reportedBy: 2,
         notes: 'Produto similar, embalagem diferente',
@@ -364,28 +348,11 @@ export const useDataStore = defineStore('data', {
         const reports = this.getPriceReportsByCompetitor(competitor.id)
         return {
           ...competitor,
-          reportCount: reports.length,
-          avgPrice: reports.length > 0 ? 
-            reports.reduce((sum, r) => sum + r.competitorPrice, 0) / reports.length : 0
+          reportCount: reports.length
         }
       }).sort((a, b) => b.reportCount - a.reportCount)
       
       return competitorReports
-    },
-
-    getPriceComparison() {
-      return this.products.map(product => {
-        const reports = this.getPriceReportsByProduct(product.id)
-        const avgCompetitorPrice = reports.length > 0 ? 
-          reports.reduce((sum, r) => sum + r.competitorPrice, 0) / reports.length : 0
-        
-        return {
-          ...product,
-          avgCompetitorPrice,
-          priceDifference: product.ourPrice - avgCompetitorPrice,
-          reportCount: reports.length
-        }
-      })
     }
   }
 })

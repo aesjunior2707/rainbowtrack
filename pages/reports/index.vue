@@ -113,31 +113,6 @@
               </div>
             </div>
 
-            <!-- Preços -->
-            <div class="mb-4 p-3 bg-gray-50 rounded-lg">
-              <div class="flex items-center justify-between mb-2">
-                <span class="text-sm text-gray-600">{{ t('reports.competitor_price') }}</span>
-                <span class="text-lg font-bold text-primary-600">
-                  {{ getCurrencySymbol(report.currencyId) }} {{ report.competitorPrice.toFixed(2) }}
-                </span>
-              </div>
-              <div class="flex items-center justify-between mb-2">
-                <span class="text-sm text-gray-600">{{ t('reports.our_price') }}</span>
-                <span class="text-sm font-medium text-gray-900">
-                  {{ getCurrencySymbol(report.currencyId) }} {{ getOurPrice(report.productId).toFixed(2) }}
-                </span>
-              </div>
-              <div class="flex items-center justify-between">
-                <span class="text-sm text-gray-600">{{ t('reports.price_difference') }}</span>
-                <span 
-                  class="text-sm font-semibold"
-                  :class="getPriceDifferenceColor(report)"
-                >
-                  {{ getPriceDifferenceText(report) }}
-                </span>
-              </div>
-            </div>
-
             <!-- Observações -->
             <div v-if="report.notes" class="mb-4">
               <p class="text-sm text-gray-600 mb-1">{{ t('reports.notes') }}</p>
@@ -258,11 +233,6 @@ const getCurrencySymbol = (currencyId) => {
   return currency ? currency.symbol : 'R$'
 }
 
-const getOurPrice = (productId) => {
-  const product = dataStore.getProductById(productId)
-  return product ? product.ourPrice : 0
-}
-
 const getReporterName = (reporterId) => {
   const user = authStore.users.find(u => u.id === reporterId)
   return user ? user.name : 'Desconhecido'
@@ -272,28 +242,6 @@ const formatDate = (dateString) => {
   if (!dateString) return ''
   const date = new Date(dateString)
   return date.toLocaleDateString('pt-BR')
-}
-
-const getPriceDifferenceColor = (report) => {
-  const ourPrice = getOurPrice(report.productId)
-  const difference = ourPrice - report.competitorPrice
-  
-  if (difference > 0) return 'text-red-600' // Estamos mais caros
-  if (difference < 0) return 'text-green-600' // Estamos mais baratos
-  return 'text-gray-600' // Mesmo preço
-}
-
-const getPriceDifferenceText = (report) => {
-  const ourPrice = getOurPrice(report.productId)
-  const difference = ourPrice - report.competitorPrice
-  const currency = getCurrencySymbol(report.currencyId)
-  
-  if (difference > 0) {
-    return `+${currency} ${Math.abs(difference).toFixed(2)}`
-  } else if (difference < 0) {
-    return `-${currency} ${Math.abs(difference).toFixed(2)}`
-  }
-  return `${currency} 0.00`
 }
 
 </script>

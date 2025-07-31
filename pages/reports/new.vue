@@ -142,7 +142,6 @@
                     <p class="text-sm text-gray-600">{{ product.brand }}</p>
                   </div>
                   <div class="space-y-1 text-sm">
-                    <p><span class="font-medium">Nosso Preço:</span> R$ {{ product.ourPrice.toFixed(2) }}</p>
                     <p><span class="font-medium">Embalagem:</span> {{ product.packaging }}</p>
                   </div>
                   <div class="mt-2">
@@ -173,38 +172,12 @@
             </div>
           </div>
 
-          <!-- Price and Details -->
+          <!-- Details -->
           <div class="card p-6">
             <h2 class="text-lg font-semibold text-gray-900 mb-4">
               {{ t('reports.report_details') }}
             </h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
-                <label class="block text-sm font-medium text-gray-700 mb-2">
-                  {{ t('reports.competitor_price') }}
-                </label>
-                <div class="flex space-x-2">
-                  <select v-model="selectedCurrency" class="input-field w-24" required>
-                    <option
-                      v-for="currency in dataStore.currencies"
-                      :key="currency.id"
-                      :value="currency.id"
-                    >
-                      {{ currency.symbol }}
-                    </option>
-                  </select>
-                  <input
-                    v-model.number="competitorPrice"
-                    type="number"
-                    step="0.01"
-                    min="0"
-                    class="input-field flex-1"
-                    placeholder="0.00"
-                    required
-                  />
-                </div>
-              </div>
-
               <div>
                 <label class="block text-sm font-medium text-gray-700 mb-2">
                   {{ t('reports.report_date') }}
@@ -242,34 +215,6 @@
                   class="input-field"
                   placeholder="Observações sobre o preço, condições especiais, etc."
                 ></textarea>
-              </div>
-            </div>
-
-            <!-- Price Comparison Preview -->
-            <div v-if="selectedProduct && competitorPrice" class="mt-6 p-4 bg-gray-50 rounded-lg">
-              <h3 class="font-medium text-gray-900 mb-3">Comparação de Preços</h3>
-              <div class="grid grid-cols-3 gap-4 text-center">
-                <div>
-                  <p class="text-sm text-gray-600">Nosso Preço</p>
-                  <p class="text-lg font-semibold text-primary-600">
-                    {{ getCurrencySymbol(selectedCurrency) }} {{ getOurPrice().toFixed(2) }}
-                  </p>
-                </div>
-                <div>
-                  <p class="text-sm text-gray-600">Preço Concorrente</p>
-                  <p class="text-lg font-semibold text-gray-900">
-                    {{ getCurrencySymbol(selectedCurrency) }} {{ competitorPrice.toFixed(2) }}
-                  </p>
-                </div>
-                <div>
-                  <p class="text-sm text-gray-600">Diferença</p>
-                  <p 
-                    class="text-lg font-semibold"
-                    :class="getPriceDifferenceColor()"
-                  >
-                    {{ getPriceDifferenceText() }}
-                  </p>
-                </div>
               </div>
             </div>
           </div>
@@ -367,7 +312,6 @@ const canSubmit = computed(() => {
   return selectedCustomer.value && 
          selectedCompetitor.value && 
          selectedProduct.value && 
-         competitorPrice.value > 0 && 
          reportDate.value && 
          region.value
 })
@@ -375,33 +319,6 @@ const canSubmit = computed(() => {
 const getCurrencySymbol = (currencyId) => {
   const currency = dataStore.getCurrencyById(currencyId)
   return currency ? currency.symbol : 'R$'
-}
-
-const getOurPrice = () => {
-  const product = dataStore.getProductById(selectedProduct.value)
-  return product ? product.ourPrice : 0
-}
-
-const getPriceDifferenceColor = () => {
-  const ourPrice = getOurPrice()
-  const difference = ourPrice - competitorPrice.value
-  
-  if (difference > 0) return 'text-red-600' // Estamos mais caros
-  if (difference < 0) return 'text-green-600' // Estamos mais baratos
-  return 'text-gray-600' // Mesmo preço
-}
-
-const getPriceDifferenceText = () => {
-  const ourPrice = getOurPrice()
-  const difference = ourPrice - competitorPrice.value
-  const currency = getCurrencySymbol(selectedCurrency.value)
-  
-  if (difference > 0) {
-    return `+${currency} ${Math.abs(difference).toFixed(2)}`
-  } else if (difference < 0) {
-    return `-${currency} ${Math.abs(difference).toFixed(2)}`
-  }
-  return `${currency} 0.00`
 }
 
 const handleCustomerCreated = (customer) => {
@@ -421,8 +338,6 @@ const handleSubmit = () => {
     productId: selectedProduct.value,
     customerId: selectedCustomer.value,
     competitorId: selectedCompetitor.value,
-    competitorPrice: competitorPrice.value,
-    currencyId: selectedCurrency.value,
     reportDate: reportDate.value,
     reportedBy: authStore.user.id,
     notes: notes.value,

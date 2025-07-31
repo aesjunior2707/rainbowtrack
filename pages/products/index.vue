@@ -46,11 +46,6 @@
             
             <div class="space-y-3 text-sm">
               <div class="flex justify-between items-center">
-                <span class="text-gray-600">Preço:</span>
-                <span class="font-semibold text-primary-600">R$ {{ product.ourPrice.toFixed(2) }}</span>
-              </div>
-              
-              <div class="flex justify-between items-center">
                 <span class="text-gray-600">Embalagem:</span>
                 <span class="font-medium">{{ product.packaging }}</span>
               </div>
