@@ -60,7 +60,10 @@ export const useTranslationStore = defineStore('translation', {
           report_details: 'Detalhes da Captura',
           cancel: 'Cancelar',
           confirm_report: 'Confirmar Captura',
-          all_competitors: 'Todos os Concorrentes'
+          all_competitors: 'Todos os Concorrentes',
+          all_regions: 'Todas as Regiões',
+          all_status: 'Todos os Status',
+          pending: 'Pendentes'
         },
         competitors: {
           title: 'Concorrentes - Rainbow Track',
@@ -174,7 +177,10 @@ export const useTranslationStore = defineStore('translation', {
           report_details: 'Capture Details',
           cancel: 'Cancel',
           confirm_report: 'Confirm Capture',
-          all_competitors: 'All Competitors'
+          all_competitors: 'All Competitors',
+          all_regions: 'All Regions',
+          all_status: 'All Status',
+          pending: 'Pending'
         },
         competitors: {
           title: 'Competitors - Rainbow Track',
@@ -289,7 +295,10 @@ export const useTranslationStore = defineStore('translation', {
           report_details: 'Detalles de la Captura',
           cancel: 'Cancelar',
           confirm_report: 'Confirmar Captura',
-          all_competitors: 'Todos los Competidores'
+          all_competitors: 'Todos los Competidores',
+          all_regions: 'Todas las Regiones',
+          all_status: 'Todos los Estados',
+          pending: 'Pendientes'
         },
         competitors: {
           title: 'Competidores - Rainbow Track',
@@ -354,7 +363,7 @@ export const useTranslationStore = defineStore('translation', {
           description: '农业销售跟踪系统'
         },
         auth: {
-          login: '���录',
+          login: '登录',
           username: '用户名',
           password: '密码',
           remember: '记住我',
@@ -404,7 +413,10 @@ export const useTranslationStore = defineStore('translation', {
           report_details: '捕获详情',
           cancel: '取消',
           confirm_report: '确认捕获',
-          all_competitors: '所有竞争对手'
+          all_competitors: '所有竞争对手',
+          all_regions: '所有地区',
+          all_status: '所有状态',
+          pending: '待处理'
         },
         competitors: {
           title: '竞争对手 - Rainbow Track',
