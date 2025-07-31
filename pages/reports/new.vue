@@ -217,6 +217,28 @@
                 </select>
               </div>
 
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">
+                  Condição de Pagamento
+                </label>
+                <select v-model="paymentCondition" class="input-field" required>
+                  <option value="">Selecione a condição</option>
+                  <option value="A_VISTA">À Vista</option>
+                  <option value="BOLETO_30">Boleto 30 dias</option>
+                  <option value="BOLETO_60">Boleto 60 dias</option>
+                  <option value="BOLETO_90">Boleto 90 dias</option>
+                  <option value="BOLETO_120">Boleto 120 dias</option>
+                  <option value="POS_COLHEITA">Pós-Colheita</option>
+                  <option value="SAFRA">Safra</option>
+                  <option value="BARTER">Barter (Troca)</option>
+                  <option value="FINANCIAMENTO">Financiamento Próprio</option>
+                  <option value="PARCELA_MENSAL">Parcelamento Mensal</option>
+                  <option value="CHEQUE_PRE">Cheque Pré-Datado</option>
+                  <option value="CARTAO_CREDITO">Cartão de Crédito</option>
+                  <option value="OUTRO">Outro</option>
+                </select>
+              </div>
+
               <div class="md:col-span-2">
                 <label class="block text-sm font-medium text-gray-700 mb-2">
                   {{ t('reports.notes') }}
