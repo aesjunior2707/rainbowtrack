@@ -198,6 +198,7 @@ const filterRegion = ref('')
 const filterVerified = ref('')
 const showVerifyModal = ref(false)
 const selectedReport = ref(null)
+const showSuccessNotification = ref(false)
 
 const isAdmin = computed(() => authStore.user?.role === 'admin')
 
