@@ -336,8 +336,11 @@ const handleReportVerified = (reportId) => {
   showVerifyModal.value = false
   selectedReport.value = null
 
-  // Opcional: mostrar notificação de sucesso
-  console.log('Relatório verificado com sucesso!')
+  // Mostrar notificação de sucesso
+  showSuccessNotification.value = true
+  setTimeout(() => {
+    showSuccessNotification.value = false
+  }, 3000)
 }
 
 </script>
