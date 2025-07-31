@@ -8,6 +8,7 @@
             {{ t('competitors.title') }}
           </h1>
           <button
+            v-if="authStore.user?.role === 'admin'"
             @click="showNewCompetitorModal = true"
             class="btn-primary"
           >
@@ -68,7 +69,7 @@
                   <span class="text-sm text-gray-500">{{ competitor.region }}</span>
                 </div>
               </div>
-              <div class="flex space-x-2">
+              <div v-if="authStore.user?.role === 'admin'" class="flex space-x-2">
                 <button class="text-gray-400 hover:text-gray-600">
                   <Edit class="w-4 h-4" />
                 </button>
@@ -134,6 +135,7 @@ definePageMeta({
 
 const { $pinia } = useNuxtApp()
 const dataStore = useDataStore($pinia)
+const authStore = useAuthStore($pinia)
 const translationStore = useTranslationStore($pinia)
 
 const t = (key, params) => translationStore.t(key, params)

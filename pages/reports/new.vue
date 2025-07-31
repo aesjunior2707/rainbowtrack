@@ -39,6 +39,7 @@
                     </option>
                   </select>
                   <button
+                    v-if="authStore.user?.role === 'admin'"
                     type="button"
                     @click="showNewCompetitorModal = true"
                     class="btn-secondary whitespace-nowrap"
@@ -173,10 +174,104 @@
                 <input
                   v-model="region"
                   type="text"
-                  class="input-field"
-                  placeholder="Ex: São Paulo, Minas Gerais"
+                  class="input-field bg-gray-100"
+                  placeholder="Região do representante"
+                  readonly
                   required
                 />
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">
+                  Estado
+                </label>
+                <select v-model="state" class="input-field" required>
+                  <option value="">Selecione o estado</option>
+                  <option value="AC">Acre</option>
+                  <option value="AL">Alagoas</option>
+                  <option value="AP">Amapá</option>
+                  <option value="AM">Amazonas</option>
+                  <option value="BA">Bahia</option>
+                  <option value="CE">Ceará</option>
+                  <option value="DF">Distrito Federal</option>
+                  <option value="ES">Espírito Santo</option>
+                  <option value="GO">Goiás</option>
+                  <option value="MA">Maranhão</option>
+                  <option value="MT">Mato Grosso</option>
+                  <option value="MS">Mato Grosso do Sul</option>
+                  <option value="MG">Minas Gerais</option>
+                  <option value="PA">Pará</option>
+                  <option value="PB">Paraíba</option>
+                  <option value="PR">Paraná</option>
+                  <option value="PE">Pernambuco</option>
+                  <option value="PI">Piauí</option>
+                  <option value="RJ">Rio de Janeiro</option>
+                  <option value="RN">Rio Grande do Norte</option>
+                  <option value="RS">Rio Grande do Sul</option>
+                  <option value="RO">Rondônia</option>
+                  <option value="RR">Roraima</option>
+                  <option value="SC">Santa Catarina</option>
+                  <option value="SP">São Paulo</option>
+                  <option value="SE">Sergipe</option>
+                  <option value="TO">Tocantins</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">
+                  Condição de Pagamento
+                </label>
+                <select v-model="paymentCondition" class="input-field" required>
+                  <option value="">Selecione a condição</option>
+                  <option value="A_VISTA">À Vista</option>
+                  <option value="BOLETO_30">Boleto 30 dias</option>
+                  <option value="BOLETO_60">Boleto 60 dias</option>
+                  <option value="BOLETO_90">Boleto 90 dias</option>
+                  <option value="BOLETO_120">Boleto 120 dias</option>
+                  <option value="POS_COLHEITA">Pós-Colheita</option>
+                  <option value="SAFRA">Safra</option>
+                  <option value="BARTER">Barter (Troca)</option>
+                  <option value="FINANCIAMENTO">Financiamento Próprio</option>
+                  <option value="PARCELA_MENSAL">Parcelamento Mensal</option>
+                  <option value="CHEQUE_PRE">Cheque Pré-Datado</option>
+                  <option value="CARTAO_CREDITO">Cartão de Crédito</option>
+                  <option value="OUTRO">Outro</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">
+                  Forma de Pagamento
+                </label>
+                <select v-model="paymentMethod" class="input-field" required>
+                  <option value="">Selecione a forma</option>
+                  <option value="DINHEIRO">Dinheiro</option>
+                  <option value="PIX">PIX</option>
+                  <option value="TRANSFERENCIA">Transferência Bancária</option>
+                  <option value="BOLETO">Boleto Bancário</option>
+                  <option value="CHEQUE">Cheque</option>
+                  <option value="CARTAO_CREDITO">Cartão de Crédito</option>
+                  <option value="CARTAO_DEBITO">Cartão de Débito</option>
+                  <option value="DEPOSITO">Depósito Bancário</option>
+                  <option value="DOCUMENTO">Documento/Duplicata</option>
+                  <option value="OUTRO">Outro</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">
+                  Moeda
+                </label>
+                <select v-model="currency" class="input-field" required>
+                  <option value="">Selecione a moeda</option>
+                  <option
+                    v-for="curr in dataStore.currencies"
+                    :key="curr.id"
+                    :value="curr.id"
+                  >
+                    {{ curr.symbol }} - {{ curr.name }}
+                  </option>
+                </select>
               </div>
 
               <div class="md:col-span-2">
@@ -241,6 +336,10 @@ const selectedProduct = ref('')
 const selectedCategory = ref('fungicides')
 const reportDate = ref('')
 const region = ref('')
+const state = ref('')
+const paymentCondition = ref('')
+const paymentMethod = ref('')
+const currency = ref('')
 const notes = ref('')
 const showNewCompetitorModal = ref(false)
 const productSearch = ref('')
@@ -272,10 +371,14 @@ const filteredProducts = computed(() => {
 })
 
 const canSubmit = computed(() => {
-  return selectedCompetitor.value && 
-         selectedProduct.value && 
-         reportDate.value && 
-         region.value
+  return selectedCompetitor.value &&
+         selectedProduct.value &&
+         reportDate.value &&
+         region.value &&
+         state.value &&
+         paymentCondition.value &&
+         paymentMethod.value &&
+         currency.value
 })
 
 const handleCompetitorCreated = (competitor) => {
@@ -290,16 +393,31 @@ const handleSubmit = () => {
     reportDate: reportDate.value,
     reportedBy: authStore.user.id,
     notes: notes.value,
-    region: region.value || 'Não informado'
+    region: region.value || 'Não informado',
+    state: state.value,
+    paymentCondition: paymentCondition.value,
+    paymentMethod: paymentMethod.value,
+    currencyId: currency.value
   }
-  
+
   dataStore.addPriceReport(report)
   navigateTo('/reports')
 }
 
-// Set default date to today
+// Set default date to today and user's default region
 onMounted(() => {
   const today = new Date()
   reportDate.value = today.toISOString().split('T')[0]
+
+  // Set user's default region
+  if (authStore.user?.defaultRegion) {
+    region.value = authStore.user.defaultRegion
+  }
+
+  // Set default currency to BRL (Real Brasileiro)
+  const brlCurrency = dataStore.currencies.find(c => c.code === 'BRL')
+  if (brlCurrency) {
+    currency.value = brlCurrency.id
+  }
 })
 </script>

@@ -68,13 +68,6 @@ export const useDataStore = defineStore('data', {
         name: 'Euro',
         symbol: '€',
         active: true
-      },
-      {
-        id: 4,
-        code: 'ARS',
-        name: 'Peso Argentino',
-        symbol: '$',
-        active: true
       }
     ],
 
@@ -179,7 +172,10 @@ export const useDataStore = defineStore('data', {
         reportedBy: 1, // user ID
         notes: 'Cliente mencionou que está considerando trocar de fornecedor',
         verified: false,
-        region: 'São Paulo'
+        region: 'REG001',
+        state: 'SP',
+        paymentCondition: 'BOLETO_60',
+        paymentMethod: 'BOLETO'
       },
       {
         id: 2,
@@ -189,7 +185,10 @@ export const useDataStore = defineStore('data', {
         reportedBy: 1,
         notes: 'Preço promocional válido até fim do mês',
         verified: true,
-        region: 'Goiás'
+        region: 'REG001',
+        state: 'GO',
+        paymentCondition: 'A_VISTA',
+        paymentMethod: 'PIX'
       },
       {
         id: 3,
@@ -199,7 +198,10 @@ export const useDataStore = defineStore('data', {
         reportedBy: 2,
         notes: 'Concorrente oferecendo desconto por volume',
         verified: true,
-        region: 'Minas Gerais'
+        region: 'REG002',
+        state: 'MG',
+        paymentCondition: 'POS_COLHEITA',
+        paymentMethod: 'TRANSFERENCIA'
       },
       {
         id: 4,
@@ -209,7 +211,10 @@ export const useDataStore = defineStore('data', {
         reportedBy: 1,
         notes: 'Preço competitivo, cliente satisfeito com qualidade',
         verified: false,
-        region: 'Paraná'
+        region: 'REG001',
+        state: 'PR',
+        paymentCondition: 'BOLETO_90',
+        paymentMethod: 'BOLETO'
       },
       {
         id: 5,
@@ -219,7 +224,10 @@ export const useDataStore = defineStore('data', {
         reportedBy: 2,
         notes: 'Produto similar, embalagem diferente',
         verified: true,
-        region: 'Rio Grande do Sul'
+        region: 'REG002',
+        state: 'RS',
+        paymentCondition: 'BARTER',
+        paymentMethod: 'DOCUMENTO'
       }
     ]
   }),

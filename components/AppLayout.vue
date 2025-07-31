@@ -58,6 +58,9 @@
                   <div class="px-4 py-2 border-b">
                     <p class="text-sm font-medium text-gray-900">{{ authStore.user?.name }}</p>
                     <p class="text-sm text-gray-500">{{ authStore.user?.email }}</p>
+                    <p class="text-xs text-primary-600 font-medium mt-1">
+                      Região: {{ authStore.user?.defaultRegion }}
+                    </p>
                   </div>
                   <button
                     @click="handleLogout"
