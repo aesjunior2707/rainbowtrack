@@ -180,7 +180,8 @@ export const useDataStore = defineStore('data', {
         notes: 'Cliente mencionou que está considerando trocar de fornecedor',
         verified: false,
         region: 'REG001',
-        state: 'SP'
+        state: 'SP',
+        paymentCondition: 'BOLETO_60'
       },
       {
         id: 2,
@@ -191,7 +192,8 @@ export const useDataStore = defineStore('data', {
         notes: 'Preço promocional válido até fim do mês',
         verified: true,
         region: 'REG001',
-        state: 'GO'
+        state: 'GO',
+        paymentCondition: 'A_VISTA'
       },
       {
         id: 3,
@@ -202,7 +204,8 @@ export const useDataStore = defineStore('data', {
         notes: 'Concorrente oferecendo desconto por volume',
         verified: true,
         region: 'REG002',
-        state: 'MG'
+        state: 'MG',
+        paymentCondition: 'POS_COLHEITA'
       },
       {
         id: 4,
@@ -213,7 +216,8 @@ export const useDataStore = defineStore('data', {
         notes: 'Preço competitivo, cliente satisfeito com qualidade',
         verified: false,
         region: 'REG001',
-        state: 'PR'
+        state: 'PR',
+        paymentCondition: 'BOLETO_90'
       },
       {
         id: 5,
@@ -224,7 +228,8 @@ export const useDataStore = defineStore('data', {
         notes: 'Produto similar, embalagem diferente',
         verified: true,
         region: 'REG002',
-        state: 'RS'
+        state: 'RS',
+        paymentCondition: 'BARTER'
       }
     ]
   }),
