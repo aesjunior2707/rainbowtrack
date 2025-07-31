@@ -31,7 +31,7 @@
                   <select v-model="selectedCompetitor" class="input-field flex-1" required>
                     <option value="">{{ t('reports.select_competitor') }}</option>
                     <option
-                      v-for="competitor in dataStore.competitors"
+                      v-for="competitor in availableCompetitors"
                       :key="competitor.id"
                       :value="competitor.id"
                     >
