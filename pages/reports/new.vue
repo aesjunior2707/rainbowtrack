@@ -396,6 +396,12 @@ const selectedCurrencySymbol = computed(() => {
   return curr ? curr.symbol : 'R$'
 })
 
+const availableCompetitors = computed(() => {
+  const userRegion = authStore.user?.defaultRegion
+  const isAdmin = authStore.user?.role === 'admin'
+  return dataStore.getCompetitorsByUserRegion(userRegion, isAdmin)
+})
+
 
 
 const canSubmit = computed(() => {
