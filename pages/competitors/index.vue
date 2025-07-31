@@ -220,8 +220,58 @@ const getCaptureCount = (competitorId) => {
   return dataStore.getPriceReportsByCompetitor(competitorId).length
 }
 
-const handleCompetitorCreated = () => {
+const handleCompetitorCreated = (competitor) => {
   showNewCompetitorModal.value = false
+  showNotificationWithMessage('success', `Concorrente "${competitor.name}" criado com sucesso!`)
+}
+
+const handleEditCompetitor = (competitor) => {
+  selectedCompetitor.value = competitor
+  showEditCompetitorModal.value = true
+}
+
+const handleCompetitorUpdated = (updatedCompetitor) => {
+  dataStore.updateCompetitor(updatedCompetitor.id, updatedCompetitor)
+  showEditCompetitorModal.value = false
+  selectedCompetitor.value = null
+  showNotificationWithMessage('success', `Concorrente "${updatedCompetitor.name}" atualizado com sucesso!`)
+}
+
+const handleDeleteCompetitor = (competitor) => {
+  selectedCompetitor.value = competitor
+  showDeleteModal.value = true
+}
+
+const confirmDeleteCompetitor = () => {
+  try {
+    const competitorName = selectedCompetitor.value.name
+    dataStore.deleteCompetitor(selectedCompetitor.value.id)
+    showDeleteModal.value = false
+    selectedCompetitor.value = null
+    showNotificationWithMessage('success', `Concorrente "${competitorName}" excluído com sucesso!`)
+  } catch (error) {
+    showNotificationWithMessage('error', error.message)
+    showDeleteModal.value = false
+  }
+}
+
+const getDeleteWarningText = (competitor) => {
+  const reportCount = getCaptureCount(competitor.id)
+  if (reportCount > 0) {
+    return `Este concorrente possui ${reportCount} captura(s) associada(s) e não pode ser excluído.`
+  }
+  return ''
+}
+
+const showNotificationWithMessage = (type, message) => {
+  notificationType.value = type
+  notificationMessage.value = message
+  showNotification.value = true
+
+  // Auto-hide after 4 seconds
+  setTimeout(() => {
+    showNotification.value = false
+  }, 4000)
 }
 
 </script>
