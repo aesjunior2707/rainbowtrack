@@ -70,10 +70,18 @@
                 </div>
               </div>
               <div v-if="authStore.user?.role === 'admin'" class="flex space-x-2">
-                <button class="text-gray-400 hover:text-gray-600">
+                <button
+                  @click="handleEditCompetitor(competitor)"
+                  class="text-gray-400 hover:text-gray-600 transition-colors"
+                  title="Editar concorrente"
+                >
                   <Edit class="w-4 h-4" />
                 </button>
-                <button class="text-gray-400 hover:text-red-600">
+                <button
+                  @click="handleDeleteCompetitor(competitor)"
+                  class="text-gray-400 hover:text-red-600 transition-colors"
+                  title="Excluir concorrente"
+                >
                   <Trash2 class="w-4 h-4" />
                 </button>
               </div>
