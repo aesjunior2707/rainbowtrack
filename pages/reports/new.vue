@@ -39,6 +39,7 @@
                     </option>
                   </select>
                   <button
+                    v-if="authStore.user?.role === 'admin'"
                     type="button"
                     @click="showNewCompetitorModal = true"
                     class="btn-secondary whitespace-nowrap"
