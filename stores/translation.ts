@@ -72,11 +72,29 @@ export const useTranslationStore = defineStore('translation', {
           market_share: 'Participação de Mercado (%)',
           report_count: 'Capturas Coletadas',
           no_competitors: 'Nenhum concorrente encontrado',
+          select_region: 'Selecionar Região',
           types: {
             manufacturer: 'Fabricante',
             distributor: 'Distribuidor',
             retailer: 'Varejista',
             cooperative: 'Cooperativa'
+          },
+          regions: {
+            national: 'Nacional',
+            north: 'Norte',
+            northeast: 'Nordeste',
+            center_west: 'Centro-Oeste',
+            southeast: 'Sudeste',
+            south: 'Sul',
+            sao_paulo: 'São Paulo',
+            rio_janeiro: 'Rio de Janeiro',
+            minas_gerais: 'Minas Gerais',
+            rio_grande_sul: 'Rio Grande do Sul',
+            parana: 'Paraná',
+            santa_catarina: 'Santa Catarina',
+            goias: 'Goiás',
+            mato_grosso: 'Mato Grosso',
+            mato_grosso_sul: 'Mato Grosso do Sul'
           }
         },
         products: {
@@ -177,11 +195,29 @@ export const useTranslationStore = defineStore('translation', {
           market_share: 'Market Share (%)',
           report_count: 'Captures Collected',
           no_competitors: 'No competitors found',
+          select_region: 'Select Region',
           types: {
             manufacturer: 'Manufacturer',
             distributor: 'Distributor',
             retailer: 'Retailer',
             cooperative: 'Cooperative'
+          },
+          regions: {
+            national: 'National',
+            north: 'North',
+            northeast: 'Northeast',
+            center_west: 'Center-West',
+            southeast: 'Southeast',
+            south: 'South',
+            sao_paulo: 'São Paulo',
+            rio_janeiro: 'Rio de Janeiro',
+            minas_gerais: 'Minas Gerais',
+            rio_grande_sul: 'Rio Grande do Sul',
+            parana: 'Paraná',
+            santa_catarina: 'Santa Catarina',
+            goias: 'Goiás',
+            mato_grosso: 'Mato Grosso',
+            mato_grosso_sul: 'Mato Grosso do Sul'
           }
         },
         products: {
@@ -284,11 +320,29 @@ export const useTranslationStore = defineStore('translation', {
           report_count: 'Capturas Recolectadas',
           avg_price: 'Precio Promedio',
           no_competitors: 'No se encontraron competidores',
+          select_region: 'Seleccionar Región',
           types: {
             manufacturer: 'Fabricante',
             distributor: 'Distribuidor',
             retailer: 'Minorista',
             cooperative: 'Cooperativa'
+          },
+          regions: {
+            national: 'Nacional',
+            north: 'Norte',
+            northeast: 'Nordeste',
+            center_west: 'Centro-Oeste',
+            southeast: 'Sudeste',
+            south: 'Sur',
+            sao_paulo: 'São Paulo',
+            rio_janeiro: 'Rio de Janeiro',
+            minas_gerais: 'Minas Gerais',
+            rio_grande_sul: 'Rio Grande do Sul',
+            parana: 'Paraná',
+            santa_catarina: 'Santa Catarina',
+            goias: 'Goiás',
+            mato_grosso: 'Mato Grosso',
+            mato_grosso_sul: 'Mato Grosso do Sul'
           }
         },
         products: {
@@ -389,11 +443,29 @@ export const useTranslationStore = defineStore('translation', {
           market_share: '市场份额 (%)',
           report_count: '收集的捕获',
           no_competitors: '未找到竞争对手',
+          select_region: '选择地区',
           types: {
             manufacturer: '制造商',
             distributor: '分销商',
             retailer: '零售商',
             cooperative: '合作社'
+          },
+          regions: {
+            national: '全国',
+            north: '北部',
+            northeast: '东北部',
+            center_west: '中西部',
+            southeast: '东南部',
+            south: '南部',
+            sao_paulo: '圣保罗',
+            rio_janeiro: '里约热内卢',
+            minas_gerais: '米纳斯吉拉斯',
+            rio_grande_sul: '南里奥格兰德',
+            parana: '巴拉那',
+            santa_catarina: '圣卡塔琳娜',
+            goias: '戈亚斯',
+            mato_grosso: '马托格罗索',
+            mato_grosso_sul: '南马托格罗索'
           }
         },
         products: {
