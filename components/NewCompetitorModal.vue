@@ -104,13 +104,13 @@
               @click="$emit('close')"
               class="btn-outline"
             >
-              {{ t('competitors.cancel') }}
+              {{ t('common.cancel') }}
             </button>
             <button
               type="submit"
               class="btn-primary"
             >
-              {{ t('competitors.save') }}
+              {{ t('common.save') }}
             </button>
           </div>
         </form>
