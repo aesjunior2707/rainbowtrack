@@ -146,7 +146,10 @@ const filterRegion = ref('')
 const showNewCompetitorModal = ref(false)
 
 const uniqueRegions = computed(() => {
-  const regions = [...new Set(dataStore.competitors.map(c => c.region))]
+  const userRegion = authStore.user?.defaultRegion
+  const isAdmin = authStore.user?.role === 'admin'
+  const availableCompetitors = dataStore.getCompetitorsByUserRegion(userRegion, isAdmin)
+  const regions = [...new Set(availableCompetitors.map(c => c.region))]
   return regions.filter(Boolean)
 })
 
