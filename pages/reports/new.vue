@@ -80,7 +80,7 @@
                     <div class="flex items-start justify-between mb-2">
                       <div>
                         <h3 class="font-semibold text-gray-900">{{ item.product.name }}</h3>
-                        <p class="text-sm text-gray-600">{{ item.product.brand }} • {{ item.product.packaging }}</p>
+                        <p class="text-sm text-gray-600">{{ item.product.brand }}</p>
                       </div>
                       <button
                         type="button"
