@@ -144,7 +144,7 @@
               <div class="text-right">
                 <p class="text-sm text-gray-600 mb-1">Valor Total</p>
                 <p class="text-2xl font-bold text-primary-600">
-                  R$ {{ formatPrice(totalCaptureValue) }}
+                  {{ selectedCurrencySymbol }} {{ formatPrice(totalCaptureValue) }}
                 </p>
               </div>
             </div>
