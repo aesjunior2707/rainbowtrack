@@ -179,7 +179,8 @@ export const useDataStore = defineStore('data', {
         reportedBy: 1, // user ID
         notes: 'Cliente mencionou que está considerando trocar de fornecedor',
         verified: false,
-        region: 'São Paulo'
+        region: 'Centro-Oeste',
+        state: 'SP'
       },
       {
         id: 2,
@@ -189,7 +190,8 @@ export const useDataStore = defineStore('data', {
         reportedBy: 1,
         notes: 'Preço promocional válido até fim do mês',
         verified: true,
-        region: 'Goiás'
+        region: 'Centro-Oeste',
+        state: 'GO'
       },
       {
         id: 3,
@@ -199,7 +201,8 @@ export const useDataStore = defineStore('data', {
         reportedBy: 2,
         notes: 'Concorrente oferecendo desconto por volume',
         verified: true,
-        region: 'Minas Gerais'
+        region: 'Sul/Sudeste',
+        state: 'MG'
       },
       {
         id: 4,
@@ -209,7 +212,8 @@ export const useDataStore = defineStore('data', {
         reportedBy: 1,
         notes: 'Preço competitivo, cliente satisfeito com qualidade',
         verified: false,
-        region: 'Paraná'
+        region: 'Sul/Sudeste',
+        state: 'PR'
       },
       {
         id: 5,
@@ -219,7 +223,8 @@ export const useDataStore = defineStore('data', {
         reportedBy: 2,
         notes: 'Produto similar, embalagem diferente',
         verified: true,
-        region: 'Rio Grande do Sul'
+        region: 'Sul/Sudeste',
+        state: 'RS'
       }
     ]
   }),
