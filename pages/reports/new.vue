@@ -173,8 +173,9 @@
                 <input
                   v-model="region"
                   type="text"
-                  class="input-field"
+                  class="input-field bg-gray-100"
                   placeholder="Região do representante"
+                  readonly
                   required
                 />
               </div>
