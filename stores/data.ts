@@ -321,6 +321,30 @@ export const useDataStore = defineStore('data', {
         return this.priceReports[reportIndex]
       }
       return null
+    },
+
+    updateCompetitor(competitorId: number, updatedData: any) {
+      const competitorIndex = this.competitors.findIndex(c => c.id === competitorId)
+      if (competitorIndex !== -1) {
+        this.competitors[competitorIndex] = { ...this.competitors[competitorIndex], ...updatedData }
+        return this.competitors[competitorIndex]
+      }
+      return null
+    },
+
+    deleteCompetitor(competitorId: number) {
+      const competitorIndex = this.competitors.findIndex(c => c.id === competitorId)
+      if (competitorIndex !== -1) {
+        // Check if competitor has reports
+        const hasReports = this.priceReports.some(r => r.competitorId === competitorId)
+        if (hasReports) {
+          throw new Error('Não é possível excluir um concorrente que possui capturas associadas.')
+        }
+
+        this.competitors.splice(competitorIndex, 1)
+        return true
+      }
+      return false
     }
   },
 
