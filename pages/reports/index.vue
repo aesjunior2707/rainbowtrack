@@ -255,4 +255,57 @@ const formatDate = (dateString) => {
   return date.toLocaleDateString('pt-BR')
 }
 
+const formatPrice = (price) => {
+  if (!price) return '0,00'
+  return new Intl.NumberFormat('pt-BR', {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  }).format(price)
+}
+
+const getProductBrand = (productId) => {
+  const product = dataStore.getProductById(productId)
+  return product ? product.brand : ''
+}
+
+const getPaymentConditionText = (condition) => {
+  const conditions = {
+    'A_VISTA': 'À Vista',
+    'BOLETO_30': 'Boleto 30d',
+    'BOLETO_60': 'Boleto 60d',
+    'BOLETO_90': 'Boleto 90d',
+    'BOLETO_120': 'Boleto 120d',
+    'POS_COLHEITA': 'Pós-Colheita',
+    'SAFRA': 'Safra',
+    'BARTER': 'Barter',
+    'FINANCIAMENTO': 'Financiamento',
+    'PARCELA_MENSAL': 'Parcelado',
+    'CHEQUE_PRE': 'Cheque Pré',
+    'CARTAO_CREDITO': 'Cartão Crédito',
+    'OUTRO': 'Outro'
+  }
+  return conditions[condition] || condition
+}
+
+const getPaymentMethodText = (method) => {
+  const methods = {
+    'DINHEIRO': 'Dinheiro',
+    'PIX': 'PIX',
+    'TRANSFERENCIA': 'Transferência',
+    'BOLETO': 'Boleto',
+    'CHEQUE': 'Cheque',
+    'CARTAO_CREDITO': 'Cartão Crédito',
+    'CARTAO_DEBITO': 'Cartão Débito',
+    'DEPOSITO': 'Depósito',
+    'DOCUMENTO': 'Documento',
+    'OUTRO': 'Outro'
+  }
+  return methods[method] || method
+}
+
+const truncateText = (text, maxLength) => {
+  if (!text) return ''
+  return text.length > maxLength ? text.substring(0, maxLength) + '...' : text
+}
+
 </script>
