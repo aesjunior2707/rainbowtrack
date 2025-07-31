@@ -30,16 +30,16 @@
             </div>
             <div>
               <select v-model="filterType" class="input-field">
-                <option value="">Todos os Tipos</option>
-                <option value="Fabricante">Fabricante</option>
-                <option value="Distribuidor">Distribuidor</option>
-                <option value="Varejista">Varejista</option>
-                <option value="Cooperativa">Cooperativa</option>
+                <option value="">{{ t('competitors.all_types') }}</option>
+                <option value="Fabricante">{{ t('competitors.types.manufacturer') }}</option>
+                <option value="Distribuidor">{{ t('competitors.types.distributor') }}</option>
+                <option value="Varejista">{{ t('competitors.types.retailer') }}</option>
+                <option value="Cooperativa">{{ t('competitors.types.cooperative') }}</option>
               </select>
             </div>
             <div>
               <select v-model="filterRegion" class="input-field">
-                <option value="">Todas as Regiões</option>
+                <option value="">{{ t('competitors.all_regions') }}</option>
                 <option
                   v-for="region in uniqueRegions"
                   :key="region"
