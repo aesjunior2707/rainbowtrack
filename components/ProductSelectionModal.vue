@@ -74,10 +74,7 @@
                   </span>
                 </div>
 
-                <!-- Our Price (if available) -->
-                <div v-if="product.ourPrice" class="text-sm text-primary-600 font-medium">
-                  Nosso preço: R$ {{ formatPrice(product.ourPrice) }}
-                </div>
+
               </div>
 
               <!-- Selection indicator -->
