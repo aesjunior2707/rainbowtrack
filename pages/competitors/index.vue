@@ -175,6 +175,12 @@ const searchTerm = ref('')
 const filterType = ref('')
 const filterRegion = ref('')
 const showNewCompetitorModal = ref(false)
+const showEditCompetitorModal = ref(false)
+const showDeleteModal = ref(false)
+const selectedCompetitor = ref(null)
+const showNotification = ref(false)
+const notificationType = ref('success')
+const notificationMessage = ref('')
 
 const uniqueRegions = computed(() => {
   const userRegion = authStore.user?.defaultRegion
