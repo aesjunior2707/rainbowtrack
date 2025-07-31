@@ -378,6 +378,12 @@ const formatPrice = (price) => {
   }).format(price)
 }
 
+const totalCaptureValue = computed(() => {
+  return selectedProducts.value.reduce((total, item) => {
+    return total + item.competitorPrice
+  }, 0)
+})
+
 
 
 const canSubmit = computed(() => {
