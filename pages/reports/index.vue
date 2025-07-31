@@ -196,6 +196,8 @@ const searchTerm = ref('')
 const filterCompetitor = ref('')
 const filterRegion = ref('')
 const filterVerified = ref('')
+const showVerifyModal = ref(false)
+const selectedReport = ref(null)
 
 const isAdmin = computed(() => authStore.user?.role === 'admin')
 
