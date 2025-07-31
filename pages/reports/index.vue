@@ -309,4 +309,34 @@ const truncateText = (text, maxLength) => {
   return text.length > maxLength ? text.substring(0, maxLength) + '...' : text
 }
 
+const selectedReportForModal = computed(() => {
+  if (!selectedReport.value) return null
+
+  return {
+    ...selectedReport.value,
+    competitorName: getCompetitorName(selectedReport.value.competitorId),
+    currencySymbol: getCurrencySymbol(selectedReport.value.currencyId)
+  }
+})
+
+const handleViewReport = (report) => {
+  // Se for admin e o relatório não estiver verificado, abre modal de verificação
+  if (isAdmin.value && !report.verified) {
+    selectedReport.value = report
+    showVerifyModal.value = true
+  } else {
+    // Caso contrário, apenas visualiza (aqui você pode implementar uma modal de visualização)
+    console.log('Visualizar relatório:', report)
+  }
+}
+
+const handleReportVerified = (reportId) => {
+  dataStore.verifyPriceReport(reportId, authStore.user.id)
+  showVerifyModal.value = false
+  selectedReport.value = null
+
+  // Opcional: mostrar notificação de sucesso
+  console.log('Relatório verificado com sucesso!')
+}
+
 </script>
