@@ -211,7 +211,7 @@
                   <option value="RO">Rondônia</option>
                   <option value="RR">Roraima</option>
                   <option value="SC">Santa Catarina</option>
-                  <option value="SP">S��o Paulo</option>
+                  <option value="SP">São Paulo</option>
                   <option value="SE">Sergipe</option>
                   <option value="TO">Tocantins</option>
                 </select>
@@ -395,7 +395,9 @@ const handleSubmit = () => {
     notes: notes.value,
     region: region.value || 'Não informado',
     state: state.value,
-    paymentCondition: paymentCondition.value
+    paymentCondition: paymentCondition.value,
+    paymentMethod: paymentMethod.value,
+    currencyId: currency.value
   }
 
   dataStore.addPriceReport(report)
