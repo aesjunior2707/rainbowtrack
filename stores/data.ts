@@ -98,8 +98,7 @@ export const useDataStore = defineStore('data', {
         brand: 'BioAgro',
         packaging: '2L',
         registeredCrops: ['Soja', 'Feijão', 'Milho'],
-        description: 'Fungicida biológico de amplo espectro',
-        ourPrice: 156.00
+        description: 'Fungicida biológico de amplo espectro'
       },
 
       // Insecticides
@@ -110,8 +109,7 @@ export const useDataStore = defineStore('data', {
         brand: 'AgroTech',
         packaging: '1L',
         registeredCrops: ['Soja', 'Milho', 'Algodão'],
-        description: 'Inseticida sistêmico para controle de pragas',
-        ourPrice: 142.80
+        description: 'Inseticida sistêmico para controle de pragas'
       },
       {
         id: 5,
@@ -140,8 +138,7 @@ export const useDataStore = defineStore('data', {
         brand: 'AgroTech',
         packaging: '1L',
         registeredCrops: ['Soja', 'Milho', 'Cana'],
-        description: 'Herbicida pós-emergente seletivo',
-        ourPrice: 105.50
+        description: 'Herbicida pós-emergente seletivo'
       },
       {
         id: 8,
