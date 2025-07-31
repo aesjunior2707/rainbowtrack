@@ -239,6 +239,41 @@
                 </select>
               </div>
 
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">
+                  Forma de Pagamento
+                </label>
+                <select v-model="paymentMethod" class="input-field" required>
+                  <option value="">Selecione a forma</option>
+                  <option value="DINHEIRO">Dinheiro</option>
+                  <option value="PIX">PIX</option>
+                  <option value="TRANSFERENCIA">Transferência Bancária</option>
+                  <option value="BOLETO">Boleto Bancário</option>
+                  <option value="CHEQUE">Cheque</option>
+                  <option value="CARTAO_CREDITO">Cartão de Crédito</option>
+                  <option value="CARTAO_DEBITO">Cartão de Débito</option>
+                  <option value="DEPOSITO">Depósito Bancário</option>
+                  <option value="DOCUMENTO">Documento/Duplicata</option>
+                  <option value="OUTRO">Outro</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">
+                  Moeda
+                </label>
+                <select v-model="currency" class="input-field" required>
+                  <option value="">Selecione a moeda</option>
+                  <option
+                    v-for="curr in dataStore.currencies"
+                    :key="curr.id"
+                    :value="curr.id"
+                  >
+                    {{ curr.symbol }} - {{ curr.name }}
+                  </option>
+                </select>
+              </div>
+
               <div class="md:col-span-2">
                 <label class="block text-sm font-medium text-gray-700 mb-2">
                   {{ t('reports.notes') }}
