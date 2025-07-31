@@ -93,7 +93,7 @@
             <div class="border-t pt-4">
               <div class="grid grid-cols-2 gap-4 text-center">
                 <div>
-                  <p class="text-lg font-semibold text-primary-600">{{ getReportCount(competitor.id) }}</p>
+                  <p class="text-lg font-semibold text-primary-600">{{ getCaptureCount(competitor.id) }}</p>
                   <p class="text-xs text-gray-500">{{ t('competitors.report_count') }}</p>
                 </div>
                 <div>
@@ -175,7 +175,7 @@ const filteredCompetitors = computed(() => {
   return competitors
 })
 
-const getReportCount = (competitorId) => {
+const getCaptureCount = (competitorId) => {
   return dataStore.getPriceReportsByCompetitor(competitorId).length
 }
 
