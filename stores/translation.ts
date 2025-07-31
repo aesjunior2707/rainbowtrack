@@ -24,7 +24,6 @@ export const useTranslationStore = defineStore('translation', {
         navigation: {
           dashboard: 'Painel',
           tracking: 'Capturas',
-          customers: 'Clientes',
           catalog: 'Catálogo',
           competitors: 'Concorrentes'
         },
@@ -34,12 +33,11 @@ export const useTranslationStore = defineStore('translation', {
           price_reports_month: 'Capturas este Mês',
           verified_reports: 'Capturas Verificadas',
           active_competitors: 'Concorrentes Ativos',
-          customers: 'Clientes',
+          products: 'Produtos',
           recent_reports: 'Capturas Recentes',
           competitor_ranking: 'Ranking de Concorrentes',
           quick_actions: 'Ações Rápidas',
           new_report: 'Nova Captura',
-          new_customer: 'Novo Cliente',
           products: 'Produtos',
           price_trends: 'Tendências de Preços',
           market_analysis: 'Análise de Mercado'
@@ -50,7 +48,6 @@ export const useTranslationStore = defineStore('translation', {
           report_number: 'Captura #{id}',
           report_date: 'Data da Captura:',
           competitor: 'Concorrente:',
-          customer: 'Cliente:',
           product: 'Produto:',
           region: 'Região:',
           notes: 'Observações:',
@@ -58,7 +55,6 @@ export const useTranslationStore = defineStore('translation', {
           no_reports: 'Nenhuma captura encontrada',
           create_first: 'Criar Primeira Captura',
           back: 'Voltar',
-          select_customer: 'Selecionar Cliente',
           select_competitor: 'Selecionar Concorrente',
           select_product: 'Selecionar Produto',
           report_details: 'Detalhes da Captura',
@@ -82,19 +78,6 @@ export const useTranslationStore = defineStore('translation', {
             retailer: 'Varejista',
             cooperative: 'Cooperativa'
           }
-        },
-        customers: {
-          title: 'Clientes - Rainbow Track',
-          new_customer: 'Novo Cliente',
-          search: 'Pesquisar',
-          no_customers: 'Nenhum cliente encontrado',
-          name: 'Nome',
-          company: 'Empresa',
-          email: 'Email',
-          phone: 'Telefone',
-          address: 'Endereço',
-          save: 'Salvar',
-          cancel: 'Cancelar'
         },
         products: {
           title: 'Catálogo de Produtos',
@@ -146,7 +129,6 @@ export const useTranslationStore = defineStore('translation', {
         navigation: {
           dashboard: 'Dashboard',
           tracking: 'Captures',
-          customers: 'Customers',
           catalog: 'Catalog',
           competitors: 'Competitors'
         },
@@ -156,12 +138,11 @@ export const useTranslationStore = defineStore('translation', {
           price_reports_month: 'Captures This Month',
           verified_reports: 'Verified Captures',
           active_competitors: 'Active Competitors',
-          customers: 'Customers',
+          products: 'Products',
           recent_reports: 'Recent Captures',
           competitor_ranking: 'Competitor Ranking',
           quick_actions: 'Quick Actions',
           new_report: 'New Capture',
-          new_customer: 'New Customer',
           products: 'Products',
           price_trends: 'Price Trends',
           market_analysis: 'Market Analysis'
@@ -172,7 +153,6 @@ export const useTranslationStore = defineStore('translation', {
           report_number: 'Capture #{id}',
           report_date: 'Capture Date:',
           competitor: 'Competitor:',
-          customer: 'Customer:',
           product: 'Product:',
           region: 'Region:',
           notes: 'Notes:',
@@ -180,7 +160,6 @@ export const useTranslationStore = defineStore('translation', {
           no_reports: 'No captures found',
           create_first: 'Create First Capture',
           back: 'Back',
-          select_customer: 'Select Customer',
           select_competitor: 'Select Competitor',
           select_product: 'Select Product',
           report_details: 'Capture Details',
@@ -204,19 +183,6 @@ export const useTranslationStore = defineStore('translation', {
             retailer: 'Retailer',
             cooperative: 'Cooperative'
           }
-        },
-        customers: {
-          title: 'Customers - Rainbow Track',
-          new_customer: 'New Customer',
-          search: 'Search',
-          no_customers: 'No customers found',
-          name: 'Name',
-          company: 'Company',
-          email: 'Email',
-          phone: 'Phone',
-          address: 'Address',
-          save: 'Save',
-          cancel: 'Cancel'
         },
         products: {
           title: 'Product Catalog',
@@ -269,7 +235,6 @@ export const useTranslationStore = defineStore('translation', {
         navigation: {
           dashboard: 'Panel',
           tracking: 'Capturas',
-          customers: 'Clientes',
           catalog: 'Catálogo',
           competitors: 'Competidores'
         },
@@ -279,12 +244,11 @@ export const useTranslationStore = defineStore('translation', {
           price_reports_month: 'Capturas Este Mes',
           verified_reports: 'Capturas Verificadas',
           active_competitors: 'Competidores Activos',
-          customers: 'Clientes',
+          products: 'Productos',
           recent_reports: 'Capturas Recientes',
           competitor_ranking: 'Ranking de Competidores',
           quick_actions: 'Acciones Rápidas',
           new_report: 'Nueva Captura',
-          new_customer: 'Nuevo Cliente',
           products: 'Productos',
           price_trends: 'Tendencias de Precios',
           market_analysis: 'Análisis de Mercado'
@@ -295,7 +259,6 @@ export const useTranslationStore = defineStore('translation', {
           report_number: 'Captura #{id}',
           report_date: 'Fecha de la Captura:',
           competitor: 'Competidor:',
-          customer: 'Cliente:',
           product: 'Producto:',
           region: 'Región:',
           notes: 'Notas:',
@@ -303,7 +266,6 @@ export const useTranslationStore = defineStore('translation', {
           no_reports: 'No se encontraron capturas',
           create_first: 'Crear Primera Captura',
           back: 'Volver',
-          select_customer: 'Seleccionar Cliente',
           select_competitor: 'Seleccionar Competidor',
           select_product: 'Seleccionar Producto',
           report_details: 'Detalles de la Captura',
@@ -328,19 +290,6 @@ export const useTranslationStore = defineStore('translation', {
             retailer: 'Minorista',
             cooperative: 'Cooperativa'
           }
-        },
-        customers: {
-          title: 'Clientes - Rainbow Track',
-          new_customer: 'Nuevo Cliente',
-          search: 'Buscar',
-          no_customers: 'No se encontraron clientes',
-          name: 'Nombre',
-          company: 'Empresa',
-          email: 'Email',
-          phone: 'Teléfono',
-          address: 'Dirección',
-          save: 'Guardar',
-          cancel: 'Cancelar'
         },
         products: {
           title: 'Catálogo de Productos',
@@ -392,7 +341,6 @@ export const useTranslationStore = defineStore('translation', {
         navigation: {
           dashboard: '仪表板',
           tracking: '捕获',
-          customers: '客户',
           catalog: '目录',
           competitors: '竞争对手'
         },
@@ -402,12 +350,11 @@ export const useTranslationStore = defineStore('translation', {
           price_reports_month: '本月捕获',
           verified_reports: '已验证捕获',
           active_competitors: '活跃竞争对手',
-          customers: '客户',
+          products: '产品',
           recent_reports: '最近捕获',
           competitor_ranking: '竞争对手排名',
           quick_actions: '快速操作',
           new_report: '新捕获',
-          new_customer: '新客户',
           products: '产品',
           price_trends: '价格趋势',
           market_analysis: '市场分析'
@@ -418,7 +365,6 @@ export const useTranslationStore = defineStore('translation', {
           report_number: '捕获 #{id}',
           report_date: '捕获日期：',
           competitor: '竞争对手：',
-          customer: '客户：',
           product: '产品：',
           region: '地区：',
           notes: '备注：',
@@ -426,7 +372,6 @@ export const useTranslationStore = defineStore('translation', {
           no_reports: '未找到捕获',
           create_first: '创建第一个捕获',
           back: '返回',
-          select_customer: '选择客户',
           select_competitor: '选择竞争对手',
           select_product: '选择产品',
           report_details: '捕获详情',
@@ -450,19 +395,6 @@ export const useTranslationStore = defineStore('translation', {
             retailer: '零售商',
             cooperative: '合作社'
           }
-        },
-        customers: {
-          title: '客户 - Rainbow Track',
-          new_customer: '新客户',
-          search: '搜索',
-          no_customers: '未找到客户',
-          name: '姓名',
-          company: '公司',
-          email: '邮箱',
-          phone: '电话',
-          address: '地址',
-          save: '保存',
-          cancel: '取消'
         },
         products: {
           title: '产品目录',

@@ -17,38 +17,12 @@
         </div>
 
         <form @submit.prevent="handleSubmit" class="space-y-6">
-          <!-- Customer and Competitor Selection -->
+          <!-- Competitor Selection -->
           <div class="card p-6">
             <h2 class="text-lg font-semibold text-gray-900 mb-4">
               Informações Básicas
             </h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
-                <label class="block text-sm font-medium text-gray-700 mb-2">
-                  {{ t('reports.select_customer') }}
-                </label>
-                <div class="flex space-x-2">
-                  <select v-model="selectedCustomer" class="input-field flex-1" required>
-                    <option value="">{{ t('reports.select_customer') }}</option>
-                    <option
-                      v-for="customer in dataStore.customers"
-                      :key="customer.id"
-                      :value="customer.id"
-                    >
-                      {{ customer.name }} - {{ customer.company }}
-                    </option>
-                  </select>
-                  <button
-                    type="button"
-                    @click="showNewCustomerModal = true"
-                    class="btn-secondary whitespace-nowrap"
-                  >
-                    <Plus class="w-4 h-4 mr-1" />
-                    Novo
-                  </button>
-                </div>
-              </div>
-
+            <div class="grid grid-cols-1 gap-4">
               <div>
                 <label class="block text-sm font-medium text-gray-700 mb-2">
                   {{ t('reports.select_competitor') }}
@@ -238,13 +212,6 @@
         </form>
       </div>
 
-      <!-- New Customer Modal -->
-      <NewCustomerModal
-        v-if="showNewCustomerModal"
-        @close="showNewCustomerModal = false"
-        @customer-created="handleCustomerCreated"
-      />
-
       <!-- New Competitor Modal -->
       <NewCompetitorModal
         v-if="showNewCompetitorModal"
@@ -269,16 +236,12 @@ const translationStore = useTranslationStore($pinia)
 
 const t = (key, params) => translationStore.t(key, params)
 
-const selectedCustomer = ref('')
 const selectedCompetitor = ref('')
 const selectedProduct = ref('')
 const selectedCategory = ref('fungicides')
-const selectedCurrency = ref(1) // Default to BRL
-const competitorPrice = ref(0)
 const reportDate = ref('')
 const region = ref('')
 const notes = ref('')
-const showNewCustomerModal = ref(false)
 const showNewCompetitorModal = ref(false)
 const productSearch = ref('')
 
@@ -309,22 +272,11 @@ const filteredProducts = computed(() => {
 })
 
 const canSubmit = computed(() => {
-  return selectedCustomer.value && 
-         selectedCompetitor.value && 
+  return selectedCompetitor.value && 
          selectedProduct.value && 
          reportDate.value && 
          region.value
 })
-
-const getCurrencySymbol = (currencyId) => {
-  const currency = dataStore.getCurrencyById(currencyId)
-  return currency ? currency.symbol : 'R$'
-}
-
-const handleCustomerCreated = (customer) => {
-  selectedCustomer.value = customer.id
-  showNewCustomerModal.value = false
-}
 
 const handleCompetitorCreated = (competitor) => {
   selectedCompetitor.value = competitor.id
@@ -332,16 +284,13 @@ const handleCompetitorCreated = (competitor) => {
 }
 
 const handleSubmit = () => {
-  const customer = dataStore.getCustomerById(selectedCustomer.value)
-  
   const report = {
     productId: selectedProduct.value,
-    customerId: selectedCustomer.value,
     competitorId: selectedCompetitor.value,
     reportDate: reportDate.value,
     reportedBy: authStore.user.id,
     notes: notes.value,
-    region: region.value || customer?.region || 'Não informado'
+    region: region.value || 'Não informado'
   }
   
   dataStore.addPriceReport(report)

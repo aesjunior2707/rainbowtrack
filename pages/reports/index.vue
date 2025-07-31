@@ -93,11 +93,6 @@
             <!-- Informações do Relatório -->
             <div class="space-y-3 mb-4">
               <div class="flex items-center justify-between">
-                <span class="text-sm text-gray-600">{{ t('reports.customer') }}</span>
-                <span class="text-sm font-medium">{{ getCustomerName(report.customerId) }}</span>
-              </div>
-              
-              <div class="flex items-center justify-between">
                 <span class="text-sm text-gray-600">{{ t('reports.competitor') }}</span>
                 <span class="text-sm font-medium">{{ getCompetitorName(report.competitorId) }}</span>
               </div>
@@ -192,9 +187,8 @@ const filteredReports = computed(() => {
     const term = searchTerm.value.toLowerCase()
     reports = reports.filter(report => {
       const product = getProductName(report.productId).toLowerCase()
-      const customer = getCustomerName(report.customerId).toLowerCase()
       const competitor = getCompetitorName(report.competitorId).toLowerCase()
-      return product.includes(term) || customer.includes(term) || competitor.includes(term)
+      return product.includes(term) || competitor.includes(term)
     })
   }
 
@@ -212,11 +206,6 @@ const filteredReports = computed(() => {
 
   return reports.sort((a, b) => new Date(b.reportDate).getTime() - new Date(a.reportDate).getTime())
 })
-
-const getCustomerName = (customerId) => {
-  const customer = dataStore.getCustomerById(customerId)
-  return customer ? customer.name : 'Cliente Desconhecido'
-}
 
 const getCompetitorName = (competitorId) => {
   const competitor = dataStore.getCompetitorById(competitorId)

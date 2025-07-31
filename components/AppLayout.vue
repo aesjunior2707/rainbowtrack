@@ -109,7 +109,6 @@
 import { 
   Home, 
   FileText, 
-  Users, 
   Package, 
   Building2,
   ChevronDown, 
@@ -129,7 +128,6 @@ const mobileMenuOpen = ref(false)
 const navigation = [
   { nameKey: 'navigation.dashboard', href: '/', icon: Home },
   { nameKey: 'navigation.tracking', href: '/reports', icon: FileText },
-  { nameKey: 'navigation.customers', href: '/customers', icon: Users },
   { nameKey: 'navigation.competitors', href: '/competitors', icon: Building2 },
   { nameKey: 'navigation.catalog', href: '/products', icon: Package }
 ]

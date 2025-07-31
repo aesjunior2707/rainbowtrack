@@ -2,53 +2,7 @@ import { defineStore } from 'pinia'
 
 export const useDataStore = defineStore('data', {
   state: () => ({
-    customers: [
-      {
-        id: 1,
-        name: 'João Silva',
-        email: 'joao.silva@fazenda.com',
-        phone: '(11) 98765-4321',
-        company: 'Fazenda São José',
-        address: 'Rua das Plantas, 123 - Ribeirão Preto, SP',
-        region: 'São Paulo'
-      },
-      {
-        id: 2,
-        name: 'Maria Santos',
-        email: 'maria.santos@agricultura.com',
-        phone: '(21) 99876-5432',
-        company: 'Agricultura Santos Ltda',
-        address: 'Av. do Campo, 456 - Goiânia, GO',
-        region: 'Goiás'
-      },
-      {
-        id: 3,
-        name: 'Pedro Oliveira',
-        email: 'pedro.oliveira@plantio.com',
-        phone: '(31) 91234-5678',
-        company: 'Plantio Oliveira',
-        address: 'Estrada Rural, 789 - Uberlândia, MG',
-        region: 'Minas Gerais'
-      },
-      {
-        id: 4,
-        name: 'Ana Costa',
-        email: 'ana.costa@agronegocio.com',
-        phone: '(41) 92345-6789',
-        company: 'Agronegócio Costa',
-        address: 'Fazenda Boa Vista, s/n - Cascavel, PR',
-        region: 'Paraná'
-      },
-      {
-        id: 5,
-        name: 'Carlos Ferreira',
-        email: 'carlos.ferreira@rural.com',
-        phone: '(51) 93456-7890',
-        company: 'Rural Ferreira',
-        address: 'Sítio Esperança, 321 - Passo Fundo, RS',
-        region: 'Rio Grande do Sul'
-      }
-    ],
+    customers: [],
 
     competitors: [
       {
@@ -220,7 +174,6 @@ export const useDataStore = defineStore('data', {
         productId: 1,
         customerId: 1,
         competitorId: 1,
-        competitorPrice: 118.00,
         currencyId: 1,
         reportDate: '2024-01-15',
         reportedBy: 1, // user ID
@@ -231,7 +184,6 @@ export const useDataStore = defineStore('data', {
       {
         id: 2,
         productId: 4,
-        customerId: 2,
         competitorId: 2,
         reportDate: '2024-01-12',
         reportedBy: 1,
@@ -242,7 +194,6 @@ export const useDataStore = defineStore('data', {
       {
         id: 3,
         productId: 7,
-        customerId: 3,
         competitorId: 3,
         reportDate: '2024-01-10',
         reportedBy: 2,
@@ -253,7 +204,6 @@ export const useDataStore = defineStore('data', {
       {
         id: 4,
         productId: 2,
-        customerId: 4,
         competitorId: 4,
         reportDate: '2024-01-08',
         reportedBy: 1,
@@ -264,7 +214,6 @@ export const useDataStore = defineStore('data', {
       {
         id: 5,
         productId: 5,
-        customerId: 5,
         competitorId: 1,
         reportDate: '2024-01-05',
         reportedBy: 2,
@@ -276,14 +225,6 @@ export const useDataStore = defineStore('data', {
   }),
 
   actions: {
-    addCustomer(customer: any) {
-      const newCustomer = {
-        ...customer,
-        id: Math.max(...this.customers.map(c => c.id)) + 1
-      }
-      this.customers.push(newCustomer)
-      return newCustomer
-    },
 
     addCompetitor(competitor: any) {
       const newCompetitor = {
@@ -303,10 +244,6 @@ export const useDataStore = defineStore('data', {
       }
       this.priceReports.push(newReport)
       return newReport
-    },
-
-    getCustomerById(id: number) {
-      return this.customers.find(c => c.id === id)
     },
 
     getCompetitorById(id: number) {

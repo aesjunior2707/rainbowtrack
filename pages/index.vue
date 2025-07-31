@@ -64,11 +64,11 @@
           <div class="card p-6">
             <div class="flex items-center justify-between">
               <div>
-                <p class="text-sm text-gray-600">{{ t('dashboard.customers') }}</p>
-                <p class="text-2xl font-bold text-purple-600">{{ dataStore.customers.length }}</p>
+                <p class="text-sm text-gray-600">{{ t('dashboard.products') }}</p>
+                <p class="text-2xl font-bold text-purple-600">{{ dataStore.products.length }}</p>
               </div>
               <div class="bg-purple-100 p-3 rounded-full">
-                <Users class="w-6 h-6 text-purple-600" />
+                <Package class="w-6 h-6 text-purple-600" />
               </div>
             </div>
           </div>
@@ -89,18 +89,18 @@
               {{ t('dashboard.new_report') }}
             </NuxtLink>
             <NuxtLink
-              to="/customers"
-              class="btn-secondary text-center py-3 px-6 rounded-lg no-underline"
-            >
-              <UserPlus class="w-5 h-5 inline mr-2" />
-              {{ t('dashboard.new_customer') }}
-            </NuxtLink>
-            <NuxtLink
               to="/competitors"
-              class="btn-outline text-center py-3 px-6 rounded-lg no-underline"
+              class="btn-secondary text-center py-3 px-6 rounded-lg no-underline"
             >
               <Building2 class="w-5 h-5 inline mr-2" />
               Concorrentes
+            </NuxtLink>
+            <NuxtLink
+              to="/products"
+              class="btn-outline text-center py-3 px-6 rounded-lg no-underline"
+            >
+              <Package class="w-5 h-5 inline mr-2" />
+              {{ t('dashboard.products') }}
             </NuxtLink>
           </div>
         </div>
@@ -110,7 +110,7 @@
 </template>
 
 <script setup>
-import { FileText, CheckCircle, Building2, Users, UserPlus, Clock } from 'lucide-vue-next'
+import { FileText, CheckCircle, Building2, Package, Clock } from 'lucide-vue-next'
 
 definePageMeta({
   middleware: 'auth'
