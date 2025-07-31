@@ -355,7 +355,8 @@ const handleSubmit = () => {
     reportedBy: authStore.user.id,
     notes: notes.value,
     region: region.value || 'Não informado',
-    state: state.value
+    state: state.value,
+    paymentCondition: paymentCondition.value
   }
 
   dataStore.addPriceReport(report)
