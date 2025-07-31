@@ -54,19 +54,13 @@
               required
             >
               <option value="">{{ t('competitors.select_region') }}</option>
-              <option value="Minha Região">{{ t('competitors.regions.my_region') }}</option>
-              <option value="Região Norte">{{ t('competitors.regions.north_territory') }}</option>
-              <option value="Região Sul">{{ t('competitors.regions.south_territory') }}</option>
-              <option value="Região Leste">{{ t('competitors.regions.east_territory') }}</option>
-              <option value="Região Oeste">{{ t('competitors.regions.west_territory') }}</option>
-              <option value="Região Central">{{ t('competitors.regions.central_territory') }}</option>
-              <option value="Território A">{{ t('competitors.regions.territory_a') }}</option>
-              <option value="Território B">{{ t('competitors.regions.territory_b') }}</option>
-              <option value="Território C">{{ t('competitors.regions.territory_c') }}</option>
-              <option value="Zona Metropolitana">{{ t('competitors.regions.metropolitan_zone') }}</option>
-              <option value="Interior">{{ t('competitors.regions.interior') }}</option>
-              <option value="Capital">{{ t('competitors.regions.capital') }}</option>
-              <option value="Outras Regiões">{{ t('competitors.regions.other_regions') }}</option>
+              <option value="Nacional">{{ t('competitors.regions.national') }}</option>
+              <option value="Sul/Sudeste">{{ t('competitors.regions.south_southeast') }}</option>
+              <option value="Centro-Oeste">{{ t('competitors.regions.center_west') }}</option>
+              <option value="Norte/Nordeste">{{ t('competitors.regions.north_northeast') }}</option>
+              <option value="REG001">{{ t('competitors.regions.reg001') }}</option>
+              <option value="REG002">{{ t('competitors.regions.reg002') }}</option>
+              <option value="REG003">{{ t('competitors.regions.reg003') }}</option>
             </select>
           </div>
 
