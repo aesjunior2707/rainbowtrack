@@ -338,7 +338,8 @@ const canSubmit = computed(() => {
          selectedProduct.value &&
          reportDate.value &&
          region.value &&
-         state.value
+         state.value &&
+         paymentCondition.value
 })
 
 const handleCompetitorCreated = (competitor) => {
