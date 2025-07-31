@@ -391,6 +391,11 @@ const totalCaptureValue = computed(() => {
   }, 0)
 })
 
+const selectedCurrencySymbol = computed(() => {
+  const curr = dataStore.getCurrencyById(currency.value)
+  return curr ? curr.symbol : 'R$'
+})
+
 
 
 const canSubmit = computed(() => {
