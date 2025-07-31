@@ -29,7 +29,7 @@
             </div>
             <div>
               <select v-model="filterCompetitor" class="input-field">
-                <option value="">Todos os Concorrentes</option>
+                <option value="">{{ t('reports.all_competitors') }}</option>
                 <option
                   v-for="competitor in dataStore.competitors"
                   :key="competitor.id"
