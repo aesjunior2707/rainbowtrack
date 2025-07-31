@@ -135,6 +135,7 @@ definePageMeta({
 
 const { $pinia } = useNuxtApp()
 const dataStore = useDataStore($pinia)
+const authStore = useAuthStore($pinia)
 const translationStore = useTranslationStore($pinia)
 
 const t = (key, params) => translationStore.t(key, params)
