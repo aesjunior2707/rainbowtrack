@@ -69,7 +69,7 @@
                   <span class="text-sm text-gray-500">{{ competitor.region }}</span>
                 </div>
               </div>
-              <div class="flex space-x-2">
+              <div v-if="authStore.user?.role === 'admin'" class="flex space-x-2">
                 <button class="text-gray-400 hover:text-gray-600">
                   <Edit class="w-4 h-4" />
                 </button>
