@@ -277,19 +277,6 @@
                 </select>
               </div>
 
-              <!-- Total Value -->
-              <div v-if="selectedProducts.length > 0">
-                <label class="block text-sm font-medium text-gray-700 mb-2">
-                  Valor Total da Captura
-                </label>
-                <div class="input-field bg-gray-50 font-semibold text-primary-600">
-                  R$ {{ formatPrice(totalCaptureValue) }}
-                </div>
-                <p class="text-xs text-gray-500 mt-1">
-                  Total de {{ selectedProducts.length }} produto{{ selectedProducts.length > 1 ? 's' : '' }}
-                </p>
-              </div>
-
               <div class="md:col-span-2">
                 <label class="block text-sm font-medium text-gray-700 mb-2">
                   {{ t('reports.notes') }}
