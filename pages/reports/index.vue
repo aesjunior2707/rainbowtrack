@@ -62,73 +62,95 @@
         </div>
 
         <!-- Reports Cards -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           <div
             v-for="report in filteredReports"
             :key="report.id"
-            class="card p-6 hover:shadow-lg transition-shadow"
+            class="card hover:shadow-lg transition-all duration-200 overflow-hidden"
           >
-            <!-- Header do Card -->
-            <div class="flex justify-between items-start mb-4">
-              <div class="flex-1">
-                <h3 class="text-lg font-semibold text-gray-900">
-                  {{ getProductName(report.productId) }}
-                </h3>
-                <p class="text-sm text-gray-500">
-                  {{ t('reports.report_number', { id: report.id }) }}
-                </p>
-              </div>
-              <div class="flex items-center space-x-2">
-                <span
-                  class="inline-flex items-center px-2 py-1 text-xs font-semibold rounded-full"
-                  :class="report.verified ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'"
-                >
-                  <CheckCircle v-if="report.verified" class="w-3 h-3 mr-1" />
-                  <Clock v-else class="w-3 h-3 mr-1" />
-                  {{ report.verified ? t('reports.verified') : 'Pendente' }}
-                </span>
-              </div>
-            </div>
-
-            <!-- Informações do Relatório -->
-            <div class="space-y-3 mb-4">
-              <div class="flex items-center justify-between">
-                <span class="text-sm text-gray-600">{{ t('reports.competitor') }}</span>
-                <span class="text-sm font-medium">{{ getCompetitorName(report.competitorId) }}</span>
-              </div>
-              
-              <div class="flex items-center justify-between">
-                <span class="text-sm text-gray-600">{{ t('reports.region') }}</span>
-                <span class="text-sm font-medium">{{ report.region }}</span>
-              </div>
-              
-              <div class="flex items-center justify-between">
-                <span class="text-sm text-gray-600">{{ t('reports.report_date') }}</span>
-                <span class="text-sm font-medium">{{ formatDate(report.reportDate) }}</span>
-              </div>
-            </div>
-
-            <!-- Observações -->
-            <div v-if="report.notes" class="mb-4">
-              <p class="text-sm text-gray-600 mb-1">{{ t('reports.notes') }}</p>
-              <p class="text-xs text-gray-500 italic">{{ report.notes }}</p>
-            </div>
-
-            <!-- Ações -->
-            <div class="border-t pt-4">
-              <div class="flex items-center justify-between">
-                <span class="text-xs text-gray-400">
-                  Por: {{ getReporterName(report.reportedBy) }}
-                </span>
+            <!-- Header com Status e Data -->
+            <div class="bg-gradient-to-r from-primary-50 to-secondary-50 px-4 py-3 border-b">
+              <div class="flex justify-between items-center">
                 <div class="flex items-center space-x-2">
+                  <span
+                    class="inline-flex items-center px-2 py-1 text-xs font-medium rounded-full"
+                    :class="report.verified ? 'bg-green-100 text-green-700' : 'bg-orange-100 text-orange-700'"
+                  >
+                    <CheckCircle v-if="report.verified" class="w-3 h-3 mr-1" />
+                    <Clock v-else class="w-3 h-3 mr-1" />
+                    {{ report.verified ? 'Verificado' : 'Pendente' }}
+                  </span>
+                </div>
+                <span class="text-xs text-gray-600">
+                  {{ formatDate(report.reportDate) }}
+                </span>
+              </div>
+            </div>
+
+            <!-- Conteúdo Principal -->
+            <div class="p-4">
+              <!-- Concorrente em Destaque -->
+              <div class="mb-3">
+                <h3 class="text-lg font-bold text-gray-900 mb-1">
+                  {{ getCompetitorName(report.competitorId) }}
+                </h3>
+                <div class="flex items-center space-x-2 text-sm text-gray-600">
+                  <MapPin class="w-4 h-4" />
+                  <span>{{ report.state || report.region }}</span>
+                </div>
+              </div>
+
+              <!-- Produto e Preço -->
+              <div class="bg-gray-50 rounded-lg p-3 mb-3">
+                <div class="flex justify-between items-start">
+                  <div class="flex-1">
+                    <p class="font-semibold text-gray-900 text-sm">
+                      {{ getProductName(report.productId) }}
+                    </p>
+                    <p class="text-xs text-gray-500 mt-1">
+                      {{ getProductBrand(report.productId) }}
+                    </p>
+                  </div>
+                  <div class="text-right ml-3">
+                    <p class="text-lg font-bold text-primary-600">
+                      {{ getCurrencySymbol(report.currencyId) }} {{ formatPrice(report.competitorPrice) }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Condições de Pagamento (apenas para admin) -->
+              <div v-if="authStore.user?.role === 'admin' && (report.paymentCondition || report.paymentMethod)" class="text-xs text-gray-500 mb-3">
+                <div class="flex items-center space-x-2">
+                  <CreditCard class="w-3 h-3" />
+                  <span>{{ getPaymentConditionText(report.paymentCondition) }}</span>
+                  <span v-if="report.paymentMethod">• {{ getPaymentMethodText(report.paymentMethod) }}</span>
+                </div>
+              </div>
+
+              <!-- Observações (se houver) -->
+              <div v-if="report.notes" class="text-xs text-gray-600 bg-blue-50 rounded p-2 mb-3 border-l-2 border-blue-200">
+                <p class="italic">"{{ truncateText(report.notes, 60) }}"</p>
+              </div>
+            </div>
+
+            <!-- Footer com Ações -->
+            <div class="px-4 py-3 bg-gray-50 border-t">
+              <div class="flex items-center justify-between">
+                <div class="text-xs text-gray-500">
+                  <User class="w-3 h-3 inline mr-1" />
+                  {{ getReporterName(report.reportedBy) }}
+                </div>
+                <div class="flex items-center space-x-1">
                   <button
-                    class="p-2 text-primary-600 hover:text-primary-900 hover:bg-primary-50 rounded-full transition-colors"
-                    title="Visualizar"
+                    class="p-1.5 text-primary-600 hover:text-primary-900 hover:bg-primary-100 rounded transition-colors"
+                    title="Visualizar Detalhes"
                   >
                     <Eye class="w-4 h-4" />
                   </button>
                   <button
-                    class="p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-50 rounded-full transition-colors"
+                    v-if="authStore.user?.role === 'admin' || report.reportedBy === authStore.user?.id"
+                    class="p-1.5 text-gray-500 hover:text-gray-700 hover:bg-gray-200 rounded transition-colors"
                     title="Editar"
                   >
                     <Edit class="w-4 h-4" />
@@ -157,7 +179,7 @@
 </template>
 
 <script setup>
-import { Plus, Eye, Edit, FileText, CheckCircle, Clock } from 'lucide-vue-next'
+import { Plus, Eye, Edit, FileText, CheckCircle, Clock, MapPin, CreditCard, User } from 'lucide-vue-next'
 
 definePageMeta({
   middleware: 'auth'
