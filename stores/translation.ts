@@ -80,19 +80,13 @@ export const useTranslationStore = defineStore('translation', {
             cooperative: 'Cooperativa'
           },
           regions: {
-            my_region: 'Minha Região',
-            north_territory: 'Região Norte',
-            south_territory: 'Região Sul',
-            east_territory: 'Região Leste',
-            west_territory: 'Região Oeste',
-            central_territory: 'Região Central',
-            territory_a: 'Território A',
-            territory_b: 'Território B',
-            territory_c: 'Território C',
-            metropolitan_zone: 'Zona Metropolitana',
-            interior: 'Interior',
-            capital: 'Capital',
-            other_regions: 'Outras Regiões'
+            national: 'Nacional',
+            south_southeast: 'Sul/Sudeste',
+            center_west: 'Centro-Oeste',
+            north_northeast: 'Norte/Nordeste',
+            reg001: 'Região 001',
+            reg002: 'Região 002',
+            reg003: 'Região 003'
           }
         },
         products: {
@@ -201,19 +195,13 @@ export const useTranslationStore = defineStore('translation', {
             cooperative: 'Cooperative'
           },
           regions: {
-            my_region: 'My Region',
-            north_territory: 'North Territory',
-            south_territory: 'South Territory',
-            east_territory: 'East Territory',
-            west_territory: 'West Territory',
-            central_territory: 'Central Territory',
-            territory_a: 'Territory A',
-            territory_b: 'Territory B',
-            territory_c: 'Territory C',
-            metropolitan_zone: 'Metropolitan Zone',
-            interior: 'Interior',
-            capital: 'Capital',
-            other_regions: 'Other Regions'
+            national: 'National',
+            south_southeast: 'South/Southeast',
+            center_west: 'Center-West',
+            north_northeast: 'North/Northeast',
+            reg001: 'Region 001',
+            reg002: 'Region 002',
+            reg003: 'Region 003'
           }
         },
         products: {
@@ -324,19 +312,13 @@ export const useTranslationStore = defineStore('translation', {
             cooperative: 'Cooperativa'
           },
           regions: {
-            my_region: 'Mi Región',
-            north_territory: 'Territorio Norte',
-            south_territory: 'Territorio Sur',
-            east_territory: 'Territorio Este',
-            west_territory: 'Territorio Oeste',
-            central_territory: 'Territorio Central',
-            territory_a: 'Territorio A',
-            territory_b: 'Territorio B',
-            territory_c: 'Territorio C',
-            metropolitan_zone: 'Zona Metropolitana',
-            interior: 'Interior',
-            capital: 'Capital',
-            other_regions: 'Otras Regiones'
+            national: 'Nacional',
+            south_southeast: 'Sur/Sudeste',
+            center_west: 'Centro-Oeste',
+            north_northeast: 'Norte/Nordeste',
+            reg001: 'Región 001',
+            reg002: 'Región 002',
+            reg003: 'Región 003'
           }
         },
         products: {
@@ -445,19 +427,13 @@ export const useTranslationStore = defineStore('translation', {
             cooperative: '合作社'
           },
           regions: {
-            my_region: '我的地区',
-            north_territory: '北部区域',
-            south_territory: '南部区域',
-            east_territory: '东部区域',
-            west_territory: '西部区域',
-            central_territory: '中央区域',
-            territory_a: '区域 A',
-            territory_b: '区域 B',
-            territory_c: '区域 C',
-            metropolitan_zone: '大都市区',
-            interior: '内陆',
-            capital: '首都',
-            other_regions: '其他地区'
+            national: '全国',
+            south_southeast: '南部/东南部',
+            center_west: '中西部',
+            north_northeast: '北部/东北部',
+            reg001: '地区 001',
+            reg002: '地区 002',
+            reg003: '地区 003'
           }
         },
         products: {
