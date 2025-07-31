@@ -256,10 +256,7 @@ const formatPrice = (price) => {
   }).format(price)
 }
 
-const getProductBrand = (productId) => {
-  const product = dataStore.getProductById(productId)
-  return product ? product.brand : ''
-}
+
 
 const getPaymentConditionText = (condition) => {
   const conditions = {
