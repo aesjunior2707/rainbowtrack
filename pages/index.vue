@@ -173,13 +173,5 @@ const formatDate = (dateString) => {
   return date.toLocaleDateString('pt-BR')
 }
 
-const getPriceDifferenceColor = (report) => {
-  const product = dataStore.getProductById(report.productId)
-  if (!product) return 'text-gray-600'
-  
-  const difference = product.ourPrice - report.competitorPrice
-  if (difference > 0) return 'text-red-600' // We're more expensive
-  if (difference < 0) return 'text-green-600' // We're cheaper
-  return 'text-gray-600' // Same price
-}
+
 </script>
