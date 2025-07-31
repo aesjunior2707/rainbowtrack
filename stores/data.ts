@@ -300,8 +300,18 @@ export const useDataStore = defineStore('data', {
           reportCount: reports.length
         }
       }).sort((a, b) => b.reportCount - a.reportCount)
-      
+
       return competitorReports
+    },
+
+    verifyPriceReport(reportId: number, verifiedBy: number) {
+      const report = this.priceReports.find(r => r.id === reportId)
+      if (report) {
+        report.verified = true
+        report.verifiedBy = verifiedBy
+        report.verifiedAt = new Date().toISOString()
+      }
+      return report
     }
   }
 })
