@@ -45,11 +45,6 @@
             </div>
             
             <div class="space-y-3 text-sm">
-              <div class="flex justify-between items-center">
-                <span class="text-gray-600">Embalagem:</span>
-                <span class="font-medium">{{ product.packaging }}</span>
-              </div>
-              
               <div>
                 <span class="text-gray-600">Cultivos Registrados:</span>
                 <div class="flex flex-wrap gap-1 mt-1">
