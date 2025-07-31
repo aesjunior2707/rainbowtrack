@@ -88,7 +88,7 @@ export const useDataStore = defineStore('data', {
         category: 'fungicides',
         brand: 'CropGuard',
         packaging: '500ml',
-        registeredCrops: ['Café', 'Algodão', 'Cana'],
+        registeredCrops: ['Caf��', 'Algodão', 'Cana'],
         description: 'Fungicida de contato para aplicação foliar'
       },
       {
@@ -312,6 +312,17 @@ export const useDataStore = defineStore('data', {
         report.verifiedAt = new Date().toISOString()
       }
       return report
+    }
+  },
+
+  getters: {
+    getCompetitorsByUserRegion() {
+      return (userRegion: string, isAdmin: boolean) => {
+        if (isAdmin) {
+          return this.competitors
+        }
+        return this.competitors.filter(competitor => competitor.region === userRegion)
+      }
     }
   }
 })
