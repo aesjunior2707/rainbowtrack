@@ -62,10 +62,23 @@ export const useAuthStore = defineStore('auth', {
 
     async checkAuth() {
       if (process.client) {
-        const stored = localStorage.getItem('rainbow_user')
-        if (stored) {
-          this.user = JSON.parse(stored)
-          this.isAuthenticated = true
+        try {
+          const stored = localStorage.getItem('rainbow_user')
+          if (stored) {
+            const user = JSON.parse(stored)
+            // Verify user still exists in our users array
+            const validUser = this.users.find(u => u.id === user.id)
+            if (validUser) {
+              this.user = user
+              this.isAuthenticated = true
+            } else {
+              // User no longer valid, clear storage
+              localStorage.removeItem('rainbow_user')
+            }
+          }
+        } catch (error) {
+          // Clear corrupted data
+          localStorage.removeItem('rainbow_user')
         }
       }
     }

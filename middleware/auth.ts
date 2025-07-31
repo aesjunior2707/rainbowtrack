@@ -1,11 +1,14 @@
-export default defineNuxtRouteMiddleware((to, from) => {
+export default defineNuxtRouteMiddleware(async (to, from) => {
   const { $pinia } = useNuxtApp()
   const authStore = useAuthStore($pinia)
 
-  // Check authentication on client side
-  if (process.client) {
-    authStore.checkAuth()
+  // Skip middleware during SSR to avoid hydration issues
+  if (process.server) {
+    return
   }
+
+  // Check authentication on client side
+  await authStore.checkAuth()
 
   // Redirect to login if not authenticated
   if (!authStore.isAuthenticated && to.path !== '/login') {

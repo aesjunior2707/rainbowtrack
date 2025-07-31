@@ -83,9 +83,7 @@
 </template>
 
 <script setup>
-definePageMeta({
-  middleware: 'auth'
-})
+// No middleware needed for login page
 
 const { $pinia } = useNuxtApp()
 const authStore = useAuthStore($pinia)
