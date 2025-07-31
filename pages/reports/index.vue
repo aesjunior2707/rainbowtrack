@@ -168,14 +168,13 @@
         </div>
       </div>
 
-      <!-- Success Notification -->
-      <div
-        v-if="showSuccessNotification"
-        class="fixed top-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50 flex items-center space-x-2"
-      >
-        <CheckCircle class="w-5 h-5" />
-        <span>{{ successMessage }}</span>
-      </div>
+      <!-- Animated Notification -->
+      <AnimatedNotification
+        :show="showSuccessNotification"
+        type="success"
+        :message="successMessage"
+        @close="showSuccessNotification = false"
+      />
 
       <!-- Verification Modal -->
       <VerifyReportModal
@@ -362,7 +361,7 @@ const handleReportVerified = (reportId) => {
   showSuccessNotification.value = true
   setTimeout(() => {
     showSuccessNotification.value = false
-  }, 3000)
+  }, 4000)
 }
 
 const handleEditReport = (report) => {
@@ -380,7 +379,7 @@ const handleReportUpdated = (updatedReport) => {
   showSuccessNotification.value = true
   setTimeout(() => {
     showSuccessNotification.value = false
-  }, 3000)
+  }, 4000)
 }
 
 </script>
