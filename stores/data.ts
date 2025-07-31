@@ -80,8 +80,7 @@ export const useDataStore = defineStore('data', {
         brand: 'AgroTech',
         packaging: '1L',
         registeredCrops: ['Soja', 'Milho', 'Trigo'],
-        description: 'Fungicida sistêmico para controle preventivo',
-        ourPrice: 149.90
+        description: 'Fungicida sistêmico para controle preventivo'
       },
       {
         id: 2,
