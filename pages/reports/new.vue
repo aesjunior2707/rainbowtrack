@@ -92,21 +92,12 @@
                     </div>
 
                     <!-- Price Display -->
-                    <div class="flex items-center justify-between mt-3">
+                    <div class="mt-3">
                       <div class="text-sm">
                         <span class="text-gray-600">Preço Concorrente:</span>
                         <span class="ml-2 font-semibold text-lg text-primary-600">
                           R$ {{ formatPrice(item.competitorPrice) }}
                         </span>
-                      </div>
-                      <div v-if="item.product.ourPrice" class="text-sm text-right">
-                        <span class="text-gray-600">Nosso preço:</span>
-                        <span class="ml-2 font-medium text-gray-900">
-                          R$ {{ formatPrice(item.product.ourPrice) }}
-                        </span>
-                        <div class="text-xs" :class="getPriceDifferenceColor(item)">
-                          {{ getPriceDifferenceText(item) }}
-                        </div>
                       </div>
                     </div>
 
