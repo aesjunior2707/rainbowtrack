@@ -312,6 +312,15 @@ export const useDataStore = defineStore('data', {
         report.verifiedAt = new Date().toISOString()
       }
       return report
+    },
+
+    updatePriceReport(reportId: number, updatedData: any) {
+      const reportIndex = this.priceReports.findIndex(r => r.id === reportId)
+      if (reportIndex !== -1) {
+        this.priceReports[reportIndex] = { ...this.priceReports[reportIndex], ...updatedData }
+        return this.priceReports[reportIndex]
+      }
+      return null
     }
   },
 
