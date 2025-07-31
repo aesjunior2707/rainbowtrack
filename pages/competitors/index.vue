@@ -24,7 +24,7 @@
               <input
                 v-model="searchTerm"
                 type="text"
-                placeholder="Pesquisar concorrentes..."
+                :placeholder="t('competitors.search_placeholder')"
                 class="input-field"
               />
             </div>
