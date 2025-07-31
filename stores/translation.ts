@@ -75,6 +75,8 @@ export const useTranslationStore = defineStore('translation', {
           no_competitors: 'Nenhum concorrente encontrado',
           select_region: 'Selecionar Região',
           search_placeholder: 'Pesquisar concorrentes...',
+          all_types: 'Todos os Tipos',
+          all_regions: 'Todas as Regiões',
           types: {
             manufacturer: 'Fabricante',
             distributor: 'Distribuidor',
@@ -187,6 +189,8 @@ export const useTranslationStore = defineStore('translation', {
           no_competitors: 'No competitors found',
           select_region: 'Select Region',
           search_placeholder: 'Search competitors...',
+          all_types: 'All Types',
+          all_regions: 'All Regions',
           types: {
             manufacturer: 'Manufacturer',
             distributor: 'Distributor',
@@ -301,6 +305,8 @@ export const useTranslationStore = defineStore('translation', {
           no_competitors: 'No se encontraron competidores',
           select_region: 'Seleccionar Región',
           search_placeholder: 'Buscar competidores...',
+          all_types: 'Todos los Tipos',
+          all_regions: 'Todas las Regiones',
           types: {
             manufacturer: 'Fabricante',
             distributor: 'Distribuidor',
@@ -348,7 +354,7 @@ export const useTranslationStore = defineStore('translation', {
           description: '农业销售跟踪系统'
         },
         auth: {
-          login: '登录',
+          login: '���录',
           username: '用户名',
           password: '密码',
           remember: '记住我',
@@ -413,6 +419,8 @@ export const useTranslationStore = defineStore('translation', {
           no_competitors: '未找到竞争对手',
           select_region: '选择地区',
           search_placeholder: '搜索竞争对手...',
+          all_types: '所有类型',
+          all_regions: '所有地区',
           types: {
             manufacturer: '制造商',
             distributor: '分销商',
