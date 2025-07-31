@@ -120,7 +120,7 @@
               </div>
 
               <!-- Condições de Pagamento (apenas para admin) -->
-              <div v-if="authStore.user?.role === 'admin' && (report.paymentCondition || report.paymentMethod)" class="text-xs text-gray-500 mb-3">
+              <div v-if="isAdmin && (report.paymentCondition || report.paymentMethod)" class="text-xs text-gray-500 mb-3">
                 <div class="flex items-center space-x-2">
                   <CreditCard class="w-3 h-3" />
                   <span>{{ getPaymentConditionText(report.paymentCondition) }}</span>
