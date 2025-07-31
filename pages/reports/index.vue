@@ -100,22 +100,13 @@
                 </div>
               </div>
 
-              <!-- Produto e Preço -->
+              <!-- Preço -->
               <div class="bg-gray-50 rounded-lg p-3 mb-3">
-                <div class="flex justify-between items-start">
-                  <div class="flex-1">
-                    <p class="font-semibold text-gray-900 text-sm">
-                      {{ getProductName(report.productId) }}
-                    </p>
-                    <p class="text-xs text-gray-500 mt-1">
-                      {{ getProductBrand(report.productId) }}
-                    </p>
-                  </div>
-                  <div class="text-right ml-3">
-                    <p class="text-lg font-bold text-primary-600">
-                      {{ getCurrencySymbol(report.currencyId) }} {{ formatPrice(report.competitorPrice) }}
-                    </p>
-                  </div>
+                <div class="text-center">
+                  <p class="text-xs text-gray-600 mb-1">Preço Capturado</p>
+                  <p class="text-2xl font-bold text-primary-600">
+                    {{ getCurrencySymbol(report.currencyId) }} {{ formatPrice(report.competitorPrice) }}
+                  </p>
                 </div>
               </div>
 
