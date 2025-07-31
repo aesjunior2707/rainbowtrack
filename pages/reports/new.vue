@@ -211,7 +211,7 @@
                   <option value="RO">Rondônia</option>
                   <option value="RR">Roraima</option>
                   <option value="SC">Santa Catarina</option>
-                  <option value="SP">São Paulo</option>
+                  <option value="SP">S��o Paulo</option>
                   <option value="SE">Sergipe</option>
                   <option value="TO">Tocantins</option>
                 </select>
@@ -376,7 +376,9 @@ const canSubmit = computed(() => {
          reportDate.value &&
          region.value &&
          state.value &&
-         paymentCondition.value
+         paymentCondition.value &&
+         paymentMethod.value &&
+         currency.value
 })
 
 const handleCompetitorCreated = (competitor) => {
