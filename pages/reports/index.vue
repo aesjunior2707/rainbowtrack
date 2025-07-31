@@ -149,7 +149,7 @@
                     <Eye class="w-4 h-4" />
                   </button>
                   <button
-                    v-if="authStore.user?.role === 'admin' || report.reportedBy === authStore.user?.id"
+                    v-if="isAdmin || report.reportedBy === authStore.user?.id"
                     class="p-1.5 text-gray-500 hover:text-gray-700 hover:bg-gray-200 rounded transition-colors"
                     title="Editar"
                   >
