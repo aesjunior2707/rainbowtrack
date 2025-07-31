@@ -59,7 +59,8 @@ export const useTranslationStore = defineStore('translation', {
           select_product: 'Selecionar Produto',
           report_details: 'Detalhes da Captura',
           cancel: 'Cancelar',
-          confirm_report: 'Confirmar Captura'
+          confirm_report: 'Confirmar Captura',
+          all_competitors: 'Todos os Concorrentes'
         },
         competitors: {
           title: 'Concorrentes - Rainbow Track',
@@ -73,6 +74,7 @@ export const useTranslationStore = defineStore('translation', {
           report_count: 'Capturas Coletadas',
           no_competitors: 'Nenhum concorrente encontrado',
           select_region: 'Selecionar Região',
+          search_placeholder: 'Pesquisar concorrentes...',
           types: {
             manufacturer: 'Fabricante',
             distributor: 'Distribuidor',
@@ -169,7 +171,8 @@ export const useTranslationStore = defineStore('translation', {
           select_product: 'Select Product',
           report_details: 'Capture Details',
           cancel: 'Cancel',
-          confirm_report: 'Confirm Capture'
+          confirm_report: 'Confirm Capture',
+          all_competitors: 'All Competitors'
         },
         competitors: {
           title: 'Competitors - Rainbow Track',
@@ -183,6 +186,7 @@ export const useTranslationStore = defineStore('translation', {
           report_count: 'Captures Collected',
           no_competitors: 'No competitors found',
           select_region: 'Select Region',
+          search_placeholder: 'Search competitors...',
           types: {
             manufacturer: 'Manufacturer',
             distributor: 'Distributor',
@@ -280,7 +284,8 @@ export const useTranslationStore = defineStore('translation', {
           select_product: 'Seleccionar Producto',
           report_details: 'Detalles de la Captura',
           cancel: 'Cancelar',
-          confirm_report: 'Confirmar Captura'
+          confirm_report: 'Confirmar Captura',
+          all_competitors: 'Todos los Competidores'
         },
         competitors: {
           title: 'Competidores - Rainbow Track',
@@ -295,6 +300,7 @@ export const useTranslationStore = defineStore('translation', {
           avg_price: 'Precio Promedio',
           no_competitors: 'No se encontraron competidores',
           select_region: 'Seleccionar Región',
+          search_placeholder: 'Buscar competidores...',
           types: {
             manufacturer: 'Fabricante',
             distributor: 'Distribuidor',
@@ -360,7 +366,7 @@ export const useTranslationStore = defineStore('translation', {
           competitors: '竞争对手'
         },
         dashboard: {
-          title: '竞争情��� - Rainbow Track',
+          title: '竞争情报 - Rainbow Track',
           welcome: '欢迎使用 Rainbow Track，{name}！',
           price_reports_month: '本月捕获',
           verified_reports: '已验证捕获',
@@ -391,7 +397,8 @@ export const useTranslationStore = defineStore('translation', {
           select_product: '选择产品',
           report_details: '捕获详情',
           cancel: '取消',
-          confirm_report: '确认捕获'
+          confirm_report: '确认捕获',
+          all_competitors: '所有竞争对手'
         },
         competitors: {
           title: '竞争对手 - Rainbow Track',
@@ -405,6 +412,7 @@ export const useTranslationStore = defineStore('translation', {
           report_count: '收集的捕获',
           no_competitors: '未找到竞争对手',
           select_region: '选择地区',
+          search_placeholder: '搜索竞争对手...',
           types: {
             manufacturer: '制造商',
             distributor: '分销商',
