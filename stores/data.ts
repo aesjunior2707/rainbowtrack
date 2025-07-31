@@ -80,7 +80,8 @@ export const useDataStore = defineStore('data', {
         brand: 'AgroTech',
         packaging: '1L',
         registeredCrops: ['Soja', 'Milho', 'Trigo'],
-        description: 'Fungicida sistêmico para controle preventivo'
+        description: 'Fungicida sistêmico para controle preventivo',
+        ourPrice: 149.90
       },
       {
         id: 2,
@@ -110,7 +111,8 @@ export const useDataStore = defineStore('data', {
         brand: 'AgroTech',
         packaging: '1L',
         registeredCrops: ['Soja', 'Milho', 'Algodão'],
-        description: 'Inseticida sistêmico para controle de pragas'
+        description: 'Inseticida sistêmico para controle de pragas',
+        ourPrice: 142.80
       },
       {
         id: 5,
@@ -139,7 +141,8 @@ export const useDataStore = defineStore('data', {
         brand: 'AgroTech',
         packaging: '1L',
         registeredCrops: ['Soja', 'Milho', 'Cana'],
-        description: 'Herbicida pós-emergente seletivo'
+        description: 'Herbicida pós-emergente seletivo',
+        ourPrice: 105.50
       },
       {
         id: 8,
