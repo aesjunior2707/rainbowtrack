@@ -209,12 +209,30 @@ const handleLogout = async () => {
   await navigateTo('/login')
 }
 
-// Close dropdowns when clicking outside
+// Close dropdowns when clicking outside and handle mobile menu
 onMounted(() => {
   document.addEventListener('click', (e) => {
     if (!e.target.closest('.relative')) {
       showUserMenu.value = false
     }
   })
+})
+
+// Prevent body scroll when mobile menu is open
+watch(mobileMenuOpen, (isOpen) => {
+  if (process.client) {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = ''
+    }
+  }
+})
+
+// Cleanup on unmount
+onUnmounted(() => {
+  if (process.client) {
+    document.body.style.overflow = ''
+  }
 })
 </script>
