@@ -294,6 +294,36 @@ const getProductName = (productId) => {
   return product ? product.name : 'Produto Desconhecido'
 }
 
+const getProductBrand = (productId) => {
+  const product = dataStore.getProductById(productId)
+  return product ? product.brand : 'Marca Desconhecida'
+}
+
+const getProductCount = (report) => {
+  // Support both old and new format
+  if (report.products && Array.isArray(report.products)) {
+    return report.products.length
+  }
+  return 1 // Old format has single product
+}
+
+const getReportProducts = (report) => {
+  // Support both old and new format
+  if (report.products && Array.isArray(report.products)) {
+    return report.products
+  }
+  // Convert old format to new format for display
+  return [{
+    productId: report.productId,
+    competitorPrice: report.competitorPrice
+  }]
+}
+
+const getTotalCaptureValue = (report) => {
+  const products = getReportProducts(report)
+  return products.reduce((total, product) => total + product.competitorPrice, 0)
+}
+
 const getCurrencySymbol = (currencyId) => {
   const currency = dataStore.getCurrencyById(currencyId)
   return currency ? currency.symbol : 'R$'
