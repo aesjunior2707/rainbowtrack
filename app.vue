@@ -44,15 +44,20 @@ useHead({
     { name: 'theme-color', content: '#006E68' },
     { name: 'mobile-web-app-capable', content: 'yes' },
     { name: 'apple-mobile-web-app-capable', content: 'yes' },
-    { name: 'apple-mobile-web-app-status-bar-style', content: 'black-translucent' },
+    { name: 'apple-mobile-web-app-status-bar-style', content: 'default' },
     { name: 'apple-mobile-web-app-title', content: 'Rainbow Track' },
     { name: 'application-name', content: 'Rainbow Track' },
     { name: 'msapplication-TileColor', content: '#006E68' },
-    { name: 'msapplication-config', content: '/browserconfig.xml' }
+    { name: 'msapplication-config', content: '/browserconfig.xml' },
+    { name: 'format-detection', content: 'telephone=no' },
+    { name: 'apple-touch-fullscreen', content: 'yes' }
   ],
   link: [
     { rel: 'icon', type: 'image/svg+xml', href: '/icon.svg' },
     { rel: 'apple-touch-icon', href: '/icon.svg' },
+    { rel: 'apple-touch-icon', sizes: '152x152', href: '/icon-192x192.png' },
+    { rel: 'apple-touch-icon', sizes: '180x180', href: '/icon-192x192.png' },
+    { rel: 'apple-touch-icon', sizes: '167x167', href: '/icon-192x192.png' },
     { rel: 'mask-icon', href: '/icon.svg', color: '#006E68' }
   ]
 })
