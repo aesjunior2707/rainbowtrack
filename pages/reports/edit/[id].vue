@@ -351,6 +351,7 @@ const totalCaptureValue = computed(() => {
 
 const form = ref({
   reportDate: '',
+  customerName: '',
   region: '',
   state: '',
   paymentCondition: '',
