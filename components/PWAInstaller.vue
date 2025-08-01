@@ -28,7 +28,7 @@
               @click="handleInstall"
               class="bg-white text-primary-600 px-4 py-2 rounded-lg text-sm font-medium hover:bg-primary-50 transition-colors"
             >
-              Instalar
+              {{ isIOS ? 'Como Instalar' : 'Instalar' }}
             </button>
             <button
               @click="dismissBanner"
