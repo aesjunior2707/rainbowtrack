@@ -1,107 +1,158 @@
 <template>
   <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50" @click="$emit('close')">
-    <div class="bg-white rounded-lg max-w-md w-full mx-4 p-6" @click.stop>
-      <!-- Header -->
-      <div class="flex items-center justify-between mb-4">
-        <div class="flex items-center space-x-3">
-          <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
-            <CheckCircle class="w-6 h-6 text-green-600" />
-          </div>
-          <h3 class="text-lg font-semibold text-gray-900">
-            Verificar Captura
+    <div class="bg-white rounded-lg shadow-xl w-full max-w-2xl mx-4 max-h-[90vh] overflow-y-auto" @click.stop>
+      <div class="p-6">
+        <div class="flex justify-between items-center mb-6">
+          <h3 class="text-xl font-bold text-gray-900">
+            Verificar Captura #{{ report.id }}
           </h3>
+          <button
+            @click="$emit('close')"
+            class="text-gray-400 hover:text-gray-600 p-2 hover:bg-gray-100 rounded-lg transition-colors"
+          >
+            <X class="w-5 h-5" />
+          </button>
         </div>
-        <button
-          @click="$emit('close')"
-          class="p-2 hover:bg-gray-100 rounded-full transition-colors"
-        >
-          <X class="w-5 h-5 text-gray-400" />
-        </button>
-      </div>
 
-      <!-- Content -->
-      <div class="mb-6">
-        <p class="text-gray-600 mb-4">
-          Você deseja marcar esta captura como <strong>verificada</strong>?
-        </p>
-        
-        <!-- Report Summary -->
-        <div class="bg-gray-50 rounded-lg p-4 border">
-          <div class="space-y-2">
-            <div class="flex justify-between items-center">
-              <span class="text-sm text-gray-600">Concorrente:</span>
-              <span class="text-sm font-medium">{{ report.competitorName }}</span>
+        <!-- Competitor Information -->
+        <div class="card p-4 mb-4">
+          <h4 class="font-semibold text-gray-900 mb-2">Concorrente</h4>
+          <div class="flex items-center space-x-3">
+            <div class="bg-primary-600 rounded-full p-2">
+              <Building2 class="w-5 h-5 text-white" />
             </div>
+            <div>
+              <p class="font-medium text-gray-900">{{ report.competitorName }}</p>
+              <p class="text-sm text-gray-600">{{ formatDate(report.reportDate) }}</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Products Information -->
+        <div class="card p-4 mb-4">
+          <h4 class="font-semibold text-gray-900 mb-3">Produtos Capturados</h4>
+          
+          <div class="space-y-3">
+            <div
+              v-for="(productItem, index) in getReportProducts()"
+              :key="`verify-${productItem.productId}-${index}`"
+              class="border border-gray-200 rounded-lg p-3 bg-gray-50"
+            >
+              <div class="flex justify-between items-center">
+                <div class="flex-1">
+                  <h5 class="font-medium text-gray-900">{{ getProductName(productItem.productId) }}</h5>
+                  <p class="text-sm text-gray-600">{{ getProductBrand(productItem.productId) }}</p>
+                </div>
+                <div class="text-right">
+                  <p class="text-lg font-bold text-primary-600">
+                    {{ report.currencySymbol }} {{ formatPrice(productItem.competitorPrice) }}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Total if multiple products -->
+          <div v-if="getProductCount() > 1" class="mt-3 pt-3 border-t border-gray-200">
             <div class="flex justify-between items-center">
-              <span class="text-sm text-gray-600">Preço:</span>
-              <span class="text-sm font-medium text-primary-600">
-                {{ report.currencySymbol }} {{ formatPrice(report.competitorPrice) }}
+              <span class="font-medium text-gray-900">Total da Captura:</span>
+              <span class="text-xl font-bold text-primary-600">
+                {{ report.currencySymbol }} {{ formatPrice(getTotalValue()) }}
               </span>
             </div>
-            <div class="flex justify-between items-center">
-              <span class="text-sm text-gray-600">Data:</span>
-              <span class="text-sm font-medium">{{ formatDate(report.reportDate) }}</span>
+          </div>
+        </div>
+
+        <!-- Additional Details -->
+        <div class="card p-4 mb-6">
+          <h4 class="font-semibold text-gray-900 mb-3">Detalhes</h4>
+          <div class="grid grid-cols-2 gap-4 text-sm">
+            <div>
+              <span class="text-gray-600">Estado:</span>
+              <span class="ml-2 font-medium">{{ report.state || 'Não informado' }}</span>
             </div>
-            <div class="flex justify-between items-center">
-              <span class="text-sm text-gray-600">Local:</span>
-              <span class="text-sm font-medium">{{ report.state || report.region }}</span>
+            <div>
+              <span class="text-gray-600">Região:</span>
+              <span class="ml-2 font-medium">{{ report.region || 'Não informado' }}</span>
+            </div>
+            <div>
+              <span class="text-gray-600">Condição:</span>
+              <span class="ml-2 font-medium">{{ getPaymentConditionText(report.paymentCondition) }}</span>
+            </div>
+            <div>
+              <span class="text-gray-600">Forma:</span>
+              <span class="ml-2 font-medium">{{ getPaymentMethodText(report.paymentMethod) }}</span>
             </div>
           </div>
           
-          <div v-if="report.notes" class="mt-3 pt-3 border-t">
-            <p class="text-xs text-gray-600 mb-1">Observações:</p>
-            <p class="text-sm text-gray-800 italic">"{{ report.notes }}"</p>
+          <div v-if="report.notes" class="mt-3 pt-3 border-t border-gray-200">
+            <span class="text-gray-600">Observações:</span>
+            <p class="mt-1 text-sm text-gray-900">{{ report.notes }}</p>
           </div>
         </div>
 
-        <div class="mt-4 p-3 bg-green-50 rounded-lg border border-green-200">
-          <div class="flex items-start space-x-2">
-            <CheckCircle class="w-4 h-4 text-green-600 mt-0.5 flex-shrink-0" />
-            <div class="text-sm text-green-800">
-              <p class="font-medium">Esta ação irá:</p>
-              <ul class="mt-1 space-y-1 text-sm">
-                <li>• Marcar a captura como verificada</li>
-                <li>• Registrar você como responsável pela verificação</li>
-                <li>• Atualizar o status visualmente para todos os usuários</li>
-              </ul>
-            </div>
-          </div>
+        <!-- Action Buttons -->
+        <div class="flex justify-end space-x-3">
+          <button
+            @click="$emit('close')"
+            class="btn-outline"
+          >
+            Cancelar
+          </button>
+          <button
+            @click="handleVerify"
+            class="btn-primary"
+          >
+            <CheckCircle class="w-4 h-4 mr-2" />
+            Verificar Captura
+          </button>
         </div>
-      </div>
-
-      <!-- Actions -->
-      <div class="flex space-x-3">
-        <button
-          @click="$emit('close')"
-          class="flex-1 px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
-        >
-          Cancelar
-        </button>
-        <button
-          @click="confirmVerification"
-          class="flex-1 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors font-medium"
-        >
-          Confirmar Verificação
-        </button>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { CheckCircle, X } from 'lucide-vue-next'
+import { X, Building2, CheckCircle } from 'lucide-vue-next'
 
-const props = defineProps({
-  report: {
-    type: Object,
-    required: true
-  }
-})
-
+const props = defineProps(['report'])
 const emit = defineEmits(['close', 'verified'])
 
+const { $pinia } = useNuxtApp()
+const dataStore = useDataStore($pinia)
+
+const getProductName = (productId) => {
+  const product = dataStore.getProductById(productId)
+  return product ? product.name : 'Produto Desconhecido'
+}
+
+const getProductBrand = (productId) => {
+  const product = dataStore.getProductById(productId)
+  return product ? product.brand : 'Marca Desconhecida'
+}
+
+const getReportProducts = () => {
+  // Support both old and new format
+  if (props.report.products && Array.isArray(props.report.products)) {
+    return props.report.products
+  }
+  // Convert old format to new format for display
+  return [{
+    productId: props.report.productId,
+    competitorPrice: props.report.competitorPrice
+  }]
+}
+
+const getProductCount = () => {
+  return getReportProducts().length
+}
+
+const getTotalValue = () => {
+  const products = getReportProducts()
+  return products.reduce((total, product) => total + product.competitorPrice, 0)
+}
+
 const formatPrice = (price) => {
-  if (!price) return '0,00'
   return new Intl.NumberFormat('pt-BR', {
     minimumFractionDigits: 2,
     maximumFractionDigits: 2
@@ -114,7 +165,42 @@ const formatDate = (dateString) => {
   return date.toLocaleDateString('pt-BR')
 }
 
-const confirmVerification = () => {
+const getPaymentConditionText = (condition) => {
+  const conditions = {
+    'A_VISTA': 'À Vista',
+    'BOLETO_30': 'Boleto 30d',
+    'BOLETO_60': 'Boleto 60d',
+    'BOLETO_90': 'Boleto 90d',
+    'BOLETO_120': 'Boleto 120d',
+    'POS_COLHEITA': 'Pós-Colheita',
+    'SAFRA': 'Safra',
+    'BARTER': 'Barter',
+    'FINANCIAMENTO': 'Financiamento',
+    'PARCELA_MENSAL': 'Parcelado',
+    'CHEQUE_PRE': 'Cheque Pré',
+    'CARTAO_CREDITO': 'Cartão Crédito',
+    'OUTRO': 'Outro'
+  }
+  return conditions[condition] || condition
+}
+
+const getPaymentMethodText = (method) => {
+  const methods = {
+    'DINHEIRO': 'Dinheiro',
+    'PIX': 'PIX',
+    'TRANSFERENCIA': 'Transferência',
+    'BOLETO': 'Boleto',
+    'CHEQUE': 'Cheque',
+    'CARTAO_CREDITO': 'Cartão Crédito',
+    'CARTAO_DEBITO': 'Cartão Débito',
+    'DEPOSITO': 'Depósito',
+    'DOCUMENTO': 'Documento',
+    'OUTRO': 'Outro'
+  }
+  return methods[method] || method
+}
+
+const handleVerify = () => {
   emit('verified', props.report.id)
 }
 </script>
