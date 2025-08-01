@@ -15,15 +15,15 @@
 
 @layer components {
   .btn-primary {
-    @apply bg-primary-600 hover:bg-primary-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-200;
+    @apply bg-primary-600 hover:bg-primary-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200 min-h-[44px] flex items-center justify-center;
   }
 
   .btn-secondary {
-    @apply bg-secondary-500 hover:bg-secondary-600 text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-200;
+    @apply bg-secondary-500 hover:bg-secondary-600 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200 min-h-[44px] flex items-center justify-center;
   }
 
   .btn-outline {
-    @apply border-2 border-primary-600 text-primary-600 hover:bg-primary-600 hover:text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-200;
+    @apply border-2 border-primary-600 text-primary-600 hover:bg-primary-600 hover:text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200 min-h-[44px] flex items-center justify-center;
   }
 
   .card {
@@ -31,6 +31,52 @@
   }
 
   .input-field {
-    @apply w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent;
+    @apply w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent min-h-[44px];
+  }
+
+  /* Mobile touch targets and safe areas */
+  .touch-target {
+    @apply min-h-[44px] min-w-[44px] flex items-center justify-center;
+  }
+
+  .safe-top {
+    padding-top: env(safe-area-inset-top);
+  }
+
+  .safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  .safe-left {
+    padding-left: env(safe-area-inset-left);
+  }
+
+  .safe-right {
+    padding-right: env(safe-area-inset-right);
+  }
+
+  /* Mobile navigation improvements */
+  .mobile-tap {
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+  }
+
+  .nav-item {
+    @apply transition-all duration-200 ease-in-out;
+  }
+
+  .nav-item:active {
+    @apply scale-95 bg-opacity-75;
+  }
+
+  /* Improved mobile menu */
+  @media (max-width: 768px) {
+    .mobile-menu-item {
+      @apply py-4 px-6 text-base font-medium;
+    }
+
+    .mobile-button {
+      @apply p-3 rounded-lg;
+    }
   }
 }
