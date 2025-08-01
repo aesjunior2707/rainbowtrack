@@ -21,7 +21,7 @@ export default defineNuxtConfig({
       theme_color: '#006E68',
       background_color: '#ffffff',
       display: 'standalone',
-      orientation: 'portrait-primary',
+      orientation: 'any',
       scope: '/',
       start_url: '/?pwa=1',
       lang: 'pt-BR',
