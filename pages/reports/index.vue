@@ -107,8 +107,9 @@
 
               <!-- Lista de Produtos -->
               <div class="space-y-2 mb-3">
+                <!-- Mostrar apenas os primeiros 2 produtos -->
                 <div
-                  v-for="(productItem, index) in getReportProducts(report)"
+                  v-for="(productItem, index) in getReportProducts(report).slice(0, 2)"
                   :key="`${report.id}-${productItem.productId}-${index}`"
                   class="bg-gray-50 rounded-lg p-3"
                 >
@@ -126,6 +127,16 @@
                         {{ getCurrencySymbol(report.currencyId) }} {{ formatPrice(productItem.competitorPrice) }}
                       </p>
                     </div>
+                  </div>
+                </div>
+
+                <!-- Indicador de produtos restantes -->
+                <div v-if="getProductCount(report) > 2" class="bg-gradient-to-r from-gray-100 to-gray-50 rounded-lg p-3 border border-gray-200">
+                  <div class="flex items-center justify-center space-x-2">
+                    <Package class="w-4 h-4 text-gray-600" />
+                    <span class="text-sm font-medium text-gray-700">
+                      + {{ getProductCount(report) - 2 }} {{ getProductCount(report) - 2 === 1 ? 'produto adicional' : 'produtos adicionais' }}
+                    </span>
                   </div>
                 </div>
               </div>
