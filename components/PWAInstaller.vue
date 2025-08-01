@@ -179,29 +179,11 @@ const setupAutoInstall = () => {
   if (!process.client) return
 
   try {
-    // Watch for deferred prompt availability
-    watch(deferredPrompt, (newPrompt) => {
-      if (newPrompt && !unref(isInstalled)) {
-        // Sempre mostra o banner quando app não estiver instalado
-        showInstallBanner.value = true
-      }
-    })
-
-    // Also watch canInstall from the official composable
-    watch(canInstall, (newVal) => {
-      if (newVal && !unref(isInstalled)) {
-        // Sempre mostra o banner quando pode instalar e não está instalado
-        showInstallBanner.value = true
-        console.log('PWA can be installed via official API')
-      }
-    })
-
-    // Watch para garantir que o banner fique visível se o app não estiver instalado
+    // Watch for app installation status
     watch(isInstalled, (newVal) => {
-      if (!newVal && (deferredPrompt.value || unref(canInstall))) {
-        showInstallBanner.value = true
-      } else if (newVal) {
-        showInstallBanner.value = false
+      if (newVal) {
+        // Se o app foi instalado, resetar o banner
+        bannerDismissed.value = false
       }
     })
   } catch (error) {
