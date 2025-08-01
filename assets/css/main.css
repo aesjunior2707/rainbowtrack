@@ -136,4 +136,51 @@
   .z-nav-dropdown { z-index: 100; }
   .z-modal { z-index: 1000; }
   .z-notification { z-index: 9999; }
+
+  /* Mobile device specific fixes */
+  .mobile-device {
+    /* Use CSS custom property for dynamic viewport height */
+    --vh: 1vh;
+  }
+
+  .mobile-device .min-h-screen {
+    min-height: calc(var(--vh, 1vh) * 100);
+  }
+
+  /* iOS specific fixes */
+  .ios-device {
+    /* Prevent page zoom on input focus */
+    -webkit-text-size-adjust: 100%;
+  }
+
+  .ios-device input,
+  .ios-device textarea,
+  .ios-device select {
+    /* Prevent zoom on focus */
+    font-size: 16px !important;
+  }
+
+  /* Keyboard open state */
+  .keyboard-open {
+    /* Reduce safe areas when keyboard is open */
+    padding-bottom: 0 !important;
+  }
+
+  .keyboard-open .safe-bottom {
+    padding-bottom: 0.5rem !important;
+  }
+
+  /* Fix for position fixed elements on iOS */
+  @supports (-webkit-touch-callout: none) {
+    .fixed {
+      position: -webkit-sticky;
+      position: sticky;
+    }
+
+    .z-notification .fixed {
+      position: fixed;
+      -webkit-transform: translateZ(0);
+      transform: translateZ(0);
+    }
+  }
 }
