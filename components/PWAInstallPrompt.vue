@@ -82,14 +82,35 @@ const STORAGE_KEYS = {
 onMounted(() => {
   checkInstallability()
   setupInstallPromptListener()
-  
-  // Auto-prompt após 30 segundos se elegível
-  setTimeout(() => {
-    if (shouldShowPrompt()) {
-      showInstallPrompt()
-    }
-  }, 30000)
+  setupAutoInstallListeners()
 })
+
+function setupAutoInstallListeners() {
+  if (process.client) {
+    // Escuta eventos de auto-instalação do plugin
+    window.addEventListener('pwa-auto-install-trigger', (event: any) => {
+      console.log('🎯 Auto-install triggered:', event.detail)
+
+      if (shouldShowPrompt()) {
+        showInstallPrompt()
+      }
+    })
+
+    // Escuta eventos de instalação manual
+    window.addEventListener('pwa-manual-install-trigger', () => {
+      console.log('👆 Manual install triggered')
+      showInstallPrompt()
+    })
+
+    // Escuta benefícios offline
+    window.addEventListener('pwa-offline-benefit-show', () => {
+      if (!showPrompt.value && shouldShowPrompt()) {
+        console.log('📴 Showing offline benefits')
+        showInstallPrompt()
+      }
+    })
+  }
+}
 
 function checkInstallability() {
   if (process.client) {
