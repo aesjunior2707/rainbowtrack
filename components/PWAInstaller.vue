@@ -69,28 +69,23 @@
 <script setup>
 import { Download, X, RefreshCw } from 'lucide-vue-next'
 
-// Use the official @vite-pwa/nuxt composable
+// Composables PWA
 const { isInstalled, canInstall, needsUpdate, updateServiceWorker } = usePWA()
 
-// Use navigator.onLine for better reliability
 const isOnline = ref(true)
-
 const deferredPrompt = ref(null)
-
 const showInstallBanner = ref(false)
 const bannerDismissed = ref(false)
 const isClientMounted = ref(false)
 
-// Check if it's iOS device
 const isIOS = computed(() => {
   if (!process.client) return false
   return /iPad|iPhone|iPod/.test(navigator.userAgent)
 })
 
-// Check if we can show install option (including iOS manual instructions)
 const showInstallOption = computed(() => {
   if (!isClientMounted.value) return false
-  return !unref(isInstalled) && (unref(canInstall) || deferredPrompt.value || isIOS.value)
+  return !isInstalled.value && (canInstall.value || deferredPrompt.value || isIOS.value)
 })
 
 const statusText = computed(() => {
@@ -99,11 +94,11 @@ const statusText = computed(() => {
   }
 
   try {
-    if (!unref(isOnline)) {
+    if (!isOnline.value) {
       return 'Modo offline'
-    } else if (unref(isInstalled)) {
+    } else if (isInstalled.value) {
       return 'App instalado'
-    } else if (unref(canInstall) || deferredPrompt.value) {
+    } else if (canInstall.value || deferredPrompt.value) {
       return 'App disponível para instalação'
     } else if (isIOS.value) {
       return 'Instale via Safari (Compartilhar > Adicionar à Tela Inicial)'
@@ -147,7 +142,7 @@ const setupAutoInstall = () => {
     // Watch for app installation status
     watch(isInstalled, (newVal) => {
       if (newVal) {
-        // Se o app foi instalado, resetar o banner
+        // Reset banner when app is installed
         bannerDismissed.value = false
       }
     })
@@ -156,7 +151,7 @@ const setupAutoInstall = () => {
   }
 }
 
-// Install PWA with banner management
+// Handle PWA installation
 const handleInstall = async () => {
   if (!process.client) return
 
@@ -182,7 +177,7 @@ const handleInstall = async () => {
   }
 }
 
-// Dismiss banner (temporariamente)
+// Dismiss banner temporarily
 const dismissBanner = () => {
   if (!process.client) return
 
@@ -190,7 +185,7 @@ const dismissBanner = () => {
     bannerDismissed.value = true
     // Reexibe o banner após 1 minuto se o app ainda não estiver instalado
     setTimeout(() => {
-      if (!unref(isInstalled)) {
+      if (!isInstalled.value) {
         bannerDismissed.value = false
       }
     }, 60000) // 1 minuto
@@ -203,7 +198,7 @@ const dismissBanner = () => {
 const updateApp = async () => {
   if (process.client) {
     try {
-      if (updateServiceWorker) {
+      if (typeof updateServiceWorker === 'function') {
         await updateServiceWorker()
       } else {
         window.location.reload()
@@ -216,6 +211,18 @@ const updateApp = async () => {
 }
 
 onMounted(() => {
+  // Aguarda um pouco para garantir que tudo foi carregado
+  setTimeout(() => {
+    isClientMounted.value = true
+  }, 1000)
+
+  // Auto-show banner after some time if conditions are met
+  setTimeout(() => {
+    if (!isInstalled.value && !bannerDismissed.value && (canInstall.value || deferredPrompt.value)) {
+      showInstallBanner.value = true
+    }
+  }, 5000)
+
   isClientMounted.value = true
 
   // Setup connectivity detection
@@ -239,5 +246,12 @@ onMounted(() => {
       console.error('Error in onMounted:', error)
     }
   })
+
+  // Show banner automatically after some engagement
+  setTimeout(() => {
+    if (showInstallOption.value && !bannerDismissed.value) {
+      showInstallBanner.value = true
+    }
+  }, 10000) // Show after 10 seconds
 })
 </script>

@@ -59,17 +59,8 @@
 </template>
 
 <script setup lang="ts">
-interface BeforeInstallPromptEvent extends Event {
-  readonly platforms: string[]
-  readonly userChoice: Promise<{
-    outcome: 'accepted' | 'dismissed'
-    platform: string
-  }>
-  prompt(): Promise<void>
-}
-
 const showPrompt = ref(false)
-const deferredPrompt = ref<BeforeInstallPromptEvent | null>(null)
+const deferredPrompt = ref<any>(null)
 const isInstallable = ref(false)
 
 // Configurações de localStorage
@@ -78,6 +69,9 @@ const STORAGE_KEYS = {
   REMIND_LATER: 'pwa_install_remind_later',
   PROMPT_COUNT: 'pwa_install_prompt_count'
 }
+
+// Use PWA composable
+const { isInstalled, canInstall } = usePWA()
 
 onMounted(() => {
   checkInstallability()
@@ -115,7 +109,7 @@ function setupAutoInstallListeners() {
 function checkInstallability() {
   if (process.client) {
     // Verifica se já está instalado
-    const isStandalone = window.matchMedia('(display-mode: standalone)').matches
+    const isStandalone = window.matchMedia && window.matchMedia('(display-mode: standalone)').matches
     const isInWebAppiOS = (window.navigator as any).standalone === true
     const isInstalled = isStandalone || isInWebAppiOS
     
@@ -125,7 +119,7 @@ function checkInstallability() {
     }
     
     // Verifica se o browser suporta instalação
-    isInstallable.value = 'serviceWorker' in navigator && 'BeforeInstallPromptEvent' in window
+    isInstallable.value = 'serviceWorker' in navigator
   }
 }
 
@@ -133,7 +127,7 @@ function setupInstallPromptListener() {
   if (process.client) {
     window.addEventListener('beforeinstallprompt', (e: Event) => {
       e.preventDefault()
-      deferredPrompt.value = e as BeforeInstallPromptEvent
+      deferredPrompt.value = e as any
       isInstallable.value = true
       
       console.log('📱 PWA instalável detectado!')
@@ -161,7 +155,7 @@ function setupInstallPromptListener() {
 function shouldShowPrompt(): boolean {
   if (!process.client || !isInstallable.value) return false
   
-  const dismissed = localStorage.getItem(STORAGE_KEYS.DISMISSED) === 'true'
+  const dismissed = typeof localStorage !== 'undefined' && localStorage.getItem(STORAGE_KEYS.DISMISSED) === 'true'
   const remindLater = localStorage.getItem(STORAGE_KEYS.REMIND_LATER)
   const promptCount = parseInt(localStorage.getItem(STORAGE_KEYS.PROMPT_COUNT) || '0')
   
@@ -186,7 +180,11 @@ function shouldShowPrompt(): boolean {
 function showInstallPrompt() {
   if (!shouldShowPrompt()) return
   
+  console.log('🎯 Showing PWA install prompt')
   showPrompt.value = true
+  
+  // Auto-hide after 15 seconds
+  setTimeout(() => showPrompt.value = false, 15000)
   
   // Incrementa contador
   const currentCount = parseInt(localStorage.getItem(STORAGE_KEYS.PROMPT_COUNT) || '0')
@@ -196,7 +194,7 @@ function showInstallPrompt() {
 async function installApp() {
   if (!deferredPrompt.value) {
     // Fallback para dispositivos iOS
-    if (/iphone|ipad|ipod/.test(navigator.userAgent.toLowerCase())) {
+    if (typeof navigator !== 'undefined' && /iphone|ipad|ipod/.test(navigator.userAgent.toLowerCase())) {
       alert('Para instalar no iOS:\n1. Toque no ícone de compartilhar (📤)\n2. Selecione "Adicionar à Tela de Início"')
       showPrompt.value = false
       return
@@ -237,15 +235,4 @@ function dismissPermanently() {
   localStorage.setItem(STORAGE_KEYS.DISMISSED, 'true')
   console.log('🚫 Prompt de instalação dispensado permanentemente')
 }
-
-// Auto-hide após 15 segundos
-watchEffect(() => {
-  if (showPrompt.value) {
-    setTimeout(() => {
-      if (showPrompt.value) {
-        remindLater()
-      }
-    }, 15000)
-  }
-})
 </script>
