@@ -181,28 +181,26 @@ const setupAutoInstall = () => {
     // Watch for deferred prompt availability
     watch(deferredPrompt, (newPrompt) => {
       if (newPrompt && !unref(isInstalled)) {
-        setTimeout(() => {
-          if (!process.client) return
-
-          const dismissed = localStorage.getItem('pwa-install-dismissed')
-          const lastShown = localStorage.getItem('pwa-banner-last-shown')
-          const now = Date.now()
-
-          // Show banner only if never dismissed and after 10 seconds of use
-          // Or if 48 hours have passed since last shown (less intrusive)
-          if (!dismissed || (lastShown && now - parseInt(lastShown) > 48 * 60 * 60 * 1000)) {
-            showInstallBanner.value = true
-            localStorage.setItem('pwa-banner-last-shown', now.toString())
-          }
-        }, 10000) // Show after 10 seconds (less intrusive)
+        // Sempre mostra o banner quando app não estiver instalado
+        showInstallBanner.value = true
       }
     })
 
     // Also watch canInstall from the official composable
     watch(canInstall, (newVal) => {
       if (newVal && !unref(isInstalled)) {
-        // Just log for debugging, main logic is handled by deferredPrompt watch
+        // Sempre mostra o banner quando pode instalar e não está instalado
+        showInstallBanner.value = true
         console.log('PWA can be installed via official API')
+      }
+    })
+
+    // Watch para garantir que o banner fique visível se o app não estiver instalado
+    watch(isInstalled, (newVal) => {
+      if (!newVal && (deferredPrompt.value || unref(canInstall))) {
+        showInstallBanner.value = true
+      } else if (newVal) {
+        showInstallBanner.value = false
       }
     })
   } catch (error) {
