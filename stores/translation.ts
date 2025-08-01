@@ -38,7 +38,6 @@ export const useTranslationStore = defineStore('translation', {
           competitor_ranking: 'Ranking de Concorrentes',
           quick_actions: 'Ações Rápidas',
           new_report: 'Nova Captura',
-          products: 'Produtos',
           price_trends: 'Tendências de Preços',
           market_analysis: 'Análise de Mercado'
         },
