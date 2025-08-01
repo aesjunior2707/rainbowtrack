@@ -249,21 +249,35 @@
 </template>
 
 <script setup>
-import { X } from 'lucide-vue-next'
+import { X, Building2 } from 'lucide-vue-next'
 
 const props = defineProps(['report', 'dataStore'])
 const emit = defineEmits(['close', 'report-updated'])
 
 const currencies = computed(() => props.dataStore.currencies)
 
-const competitorName = computed(() => {
+const competitorInfo = computed(() => {
   const competitor = props.dataStore.getCompetitorById(props.report.competitorId)
-  return competitor ? competitor.name : 'Concorrente Desconhecido'
+  return competitor || { name: 'Concorrente Desconhecido', type: 'Não informado' }
 })
 
-const productName = computed(() => {
+const competitorName = computed(() => competitorInfo.value.name)
+const competitorType = computed(() => competitorInfo.value.type)
+
+const productInfo = computed(() => {
   const product = props.dataStore.getProductById(props.report.productId)
-  return product ? product.name : 'Produto Desconhecido'
+  return product || {
+    name: 'Produto Desconhecido',
+    brand: 'Não informado',
+    packaging: 'Não informado',
+    description: 'Produto não encontrado',
+    registeredCrops: []
+  }
+})
+
+const selectedCurrencySymbol = computed(() => {
+  const currency = props.dataStore.getCurrencyById(form.value.currencyId)
+  return currency ? currency.symbol : 'R$'
 })
 
 const form = ref({
@@ -283,7 +297,7 @@ const handleSubmit = () => {
     ...form.value,
     editedAt: new Date().toISOString()
   }
-  
+
   emit('report-updated', updatedReport)
 }
 </script>
