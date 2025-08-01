@@ -240,11 +240,11 @@ const dismissBanner = () => {
   if (!process.client) return
 
   try {
-    showInstallBanner.value = false
+    bannerDismissed.value = true
     // Reexibe o banner após 1 minuto se o app ainda não estiver instalado
     setTimeout(() => {
-      if (!unref(isInstalled) && (deferredPrompt.value || unref(canInstall))) {
-        showInstallBanner.value = true
+      if (!unref(isInstalled)) {
+        bannerDismissed.value = false
       }
     }, 60000) // 1 minuto
   } catch (error) {
