@@ -12,84 +12,32 @@ export default defineNuxtConfig({
     '@vite-pwa/nuxt'
   ],
   pwa: {
-    registerType: 'prompt',
-    includeAssets: ['favicon.ico', 'icon.svg'],
+    registerType: 'autoUpdate',
+    includeAssets: ['icon.svg'],
     manifest: {
-      name: 'Rainbow Track - Inteligência Competitiva',
+      name: 'Rainbow Track',
       short_name: 'Rainbow Track',
-      description: 'Sistema de Rastreamento e Vendas Agrícolas com Inteligência Competitiva',
+      description: 'Sistema de Rastreamento e Vendas Agrícolas',
       theme_color: '#006E68',
       background_color: '#ffffff',
       display: 'standalone',
-      orientation: 'portrait-primary',
+      orientation: 'portrait',
       scope: '/',
-      start_url: '/?pwa=1',
-      categories: ['business', 'productivity', 'utilities'],
-      lang: 'pt-BR',
+      start_url: '/',
       icons: [
         {
           src: '/icon.svg',
           sizes: 'any',
-          type: 'image/svg+xml',
-          purpose: 'any maskable'
-        },
-        {
-          src: '/icon.svg',
-          sizes: '192x192',
           type: 'image/svg+xml'
-        },
-        {
-          src: '/icon.svg',
-          sizes: '512x512',
-          type: 'image/svg+xml'
-        }
-      ],
-      screenshots: [
-        {
-          src: '/screenshot1.png',
-          sizes: '1280x720',
-          type: 'image/png',
-          form_factor: 'wide'
         }
       ]
     },
     workbox: {
       navigateFallback: '/',
-      globPatterns: ['**/*.{js,css,html,png,svg,ico}'],
-      runtimeCaching: [
-        {
-          urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i,
-          handler: 'CacheFirst',
-          options: {
-            cacheName: 'google-fonts-cache',
-            expiration: {
-              maxEntries: 10,
-              maxAgeSeconds: 60 * 60 * 24 * 365 // 1 year
-            }
-          }
-        },
-        {
-          urlPattern: /^https:\/\/.*\.(?:png|jpg|jpeg|svg|gif)$/,
-          handler: 'StaleWhileRevalidate',
-          options: {
-            cacheName: 'images-cache',
-            expiration: {
-              maxEntries: 100,
-              maxAgeSeconds: 60 * 60 * 24 * 30 // 30 days
-            }
-          }
-        }
-      ]
-    },
-    client: {
-      installPrompt: true,
-      periodicSyncForUpdates: 20
+      globPatterns: ['**/*.{js,css,html,svg}']
     },
     devOptions: {
-      enabled: true,
-      suppressWarnings: true,
-      navigateFallbackAllowlist: [/^\/$/],
-      type: 'module'
+      enabled: false
     }
   },
   css: ['~/assets/css/main.css']
