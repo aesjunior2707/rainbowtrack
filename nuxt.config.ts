@@ -14,7 +14,6 @@ export default defineNuxtConfig({
   ],
   pwa: {
     registerType: 'autoUpdate',
-    mode: 'development',
     workbox: {
       navigateFallback: '/',
       globPatterns: ['**/*.{js,css,html,png,svg,ico,woff2,woff,ttf}'],
@@ -98,12 +97,10 @@ export default defineNuxtConfig({
     },
     client: {
       installPrompt: true,
-      periodicSyncForUpdates: 20,
-      registerPlugin: true
+      periodicSyncForUpdates: 20
     },
     devOptions: {
-      enabled: true,
-      type: 'module',
+      enabled: false,
       suppressWarnings: true
     }
   },
