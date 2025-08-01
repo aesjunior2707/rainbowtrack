@@ -238,7 +238,7 @@
 </template>
 
 <script setup>
-import { Plus, Eye, Edit, FileText, CheckCircle, Clock, MapPin, CreditCard, User } from 'lucide-vue-next'
+import { Plus, Eye, Edit, FileText, CheckCircle, Clock, MapPin, CreditCard, User, Package } from 'lucide-vue-next'
 
 definePageMeta({
   middleware: 'auth'
