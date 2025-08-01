@@ -43,23 +43,50 @@
 
     <!-- PWA Status in Footer -->
     <div class="mt-6 pt-4 border-t border-gray-200">
+      <!-- Install Available Card -->
+      <div
+        v-if="showInstallOption"
+        class="mb-4 bg-gradient-to-r from-primary-50 to-secondary-50 border border-primary-200 rounded-lg p-4"
+      >
+        <div class="flex items-center justify-between">
+          <div class="flex items-center space-x-3">
+            <div class="w-10 h-10 bg-primary-600 rounded-lg flex items-center justify-center">
+              <Download class="w-5 h-5 text-white" />
+            </div>
+            <div>
+              <h3 class="font-semibold text-primary-900">Instalar Rainbow Track</h3>
+              <p class="text-sm text-primary-700">
+                {{ isIOS ? 'Use Safari: Compartilhar → Adicionar à Tela Inicial' : 'Tenha acesso rápido sem abrir o navegador' }}
+              </p>
+            </div>
+          </div>
+          <button
+            v-if="!isIOS && (unref(canInstall) || deferredPrompt)"
+            @click="handleInstall"
+            class="bg-primary-600 text-white px-6 py-2 rounded-lg font-medium hover:bg-primary-700 transition-colors shadow-sm"
+          >
+            Instalar
+          </button>
+          <div
+            v-else-if="isIOS"
+            class="flex items-center text-primary-600"
+          >
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M15 8a3 3 0 10-2.977-2.63l-4.94 2.47a3 3 0 100 4.319l4.94 2.47a3 3 0 10.895-1.789l-4.94-2.47a3.027 3.027 0 000-.74l4.94-2.47C13.456 7.68 14.19 8 15 8z"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Regular Status Row -->
       <div class="flex items-center justify-center space-x-4 text-sm text-gray-500">
         <div class="flex items-center space-x-2">
           <div
             class="w-2 h-2 rounded-full"
-            :class="isClientMounted && unref(isInstalled) ? 'bg-green-500' : 'bg-yellow-500'"
+            :class="isClientMounted && unref(isInstalled) ? 'bg-green-500' : (showInstallOption ? 'bg-primary-500' : 'bg-yellow-500')"
           ></div>
           <span>{{ statusText }}</span>
         </div>
-
-        <button
-          v-if="isClientMounted && !unref(isInstalled) && unref(canInstall)"
-          @click="handleInstall"
-          class="flex items-center space-x-1 text-primary-600 hover:text-primary-700 font-medium"
-        >
-          <Download class="w-4 h-4" />
-          <span>Instalar App</span>
-        </button>
 
         <button
           v-if="isClientMounted && unref(needsUpdate)"
@@ -77,12 +104,25 @@
 <script setup>
 import { Download, X, RefreshCw } from 'lucide-vue-next'
 
-// Safely initialize PWA composable
-const pwaComposable = usePWA()
-const { isInstalled, canInstall, needsUpdate, isOnline, installPWA, initPWA } = pwaComposable
+// Use the official @vite-pwa/nuxt composable
+const { isInstalled, canInstall, needsUpdate, isOnline, updateServiceWorker } = usePWA()
+
+const deferredPrompt = ref(null)
 
 const showInstallBanner = ref(false)
 const isClientMounted = ref(false)
+
+// Check if it's iOS device
+const isIOS = computed(() => {
+  if (!process.client) return false
+  return /iPad|iPhone|iPod/.test(navigator.userAgent)
+})
+
+// Check if we can show install option (including iOS manual instructions)
+const showInstallOption = computed(() => {
+  if (!isClientMounted.value) return false
+  return !unref(isInstalled) && (unref(canInstall) || deferredPrompt.value || isIOS.value)
+})
 
 const statusText = computed(() => {
   if (!isClientMounted.value) {
@@ -94,8 +134,10 @@ const statusText = computed(() => {
       return 'Modo offline'
     } else if (unref(isInstalled)) {
       return 'App instalado'
-    } else if (unref(canInstall)) {
+    } else if (unref(canInstall) || deferredPrompt.value) {
       return 'App disponível para instalação'
+    } else if (isIOS.value) {
+      return 'Instale via Safari (Compartilhar > Adicionar à Tela Inicial)'
     } else {
       return 'Navegador web'
     }
@@ -105,13 +147,37 @@ const statusText = computed(() => {
   }
 })
 
+// Setup install prompt event listener
+const setupInstallPrompt = () => {
+  if (!process.client) return
+
+  try {
+    // Listen for the beforeinstallprompt event
+    window.addEventListener('beforeinstallprompt', (e) => {
+      console.log('PWA install prompt available')
+      e.preventDefault()
+      deferredPrompt.value = e
+    })
+
+    // Listen for successful installation
+    window.addEventListener('appinstalled', () => {
+      console.log('PWA successfully installed')
+      deferredPrompt.value = null
+      showInstallBanner.value = false
+    })
+  } catch (error) {
+    console.warn('Error setting up install prompt:', error)
+  }
+}
+
 // Auto-show install banner
 const setupAutoInstall = () => {
   if (!process.client) return
 
   try {
-    watch(canInstall, (newVal) => {
-      if (newVal && !unref(isInstalled)) {
+    // Watch for deferred prompt availability
+    watch(deferredPrompt, (newPrompt) => {
+      if (newPrompt && !unref(isInstalled)) {
         setTimeout(() => {
           if (!process.client) return
 
@@ -119,12 +185,21 @@ const setupAutoInstall = () => {
           const lastShown = localStorage.getItem('pwa-banner-last-shown')
           const now = Date.now()
 
-          // Show if never dismissed or if 24 hours have passed
-          if (!dismissed || (lastShown && now - parseInt(lastShown) > 24 * 60 * 60 * 1000)) {
+          // Show banner only if never dismissed and after 10 seconds of use
+          // Or if 48 hours have passed since last shown (less intrusive)
+          if (!dismissed || (lastShown && now - parseInt(lastShown) > 48 * 60 * 60 * 1000)) {
             showInstallBanner.value = true
             localStorage.setItem('pwa-banner-last-shown', now.toString())
           }
-        }, 3000) // Show after 3 seconds
+        }, 10000) // Show after 10 seconds (less intrusive)
+      }
+    })
+
+    // Also watch canInstall from the official composable
+    watch(canInstall, (newVal) => {
+      if (newVal && !unref(isInstalled)) {
+        // Just log for debugging, main logic is handled by deferredPrompt watch
+        console.log('PWA can be installed via official API')
       }
     })
   } catch (error) {
@@ -134,14 +209,18 @@ const setupAutoInstall = () => {
 
 // Install PWA with banner management
 const handleInstall = async () => {
-  if (!process.client) return
+  if (!process.client || !deferredPrompt.value) return
 
   try {
-    const success = await installPWA()
-    if (success) {
+    const result = await deferredPrompt.value.prompt()
+    const isAccepted = result.outcome === 'accepted'
+
+    if (isAccepted) {
       showInstallBanner.value = false
       localStorage.removeItem('pwa-install-dismissed')
     }
+
+    deferredPrompt.value = null
   } catch (error) {
     console.error('Error handling install:', error)
   }
@@ -160,12 +239,17 @@ const dismissBanner = () => {
 }
 
 // Update app
-const updateApp = () => {
+const updateApp = async () => {
   if (process.client) {
     try {
-      window.location.reload()
+      if (updateServiceWorker) {
+        await updateServiceWorker()
+      } else {
+        window.location.reload()
+      }
     } catch (error) {
       console.error('Error updating app:', error)
+      window.location.reload()
     }
   }
 }
@@ -175,9 +259,7 @@ onMounted(() => {
 
   nextTick(() => {
     try {
-      if (initPWA && typeof initPWA === 'function') {
-        initPWA()
-      }
+      setupInstallPrompt()
       setupAutoInstall()
     } catch (error) {
       console.error('Error in onMounted:', error)
