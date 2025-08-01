@@ -256,6 +256,41 @@ export const useDataStore = defineStore('data', {
             competitorPrice: 78.50
           }
         ]
+      },
+      {
+        id: 6,
+        competitorId: 2,
+        reportDate: '2024-01-20',
+        reportedBy: 1,
+        notes: 'Cotação completa com múltiplos produtos para análise competitiva',
+        verified: false,
+        region: 'REG001',
+        state: 'SP',
+        paymentCondition: 'BOLETO_60',
+        paymentMethod: 'BOLETO',
+        currencyId: 1,
+        products: [
+          {
+            productId: 1,
+            competitorPrice: 145.75
+          },
+          {
+            productId: 2,
+            competitorPrice: 92.30
+          },
+          {
+            productId: 4,
+            competitorPrice: 138.90
+          },
+          {
+            productId: 7,
+            competitorPrice: 105.50
+          },
+          {
+            productId: 8,
+            competitorPrice: 67.80
+          }
+        ]
       }
     ]
   }),
