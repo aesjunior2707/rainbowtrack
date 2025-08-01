@@ -266,9 +266,16 @@ const filteredReports = computed(() => {
   if (searchTerm.value) {
     const term = searchTerm.value.toLowerCase()
     reports = reports.filter(report => {
-      const product = getProductName(report.productId).toLowerCase()
+      // Search in competitor name
       const competitor = getCompetitorName(report.competitorId).toLowerCase()
-      return product.includes(term) || competitor.includes(term)
+      if (competitor.includes(term)) return true
+
+      // Search in product names (support both formats)
+      const products = getReportProducts(report)
+      return products.some(productItem => {
+        const productName = getProductName(productItem.productId).toLowerCase()
+        return productName.includes(term)
+      })
     })
   }
 
