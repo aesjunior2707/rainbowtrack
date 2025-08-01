@@ -291,6 +291,25 @@ export const useDataStore = defineStore('data', {
             competitorPrice: 67.80
           }
         ]
+      },
+      {
+        id: 7,
+        competitorId: 1,
+        reportDate: '2025-01-30',
+        reportedBy: 1,
+        notes: 'Captura recente para teste do dashboard',
+        verified: true,
+        region: 'REG001',
+        state: 'MG',
+        paymentCondition: 'A_VISTA',
+        paymentMethod: 'PIX',
+        currencyId: 1,
+        products: [
+          {
+            productId: 3,
+            competitorPrice: 156.90
+          }
+        ]
       }
     ]
   }),
