@@ -1,7 +1,7 @@
 <template>
-  <div class="min-h-screen bg-gray-50">
+  <div class="min-h-screen bg-gray-50 relative">
     <!-- Navigation -->
-    <nav class="bg-white shadow-sm border-b">
+    <nav class="bg-white shadow-sm border-b sticky top-0 z-40 safe-top">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between items-center h-16">
           <!-- Logo -->
@@ -53,7 +53,7 @@
                 <!-- User Dropdown -->
                 <div
                   v-if="showUserMenu"
-                  class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50"
+                  class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-[100] border"
                 >
                   <div class="px-4 py-2 border-b">
                     <p class="text-sm font-medium text-gray-900">{{ authStore.user?.name }}</p>
@@ -77,34 +77,83 @@
           <!-- Mobile menu button -->
           <button
             @click="mobileMenuOpen = !mobileMenuOpen"
-            class="md:hidden p-2 rounded-md text-gray-700 hover:text-primary-600 hover:bg-gray-100"
+            class="md:hidden p-2 rounded-md text-gray-700 hover:text-primary-600 hover:bg-gray-100 touch-target"
           >
             <Menu class="w-6 h-6" />
           </button>
         </div>
       </div>
 
+      <!-- Mobile Navigation Overlay -->
+      <Transition
+        enter-active-class="transition-opacity duration-200"
+        enter-from-class="opacity-0"
+        enter-to-class="opacity-100"
+        leave-active-class="transition-opacity duration-200"
+        leave-from-class="opacity-100"
+        leave-to-class="opacity-0"
+      >
+        <div
+          v-if="mobileMenuOpen"
+          class="fixed inset-0 bg-black bg-opacity-25 z-20 md:hidden"
+          @click="mobileMenuOpen = false"
+        />
+      </Transition>
+
       <!-- Mobile Navigation -->
-      <div v-if="mobileMenuOpen" class="md:hidden bg-white border-t">
-        <div class="px-2 pt-2 pb-3 space-y-1">
-          <NuxtLink
-            v-for="item in navigation"
-            :key="item.name"
-            :to="item.href"
-            class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-primary-600 hover:bg-gray-50"
-            :class="{ 'text-primary-600 bg-primary-50': $route.path === item.href }"
-          >
-            <component :is="item.icon" class="w-4 h-4 inline mr-2" />
-            {{ t(item.nameKey) }}
-          </NuxtLink>
+      <Transition
+        enter-active-class="transition-transform duration-300 ease-out"
+        enter-from-class="-translate-y-full"
+        enter-to-class="translate-y-0"
+        leave-active-class="transition-transform duration-200 ease-in"
+        leave-from-class="translate-y-0"
+        leave-to-class="-translate-y-full"
+      >
+        <div v-if="mobileMenuOpen" class="md:hidden bg-white border-t shadow-lg z-30 relative">
+          <div class="px-4 pt-4 pb-4 space-y-2 safe-bottom">
+            <NuxtLink
+              v-for="item in navigation"
+              :key="item.name"
+              :to="item.href"
+              @click="mobileMenuOpen = false"
+              class="flex items-center px-4 py-3 rounded-xl text-base font-medium text-gray-700 hover:text-primary-600 hover:bg-primary-50 nav-item mobile-tap touch-target transition-colors"
+              :class="{ 'text-primary-600 bg-primary-50 font-semibold': $route.path === item.href }"
+            >
+              <component :is="item.icon" class="w-5 h-5 mr-3 flex-shrink-0" />
+              {{ t(item.nameKey) }}
+            </NuxtLink>
+
+            <!-- Mobile User Info -->
+            <div class="mt-4 pt-4 border-t border-gray-200">
+              <div class="px-4 py-2">
+                <p class="text-sm font-medium text-gray-900">{{ authStore.user?.name }}</p>
+                <p class="text-sm text-gray-500">{{ authStore.user?.email }}</p>
+                <p class="text-xs text-primary-600 font-medium mt-1">
+                  Região: {{ authStore.user?.defaultRegion }}
+                </p>
+              </div>
+              <button
+                @click="handleLogout"
+                class="w-full flex items-center px-4 py-3 text-sm text-red-600 hover:bg-red-50 rounded-xl nav-item mobile-tap touch-target mt-2 transition-colors"
+              >
+                <LogOut class="w-4 h-4 mr-3" />
+                {{ t('auth.logout') }}
+              </button>
+            </div>
+          </div>
         </div>
-      </div>
+      </Transition>
     </nav>
 
     <!-- Main Content -->
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 safe-left safe-right min-h-[calc(100vh-4rem)]">
       <slot />
     </main>
+
+    <!-- PWA Install Prompt -->
+    <ClientOnly>
+      <PWAInstallPrompt />
+    </ClientOnly>
   </div>
 </template>
 

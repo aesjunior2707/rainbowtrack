@@ -80,7 +80,7 @@
           <h2 class="text-lg font-semibold text-gray-900 mb-4">
             {{ t('dashboard.quick_actions') }}
           </h2>
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
             <NuxtLink
               to="/reports/new"
               class="btn-primary text-center py-3 px-6 rounded-lg no-underline"
@@ -102,6 +102,9 @@
               <Package class="w-5 h-5 inline mr-2" />
               {{ t('dashboard.products') }}
             </NuxtLink>
+            <ClientOnly>
+              <PWAInstallButton text="Instalar App" />
+            </ClientOnly>
           </div>
         </div>
       </div>

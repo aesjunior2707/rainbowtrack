@@ -13,7 +13,7 @@ export default defineNuxtConfig({
   ],
   pwa: {
     registerType: 'autoUpdate',
-    includeAssets: ['icon.svg', 'icon-192.png', 'icon-512.png'],
+    includeAssets: ['favicon.ico', 'icon.svg', 'icon-192x192.png', 'icon-512x512.png'],
     manifest: {
       name: 'Rainbow Track - Inteligência Competitiva',
       short_name: 'Rainbow Track',
@@ -21,23 +21,28 @@ export default defineNuxtConfig({
       theme_color: '#006E68',
       background_color: '#ffffff',
       display: 'standalone',
-      orientation: 'portrait-primary',
+      orientation: 'any',
       scope: '/',
       start_url: '/?pwa=1',
       lang: 'pt-BR',
       categories: ['business', 'productivity'],
       icons: [
         {
-          src: '/icon-192.png',
+          src: '/icon-192x192.png',
           sizes: '192x192',
           type: 'image/png',
           purpose: 'any maskable'
         },
         {
-          src: '/icon-512.png',
+          src: '/icon-512x512.png',
           sizes: '512x512',
           type: 'image/png',
           purpose: 'any maskable'
+        },
+        {
+          src: '/favicon.ico',
+          sizes: '64x64 32x32 24x24 16x16',
+          type: 'image/x-icon'
         },
         {
           src: '/icon.svg',

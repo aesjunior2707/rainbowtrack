@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen bg-gray-50">
+  <div class="min-h-screen bg-gray-50 relative overflow-x-hidden">
     <!-- Offline Indicator -->
     <Transition
       enter-active-class="transition-all duration-300 ease-out"
@@ -11,7 +11,7 @@
     >
       <div
         v-if="!isOnline"
-        class="fixed top-0 left-0 right-0 bg-red-500 text-white text-center py-2 text-sm font-medium z-50"
+        class="fixed top-0 left-0 right-0 bg-red-500 text-white text-center py-2 text-sm font-medium z-[9999] safe-top"
       >
         📡 Modo offline - Algumas funcionalidades podem estar limitadas
       </div>
@@ -40,11 +40,11 @@ useHead({
   title: 'Rainbow Track - Inteligência Competitiva',
   meta: [
     { name: 'description', content: 'Sistema de Rastreamento e Vendas Agrícolas com Inteligência Competitiva' },
-    { name: 'viewport', content: 'width=device-width, initial-scale=1, user-scalable=no' },
+    { name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover' },
     { name: 'theme-color', content: '#006E68' },
     { name: 'mobile-web-app-capable', content: 'yes' },
     { name: 'apple-mobile-web-app-capable', content: 'yes' },
-    { name: 'apple-mobile-web-app-status-bar-style', content: 'default' },
+    { name: 'apple-mobile-web-app-status-bar-style', content: 'black-translucent' },
     { name: 'apple-mobile-web-app-title', content: 'Rainbow Track' },
     { name: 'application-name', content: 'Rainbow Track' },
     { name: 'msapplication-TileColor', content: '#006E68' },
