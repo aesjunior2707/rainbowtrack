@@ -63,16 +63,7 @@
           </div>
         </form>
 
-        <div class="mt-8 text-center">
-          <div class="text-sm text-gray-600 mb-4">
-            {{ t('auth.demo_users') }}
-          </div>
-          <div class="text-xs text-gray-500 space-y-1">
-            <div>leonardo.campos / senha123</div>
-            <div>leonardo.campos2 / senha123</div>
-            <div>admin / admin123</div>
-          </div>
-        </div>
+        <!-- Dados de demo removidos para produção -->
 
         <div class="mt-6 flex justify-center">
           <LanguageSelector />
