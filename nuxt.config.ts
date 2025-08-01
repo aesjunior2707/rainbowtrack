@@ -13,18 +13,32 @@ export default defineNuxtConfig({
   ],
   pwa: {
     registerType: 'autoUpdate',
-    includeAssets: ['icon.svg'],
+    includeAssets: ['icon.svg', 'icon-192.png', 'icon-512.png'],
     manifest: {
-      name: 'Rainbow Track',
+      name: 'Rainbow Track - Inteligência Competitiva',
       short_name: 'Rainbow Track',
-      description: 'Sistema de Rastreamento e Vendas Agrícolas',
+      description: 'Sistema de Rastreamento e Vendas Agrícolas com Inteligência Competitiva',
       theme_color: '#006E68',
       background_color: '#ffffff',
       display: 'standalone',
-      orientation: 'portrait',
+      orientation: 'portrait-primary',
       scope: '/',
-      start_url: '/',
+      start_url: '/?pwa=1',
+      lang: 'pt-BR',
+      categories: ['business', 'productivity'],
       icons: [
+        {
+          src: '/icon-192.png',
+          sizes: '192x192',
+          type: 'image/png',
+          purpose: 'any maskable'
+        },
+        {
+          src: '/icon-512.png',
+          sizes: '512x512',
+          type: 'image/png',
+          purpose: 'any maskable'
+        },
         {
           src: '/icon.svg',
           sizes: 'any',
@@ -34,7 +48,23 @@ export default defineNuxtConfig({
     },
     workbox: {
       navigateFallback: '/',
-      globPatterns: ['**/*.{js,css,html,svg}']
+      globPatterns: ['**/*.{js,css,html,png,svg,ico}'],
+      runtimeCaching: [
+        {
+          urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i,
+          handler: 'CacheFirst',
+          options: {
+            cacheName: 'google-fonts-cache',
+            expiration: {
+              maxEntries: 10,
+              maxAgeSeconds: 60 * 60 * 24 * 365 // 365 days
+            },
+            cacheableResponse: {
+              statuses: [0, 200]
+            }
+          }
+        }
+      ]
     },
     devOptions: {
       enabled: false
