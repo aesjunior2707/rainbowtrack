@@ -83,4 +83,57 @@
   .touch-target {
     @apply min-h-[44px] min-w-[44px];
   }
+
+  /* Safe area utilities */
+  .safe-top {
+    padding-top: max(0.5rem, env(safe-area-inset-top));
+  }
+
+  .safe-bottom {
+    padding-bottom: max(0.5rem, env(safe-area-inset-bottom));
+  }
+
+  .safe-left {
+    padding-left: max(1rem, env(safe-area-inset-left));
+  }
+
+  .safe-right {
+    padding-right: max(1rem, env(safe-area-inset-right));
+  }
+
+  /* Mobile navigation improvements */
+  @media (max-width: 768px) {
+    .mobile-nav-overlay {
+      @apply fixed inset-0 bg-black bg-opacity-25 z-20;
+    }
+
+    .mobile-nav-content {
+      @apply relative z-30 bg-white;
+    }
+
+    /* Prevent text selection on navigation items */
+    .nav-item {
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      -webkit-touch-callout: none;
+    }
+
+    /* Improve tap highlighting */
+    .mobile-tap {
+      -webkit-tap-highlight-color: rgba(20, 184, 166, 0.1);
+      transition: background-color 0.15s ease;
+    }
+
+    .mobile-tap:active {
+      @apply bg-primary-50;
+    }
+  }
+
+  /* Z-index scale for proper layering */
+  .z-nav-bar { z-index: 40; }
+  .z-nav-dropdown { z-index: 100; }
+  .z-modal { z-index: 1000; }
+  .z-notification { z-index: 9999; }
 }
