@@ -304,7 +304,13 @@ export const useDataStore = defineStore('data', {
     },
 
     getPriceReportsByProduct(productId: number) {
-      return this.priceReports.filter(r => r.productId === productId)
+      return this.priceReports.filter(r => {
+        // Support both old and new format
+        if (r.products && Array.isArray(r.products)) {
+          return r.products.some(p => p.productId === productId)
+        }
+        return r.productId === productId
+      })
     },
 
     getPriceReportsByCompetitor(competitorId: number) {
