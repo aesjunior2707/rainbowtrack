@@ -94,19 +94,49 @@
                 <h3 class="text-lg font-bold text-gray-900 mb-1">
                   {{ getCompetitorName(report.competitorId) }}
                 </h3>
-                <div class="flex items-center space-x-2 text-sm text-gray-600">
-                  <MapPin class="w-4 h-4" />
-                  <span>{{ report.state || report.region }}</span>
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center space-x-2 text-sm text-gray-600">
+                    <MapPin class="w-4 h-4" />
+                    <span>{{ report.state || report.region }}</span>
+                  </div>
+                  <span class="text-xs text-primary-600 font-medium">
+                    {{ getProductCount(report) }} produto{{ getProductCount(report) > 1 ? 's' : '' }}
+                  </span>
                 </div>
               </div>
 
-              <!-- Preço -->
-              <div class="bg-gray-50 rounded-lg p-3 mb-3">
-                <div class="text-center">
-                  <p class="text-xs text-gray-600 mb-1">Preço Capturado</p>
-                  <p class="text-2xl font-bold text-primary-600">
-                    {{ getCurrencySymbol(report.currencyId) }} {{ formatPrice(report.competitorPrice) }}
-                  </p>
+              <!-- Lista de Produtos -->
+              <div class="space-y-2 mb-3">
+                <div
+                  v-for="(productItem, index) in getReportProducts(report)"
+                  :key="`${report.id}-${productItem.productId}-${index}`"
+                  class="bg-gray-50 rounded-lg p-3"
+                >
+                  <div class="flex justify-between items-center">
+                    <div class="flex-1">
+                      <h4 class="font-medium text-gray-900 text-sm">
+                        {{ getProductName(productItem.productId) }}
+                      </h4>
+                      <p class="text-xs text-gray-500">
+                        {{ getProductBrand(productItem.productId) }}
+                      </p>
+                    </div>
+                    <div class="text-right">
+                      <p class="font-bold text-primary-600">
+                        {{ getCurrencySymbol(report.currencyId) }} {{ formatPrice(productItem.competitorPrice) }}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Total da Captura -->
+              <div v-if="getProductCount(report) > 1" class="bg-primary-50 border border-primary-200 rounded-lg p-3 mb-3">
+                <div class="flex justify-between items-center">
+                  <span class="text-sm font-medium text-primary-900">Total da Captura:</span>
+                  <span class="text-lg font-bold text-primary-600">
+                    {{ getCurrencySymbol(report.currencyId) }} {{ formatPrice(getTotalCaptureValue(report)) }}
+                  </span>
                 </div>
               </div>
 
