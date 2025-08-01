@@ -1,7 +1,7 @@
 <template>
-  <div class="min-h-screen bg-gray-50">
+  <div class="min-h-screen bg-gray-50 relative">
     <!-- Navigation -->
-    <nav class="bg-white shadow-sm border-b">
+    <nav class="bg-white shadow-sm border-b sticky top-0 z-40 safe-top">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between items-center h-16">
           <!-- Logo -->
@@ -53,7 +53,7 @@
                 <!-- User Dropdown -->
                 <div
                   v-if="showUserMenu"
-                  class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50"
+                  class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-[100] border"
                 >
                   <div class="px-4 py-2 border-b">
                     <p class="text-sm font-medium text-gray-900">{{ authStore.user?.name }}</p>
@@ -77,7 +77,7 @@
           <!-- Mobile menu button -->
           <button
             @click="mobileMenuOpen = !mobileMenuOpen"
-            class="md:hidden p-2 rounded-md text-gray-700 hover:text-primary-600 hover:bg-gray-100"
+            class="md:hidden p-2 rounded-md text-gray-700 hover:text-primary-600 hover:bg-gray-100 touch-target"
           >
             <Menu class="w-6 h-6" />
           </button>
@@ -85,7 +85,7 @@
       </div>
 
       <!-- Mobile Navigation -->
-      <div v-if="mobileMenuOpen" class="md:hidden bg-white border-t">
+      <div v-if="mobileMenuOpen" class="md:hidden bg-white border-t shadow-lg z-30">
         <div class="px-2 pt-2 pb-3 space-y-1">
           <NuxtLink
             v-for="item in navigation"
