@@ -315,7 +315,7 @@
 </template>
 
 <script setup>
-import { ArrowLeft, Building2, X } from 'lucide-vue-next'
+import { ArrowLeft, Building2, X, User } from 'lucide-vue-next'
 
 definePageMeta({
   middleware: 'auth'
