@@ -227,13 +227,18 @@ const handleInstall = async () => {
   }
 }
 
-// Dismiss banner
+// Dismiss banner (temporariamente)
 const dismissBanner = () => {
   if (!process.client) return
 
   try {
     showInstallBanner.value = false
-    localStorage.setItem('pwa-install-dismissed', 'true')
+    // Reexibe o banner após 1 minuto se o app ainda não estiver instalado
+    setTimeout(() => {
+      if (!unref(isInstalled) && (deferredPrompt.value || unref(canInstall))) {
+        showInstallBanner.value = true
+      }
+    }, 60000) // 1 minuto
   } catch (error) {
     console.warn('Error dismissing banner:', error)
   }
