@@ -192,30 +192,31 @@ function showInstallPrompt() {
 }
 
 async function installApp() {
-  if (!deferredPrompt.value) {
+  if (!deferredPrompt.value || typeof deferredPrompt.value.prompt !== 'function') {
     // Fallback para dispositivos iOS
     if (typeof navigator !== 'undefined' && /iphone|ipad|ipod/.test(navigator.userAgent.toLowerCase())) {
       alert('Para instalar no iOS:\n1. Toque no ícone de compartilhar (📤)\n2. Selecione "Adicionar à Tela de Início"')
       showPrompt.value = false
       return
     }
-    
+
     alert('Instalação não disponível neste momento. Tente novamente mais tarde.')
     return
   }
-  
+
   try {
     await deferredPrompt.value.prompt()
-    const { outcome } = await deferredPrompt.value.userChoice
-    
+    const result = await deferredPrompt.value.userChoice
+    const outcome = result?.outcome
+
     console.log('Resultado da instalação:', outcome)
-    
+
     if (outcome === 'accepted') {
       console.log('✅ Usuário aceitou instalar o PWA')
     } else {
       console.log('❌ Usuário recusou instalar o PWA')
     }
-    
+
     showPrompt.value = false
     deferredPrompt.value = null
   } catch (error) {
