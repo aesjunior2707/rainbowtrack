@@ -273,17 +273,12 @@ export const useDataStore = defineStore('data', {
     },
 
     addPriceReport(report: any) {
-      console.log('Store: Adicionando captura com produtos:', report.products?.length || 0)
-
       const newReport = {
         ...report,
         id: this.nextReportId++,
         verified: false
       }
       this.priceReports.push(newReport)
-
-      console.log('Store: Captura adicionada. Total de capturas:', this.priceReports.length)
-
       return newReport
     },
 
