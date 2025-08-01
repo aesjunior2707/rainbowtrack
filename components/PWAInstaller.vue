@@ -113,6 +113,7 @@ const isOnline = ref(true)
 const deferredPrompt = ref(null)
 
 const showInstallBanner = ref(false)
+const bannerDismissed = ref(false)
 const isClientMounted = ref(false)
 
 // Check if it's iOS device
