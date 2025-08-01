@@ -129,7 +129,13 @@ const props = defineProps(['competitor'])
 const emit = defineEmits(['close', 'competitor-updated'])
 
 const { $pinia } = useNuxtApp()
+const authStore = useAuthStore($pinia)
 const translationStore = useTranslationStore($pinia)
+
+// Check if user is admin
+if (authStore.user?.role !== 'admin') {
+  throw new Error('Acesso negado: apenas administradores podem editar concorrentes')
+}
 
 const t = (key, params) => translationStore.t(key, params)
 
