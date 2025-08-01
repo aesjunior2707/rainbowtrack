@@ -434,45 +434,8 @@ const handleCompetitorCreated = (competitor) => {
   showNewCompetitorModal.value = false
 }
 
-const testMultipleReports = () => {
-  console.log('=== TESTE DE MÚLTIPLOS RELATÓRIOS ===')
-
-  // Criar 3 relatórios de teste
-  const testReports = [
-    { productId: 1, competitorPrice: 100.50 },
-    { productId: 2, competitorPrice: 200.75 },
-    { productId: 3, competitorPrice: 300.25 }
-  ]
-
-  testReports.forEach((testData, index) => {
-    const report = {
-      productId: testData.productId,
-      competitorId: 1,
-      competitorPrice: testData.competitorPrice,
-      reportDate: new Date().toISOString().split('T')[0],
-      reportedBy: authStore.user.id,
-      notes: `Teste ${index + 1}`,
-      region: 'Teste',
-      state: 'SP',
-      paymentCondition: 'A_VISTA',
-      paymentMethod: 'PIX',
-      currencyId: 1
-    }
-
-    const savedReport = dataStore.addPriceReport(report)
-    console.log(`Teste ${index + 1}: Salvo com ID ${savedReport.id}`)
-  })
-
-  console.log('Total após teste:', dataStore.priceReports.length)
-  console.log('=== FIM DO TESTE ===')
-}
-
 const handleSubmit = () => {
-  console.log('=== INÍCIO DO SALVAMENTO ===')
-  console.log('Produtos selecionados:', selectedProducts.value.length)
-
   if (selectedProducts.value.length === 0) {
-    console.error('Nenhum produto selecionado!')
     return
   }
 
@@ -493,12 +456,7 @@ const handleSubmit = () => {
     }))
   }
 
-  console.log('Captura criada:', report)
-  const savedReport = dataStore.addPriceReport(report)
-  console.log('Captura salva com ID:', savedReport.id)
-  console.log('Total de capturas após salvamento:', dataStore.priceReports.length)
-  console.log('=== FIM DO SALVAMENTO ===')
-
+  dataStore.addPriceReport(report)
   navigateTo('/reports')
 }
 
