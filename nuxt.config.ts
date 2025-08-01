@@ -13,6 +13,7 @@ export default defineNuxtConfig({
   ],
   pwa: {
     registerType: 'autoUpdate',
+    includeAssets: ['icon.svg'],
     manifest: {
       name: 'Rainbow Track',
       short_name: 'Rainbow Track',
@@ -25,20 +26,18 @@ export default defineNuxtConfig({
       start_url: '/',
       icons: [
         {
-          src: '/icon-192x192.png',
-          sizes: '192x192',
-          type: 'image/png'
-        },
-        {
-          src: '/icon-512x512.png',
-          sizes: '512x512',
-          type: 'image/png'
+          src: '/icon.svg',
+          sizes: 'any',
+          type: 'image/svg+xml'
         }
       ]
     },
     workbox: {
       navigateFallback: '/',
-      globPatterns: ['**/*.{js,css,html,png,svg,ico}']
+      globPatterns: ['**/*.{js,css,html,svg}']
+    },
+    devOptions: {
+      enabled: false
     }
   },
   css: ['~/assets/css/main.css']

@@ -59,7 +59,11 @@ export const useTranslationStore = defineStore('translation', {
           select_product: 'Selecionar Produto',
           report_details: 'Detalhes da Captura',
           cancel: 'Cancelar',
-          confirm_report: 'Confirmar Captura'
+          confirm_report: 'Confirmar Captura',
+          all_competitors: 'Todos os Concorrentes',
+          all_regions: 'Todas as Regiões',
+          all_status: 'Todos os Status',
+          pending: 'Pendentes'
         },
         competitors: {
           title: 'Concorrentes - Rainbow Track',
@@ -72,18 +76,26 @@ export const useTranslationStore = defineStore('translation', {
           market_share: 'Participação de Mercado (%)',
           report_count: 'Capturas Coletadas',
           no_competitors: 'Nenhum concorrente encontrado',
+          select_region: 'Selecionar Região',
+          search_placeholder: 'Pesquisar concorrentes...',
+          all_types: 'Todos os Tipos',
+          all_regions: 'Todas as Regiões',
           types: {
             manufacturer: 'Fabricante',
             distributor: 'Distribuidor',
             retailer: 'Varejista',
             cooperative: 'Cooperativa'
+          },
+          regions: {
+            reg001: 'Região 001',
+            reg002: 'Região 002',
+            reg003: 'Região 003'
           }
         },
         products: {
           title: 'Catálogo de Produtos',
           category: 'Categoria',
           search: 'Buscar produtos...',
-          packaging: 'Embalagem:',
           registered_crops: 'Cultivos Registrados:',
           add_product: 'Adicionar Produto',
           selected_products: '{count} produto(s) selecionado(s)',
@@ -164,7 +176,11 @@ export const useTranslationStore = defineStore('translation', {
           select_product: 'Select Product',
           report_details: 'Capture Details',
           cancel: 'Cancel',
-          confirm_report: 'Confirm Capture'
+          confirm_report: 'Confirm Capture',
+          all_competitors: 'All Competitors',
+          all_regions: 'All Regions',
+          all_status: 'All Status',
+          pending: 'Pending'
         },
         competitors: {
           title: 'Competitors - Rainbow Track',
@@ -177,18 +193,26 @@ export const useTranslationStore = defineStore('translation', {
           market_share: 'Market Share (%)',
           report_count: 'Captures Collected',
           no_competitors: 'No competitors found',
+          select_region: 'Select Region',
+          search_placeholder: 'Search competitors...',
+          all_types: 'All Types',
+          all_regions: 'All Regions',
           types: {
             manufacturer: 'Manufacturer',
             distributor: 'Distributor',
             retailer: 'Retailer',
             cooperative: 'Cooperative'
+          },
+          regions: {
+            reg001: 'Region 001',
+            reg002: 'Region 002',
+            reg003: 'Region 003'
           }
         },
         products: {
           title: 'Product Catalog',
           category: 'Category',
           search: 'Search products...',
-          packaging: 'Packaging:',
           registered_crops: 'Registered Crops:',
           add_product: 'Add Product',
           selected_products: '{count} product(s) selected',
@@ -270,7 +294,11 @@ export const useTranslationStore = defineStore('translation', {
           select_product: 'Seleccionar Producto',
           report_details: 'Detalles de la Captura',
           cancel: 'Cancelar',
-          confirm_report: 'Confirmar Captura'
+          confirm_report: 'Confirmar Captura',
+          all_competitors: 'Todos los Competidores',
+          all_regions: 'Todas las Regiones',
+          all_status: 'Todos los Estados',
+          pending: 'Pendientes'
         },
         competitors: {
           title: 'Competidores - Rainbow Track',
@@ -284,18 +312,26 @@ export const useTranslationStore = defineStore('translation', {
           report_count: 'Capturas Recolectadas',
           avg_price: 'Precio Promedio',
           no_competitors: 'No se encontraron competidores',
+          select_region: 'Seleccionar Región',
+          search_placeholder: 'Buscar competidores...',
+          all_types: 'Todos los Tipos',
+          all_regions: 'Todas las Regiones',
           types: {
             manufacturer: 'Fabricante',
             distributor: 'Distribuidor',
             retailer: 'Minorista',
             cooperative: 'Cooperativa'
+          },
+          regions: {
+            reg001: 'Región 001',
+            reg002: 'Región 002',
+            reg003: 'Región 003'
           }
         },
         products: {
           title: 'Catálogo de Productos',
           category: 'Categoría',
           search: 'Buscar productos...',
-          packaging: 'Empaque:',
           registered_crops: 'Cultivos Registrados:',
           add_product: 'Agregar Producto',
           selected_products: '{count} producto(s) seleccionado(s)',
@@ -376,7 +412,11 @@ export const useTranslationStore = defineStore('translation', {
           select_product: '选择产品',
           report_details: '捕获详情',
           cancel: '取消',
-          confirm_report: '确认捕获'
+          confirm_report: '确认捕获',
+          all_competitors: '所有竞争对手',
+          all_regions: '所有地区',
+          all_status: '所有状态',
+          pending: '待处理'
         },
         competitors: {
           title: '竞争对手 - Rainbow Track',
@@ -389,18 +429,26 @@ export const useTranslationStore = defineStore('translation', {
           market_share: '市场份额 (%)',
           report_count: '收集的捕获',
           no_competitors: '未找到竞争对手',
+          select_region: '选择地区',
+          search_placeholder: '搜索竞争对手...',
+          all_types: '所有类型',
+          all_regions: '所有地区',
           types: {
             manufacturer: '制造商',
             distributor: '分销商',
             retailer: '零售商',
             cooperative: '合作社'
+          },
+          regions: {
+            reg001: '地区 001',
+            reg002: '地区 002',
+            reg003: '地区 003'
           }
         },
         products: {
           title: '产品目录',
           category: '类别',
           search: '搜索产品...',
-          packaging: '包装：',
           registered_crops: '注册作物：',
           add_product: '添加产品',
           selected_products: '已选择 {count} 个产品',

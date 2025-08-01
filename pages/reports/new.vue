@@ -31,7 +31,7 @@
                   <select v-model="selectedCompetitor" class="input-field flex-1" required>
                     <option value="">{{ t('reports.select_competitor') }}</option>
                     <option
-                      v-for="competitor in dataStore.competitors"
+                      v-for="competitor in availableCompetitors"
                       :key="competitor.id"
                       :value="competitor.id"
                     >
@@ -80,7 +80,7 @@
                     <div class="flex items-start justify-between mb-2">
                       <div>
                         <h3 class="font-semibold text-gray-900">{{ item.product.name }}</h3>
-                        <p class="text-sm text-gray-600">{{ item.product.brand }} • {{ item.product.packaging }}</p>
+                        <p class="text-sm text-gray-600">{{ item.product.brand }}</p>
                       </div>
                       <button
                         type="button"
@@ -394,6 +394,12 @@ const totalCaptureValue = computed(() => {
 const selectedCurrencySymbol = computed(() => {
   const curr = dataStore.getCurrencyById(currency.value)
   return curr ? curr.symbol : 'R$'
+})
+
+const availableCompetitors = computed(() => {
+  const userRegion = authStore.user?.defaultRegion
+  const isAdmin = authStore.user?.role === 'admin'
+  return dataStore.getCompetitorsByUserRegion(userRegion, isAdmin)
 })
 
 

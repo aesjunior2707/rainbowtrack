@@ -1,14 +1,14 @@
 <template>
   <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-    <div class="bg-white rounded-lg shadow-xl w-full max-w-md mx-4">
+    <div class="bg-white rounded-lg shadow-xl w-full max-w-md mx-4 transform transition-all duration-300 ease-out scale-100">
       <div class="p-6">
         <div class="flex justify-between items-center mb-4">
           <h3 class="text-lg font-semibold text-gray-900">
-            {{ t('competitors.new_competitor') }}
+            Editar Concorrente
           </h3>
           <button
             @click="$emit('close')"
-            class="text-gray-400 hover:text-gray-600"
+            class="text-gray-400 hover:text-gray-600 transition-colors"
           >
             <X class="w-5 h-5" />
           </button>
@@ -125,27 +125,30 @@
 <script setup>
 import { X } from 'lucide-vue-next'
 
-const emit = defineEmits(['close', 'competitor-created'])
+const props = defineProps(['competitor'])
+const emit = defineEmits(['close', 'competitor-updated'])
 
 const { $pinia } = useNuxtApp()
-const dataStore = useDataStore($pinia)
 const translationStore = useTranslationStore($pinia)
 
 const t = (key, params) => translationStore.t(key, params)
 
 const form = ref({
-  name: '',
-  type: '',
-  region: '',
-  contact: '',
-  phone: '',
-  marketShare: 0
+  name: props.competitor.name,
+  type: props.competitor.type,
+  region: props.competitor.region,
+  contact: props.competitor.contact,
+  phone: props.competitor.phone,
+  marketShare: props.competitor.marketShare
 })
 
 const handleSubmit = () => {
-  const competitor = dataStore.addCompetitor(form.value)
-  emit('competitor-created', competitor)
+  const updatedCompetitor = {
+    ...props.competitor,
+    ...form.value,
+    updatedAt: new Date().toISOString()
+  }
+  
+  emit('competitor-updated', updatedCompetitor)
 }
-
-// Initialize translation store
 </script>

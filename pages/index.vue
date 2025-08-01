@@ -93,7 +93,7 @@
               class="btn-secondary text-center py-3 px-6 rounded-lg no-underline"
             >
               <Building2 class="w-5 h-5 inline mr-2" />
-              Concorrentes
+              {{ t('navigation.competitors') }}
             </NuxtLink>
             <NuxtLink
               to="/products"
@@ -105,6 +105,21 @@
           </div>
         </div>
       </div>
+
+      <!-- PWA Installer -->
+      <ClientOnly>
+        <PWAInstaller />
+        <template #fallback>
+          <div class="mt-6 pt-4 border-t border-gray-200">
+            <div class="flex items-center justify-center space-x-4 text-sm text-gray-500">
+              <div class="flex items-center space-x-2">
+                <div class="w-2 h-2 rounded-full bg-gray-300"></div>
+                <span>Carregando...</span>
+              </div>
+            </div>
+          </div>
+        </template>
+      </ClientOnly>
     </AppLayout>
   </div>
 </template>

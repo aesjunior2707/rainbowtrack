@@ -7,19 +7,19 @@ export const useAuthStore = defineStore('auth', {
     users: [
       {
         id: 1,
-        username: 'leonardo.campos',
-        password: 'senha123',
-        name: 'Leonardo Campos',
-        email: 'leonardo.campos@rainbow.com',
+        username: 'alexandre',
+        password: '123',
+        name: 'Alexandre',
+        email: 'alexandre@rainbow.com',
         role: 'sales_rep',
         defaultRegion: 'REG001'
       },
       {
         id: 2,
-        username: 'leonardo.campos2',
-        password: 'senha123',
-        name: 'Leonardo Campos',
-        email: 'leonardo.campos2@rainbow.com',
+        username: 'tiago',
+        password: '123',
+        name: 'Tiago',
+        email: 'tiago@rainbow.com',
         role: 'sales_rep',
         defaultRegion: 'REG002'
       },

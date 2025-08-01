@@ -24,22 +24,22 @@
               <input
                 v-model="searchTerm"
                 type="text"
-                placeholder="Pesquisar concorrentes..."
+                :placeholder="t('competitors.search_placeholder')"
                 class="input-field"
               />
             </div>
             <div>
               <select v-model="filterType" class="input-field">
-                <option value="">Todos os Tipos</option>
-                <option value="Fabricante">Fabricante</option>
-                <option value="Distribuidor">Distribuidor</option>
-                <option value="Varejista">Varejista</option>
-                <option value="Cooperativa">Cooperativa</option>
+                <option value="">{{ t('competitors.all_types') }}</option>
+                <option value="Fabricante">{{ t('competitors.types.manufacturer') }}</option>
+                <option value="Distribuidor">{{ t('competitors.types.distributor') }}</option>
+                <option value="Varejista">{{ t('competitors.types.retailer') }}</option>
+                <option value="Cooperativa">{{ t('competitors.types.cooperative') }}</option>
               </select>
             </div>
             <div>
               <select v-model="filterRegion" class="input-field">
-                <option value="">Todas as Regiões</option>
+                <option value="">{{ t('competitors.all_regions') }}</option>
                 <option
                   v-for="region in uniqueRegions"
                   :key="region"
@@ -70,10 +70,18 @@
                 </div>
               </div>
               <div v-if="authStore.user?.role === 'admin'" class="flex space-x-2">
-                <button class="text-gray-400 hover:text-gray-600">
+                <button
+                  @click="handleEditCompetitor(competitor)"
+                  class="text-gray-400 hover:text-gray-600 transition-colors"
+                  title="Editar concorrente"
+                >
                   <Edit class="w-4 h-4" />
                 </button>
-                <button class="text-gray-400 hover:text-red-600">
+                <button
+                  @click="handleDeleteCompetitor(competitor)"
+                  class="text-gray-400 hover:text-red-600 transition-colors"
+                  title="Excluir concorrente"
+                >
                   <Trash2 class="w-4 h-4" />
                 </button>
               </div>
@@ -122,6 +130,29 @@
         @close="showNewCompetitorModal = false"
         @competitor-created="handleCompetitorCreated"
       />
+
+      <EditCompetitorModal
+        v-if="showEditCompetitorModal && selectedCompetitor"
+        :competitor="selectedCompetitor"
+        @close="showEditCompetitorModal = false"
+        @competitor-updated="handleCompetitorUpdated"
+      />
+
+      <ConfirmDeleteModal
+        v-if="showDeleteModal && selectedCompetitor"
+        title="Excluir Concorrente"
+        :message="'Tem certeza que deseja excluir o concorrente ' + selectedCompetitor.name + '?'"
+        :warning-text="getDeleteWarningText(selectedCompetitor)"
+        @cancel="showDeleteModal = false"
+        @confirm="confirmDeleteCompetitor"
+      />
+
+      <AnimatedNotification
+        :show="showNotification"
+        :type="notificationType"
+        :message="notificationMessage"
+        @close="showNotification = false"
+      />
     </AppLayout>
   </div>
 </template>
@@ -144,18 +175,30 @@ const searchTerm = ref('')
 const filterType = ref('')
 const filterRegion = ref('')
 const showNewCompetitorModal = ref(false)
+const showEditCompetitorModal = ref(false)
+const showDeleteModal = ref(false)
+const selectedCompetitor = ref(null)
+const showNotification = ref(false)
+const notificationType = ref('success')
+const notificationMessage = ref('')
 
 const uniqueRegions = computed(() => {
-  const regions = [...new Set(dataStore.competitors.map(c => c.region))]
+  const userRegion = authStore.user?.defaultRegion
+  const isAdmin = authStore.user?.role === 'admin'
+  const availableCompetitors = dataStore.getCompetitorsByUserRegion(userRegion, isAdmin)
+  const regions = [...new Set(availableCompetitors.map(c => c.region))]
   return regions.filter(Boolean)
 })
 
 const filteredCompetitors = computed(() => {
-  let competitors = dataStore.competitors
+  // Start with competitors filtered by user region/role
+  const userRegion = authStore.user?.defaultRegion
+  const isAdmin = authStore.user?.role === 'admin'
+  let competitors = dataStore.getCompetitorsByUserRegion(userRegion, isAdmin)
 
   if (searchTerm.value) {
     const term = searchTerm.value.toLowerCase()
-    competitors = competitors.filter(competitor => 
+    competitors = competitors.filter(competitor =>
       competitor.name.toLowerCase().includes(term) ||
       competitor.type.toLowerCase().includes(term) ||
       competitor.region.toLowerCase().includes(term)
@@ -177,8 +220,58 @@ const getCaptureCount = (competitorId) => {
   return dataStore.getPriceReportsByCompetitor(competitorId).length
 }
 
-const handleCompetitorCreated = () => {
+const handleCompetitorCreated = (competitor) => {
   showNewCompetitorModal.value = false
+  showNotificationWithMessage('success', `Concorrente "${competitor.name}" criado com sucesso!`)
+}
+
+const handleEditCompetitor = (competitor) => {
+  selectedCompetitor.value = competitor
+  showEditCompetitorModal.value = true
+}
+
+const handleCompetitorUpdated = (updatedCompetitor) => {
+  dataStore.updateCompetitor(updatedCompetitor.id, updatedCompetitor)
+  showEditCompetitorModal.value = false
+  selectedCompetitor.value = null
+  showNotificationWithMessage('success', `Concorrente "${updatedCompetitor.name}" atualizado com sucesso!`)
+}
+
+const handleDeleteCompetitor = (competitor) => {
+  selectedCompetitor.value = competitor
+  showDeleteModal.value = true
+}
+
+const confirmDeleteCompetitor = () => {
+  try {
+    const competitorName = selectedCompetitor.value.name
+    dataStore.deleteCompetitor(selectedCompetitor.value.id)
+    showDeleteModal.value = false
+    selectedCompetitor.value = null
+    showNotificationWithMessage('success', `Concorrente "${competitorName}" excluído com sucesso!`)
+  } catch (error) {
+    showNotificationWithMessage('error', error.message)
+    showDeleteModal.value = false
+  }
+}
+
+const getDeleteWarningText = (competitor) => {
+  const reportCount = getCaptureCount(competitor.id)
+  if (reportCount > 0) {
+    return `Este concorrente possui ${reportCount} captura(s) associada(s) e não pode ser excluído.`
+  }
+  return ''
+}
+
+const showNotificationWithMessage = (type, message) => {
+  notificationType.value = type
+  notificationMessage.value = message
+  showNotification.value = true
+
+  // Auto-hide after 4 seconds
+  setTimeout(() => {
+    showNotification.value = false
+  }, 4000)
 }
 
 </script>
