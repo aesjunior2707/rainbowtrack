@@ -101,6 +101,18 @@ const deferredPrompt = ref<any>(null)
 const showInstallBanner = ref(false)
 const isClientMounted = ref(false)
 
+// Check if it's iOS device
+const isIOS = computed(() => {
+  if (!process.client) return false
+  return /iPad|iPhone|iPod/.test(navigator.userAgent)
+})
+
+// Check if we can show install option (including iOS manual instructions)
+const showInstallOption = computed(() => {
+  if (!isClientMounted.value) return false
+  return !unref(isInstalled) && (unref(canInstall) || deferredPrompt.value || isIOS.value)
+})
+
 const statusText = computed(() => {
   if (!isClientMounted.value) {
     return 'Carregando...'
@@ -111,8 +123,10 @@ const statusText = computed(() => {
       return 'Modo offline'
     } else if (unref(isInstalled)) {
       return 'App instalado'
-    } else if (unref(canInstall)) {
+    } else if (unref(canInstall) || deferredPrompt.value) {
       return 'App disponível para instalação'
+    } else if (isIOS.value) {
+      return 'Instale via Safari (Compartilhar > Adicionar à Tela Inicial)'
     } else {
       return 'Navegador web'
     }
