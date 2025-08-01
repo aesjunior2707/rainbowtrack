@@ -45,7 +45,7 @@
     <div class="mt-6 pt-4 border-t border-gray-200">
       <!-- Install Available Card -->
       <div
-        v-if="isClientMounted && !unref(isInstalled) && unref(canInstall)"
+        v-if="showInstallOption"
         class="mb-4 bg-gradient-to-r from-primary-50 to-secondary-50 border border-primary-200 rounded-lg p-4"
       >
         <div class="flex items-center justify-between">
@@ -55,15 +55,26 @@
             </div>
             <div>
               <h3 class="font-semibold text-primary-900">Instalar Rainbow Track</h3>
-              <p class="text-sm text-primary-700">Tenha acesso rápido sem abrir o navegador</p>
+              <p class="text-sm text-primary-700">
+                {{ isIOS ? 'Use Safari: Compartilhar → Adicionar à Tela Inicial' : 'Tenha acesso rápido sem abrir o navegador' }}
+              </p>
             </div>
           </div>
           <button
+            v-if="!isIOS && (unref(canInstall) || deferredPrompt)"
             @click="handleInstall"
             class="bg-primary-600 text-white px-6 py-2 rounded-lg font-medium hover:bg-primary-700 transition-colors shadow-sm"
           >
             Instalar
           </button>
+          <div
+            v-else-if="isIOS"
+            class="flex items-center text-primary-600"
+          >
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M15 8a3 3 0 10-2.977-2.63l-4.94 2.47a3 3 0 100 4.319l4.94 2.47a3 3 0 10.895-1.789l-4.94-2.47a3.027 3.027 0 000-.74l4.94-2.47C13.456 7.68 14.19 8 15 8z"/>
+            </svg>
+          </div>
         </div>
       </div>
 
