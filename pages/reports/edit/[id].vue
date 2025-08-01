@@ -406,6 +406,7 @@ const loadReport = () => {
     // Populate form with report data
     form.value = {
       reportDate: foundReport.reportDate,
+      customerName: foundReport.customerName || '',
       region: foundReport.region,
       state: foundReport.state,
       paymentCondition: foundReport.paymentCondition,
