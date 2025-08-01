@@ -78,5 +78,17 @@
     .mobile-button {
       @apply p-3 rounded-lg;
     }
+
+    /* Prevent body scroll when mobile menu is open */
+    .mobile-menu-open {
+      @apply overflow-hidden;
+    }
+  }
+
+  /* PWA specific styles */
+  @media (display-mode: standalone) {
+    .pwa-standalone {
+      @apply pt-8; /* Extra padding for status bar in PWA mode */
+    }
   }
 }
