@@ -411,6 +411,10 @@ export const useDataStore = defineStore('data', {
       return this.products.find(p => p.id === id)
     },
 
+    getCustomerById(id: number) {
+      return this.customers.find(c => c.id === id)
+    },
+
     getProductsByCategory(category: string) {
       return this.products.filter(p => p.category === category)
     },
