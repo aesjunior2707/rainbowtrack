@@ -150,10 +150,22 @@ const competitorRanking = computed(() => {
 const currentMonthReports = computed(() => {
   const currentMonth = new Date().getMonth()
   const currentYear = new Date().getFullYear()
-  return dataStore.priceReports.filter(report => {
+
+  console.log('Debug Dashboard - Mês atual:', currentMonth, 'Ano atual:', currentYear)
+  console.log('Debug Dashboard - Total de relatórios:', dataStore.priceReports.length)
+
+  const filteredReports = dataStore.priceReports.filter(report => {
     const reportDate = new Date(report.reportDate)
-    return reportDate.getMonth() === currentMonth && reportDate.getFullYear() === currentYear
-  }).length
+    const reportMonth = reportDate.getMonth()
+    const reportYear = reportDate.getFullYear()
+
+    console.log(`Debug Dashboard - Relatório ${report.id}: ${report.reportDate} (Mês: ${reportMonth}, Ano: ${reportYear})`)
+
+    return reportMonth === currentMonth && reportYear === currentYear
+  })
+
+  console.log('Debug Dashboard - Relatórios filtrados:', filteredReports.length)
+  return filteredReports.length
 })
 
 const verifiedReportsPercentage = computed(() => {
