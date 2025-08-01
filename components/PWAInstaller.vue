@@ -83,7 +83,7 @@
         <div class="flex items-center space-x-2">
           <div
             class="w-2 h-2 rounded-full"
-            :class="isClientMounted && unref(isInstalled) ? 'bg-green-500' : (isClientMounted && unref(canInstall) ? 'bg-primary-500' : 'bg-yellow-500')"
+            :class="isClientMounted && unref(isInstalled) ? 'bg-green-500' : (showInstallOption ? 'bg-primary-500' : 'bg-yellow-500')"
           ></div>
           <span>{{ statusText }}</span>
         </div>
