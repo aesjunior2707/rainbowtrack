@@ -96,9 +96,9 @@
       >
         <div
           v-if="mobileMenuOpen"
-          class="fixed inset-0 bg-black bg-opacity-40 z-40 md:hidden"
+          class="fixed inset-0 bg-black bg-opacity-50 z-40 md:hidden"
           @click="mobileMenuOpen = false"
-          @touchstart="mobileMenuOpen = false"
+          @touchstart.prevent
         />
       </Transition>
 
