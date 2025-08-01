@@ -154,7 +154,6 @@ export const useTranslationStore = defineStore('translation', {
           competitor_ranking: 'Competitor Ranking',
           quick_actions: 'Quick Actions',
           new_report: 'New Capture',
-          products: 'Products',
           price_trends: 'Price Trends',
           market_analysis: 'Market Analysis'
         },
@@ -272,7 +271,6 @@ export const useTranslationStore = defineStore('translation', {
           competitor_ranking: 'Ranking de Competidores',
           quick_actions: 'Acciones Rápidas',
           new_report: 'Nueva Captura',
-          products: 'Productos',
           price_trends: 'Tendencias de Precios',
           market_analysis: 'Análisis de Mercado'
         },
@@ -390,7 +388,6 @@ export const useTranslationStore = defineStore('translation', {
           competitor_ranking: '竞争对手排名',
           quick_actions: '快速操作',
           new_report: '新捕获',
-          products: '产品',
           price_trends: '价格趋势',
           market_analysis: '市场分析'
         },
