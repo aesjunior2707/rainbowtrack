@@ -156,10 +156,10 @@ const handleInstall = async () => {
   if (!process.client) return
 
   try {
-    if (deferredPrompt.value) {
+    if (deferredPrompt.value && typeof deferredPrompt.value.prompt === 'function') {
       // Usar o prompt nativo se disponível
       const result = await deferredPrompt.value.prompt()
-      const isAccepted = result.outcome === 'accepted'
+      const isAccepted = result?.outcome === 'accepted'
 
       if (isAccepted) {
         showInstallBanner.value = false
