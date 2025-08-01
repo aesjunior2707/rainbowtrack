@@ -218,7 +218,6 @@ const handleInstall = async () => {
 
     if (isAccepted) {
       showInstallBanner.value = false
-      localStorage.removeItem('pwa-install-dismissed')
     }
 
     deferredPrompt.value = null
