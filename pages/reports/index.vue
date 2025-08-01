@@ -225,14 +225,7 @@
         @verified="handleReportVerified"
       />
 
-      <!-- Edit Report Modal -->
-      <EditReportModal
-        v-if="showEditModal && selectedReport"
-        :report="selectedReport"
-        :data-store="dataStore"
-        @close="showEditModal = false"
-        @report-updated="handleReportUpdated"
-      />
+
     </AppLayout>
   </div>
 </template>
