@@ -77,64 +77,111 @@
 <script setup>
 import { Download, X, RefreshCw } from 'lucide-vue-next'
 
-const { isInstalled, canInstall, needsUpdate, isOnline, installPWA, initPWA } = usePWA()
+// Safely initialize PWA composable
+const pwaComposable = usePWA()
+const { isInstalled, canInstall, needsUpdate, isOnline, installPWA, initPWA } = pwaComposable
+
 const showInstallBanner = ref(false)
+const isClientMounted = ref(false)
 
 const statusText = computed(() => {
-  if (!isOnline.value) {
-    return 'Modo offline'
-  } else if (isInstalled.value) {
-    return 'App instalado'
-  } else if (canInstall.value) {
-    return 'App disponível para instalação'
-  } else {
+  if (!isClientMounted.value) {
+    return 'Carregando...'
+  }
+
+  try {
+    if (!unref(isOnline)) {
+      return 'Modo offline'
+    } else if (unref(isInstalled)) {
+      return 'App instalado'
+    } else if (unref(canInstall)) {
+      return 'App disponível para instalação'
+    } else {
+      return 'Navegador web'
+    }
+  } catch (error) {
+    console.warn('Error in statusText computed:', error)
     return 'Navegador web'
   }
 })
 
 // Auto-show install banner
 const setupAutoInstall = () => {
-  watch(canInstall, (newVal) => {
-    if (newVal && !isInstalled.value) {
-      setTimeout(() => {
-        const dismissed = localStorage.getItem('pwa-install-dismissed')
-        const lastShown = localStorage.getItem('pwa-banner-last-shown')
-        const now = Date.now()
+  if (!process.client) return
 
-        // Show if never dismissed or if 24 hours have passed
-        if (!dismissed || (lastShown && now - parseInt(lastShown) > 24 * 60 * 60 * 1000)) {
-          showInstallBanner.value = true
-          localStorage.setItem('pwa-banner-last-shown', now.toString())
-        }
-      }, 3000) // Show after 3 seconds
-    }
-  })
+  try {
+    watch(canInstall, (newVal) => {
+      if (newVal && !unref(isInstalled)) {
+        setTimeout(() => {
+          if (!process.client) return
+
+          const dismissed = localStorage.getItem('pwa-install-dismissed')
+          const lastShown = localStorage.getItem('pwa-banner-last-shown')
+          const now = Date.now()
+
+          // Show if never dismissed or if 24 hours have passed
+          if (!dismissed || (lastShown && now - parseInt(lastShown) > 24 * 60 * 60 * 1000)) {
+            showInstallBanner.value = true
+            localStorage.setItem('pwa-banner-last-shown', now.toString())
+          }
+        }, 3000) // Show after 3 seconds
+      }
+    })
+  } catch (error) {
+    console.warn('Error setting up auto install:', error)
+  }
 }
 
 // Install PWA with banner management
 const handleInstall = async () => {
-  const success = await installPWA()
-  if (success) {
-    showInstallBanner.value = false
-    localStorage.removeItem('pwa-install-dismissed')
+  if (!process.client) return
+
+  try {
+    const success = await installPWA()
+    if (success) {
+      showInstallBanner.value = false
+      localStorage.removeItem('pwa-install-dismissed')
+    }
+  } catch (error) {
+    console.error('Error handling install:', error)
   }
 }
 
 // Dismiss banner
 const dismissBanner = () => {
-  showInstallBanner.value = false
-  localStorage.setItem('pwa-install-dismissed', 'true')
+  if (!process.client) return
+
+  try {
+    showInstallBanner.value = false
+    localStorage.setItem('pwa-install-dismissed', 'true')
+  } catch (error) {
+    console.warn('Error dismissing banner:', error)
+  }
 }
 
 // Update app
 const updateApp = () => {
   if (process.client) {
-    window.location.reload()
+    try {
+      window.location.reload()
+    } catch (error) {
+      console.error('Error updating app:', error)
+    }
   }
 }
 
 onMounted(() => {
-  initPWA()
-  setupAutoInstall()
+  isClientMounted.value = true
+
+  nextTick(() => {
+    try {
+      if (initPWA && typeof initPWA === 'function') {
+        initPWA()
+      }
+      setupAutoInstall()
+    } catch (error) {
+      console.error('Error in onMounted:', error)
+    }
+  })
 })
 </script>
