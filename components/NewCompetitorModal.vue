@@ -128,6 +128,12 @@ import { X } from 'lucide-vue-next'
 const emit = defineEmits(['close', 'competitor-created'])
 
 const { $pinia } = useNuxtApp()
+const authStore = useAuthStore($pinia)
+
+// Check if user is admin
+if (authStore.user?.role !== 'admin') {
+  throw new Error('Acesso negado: apenas administradores podem criar concorrentes')
+}
 const dataStore = useDataStore($pinia)
 const translationStore = useTranslationStore($pinia)
 
