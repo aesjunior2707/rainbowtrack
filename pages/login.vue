@@ -1,7 +1,7 @@
 <template>
-  <div class="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary-600 to-secondary-500">
-    <div class="max-w-md w-full mx-4">
-      <div class="bg-white rounded-lg shadow-xl p-8">
+  <div class="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary-600 to-secondary-500 px-4 py-8 safe-left safe-right safe-top safe-bottom">
+    <div class="max-w-md w-full">
+      <div class="bg-white rounded-xl shadow-xl p-6 sm:p-8">
         <div class="text-center mb-8">
           <h1 class="text-3xl font-bold text-primary-600 mb-2 leading-tight">
             <div>Rainbow</div>
@@ -20,8 +20,9 @@
             <input
               v-model="username"
               type="text"
-              class="input-field"
+              class="input-field mobile-tap"
               :placeholder="t('auth.username')"
+              autocomplete="username"
               required
             />
           </div>
@@ -33,25 +34,26 @@
             <input
               v-model="password"
               type="password"
-              class="input-field"
+              class="input-field mobile-tap"
               :placeholder="t('auth.password')"
+              autocomplete="current-password"
               required
             />
           </div>
 
           <div class="flex items-center justify-between">
-            <label class="flex items-center">
-              <input type="checkbox" class="mr-2" />
+            <label class="flex items-center touch-target">
+              <input type="checkbox" class="mr-3 w-4 h-4" />
               <span class="text-sm text-gray-600">{{ t('auth.remember') }}</span>
             </label>
-            <a href="#" class="text-sm text-primary-600 hover:text-primary-500">
+            <a href="#" class="text-sm text-primary-600 hover:text-primary-500 touch-target py-2 px-1">
               {{ t('auth.forgot_password') }}
             </a>
           </div>
 
           <button
             type="submit"
-            class="btn-primary w-full"
+            class="btn-primary w-full mobile-tap"
             :disabled="loading"
           >
             <span v-if="loading">{{ t('auth.loading') }}</span>
@@ -63,16 +65,7 @@
           </div>
         </form>
 
-        <div class="mt-8 text-center">
-          <div class="text-sm text-gray-600 mb-4">
-            {{ t('auth.demo_users') }}
-          </div>
-          <div class="text-xs text-gray-500 space-y-1">
-            <div>leonardo.campos / senha123</div>
-            <div>leonardo.campos2 / senha123</div>
-            <div>admin / admin123</div>
-          </div>
-        </div>
+        <!-- Dados de demo removidos para produção -->
 
         <div class="mt-6 flex justify-center">
           <LanguageSelector />
