@@ -427,22 +427,6 @@ const handleReportVerified = (reportId) => {
   }, 4000)
 }
 
-const handleEditReport = (report) => {
-  selectedReport.value = report
-  showEditModal.value = true
-}
 
-const handleReportUpdated = (updatedReport) => {
-  dataStore.updatePriceReport(updatedReport.id, updatedReport)
-  showEditModal.value = false
-  selectedReport.value = null
-
-  // Mostrar notificação de sucesso
-  successMessage.value = 'Captura editada com sucesso!'
-  showSuccessNotification.value = true
-  setTimeout(() => {
-    showSuccessNotification.value = false
-  }, 4000)
-}
 
 </script>
