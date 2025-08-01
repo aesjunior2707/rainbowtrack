@@ -8,6 +8,7 @@
             {{ t('competitors.title') }}
           </h1>
           <button
+            v-if="authStore.user?.role === 'admin'"
             @click="showNewCompetitorModal = true"
             class="btn-primary"
           >
