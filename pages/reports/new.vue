@@ -55,16 +55,12 @@
                   <User class="w-4 h-4 inline mr-1" />
                   Cliente
                 </label>
-                <select v-model="selectedCustomer" class="input-field" required>
-                  <option value="">Selecione o cliente</option>
-                  <option
-                    v-for="customer in availableCustomers"
-                    :key="customer.id"
-                    :value="customer.id"
-                  >
-                    {{ customer.name }} - {{ customer.city }}/{{ customer.state }}
-                  </option>
-                </select>
+                <input
+                  v-model="customerName"
+                  type="text"
+                  class="input-field"
+                  placeholder="Digite o nome do cliente (opcional)"
+                />
                 <p class="text-xs text-gray-500 mt-1">
                   Cliente que será visitado ou que forneceu a informação
                 </p>
