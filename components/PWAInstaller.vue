@@ -77,15 +77,13 @@
 <script setup>
 import { Download, X, RefreshCw } from 'lucide-vue-next'
 
-const deferredPrompt = ref(null)
-const isInstalled = ref(false)
-const canInstall = ref(false)
+const { isInstalled, canInstall, needsUpdate, isOnline, installPWA, initPWA } = usePWA()
 const showInstallBanner = ref(false)
-const needsUpdate = ref(false)
-const updateSW = ref(null)
 
 const statusText = computed(() => {
-  if (isInstalled.value) {
+  if (!isOnline.value) {
+    return 'Modo offline'
+  } else if (isInstalled.value) {
     return 'App instalado'
   } else if (canInstall.value) {
     return 'App disponível para instalação'
@@ -94,64 +92,31 @@ const statusText = computed(() => {
   }
 })
 
-// Check if app is installed
-const checkIfInstalled = () => {
-  if (process.client) {
-    // Check if running as PWA
-    isInstalled.value = 
-      window.matchMedia('(display-mode: standalone)').matches ||
-      window.navigator.standalone === true ||
-      document.referrer.includes('android-app://')
-  }
-}
+// Auto-show install banner
+const setupAutoInstall = () => {
+  watch(canInstall, (newVal) => {
+    if (newVal && !isInstalled.value) {
+      setTimeout(() => {
+        const dismissed = localStorage.getItem('pwa-install-dismissed')
+        const lastShown = localStorage.getItem('pwa-banner-last-shown')
+        const now = Date.now()
 
-// Handle PWA install prompt
-const setupInstallPrompt = () => {
-  if (process.client) {
-    window.addEventListener('beforeinstallprompt', (e) => {
-      e.preventDefault()
-      deferredPrompt.value = e
-      canInstall.value = true
-      
-      // Show banner automatically after 3 seconds if not installed
-      if (!isInstalled.value) {
-        setTimeout(() => {
-          const dismissed = localStorage.getItem('pwa-install-dismissed')
-          if (!dismissed) {
-            showInstallBanner.value = true
-          }
-        }, 3000)
-      }
-    })
-
-    // Handle successful installation
-    window.addEventListener('appinstalled', () => {
-      isInstalled.value = true
-      canInstall.value = false
-      showInstallBanner.value = false
-      deferredPrompt.value = null
-      
-      // Show success notification
-      showNotification('App instalado com sucesso!', 'success')
-    })
-  }
-}
-
-// Install PWA
-const installPWA = async () => {
-  if (!deferredPrompt.value) return
-
-  try {
-    const result = await deferredPrompt.value.prompt()
-    
-    if (result.outcome === 'accepted') {
-      showInstallBanner.value = false
-      canInstall.value = false
+        // Show if never dismissed or if 24 hours have passed
+        if (!dismissed || (lastShown && now - parseInt(lastShown) > 24 * 60 * 60 * 1000)) {
+          showInstallBanner.value = true
+          localStorage.setItem('pwa-banner-last-shown', now.toString())
+        }
+      }, 3000) // Show after 3 seconds
     }
-    
-    deferredPrompt.value = null
-  } catch (error) {
-    console.error('Error installing PWA:', error)
+  })
+}
+
+// Install PWA with banner management
+const handleInstall = async () => {
+  const success = await installPWA()
+  if (success) {
+    showInstallBanner.value = false
+    localStorage.removeItem('pwa-install-dismissed')
   }
 }
 
@@ -159,49 +124,17 @@ const installPWA = async () => {
 const dismissBanner = () => {
   showInstallBanner.value = false
   localStorage.setItem('pwa-install-dismissed', 'true')
-  
-  // Show again after 24 hours
-  setTimeout(() => {
-    localStorage.removeItem('pwa-install-dismissed')
-  }, 24 * 60 * 60 * 1000)
 }
 
 // Update app
 const updateApp = () => {
-  if (updateSW.value) {
-    updateSW.value()
-    needsUpdate.value = false
-  }
-}
-
-// Show notification (you can replace this with your notification component)
-const showNotification = (message, type = 'success') => {
-  // This would integrate with your existing notification system
-  console.log(`${type}: ${message}`)
-}
-
-// Setup service worker update detection
-const setupServiceWorker = () => {
-  if (process.client && 'serviceWorker' in navigator) {
-    // Listen for service worker updates
-    navigator.serviceWorker.addEventListener('controllerchange', () => {
-      window.location.reload()
-    })
-
-    // Check for updates periodically
-    setInterval(() => {
-      navigator.serviceWorker.getRegistration().then((reg) => {
-        if (reg) {
-          reg.update()
-        }
-      })
-    }, 60000) // Check every minute
+  if (process.client) {
+    window.location.reload()
   }
 }
 
 onMounted(() => {
-  checkIfInstalled()
-  setupInstallPrompt()
-  setupServiceWorker()
+  initPWA()
+  setupAutoInstall()
 })
 </script>
