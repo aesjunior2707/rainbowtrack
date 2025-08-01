@@ -54,7 +54,7 @@
         
         <button
           v-if="!isInstalled && canInstall"
-          @click="installPWA"
+          @click="handleInstall"
           class="flex items-center space-x-1 text-primary-600 hover:text-primary-700 font-medium"
         >
           <Download class="w-4 h-4" />
