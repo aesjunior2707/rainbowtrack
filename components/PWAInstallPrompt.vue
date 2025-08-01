@@ -71,7 +71,11 @@ const STORAGE_KEYS = {
 }
 
 // Use PWA composable
-const { isInstalled, canInstall } = usePWA()
+const { $pwa } = usePWA()
+
+// Create reactive references to PWA state
+const isInstalled = computed(() => $pwa?.isInstalled || false)
+const canInstall = computed(() => $pwa?.canInstall || false)
 
 onMounted(() => {
   checkInstallability()
