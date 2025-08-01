@@ -105,40 +105,57 @@
       <!-- Mobile Navigation -->
       <Transition
         enter-active-class="transition-transform duration-300 ease-out"
-        enter-from-class="-translate-y-full"
-        enter-to-class="translate-y-0"
+        enter-from-class="translate-x-full"
+        enter-to-class="translate-x-0"
         leave-active-class="transition-transform duration-200 ease-in"
-        leave-from-class="translate-y-0"
-        leave-to-class="-translate-y-full"
+        leave-from-class="translate-x-0"
+        leave-to-class="translate-x-full"
       >
-        <div v-if="mobileMenuOpen" class="md:hidden bg-white border-t shadow-xl z-50 fixed top-16 left-0 right-0 max-h-[calc(100vh-4rem)] overflow-y-auto">
-          <div class="px-6 pt-6 pb-6 space-y-3 safe-bottom">
-            <NuxtLink
-              v-for="item in navigation"
-              :key="item.name"
-              :to="item.href"
-              @click="mobileMenuOpen = false"
-              class="flex items-center px-5 py-4 rounded-xl text-lg font-medium text-gray-700 hover:text-primary-600 hover:bg-primary-50 nav-item mobile-tap touch-target transition-colors mobile-menu-item"
-              :class="{ 'text-primary-600 bg-primary-50 font-semibold': $route.path === item.href }"
-            >
-              <component :is="item.icon" class="w-6 h-6 mr-4 flex-shrink-0" />
-              {{ t(item.nameKey) }}
-            </NuxtLink>
-
-            <!-- Mobile User Info - Simplified -->
-            <div class="mt-6 pt-6 border-t border-gray-200">
-              <div class="mb-4 px-2">
-                <p class="text-sm font-medium text-gray-900">{{ authStore.user?.name }}</p>
-                <p class="text-xs text-gray-500">{{ authStore.user?.email }}</p>
-                <p class="text-xs text-primary-600 font-medium mt-1">
-                  Região: {{ authStore.user?.defaultRegion }}
-                </p>
+        <div v-if="mobileMenuOpen" class="md:hidden bg-white shadow-xl z-50 fixed top-16 right-0 bottom-0 w-80 max-w-[85vw] overflow-y-auto">
+          <div class="flex flex-col h-full">
+            <!-- User Info at Top -->
+            <div class="bg-gradient-to-r from-primary-600 to-primary-700 px-6 py-6 text-white">
+              <div class="flex items-center space-x-3">
+                <div class="w-12 h-12 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
+                  <span class="text-white text-lg font-bold">
+                    {{ authStore.user?.name.charAt(0) }}
+                  </span>
+                </div>
+                <div class="flex-1 min-w-0">
+                  <p class="font-semibold text-white truncate">{{ authStore.user?.name }}</p>
+                  <p class="text-primary-100 text-sm truncate">{{ authStore.user?.email }}</p>
+                  <p class="text-primary-200 text-xs mt-1">
+                    <MapPin class="w-3 h-3 inline mr-1" />
+                    {{ authStore.user?.defaultRegion }}
+                  </p>
+                </div>
               </div>
+            </div>
+
+            <!-- Navigation Items -->
+            <div class="flex-1 px-4 py-6">
+              <nav class="space-y-2">
+                <NuxtLink
+                  v-for="item in navigation"
+                  :key="item.name"
+                  :to="item.href"
+                  @click="mobileMenuOpen = false"
+                  class="flex items-center px-4 py-3 rounded-lg text-gray-700 hover:text-primary-600 hover:bg-primary-50 transition-colors duration-200 mobile-tap"
+                  :class="{ 'text-primary-600 bg-primary-50 font-semibold': $route.path === item.href }"
+                >
+                  <component :is="item.icon" class="w-5 h-5 mr-3 flex-shrink-0" />
+                  <span class="font-medium">{{ t(item.nameKey) }}</span>
+                </NuxtLink>
+              </nav>
+            </div>
+
+            <!-- Logout Button at Bottom -->
+            <div class="border-t border-gray-200 p-4">
               <button
                 @click="handleLogout"
-                class="w-full flex items-center px-5 py-4 text-base text-red-600 hover:bg-red-50 rounded-xl nav-item mobile-tap touch-target transition-colors font-medium"
+                class="w-full flex items-center justify-center px-4 py-3 text-red-600 hover:bg-red-50 rounded-lg transition-colors duration-200 font-medium mobile-tap"
               >
-                <LogOut class="w-6 h-6 mr-4" />
+                <LogOut class="w-5 h-5 mr-2" />
                 {{ t('auth.logout') }}
               </button>
             </div>
@@ -160,14 +177,15 @@
 </template>
 
 <script setup>
-import { 
-  Home, 
-  FileText, 
-  Package, 
+import {
+  Home,
+  FileText,
+  Package,
   Building2,
-  ChevronDown, 
-  LogOut, 
-  Menu 
+  ChevronDown,
+  LogOut,
+  Menu,
+  MapPin
 } from 'lucide-vue-next'
 
 const { $pinia } = useNuxtApp()
