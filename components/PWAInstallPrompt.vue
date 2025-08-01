@@ -10,7 +10,7 @@
     >
       <div
         v-if="showPrompt"
-        class="fixed inset-x-0 bottom-0 z-50 p-4 bg-gradient-to-r from-primary-600 to-primary-700 text-white shadow-2xl border-t-4 border-primary-400"
+        class="fixed inset-x-0 bottom-0 z-notification p-4 bg-gradient-to-r from-primary-600 to-primary-700 text-white shadow-2xl border-t-4 border-primary-400 safe-bottom"
       >
         <div class="max-w-md mx-auto">
           <div class="flex items-start space-x-4">
