@@ -305,11 +305,6 @@ const getCompetitorName = (competitorId) => {
   return competitor ? competitor.name : 'Concorrente Desconhecido'
 }
 
-const getCustomerName = (customerId) => {
-  const customer = dataStore.getCustomerById(customerId)
-  return customer ? customer.name : 'Cliente Desconhecido'
-}
-
 const getProductName = (productId) => {
   const product = dataStore.getProductById(productId)
   return product ? product.name : 'Produto Desconhecido'
