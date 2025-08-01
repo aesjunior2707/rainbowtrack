@@ -1,26 +1,17 @@
 export default defineNuxtRouteMiddleware((to) => {
+  // Simplified PWA middleware to prevent errors during initialization
   if (process.client) {
-    // Check if app was opened from PWA
-    const urlParams = new URLSearchParams(window.location.search)
-    const isPWALaunch = urlParams.get('pwa') === '1'
-    
-    if (isPWALaunch) {
-      console.log('🚀 App launched as PWA!')
-      
-      // Store PWA usage for analytics
-      if (typeof localStorage !== 'undefined') {
-        localStorage.setItem('pwa-launches', 
-          (parseInt(localStorage.getItem('pwa-launches') || '0') + 1).toString()
-        )
-      }
-    }
+    try {
+      // Check if app was opened from PWA
+      const urlParams = new URLSearchParams(window.location.search)
+      const isPWALaunch = urlParams.get('pwa') === '1'
 
-    // Track PWA display mode
-    const displayMode = window.matchMedia('(display-mode: standalone)').matches 
-      ? 'standalone' 
-      : 'browser'
-    
-    // You can send this to analytics or use for app behavior
-    console.log(`📱 Display mode: ${displayMode}`)
+      if (isPWALaunch) {
+        console.log('🚀 App launched as PWA!')
+      }
+    } catch (error) {
+      // Silently handle any middleware errors
+      console.warn('PWA middleware error:', error)
+    }
   }
 })
