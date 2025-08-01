@@ -10,7 +10,7 @@
       leave-to-class="translate-y-full opacity-0"
     >
       <div
-        v-if="isClientMounted && showInstallBanner && !unref(isInstalled)"
+        v-if="isClientMounted && !unref(isInstalled)"
         class="fixed bottom-0 left-0 right-0 bg-gradient-to-r from-primary-600 to-primary-700 text-white p-4 shadow-lg z-50"
       >
         <div class="max-w-md mx-auto flex items-center justify-between">
