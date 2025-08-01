@@ -47,13 +47,13 @@
         <div class="flex items-center space-x-2">
           <div
             class="w-2 h-2 rounded-full"
-            :class="isInstalled ? 'bg-green-500' : 'bg-yellow-500'"
+            :class="isClientMounted && unref(isInstalled) ? 'bg-green-500' : 'bg-yellow-500'"
           ></div>
           <span>{{ statusText }}</span>
         </div>
-        
+
         <button
-          v-if="!isInstalled && canInstall"
+          v-if="isClientMounted && !unref(isInstalled) && unref(canInstall)"
           @click="handleInstall"
           class="flex items-center space-x-1 text-primary-600 hover:text-primary-700 font-medium"
         >
@@ -62,7 +62,7 @@
         </button>
 
         <button
-          v-if="needsUpdate"
+          v-if="isClientMounted && unref(needsUpdate)"
           @click="updateApp"
           class="flex items-center space-x-1 text-blue-600 hover:text-blue-700 font-medium"
         >
