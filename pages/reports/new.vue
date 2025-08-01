@@ -355,19 +355,15 @@ const showNewCompetitorModal = ref(false)
 const showProductModal = ref(false)
 
 const handleProductSelected = (productData) => {
-  console.log('Produto selecionado:', productData)
-
   // Check if product already exists
   const existingIndex = selectedProducts.value.findIndex(
     item => item.product.id === productData.product.id
   )
 
   if (existingIndex >= 0) {
-    console.log('Atualizando produto existente no índice:', existingIndex)
     // Update existing product price
     selectedProducts.value[existingIndex].competitorPrice = productData.competitorPrice
   } else {
-    console.log('Adicionando novo produto')
     // Add new product
     selectedProducts.value.push({
       product: productData.product,
@@ -375,7 +371,6 @@ const handleProductSelected = (productData) => {
     })
   }
 
-  console.log('Lista de produtos após seleção:', selectedProducts.value)
   showProductModal.value = false
 }
 
