@@ -3,7 +3,7 @@ import { defineStore } from 'pinia'
 export const useDataStore = defineStore('data', {
   state: () => ({
     customers: [],
-    nextReportId: 7, // Track next available ID (starts at 7 since we have 6 initial reports)
+    nextReportId: 8, // Track next available ID (starts at 8 since we have 7 initial reports)
 
     competitors: [
       {
