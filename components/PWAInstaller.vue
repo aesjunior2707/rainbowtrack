@@ -175,8 +175,9 @@ const setupAutoInstall = () => {
   if (!process.client) return
 
   try {
-    watch(canInstall, (newVal) => {
-      if (newVal && !unref(isInstalled)) {
+    // Watch for deferred prompt availability
+    watch(deferredPrompt, (newPrompt) => {
+      if (newPrompt && !unref(isInstalled)) {
         setTimeout(() => {
           if (!process.client) return
 
@@ -191,6 +192,14 @@ const setupAutoInstall = () => {
             localStorage.setItem('pwa-banner-last-shown', now.toString())
           }
         }, 10000) // Show after 10 seconds (less intrusive)
+      }
+    })
+
+    // Also watch canInstall from the official composable
+    watch(canInstall, (newVal) => {
+      if (newVal && !unref(isInstalled)) {
+        // Just log for debugging, main logic is handled by deferredPrompt watch
+        console.log('PWA can be installed via official API')
       }
     })
   } catch (error) {
