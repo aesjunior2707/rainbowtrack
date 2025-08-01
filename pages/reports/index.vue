@@ -181,14 +181,14 @@
                   >
                     <Eye class="w-4 h-4" />
                   </button>
-                  <button
+                  <NuxtLink
                     v-if="isAdmin || report.reportedBy === authStore.user?.id"
-                    @click="handleEditReport(report)"
+                    :to="`/reports/edit/${report.id}`"
                     class="p-1.5 text-gray-500 hover:text-gray-700 hover:bg-gray-200 rounded transition-colors"
                     title="Editar"
                   >
                     <Edit class="w-4 h-4" />
-                  </button>
+                  </NuxtLink>
                 </div>
               </div>
             </div>
