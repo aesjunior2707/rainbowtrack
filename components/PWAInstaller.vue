@@ -93,9 +93,10 @@
 <script setup>
 import { Download, X, RefreshCw } from 'lucide-vue-next'
 
-// Safely initialize PWA composable
-const pwaComposable = usePWA()
-const { isInstalled, canInstall, needsUpdate, isOnline, installPWA, initPWA } = pwaComposable
+// Use the official @vite-pwa/nuxt composable
+const { isInstalled, canInstall, needsUpdate, isOnline, updateServiceWorker } = usePWA()
+
+const deferredPrompt = ref<any>(null)
 
 const showInstallBanner = ref(false)
 const isClientMounted = ref(false)
