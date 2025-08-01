@@ -260,7 +260,7 @@ export const useDataStore = defineStore('data', {
       {
         id: 6,
         competitorId: 2,
-        reportDate: '2024-01-20',
+        reportDate: '2025-01-31',
         reportedBy: 1,
         notes: 'Cotação completa com múltiplos produtos para análise competitiva',
         verified: false,
