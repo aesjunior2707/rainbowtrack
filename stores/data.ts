@@ -250,12 +250,22 @@ export const useDataStore = defineStore('data', {
     },
 
     addPriceReport(report: any) {
+      console.log('Store: Adicionando relatório', {
+        id: this.nextReportId,
+        productId: report.productId,
+        competitorPrice: report.competitorPrice
+      })
+
       const newReport = {
         ...report,
         id: this.nextReportId++,
         verified: false
       }
       this.priceReports.push(newReport)
+
+      console.log('Store: Relatório adicionado. Total de relatórios:', this.priceReports.length)
+      console.log('Store: Próximo ID será:', this.nextReportId)
+
       return newReport
     },
 
