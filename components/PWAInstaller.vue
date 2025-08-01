@@ -43,23 +43,39 @@
 
     <!-- PWA Status in Footer -->
     <div class="mt-6 pt-4 border-t border-gray-200">
+      <!-- Install Available Card -->
+      <div
+        v-if="isClientMounted && !unref(isInstalled) && unref(canInstall)"
+        class="mb-4 bg-gradient-to-r from-primary-50 to-secondary-50 border border-primary-200 rounded-lg p-4"
+      >
+        <div class="flex items-center justify-between">
+          <div class="flex items-center space-x-3">
+            <div class="w-10 h-10 bg-primary-600 rounded-lg flex items-center justify-center">
+              <Download class="w-5 h-5 text-white" />
+            </div>
+            <div>
+              <h3 class="font-semibold text-primary-900">Instalar Rainbow Track</h3>
+              <p class="text-sm text-primary-700">Tenha acesso rápido sem abrir o navegador</p>
+            </div>
+          </div>
+          <button
+            @click="handleInstall"
+            class="bg-primary-600 text-white px-6 py-2 rounded-lg font-medium hover:bg-primary-700 transition-colors shadow-sm"
+          >
+            Instalar
+          </button>
+        </div>
+      </div>
+
+      <!-- Regular Status Row -->
       <div class="flex items-center justify-center space-x-4 text-sm text-gray-500">
         <div class="flex items-center space-x-2">
           <div
             class="w-2 h-2 rounded-full"
-            :class="isClientMounted && unref(isInstalled) ? 'bg-green-500' : 'bg-yellow-500'"
+            :class="isClientMounted && unref(isInstalled) ? 'bg-green-500' : (isClientMounted && unref(canInstall) ? 'bg-primary-500' : 'bg-yellow-500')"
           ></div>
           <span>{{ statusText }}</span>
         </div>
-
-        <button
-          v-if="isClientMounted && !unref(isInstalled) && unref(canInstall)"
-          @click="handleInstall"
-          class="flex items-center space-x-1 text-primary-600 hover:text-primary-700 font-medium"
-        >
-          <Download class="w-4 h-4" />
-          <span>Instalar App</span>
-        </button>
 
         <button
           v-if="isClientMounted && unref(needsUpdate)"
