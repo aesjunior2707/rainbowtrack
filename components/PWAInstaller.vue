@@ -122,6 +122,24 @@ const statusText = computed(() => {
   }
 })
 
+// Setup install prompt event listener
+const setupInstallPrompt = () => {
+  if (!process.client) return
+
+  try {
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault()
+      deferredPrompt.value = e
+    })
+
+    window.addEventListener('appinstalled', () => {
+      deferredPrompt.value = null
+    })
+  } catch (error) {
+    console.warn('Error setting up install prompt:', error)
+  }
+}
+
 // Auto-show install banner
 const setupAutoInstall = () => {
   if (!process.client) return
