@@ -470,43 +470,36 @@ const testMultipleReports = () => {
 const handleSubmit = () => {
   console.log('=== INÍCIO DO SALVAMENTO ===')
   console.log('Produtos selecionados:', selectedProducts.value.length)
-  console.log('Lista de produtos:', selectedProducts.value)
 
   if (selectedProducts.value.length === 0) {
     console.error('Nenhum produto selecionado!')
     return
   }
 
-  // Create a report for each selected product
-  selectedProducts.value.forEach((item, index) => {
-    console.log(`Salvando produto ${index + 1}/${selectedProducts.value.length}:`, item.product.name, 'Preço:', item.competitorPrice)
-
-    const report = {
+  // Create single report with multiple products
+  const report = {
+    competitorId: selectedCompetitor.value,
+    reportDate: reportDate.value,
+    reportedBy: authStore.user.id,
+    notes: notes.value,
+    region: region.value || 'Não informado',
+    state: state.value,
+    paymentCondition: paymentCondition.value,
+    paymentMethod: paymentMethod.value,
+    currencyId: currency.value,
+    products: selectedProducts.value.map(item => ({
       productId: item.product.id,
-      competitorId: selectedCompetitor.value,
-      competitorPrice: item.competitorPrice,
-      reportDate: reportDate.value,
-      reportedBy: authStore.user.id,
-      notes: notes.value,
-      region: region.value || 'Não informado',
-      state: state.value,
-      paymentCondition: paymentCondition.value,
-      paymentMethod: paymentMethod.value,
-      currencyId: currency.value
-    }
+      competitorPrice: item.competitorPrice
+    }))
+  }
 
-    console.log('Relatório criado:', report)
-    const savedReport = dataStore.addPriceReport(report)
-    console.log('Relatório salvo com ID:', savedReport.id)
-  })
-
-  console.log('Total de relatórios após salvamento:', dataStore.priceReports.length)
+  console.log('Captura criada:', report)
+  const savedReport = dataStore.addPriceReport(report)
+  console.log('Captura salva com ID:', savedReport.id)
+  console.log('Total de capturas após salvamento:', dataStore.priceReports.length)
   console.log('=== FIM DO SALVAMENTO ===')
 
-  // Aguardar um pouco antes de navegar para garantir persistência
-  setTimeout(() => {
-    navigateTo('/reports')
-  }, 500)
+  navigateTo('/reports')
 }
 
 // Set default date to today and user's default region
