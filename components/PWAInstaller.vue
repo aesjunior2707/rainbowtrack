@@ -135,12 +135,13 @@ const setupAutoInstall = () => {
           const lastShown = localStorage.getItem('pwa-banner-last-shown')
           const now = Date.now()
 
-          // Show if never dismissed or if 24 hours have passed
-          if (!dismissed || (lastShown && now - parseInt(lastShown) > 24 * 60 * 60 * 1000)) {
+          // Show banner only if never dismissed and after 10 seconds of use
+          // Or if 48 hours have passed since last shown (less intrusive)
+          if (!dismissed || (lastShown && now - parseInt(lastShown) > 48 * 60 * 60 * 1000)) {
             showInstallBanner.value = true
             localStorage.setItem('pwa-banner-last-shown', now.toString())
           }
-        }, 3000) // Show after 3 seconds
+        }, 10000) // Show after 10 seconds (less intrusive)
       }
     })
   } catch (error) {
