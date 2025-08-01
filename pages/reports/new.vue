@@ -17,7 +17,7 @@
         </div>
 
         <form @submit.prevent="handleSubmit" class="space-y-6">
-          <!-- Competitor Selection -->
+          <!-- Competitor and Customer Selection -->
           <div class="card p-6">
             <h2 class="text-lg font-semibold text-gray-900 mb-4">
               Informações Básicas
@@ -48,6 +48,25 @@
                     Novo
                   </button>
                 </div>
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">
+                  Cliente
+                </label>
+                <select v-model="selectedCustomer" class="input-field" required>
+                  <option value="">Selecione o cliente</option>
+                  <option
+                    v-for="customer in availableCustomers"
+                    :key="customer.id"
+                    :value="customer.id"
+                  >
+                    {{ customer.name }} - {{ customer.city }}/{{ customer.state }}
+                  </option>
+                </select>
+                <p class="text-xs text-gray-500 mt-1">
+                  Cliente que será visitado ou que forneceu a informação
+                </p>
               </div>
             </div>
           </div>
