@@ -102,9 +102,7 @@
               <Package class="w-5 h-5 inline mr-2" />
               {{ t('dashboard.products') }}
             </NuxtLink>
-            <ClientOnly>
-              <PWAInstallButton text="Instalar App" />
-            </ClientOnly>
+
           </div>
         </div>
       </div>
