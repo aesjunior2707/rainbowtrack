@@ -200,12 +200,17 @@ const dismissBanner = () => {
 }
 
 // Update app
-const updateApp = () => {
+const updateApp = async () => {
   if (process.client) {
     try {
-      window.location.reload()
+      if (updateServiceWorker) {
+        await updateServiceWorker()
+      } else {
+        window.location.reload()
+      }
     } catch (error) {
       console.error('Error updating app:', error)
+      window.location.reload()
     }
   }
 }
