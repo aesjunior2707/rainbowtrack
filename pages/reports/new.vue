@@ -503,7 +503,10 @@ const handleSubmit = () => {
   console.log('Total de relatórios após salvamento:', dataStore.priceReports.length)
   console.log('=== FIM DO SALVAMENTO ===')
 
-  navigateTo('/reports')
+  // Aguardar um pouco antes de navegar para garantir persistência
+  setTimeout(() => {
+    navigateTo('/reports')
+  }, 500)
 }
 
 // Set default date to today and user's default region
