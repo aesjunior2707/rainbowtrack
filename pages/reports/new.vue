@@ -419,12 +419,6 @@ const availableCompetitors = computed(() => {
   return dataStore.getCompetitorsByUserRegion(userRegion, isAdmin)
 })
 
-const availableCustomers = computed(() => {
-  const userRegion = authStore.user?.defaultRegion
-  const isAdmin = authStore.user?.role === 'admin'
-  return dataStore.getCustomersByUserRegion(userRegion, isAdmin)
-})
-
 
 
 const canSubmit = computed(() => {
