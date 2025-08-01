@@ -298,6 +298,8 @@ export const useDataStore = defineStore('data', {
   actions: {
 
     addCompetitor(competitor: any) {
+      // Check if current user is admin (this would need to be passed or accessed somehow)
+      // For now, we'll add the validation at the component level
       const newCompetitor = {
         ...competitor,
         id: Math.max(...this.competitors.map(c => c.id)) + 1,
