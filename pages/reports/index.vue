@@ -94,19 +94,60 @@
                 <h3 class="text-lg font-bold text-gray-900 mb-1">
                   {{ getCompetitorName(report.competitorId) }}
                 </h3>
-                <div class="flex items-center space-x-2 text-sm text-gray-600">
-                  <MapPin class="w-4 h-4" />
-                  <span>{{ report.state || report.region }}</span>
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center space-x-2 text-sm text-gray-600">
+                    <MapPin class="w-4 h-4" />
+                    <span>{{ report.state || report.region }}</span>
+                  </div>
+                  <span class="text-xs text-primary-600 font-medium">
+                    {{ getProductCount(report) }} produto{{ getProductCount(report) > 1 ? 's' : '' }}
+                  </span>
                 </div>
               </div>
 
-              <!-- Preço -->
-              <div class="bg-gray-50 rounded-lg p-3 mb-3">
-                <div class="text-center">
-                  <p class="text-xs text-gray-600 mb-1">Preço Capturado</p>
-                  <p class="text-2xl font-bold text-primary-600">
-                    {{ getCurrencySymbol(report.currencyId) }} {{ formatPrice(report.competitorPrice) }}
-                  </p>
+              <!-- Lista de Produtos -->
+              <div class="space-y-2 mb-3">
+                <!-- Mostrar apenas os primeiros 2 produtos -->
+                <div
+                  v-for="(productItem, index) in getReportProducts(report).slice(0, 2)"
+                  :key="`${report.id}-${productItem.productId}-${index}`"
+                  class="bg-gray-50 rounded-lg p-3"
+                >
+                  <div class="flex justify-between items-center">
+                    <div class="flex-1">
+                      <h4 class="font-medium text-gray-900 text-sm">
+                        {{ getProductName(productItem.productId) }}
+                      </h4>
+                      <p class="text-xs text-gray-500">
+                        {{ getProductBrand(productItem.productId) }}
+                      </p>
+                    </div>
+                    <div class="text-right">
+                      <p class="font-bold text-primary-600">
+                        {{ getCurrencySymbol(report.currencyId) }} {{ formatPrice(productItem.competitorPrice) }}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Indicador de produtos restantes -->
+                <div v-if="getProductCount(report) > 2" class="bg-gradient-to-r from-gray-100 to-gray-50 rounded-lg p-3 border border-gray-200">
+                  <div class="flex items-center justify-center space-x-2">
+                    <Package class="w-4 h-4 text-gray-600" />
+                    <span class="text-sm font-medium text-gray-700">
+                      + {{ getProductCount(report) - 2 }} {{ getProductCount(report) - 2 === 1 ? 'produto adicional' : 'produtos adicionais' }}
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Total da Captura -->
+              <div v-if="getProductCount(report) > 1" class="bg-primary-50 border border-primary-200 rounded-lg p-3 mb-3">
+                <div class="flex justify-between items-center">
+                  <span class="text-sm font-medium text-primary-900">Total da Captura:</span>
+                  <span class="text-lg font-bold text-primary-600">
+                    {{ getCurrencySymbol(report.currencyId) }} {{ formatPrice(getTotalCaptureValue(report)) }}
+                  </span>
                 </div>
               </div>
 
@@ -140,14 +181,14 @@
                   >
                     <Eye class="w-4 h-4" />
                   </button>
-                  <button
+                  <NuxtLink
                     v-if="isAdmin || report.reportedBy === authStore.user?.id"
-                    @click="handleEditReport(report)"
+                    :to="`/reports/edit/${report.id}`"
                     class="p-1.5 text-gray-500 hover:text-gray-700 hover:bg-gray-200 rounded transition-colors"
                     title="Editar"
                   >
                     <Edit class="w-4 h-4" />
-                  </button>
+                  </NuxtLink>
                 </div>
               </div>
             </div>
@@ -184,20 +225,13 @@
         @verified="handleReportVerified"
       />
 
-      <!-- Edit Report Modal -->
-      <EditReportModal
-        v-if="showEditModal && selectedReport"
-        :report="selectedReport"
-        :data-store="dataStore"
-        @close="showEditModal = false"
-        @report-updated="handleReportUpdated"
-      />
+
     </AppLayout>
   </div>
 </template>
 
 <script setup>
-import { Plus, Eye, Edit, FileText, CheckCircle, Clock, MapPin, CreditCard, User } from 'lucide-vue-next'
+import { Plus, Eye, Edit, FileText, CheckCircle, Clock, MapPin, CreditCard, User, Package } from 'lucide-vue-next'
 
 definePageMeta({
   middleware: 'auth'
@@ -215,7 +249,6 @@ const filterCompetitor = ref('')
 const filterRegion = ref('')
 const filterVerified = ref('')
 const showVerifyModal = ref(false)
-const showEditModal = ref(false)
 const selectedReport = ref(null)
 const showSuccessNotification = ref(false)
 const successMessage = ref('')
@@ -233,9 +266,16 @@ const filteredReports = computed(() => {
   if (searchTerm.value) {
     const term = searchTerm.value.toLowerCase()
     reports = reports.filter(report => {
-      const product = getProductName(report.productId).toLowerCase()
+      // Search in competitor name
       const competitor = getCompetitorName(report.competitorId).toLowerCase()
-      return product.includes(term) || competitor.includes(term)
+      if (competitor.includes(term)) return true
+
+      // Search in product names (support both formats)
+      const products = getReportProducts(report)
+      return products.some(productItem => {
+        const productName = getProductName(productItem.productId).toLowerCase()
+        return productName.includes(term)
+      })
     })
   }
 
@@ -262,6 +302,36 @@ const getCompetitorName = (competitorId) => {
 const getProductName = (productId) => {
   const product = dataStore.getProductById(productId)
   return product ? product.name : 'Produto Desconhecido'
+}
+
+const getProductBrand = (productId) => {
+  const product = dataStore.getProductById(productId)
+  return product ? product.brand : 'Marca Desconhecida'
+}
+
+const getProductCount = (report) => {
+  // Support both old and new format
+  if (report.products && Array.isArray(report.products)) {
+    return report.products.length
+  }
+  return 1 // Old format has single product
+}
+
+const getReportProducts = (report) => {
+  // Support both old and new format
+  if (report.products && Array.isArray(report.products)) {
+    return report.products
+  }
+  // Convert old format to new format for display
+  return [{
+    productId: report.productId,
+    competitorPrice: report.competitorPrice
+  }]
+}
+
+const getTotalCaptureValue = (report) => {
+  const products = getReportProducts(report)
+  return products.reduce((total, product) => total + product.competitorPrice, 0)
 }
 
 const getCurrencySymbol = (currencyId) => {
@@ -364,22 +434,6 @@ const handleReportVerified = (reportId) => {
   }, 4000)
 }
 
-const handleEditReport = (report) => {
-  selectedReport.value = report
-  showEditModal.value = true
-}
 
-const handleReportUpdated = (updatedReport) => {
-  dataStore.updatePriceReport(updatedReport.id, updatedReport)
-  showEditModal.value = false
-  selectedReport.value = null
-
-  // Mostrar notificação de sucesso
-  successMessage.value = 'Captura editada com sucesso!'
-  showSuccessNotification.value = true
-  setTimeout(() => {
-    showSuccessNotification.value = false
-  }, 4000)
-}
 
 </script>

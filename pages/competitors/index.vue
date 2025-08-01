@@ -8,6 +8,7 @@
             {{ t('competitors.title') }}
           </h1>
           <button
+            v-if="authStore.user?.role === 'admin'"
             @click="showNewCompetitorModal = true"
             class="btn-primary"
           >
@@ -68,7 +69,7 @@
                   <span class="text-sm text-gray-500">{{ competitor.region }}</span>
                 </div>
               </div>
-              <div class="flex space-x-2">
+              <div v-if="authStore.user?.role === 'admin'" class="flex space-x-2">
                 <button
                   @click="handleEditCompetitor(competitor)"
                   class="text-gray-400 hover:text-gray-600 transition-colors"

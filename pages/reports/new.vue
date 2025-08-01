@@ -421,25 +421,28 @@ const handleCompetitorCreated = (competitor) => {
 }
 
 const handleSubmit = () => {
-  // Create a report for each selected product
-  selectedProducts.value.forEach(item => {
-    const report = {
+  if (selectedProducts.value.length === 0) {
+    return
+  }
+
+  // Create single report with multiple products
+  const report = {
+    competitorId: selectedCompetitor.value,
+    reportDate: reportDate.value,
+    reportedBy: authStore.user.id,
+    notes: notes.value,
+    region: region.value || 'Não informado',
+    state: state.value,
+    paymentCondition: paymentCondition.value,
+    paymentMethod: paymentMethod.value,
+    currencyId: currency.value,
+    products: selectedProducts.value.map(item => ({
       productId: item.product.id,
-      competitorId: selectedCompetitor.value,
-      competitorPrice: item.competitorPrice,
-      reportDate: reportDate.value,
-      reportedBy: authStore.user.id,
-      notes: notes.value,
-      region: region.value || 'Não informado',
-      state: state.value,
-      paymentCondition: paymentCondition.value,
-      paymentMethod: paymentMethod.value,
-      currencyId: currency.value
-    }
+      competitorPrice: item.competitorPrice
+    }))
+  }
 
-    dataStore.addPriceReport(report)
-  })
-
+  dataStore.addPriceReport(report)
   navigateTo('/reports')
 }
 

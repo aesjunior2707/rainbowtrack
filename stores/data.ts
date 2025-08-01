@@ -3,6 +3,7 @@ import { defineStore } from 'pinia'
 export const useDataStore = defineStore('data', {
   state: () => ({
     customers: [],
+    nextReportId: 8, // Track next available ID (starts at 8 since we have 7 initial reports)
 
     competitors: [
       {
@@ -163,25 +164,26 @@ export const useDataStore = defineStore('data', {
     priceReports: [
       {
         id: 1,
-        productId: 1,
-        customerId: 1,
         competitorId: 1,
-        competitorPrice: 142.50,
-        currencyId: 1,
         reportDate: '2024-01-15',
-        reportedBy: 1, // user ID
+        reportedBy: 1,
         notes: 'Cliente mencionou que está considerando trocar de fornecedor',
         verified: false,
         region: 'REG001',
         state: 'SP',
         paymentCondition: 'BOLETO_60',
-        paymentMethod: 'BOLETO'
+        paymentMethod: 'BOLETO',
+        currencyId: 1,
+        products: [
+          {
+            productId: 1,
+            competitorPrice: 142.50
+          }
+        ]
       },
       {
         id: 2,
-        productId: 4,
         competitorId: 2,
-        competitorPrice: 135.00,
         reportDate: '2024-01-12',
         reportedBy: 1,
         notes: 'Preço promocional válido até fim do mês',
@@ -189,13 +191,18 @@ export const useDataStore = defineStore('data', {
         region: 'REG001',
         state: 'GO',
         paymentCondition: 'A_VISTA',
-        paymentMethod: 'PIX'
+        paymentMethod: 'PIX',
+        currencyId: 1,
+        products: [
+          {
+            productId: 4,
+            competitorPrice: 135.00
+          }
+        ]
       },
       {
         id: 3,
-        productId: 7,
         competitorId: 3,
-        competitorPrice: 98.75,
         reportDate: '2024-01-10',
         reportedBy: 2,
         notes: 'Concorrente oferecendo desconto por volume',
@@ -203,13 +210,18 @@ export const useDataStore = defineStore('data', {
         region: 'REG002',
         state: 'MG',
         paymentCondition: 'POS_COLHEITA',
-        paymentMethod: 'TRANSFERENCIA'
+        paymentMethod: 'TRANSFERENCIA',
+        currencyId: 1,
+        products: [
+          {
+            productId: 7,
+            competitorPrice: 98.75
+          }
+        ]
       },
       {
         id: 4,
-        productId: 2,
         competitorId: 4,
-        competitorPrice: 89.90,
         reportDate: '2024-01-08',
         reportedBy: 1,
         notes: 'Preço competitivo, cliente satisfeito com qualidade',
@@ -217,13 +229,18 @@ export const useDataStore = defineStore('data', {
         region: 'REG001',
         state: 'PR',
         paymentCondition: 'BOLETO_90',
-        paymentMethod: 'BOLETO'
+        paymentMethod: 'BOLETO',
+        currencyId: 1,
+        products: [
+          {
+            productId: 2,
+            competitorPrice: 89.90
+          }
+        ]
       },
       {
         id: 5,
-        productId: 5,
         competitorId: 1,
-        competitorPrice: 78.50,
         reportDate: '2024-01-05',
         reportedBy: 2,
         notes: 'Produto similar, embalagem diferente',
@@ -231,7 +248,68 @@ export const useDataStore = defineStore('data', {
         region: 'REG002',
         state: 'RS',
         paymentCondition: 'BARTER',
-        paymentMethod: 'DOCUMENTO'
+        paymentMethod: 'DOCUMENTO',
+        currencyId: 1,
+        products: [
+          {
+            productId: 5,
+            competitorPrice: 78.50
+          }
+        ]
+      },
+      {
+        id: 6,
+        competitorId: 2,
+        reportDate: '2025-01-31',
+        reportedBy: 1,
+        notes: 'Cotação completa com múltiplos produtos para análise competitiva',
+        verified: false,
+        region: 'REG001',
+        state: 'SP',
+        paymentCondition: 'BOLETO_60',
+        paymentMethod: 'BOLETO',
+        currencyId: 1,
+        products: [
+          {
+            productId: 1,
+            competitorPrice: 145.75
+          },
+          {
+            productId: 2,
+            competitorPrice: 92.30
+          },
+          {
+            productId: 4,
+            competitorPrice: 138.90
+          },
+          {
+            productId: 7,
+            competitorPrice: 105.50
+          },
+          {
+            productId: 8,
+            competitorPrice: 67.80
+          }
+        ]
+      },
+      {
+        id: 7,
+        competitorId: 1,
+        reportDate: '2025-01-30',
+        reportedBy: 1,
+        notes: 'Captura recente para teste do dashboard',
+        verified: true,
+        region: 'REG001',
+        state: 'MG',
+        paymentCondition: 'A_VISTA',
+        paymentMethod: 'PIX',
+        currencyId: 1,
+        products: [
+          {
+            productId: 3,
+            competitorPrice: 156.90
+          }
+        ]
       }
     ]
   }),
@@ -239,6 +317,8 @@ export const useDataStore = defineStore('data', {
   actions: {
 
     addCompetitor(competitor: any) {
+      // Check if current user is admin (this would need to be passed or accessed somehow)
+      // For now, we'll add the validation at the component level
       const newCompetitor = {
         ...competitor,
         id: Math.max(...this.competitors.map(c => c.id)) + 1,
@@ -251,7 +331,7 @@ export const useDataStore = defineStore('data', {
     addPriceReport(report: any) {
       const newReport = {
         ...report,
-        id: Math.max(...this.priceReports.map(r => r.id)) + 1,
+        id: this.nextReportId++,
         verified: false
       }
       this.priceReports.push(newReport)
@@ -275,7 +355,13 @@ export const useDataStore = defineStore('data', {
     },
 
     getPriceReportsByProduct(productId: number) {
-      return this.priceReports.filter(r => r.productId === productId)
+      return this.priceReports.filter(r => {
+        // Support both old and new format
+        if (r.products && Array.isArray(r.products)) {
+          return r.products.some(p => p.productId === productId)
+        }
+        return r.productId === productId
+      })
     },
 
     getPriceReportsByCompetitor(competitorId: number) {
