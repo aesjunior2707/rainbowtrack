@@ -94,10 +94,10 @@
                 <h3 class="text-lg font-bold text-gray-900 mb-1">
                   {{ getCompetitorName(report.competitorId) }}
                 </h3>
-                <div v-if="report.customerId" class="mb-2">
+                <div v-if="report.customerName" class="mb-2">
                   <div class="flex items-center space-x-2 text-sm text-blue-600">
                     <User class="w-4 h-4" />
-                    <span class="font-medium">{{ getCustomerName(report.customerId) }}</span>
+                    <span class="font-medium">{{ report.customerName }}</span>
                   </div>
                 </div>
                 <div class="flex items-center justify-between">
