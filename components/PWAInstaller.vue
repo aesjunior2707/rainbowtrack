@@ -210,17 +210,25 @@ const setupAutoInstall = () => {
 
 // Install PWA with banner management
 const handleInstall = async () => {
-  if (!process.client || !deferredPrompt.value) return
+  if (!process.client) return
 
   try {
-    const result = await deferredPrompt.value.prompt()
-    const isAccepted = result.outcome === 'accepted'
+    if (deferredPrompt.value) {
+      // Usar o prompt nativo se disponível
+      const result = await deferredPrompt.value.prompt()
+      const isAccepted = result.outcome === 'accepted'
 
-    if (isAccepted) {
-      showInstallBanner.value = false
+      if (isAccepted) {
+        showInstallBanner.value = false
+      }
+      deferredPrompt.value = null
+    } else if (isIOS.value) {
+      // Para iOS, mostrar instruções
+      alert('Para instalar este app:\n\n1. Toque no botão de compartilhamento \n2. Selecione "Adicionar à Tela Inicial"\n3. Toque em "Adicionar"')
+    } else {
+      // Para outros navegadores, mostrar instruções gerais
+      alert('Para instalar este app:\n\n• Chrome: Menu > Instalar app\n• Firefox: Menu > Instalar\n• Edge: Menu > Apps > Instalar este site como app')
     }
-
-    deferredPrompt.value = null
   } catch (error) {
     console.error('Error handling install:', error)
   }
