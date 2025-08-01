@@ -249,9 +249,14 @@ export const useDataStore = defineStore('data', {
     },
 
     addPriceReport(report: any) {
+      // Get the next available ID based on current array length
+      const nextId = this.priceReports.length > 0
+        ? Math.max(...this.priceReports.map(r => r.id)) + 1
+        : 1
+
       const newReport = {
         ...report,
-        id: Math.max(...this.priceReports.map(r => r.id)) + 1,
+        id: nextId,
         verified: false
       }
       this.priceReports.push(newReport)
