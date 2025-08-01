@@ -455,6 +455,7 @@ const handleSubmit = () => {
   // Create single report with multiple products
   const report = {
     competitorId: selectedCompetitor.value,
+    customerId: selectedCustomer.value,
     reportDate: reportDate.value,
     reportedBy: authStore.user.id,
     notes: notes.value,
