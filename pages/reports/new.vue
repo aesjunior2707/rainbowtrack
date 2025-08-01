@@ -421,8 +421,14 @@ const handleCompetitorCreated = (competitor) => {
 }
 
 const handleSubmit = () => {
+  console.log('=== INÍCIO DO SALVAMENTO ===')
+  console.log('Produtos selecionados:', selectedProducts.value.length)
+  console.log('Lista de produtos:', selectedProducts.value)
+
   // Create a report for each selected product
-  selectedProducts.value.forEach(item => {
+  selectedProducts.value.forEach((item, index) => {
+    console.log(`Salvando produto ${index + 1}/${selectedProducts.value.length}:`, item.product.name, 'Preço:', item.competitorPrice)
+
     const report = {
       productId: item.product.id,
       competitorId: selectedCompetitor.value,
@@ -437,8 +443,13 @@ const handleSubmit = () => {
       currencyId: currency.value
     }
 
-    dataStore.addPriceReport(report)
+    console.log('Relatório criado:', report)
+    const savedReport = dataStore.addPriceReport(report)
+    console.log('Relatório salvo com ID:', savedReport.id)
   })
+
+  console.log('Total de relatórios após salvamento:', dataStore.priceReports.length)
+  console.log('=== FIM DO SALVAMENTO ===')
 
   navigateTo('/reports')
 }
