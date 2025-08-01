@@ -52,6 +52,7 @@
 
               <div>
                 <label class="block text-sm font-medium text-gray-700 mb-2">
+                  <User class="w-4 h-4 inline mr-1" />
                   Cliente
                 </label>
                 <select v-model="selectedCustomer" class="input-field" required>
