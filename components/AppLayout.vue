@@ -1,7 +1,7 @@
 <template>
   <div class="min-h-screen bg-gray-50 relative">
     <!-- Navigation -->
-    <nav class="bg-white shadow-sm border-b sticky top-0 z-40 safe-top">
+    <nav class="bg-white shadow-sm border-b sticky top-0 z-50 safe-top">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between items-center h-16">
           <!-- Logo -->
@@ -77,7 +77,8 @@
           <!-- Mobile menu button -->
           <button
             @click="mobileMenuOpen = !mobileMenuOpen"
-            class="md:hidden p-2 rounded-md text-gray-700 hover:text-primary-600 hover:bg-gray-100 touch-target"
+            class="md:hidden p-3 rounded-lg text-gray-700 hover:text-primary-600 hover:bg-gray-100 touch-target mobile-button transition-colors"
+            :aria-label="mobileMenuOpen ? 'Fechar menu' : 'Abrir menu'"
           >
             <Menu class="w-6 h-6" />
           </button>
@@ -86,7 +87,7 @@
 
       <!-- Mobile Navigation Overlay -->
       <Transition
-        enter-active-class="transition-opacity duration-200"
+        enter-active-class="transition-opacity duration-300"
         enter-from-class="opacity-0"
         enter-to-class="opacity-100"
         leave-active-class="transition-opacity duration-200"
@@ -95,8 +96,9 @@
       >
         <div
           v-if="mobileMenuOpen"
-          class="fixed inset-0 bg-black bg-opacity-25 z-20 md:hidden"
+          class="fixed inset-0 bg-black bg-opacity-40 z-40 md:hidden"
           @click="mobileMenuOpen = false"
+          @touchstart="mobileMenuOpen = false"
         />
       </Transition>
 
@@ -109,27 +111,34 @@
         leave-from-class="translate-y-0"
         leave-to-class="-translate-y-full"
       >
-        <div v-if="mobileMenuOpen" class="md:hidden bg-white border-t shadow-lg z-30 relative">
-          <div class="px-4 pt-4 pb-4 space-y-2 safe-bottom">
+        <div v-if="mobileMenuOpen" class="md:hidden bg-white border-t shadow-xl z-50 fixed top-16 left-0 right-0 max-h-[calc(100vh-4rem)] overflow-y-auto">
+          <div class="px-6 pt-6 pb-6 space-y-3 safe-bottom">
             <NuxtLink
               v-for="item in navigation"
               :key="item.name"
               :to="item.href"
               @click="mobileMenuOpen = false"
-              class="flex items-center px-4 py-3 rounded-xl text-base font-medium text-gray-700 hover:text-primary-600 hover:bg-primary-50 nav-item mobile-tap touch-target transition-colors"
+              class="flex items-center px-5 py-4 rounded-xl text-lg font-medium text-gray-700 hover:text-primary-600 hover:bg-primary-50 nav-item mobile-tap touch-target transition-colors mobile-menu-item"
               :class="{ 'text-primary-600 bg-primary-50 font-semibold': $route.path === item.href }"
             >
-              <component :is="item.icon" class="w-5 h-5 mr-3 flex-shrink-0" />
+              <component :is="item.icon" class="w-6 h-6 mr-4 flex-shrink-0" />
               {{ t(item.nameKey) }}
             </NuxtLink>
 
             <!-- Mobile User Info - Simplified -->
-            <div class="mt-4 pt-4 border-t border-gray-200">
+            <div class="mt-6 pt-6 border-t border-gray-200">
+              <div class="mb-4 px-2">
+                <p class="text-sm font-medium text-gray-900">{{ authStore.user?.name }}</p>
+                <p class="text-xs text-gray-500">{{ authStore.user?.email }}</p>
+                <p class="text-xs text-primary-600 font-medium mt-1">
+                  Região: {{ authStore.user?.defaultRegion }}
+                </p>
+              </div>
               <button
                 @click="handleLogout"
-                class="w-full flex items-center px-4 py-3 text-sm text-red-600 hover:bg-red-50 rounded-xl nav-item mobile-tap touch-target transition-colors"
+                class="w-full flex items-center px-5 py-4 text-base text-red-600 hover:bg-red-50 rounded-xl nav-item mobile-tap touch-target transition-colors font-medium"
               >
-                <LogOut class="w-4 h-4 mr-3" />
+                <LogOut class="w-6 h-6 mr-4" />
                 {{ t('auth.logout') }}
               </button>
             </div>
