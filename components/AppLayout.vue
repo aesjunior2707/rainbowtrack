@@ -98,7 +98,7 @@
           v-if="mobileMenuOpen"
           class="fixed inset-0 bg-black bg-opacity-50 z-40 md:hidden"
           @click="mobileMenuOpen = false"
-          @touchstart.prevent
+          @touchend="mobileMenuOpen = false"
         />
       </Transition>
 
@@ -111,7 +111,7 @@
         leave-from-class="translate-x-0"
         leave-to-class="translate-x-full"
       >
-        <div v-if="mobileMenuOpen" class="md:hidden bg-white shadow-xl z-50 fixed top-16 right-0 bottom-0 w-80 max-w-[85vw] overflow-y-auto">
+        <div v-if="mobileMenuOpen" class="md:hidden bg-white shadow-xl z-50 fixed top-16 right-0 bottom-0 w-80 max-w-[85vw] overflow-y-auto mobile-menu-container">
           <div class="flex flex-col h-full">
             <!-- User Info at Top -->
             <div class="bg-gradient-to-r from-primary-600 to-primary-700 px-6 py-6 text-white">
@@ -211,10 +211,25 @@ const handleLogout = async () => {
 
 // Close dropdowns when clicking outside and handle mobile menu
 onMounted(() => {
-  document.addEventListener('click', (e) => {
+  const handleClickOutside = (e) => {
+    // Close user menu if clicking outside
     if (!e.target.closest('.relative')) {
       showUserMenu.value = false
     }
+
+    // Close mobile menu if clicking outside the menu container
+    if (mobileMenuOpen.value && !e.target.closest('.mobile-menu-container') && !e.target.closest('.mobile-button')) {
+      mobileMenuOpen.value = false
+    }
+  }
+
+  document.addEventListener('click', handleClickOutside)
+  document.addEventListener('touchstart', handleClickOutside)
+
+  // Clean up event listeners
+  onUnmounted(() => {
+    document.removeEventListener('click', handleClickOutside)
+    document.removeEventListener('touchstart', handleClickOutside)
   })
 })
 

@@ -1,6 +1,6 @@
 <template>
-  <div class="fixed inset-0 bg-black bg-opacity-50 flex items-end justify-center z-50">
-    <div class="bg-white w-full max-w-md h-[90vh] rounded-t-2xl flex flex-col">
+  <div class="fixed inset-0 bg-black bg-opacity-50 flex items-end justify-center z-50" @click="$emit('close')">
+    <div class="bg-white w-full max-w-md h-[90vh] rounded-t-2xl flex flex-col" @click.stop>
       <!-- Header -->
       <div class="flex justify-between items-center p-4 border-b bg-white rounded-t-2xl sticky top-0 z-10">
         <h2 class="text-lg font-semibold text-gray-900">Selecionar Produto</h2>
