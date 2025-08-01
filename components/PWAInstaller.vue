@@ -152,13 +152,18 @@ const setupInstallPrompt = () => {
   if (!process.client) return
 
   try {
+    // Listen for the beforeinstallprompt event
     window.addEventListener('beforeinstallprompt', (e) => {
+      console.log('PWA install prompt available')
       e.preventDefault()
       deferredPrompt.value = e
     })
 
+    // Listen for successful installation
     window.addEventListener('appinstalled', () => {
+      console.log('PWA successfully installed')
       deferredPrompt.value = null
+      showInstallBanner.value = false
     })
   } catch (error) {
     console.warn('Error setting up install prompt:', error)
