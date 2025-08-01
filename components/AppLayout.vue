@@ -123,18 +123,11 @@
               {{ t(item.nameKey) }}
             </NuxtLink>
 
-            <!-- Mobile User Info -->
+            <!-- Mobile User Info - Simplified -->
             <div class="mt-4 pt-4 border-t border-gray-200">
-              <div class="px-4 py-2">
-                <p class="text-sm font-medium text-gray-900">{{ authStore.user?.name }}</p>
-                <p class="text-sm text-gray-500">{{ authStore.user?.email }}</p>
-                <p class="text-xs text-primary-600 font-medium mt-1">
-                  Região: {{ authStore.user?.defaultRegion }}
-                </p>
-              </div>
               <button
                 @click="handleLogout"
-                class="w-full flex items-center px-4 py-3 text-sm text-red-600 hover:bg-red-50 rounded-xl nav-item mobile-tap touch-target mt-2 transition-colors"
+                class="w-full flex items-center px-4 py-3 text-sm text-red-600 hover:bg-red-50 rounded-xl nav-item mobile-tap touch-target transition-colors"
               >
                 <LogOut class="w-4 h-4 mr-3" />
                 {{ t('auth.logout') }}

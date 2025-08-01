@@ -8,7 +8,6 @@
             {{ t('competitors.title') }}
           </h1>
           <button
-            v-if="authStore.user?.role === 'admin'"
             @click="showNewCompetitorModal = true"
             class="btn-primary"
           >
@@ -69,7 +68,7 @@
                   <span class="text-sm text-gray-500">{{ competitor.region }}</span>
                 </div>
               </div>
-              <div v-if="authStore.user?.role === 'admin'" class="flex space-x-2">
+              <div class="flex space-x-2">
                 <button
                   @click="handleEditCompetitor(competitor)"
                   class="text-gray-400 hover:text-gray-600 transition-colors"
@@ -184,7 +183,7 @@ const notificationMessage = ref('')
 
 const uniqueRegions = computed(() => {
   const userRegion = authStore.user?.defaultRegion
-  const isAdmin = authStore.user?.role === 'admin'
+  const isAdmin = true // Permite todos os usuários verem todos os concorrentes
   const availableCompetitors = dataStore.getCompetitorsByUserRegion(userRegion, isAdmin)
   const regions = [...new Set(availableCompetitors.map(c => c.region))]
   return regions.filter(Boolean)
@@ -193,7 +192,7 @@ const uniqueRegions = computed(() => {
 const filteredCompetitors = computed(() => {
   // Start with competitors filtered by user region/role
   const userRegion = authStore.user?.defaultRegion
-  const isAdmin = authStore.user?.role === 'admin'
+  const isAdmin = true // Permite todos os usuários verem todos os concorrentes
   let competitors = dataStore.getCompetitorsByUserRegion(userRegion, isAdmin)
 
   if (searchTerm.value) {

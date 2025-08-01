@@ -10,7 +10,7 @@
       leave-to-class="translate-y-full opacity-0"
     >
       <div
-        v-if="isClientMounted && showInstallBanner && !unref(isInstalled)"
+        v-if="isClientMounted && !unref(isInstalled) && !bannerDismissed"
         class="fixed bottom-0 left-0 right-0 bg-gradient-to-r from-primary-600 to-primary-700 text-white p-4 shadow-lg z-50"
       >
         <div class="max-w-md mx-auto flex items-center justify-between">
@@ -28,7 +28,7 @@
               @click="handleInstall"
               class="bg-white text-primary-600 px-4 py-2 rounded-lg text-sm font-medium hover:bg-primary-50 transition-colors"
             >
-              Instalar
+              {{ isIOS ? 'Como Instalar' : 'Instalar' }}
             </button>
             <button
               @click="dismissBanner"
@@ -113,6 +113,7 @@ const isOnline = ref(true)
 const deferredPrompt = ref(null)
 
 const showInstallBanner = ref(false)
+const bannerDismissed = ref(false)
 const isClientMounted = ref(false)
 
 // Check if it's iOS device
@@ -178,31 +179,11 @@ const setupAutoInstall = () => {
   if (!process.client) return
 
   try {
-    // Watch for deferred prompt availability
-    watch(deferredPrompt, (newPrompt) => {
-      if (newPrompt && !unref(isInstalled)) {
-        setTimeout(() => {
-          if (!process.client) return
-
-          const dismissed = localStorage.getItem('pwa-install-dismissed')
-          const lastShown = localStorage.getItem('pwa-banner-last-shown')
-          const now = Date.now()
-
-          // Show banner only if never dismissed and after 10 seconds of use
-          // Or if 48 hours have passed since last shown (less intrusive)
-          if (!dismissed || (lastShown && now - parseInt(lastShown) > 48 * 60 * 60 * 1000)) {
-            showInstallBanner.value = true
-            localStorage.setItem('pwa-banner-last-shown', now.toString())
-          }
-        }, 10000) // Show after 10 seconds (less intrusive)
-      }
-    })
-
-    // Also watch canInstall from the official composable
-    watch(canInstall, (newVal) => {
-      if (newVal && !unref(isInstalled)) {
-        // Just log for debugging, main logic is handled by deferredPrompt watch
-        console.log('PWA can be installed via official API')
+    // Watch for app installation status
+    watch(isInstalled, (newVal) => {
+      if (newVal) {
+        // Se o app foi instalado, resetar o banner
+        bannerDismissed.value = false
       }
     })
   } catch (error) {
@@ -212,30 +193,42 @@ const setupAutoInstall = () => {
 
 // Install PWA with banner management
 const handleInstall = async () => {
-  if (!process.client || !deferredPrompt.value) return
+  if (!process.client) return
 
   try {
-    const result = await deferredPrompt.value.prompt()
-    const isAccepted = result.outcome === 'accepted'
+    if (deferredPrompt.value) {
+      // Usar o prompt nativo se disponível
+      const result = await deferredPrompt.value.prompt()
+      const isAccepted = result.outcome === 'accepted'
 
-    if (isAccepted) {
-      showInstallBanner.value = false
-      localStorage.removeItem('pwa-install-dismissed')
+      if (isAccepted) {
+        showInstallBanner.value = false
+      }
+      deferredPrompt.value = null
+    } else if (isIOS.value) {
+      // Para iOS, mostrar instruções
+      alert('Para instalar este app:\n\n1. Toque no botão de compartilhamento \n2. Selecione "Adicionar à Tela Inicial"\n3. Toque em "Adicionar"')
+    } else {
+      // Para outros navegadores, mostrar instruções gerais
+      alert('Para instalar este app:\n\n• Chrome: Menu > Instalar app\n• Firefox: Menu > Instalar\n• Edge: Menu > Apps > Instalar este site como app')
     }
-
-    deferredPrompt.value = null
   } catch (error) {
     console.error('Error handling install:', error)
   }
 }
 
-// Dismiss banner
+// Dismiss banner (temporariamente)
 const dismissBanner = () => {
   if (!process.client) return
 
   try {
-    showInstallBanner.value = false
-    localStorage.setItem('pwa-install-dismissed', 'true')
+    bannerDismissed.value = true
+    // Reexibe o banner após 1 minuto se o app ainda não estiver instalado
+    setTimeout(() => {
+      if (!unref(isInstalled)) {
+        bannerDismissed.value = false
+      }
+    }, 60000) // 1 minuto
   } catch (error) {
     console.warn('Error dismissing banner:', error)
   }
