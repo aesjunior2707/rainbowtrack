@@ -348,7 +348,7 @@
 </template>
 
 <script setup>
-import { Plus, ArrowLeft, Search, Package, X } from 'lucide-vue-next'
+import { Plus, ArrowLeft, Search, Package, X, User } from 'lucide-vue-next'
 
 definePageMeta({
   middleware: 'auth'
