@@ -507,6 +507,17 @@ export const useDataStore = defineStore('data', {
         }
         return this.competitors.filter(competitor => competitor.region === userRegion)
       }
+    },
+
+    getCustomersByUserRegion() {
+      return (userRegion: string, isAdmin: boolean) => {
+        if (isAdmin) {
+          return this.customers.filter(customer => customer.active)
+        }
+        return this.customers.filter(customer =>
+          customer.active && customer.region === userRegion
+        )
+      }
     }
   }
 })
