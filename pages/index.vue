@@ -23,6 +23,25 @@
           </div>
         </div>
 
+        <!-- Debug Info (TEMPORARY) -->
+        <div class="bg-yellow-100 border border-yellow-400 rounded-lg p-4 mb-6">
+          <h3 class="font-semibold text-yellow-800 mb-2">🔍 Debug Info (Temporário)</h3>
+          <div class="text-sm text-yellow-700">
+            <p><strong>Total de relatórios na store:</strong> {{ dataStore.priceReports.length }}</p>
+            <p><strong>Data atual:</strong> {{ new Date().toLocaleDateString('pt-BR') }}</p>
+            <p><strong>Mês atual:</strong> {{ new Date().getMonth() }} ({{ new Date().getFullYear() }})</p>
+            <p><strong>Relatórios este mês calculados:</strong> {{ currentMonthReports }}</p>
+            <div class="mt-2">
+              <strong>Últimos 3 relatórios:</strong>
+              <ul class="ml-4 mt-1">
+                <li v-for="report in dataStore.priceReports.slice(-3)" :key="report.id" class="text-xs">
+                  ID: {{ report.id }} | Data: {{ report.reportDate }} | Concorrente: {{ report.competitorId }}
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
         <!-- Stats Cards -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           <div class="card p-6">
