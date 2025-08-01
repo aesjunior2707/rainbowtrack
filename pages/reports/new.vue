@@ -359,7 +359,7 @@ const translationStore = useTranslationStore($pinia)
 const t = (key, params) => translationStore.t(key, params)
 
 const selectedCompetitor = ref('')
-const selectedCustomer = ref('')
+const customerName = ref('')
 const selectedProducts = ref([])
 const reportDate = ref('')
 const region = ref('')
