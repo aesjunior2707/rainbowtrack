@@ -105,7 +105,10 @@
 import { Download, X, RefreshCw } from 'lucide-vue-next'
 
 // Use the official @vite-pwa/nuxt composable
-const { isInstalled, canInstall, needsUpdate, isOnline, updateServiceWorker } = usePWA()
+const { isInstalled, canInstall, needsUpdate, updateServiceWorker } = usePWA()
+
+// Use navigator.onLine for better reliability
+const isOnline = ref(true)
 
 const deferredPrompt = ref(null)
 
@@ -256,6 +259,19 @@ const updateApp = async () => {
 
 onMounted(() => {
   isClientMounted.value = true
+
+  // Setup connectivity detection
+  if (process.client) {
+    isOnline.value = navigator.onLine
+
+    window.addEventListener('online', () => {
+      isOnline.value = true
+    })
+
+    window.addEventListener('offline', () => {
+      isOnline.value = false
+    })
+  }
 
   nextTick(() => {
     try {
