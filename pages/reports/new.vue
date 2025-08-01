@@ -432,6 +432,7 @@ const availableCustomers = computed(() => {
 
 const canSubmit = computed(() => {
   return selectedCompetitor.value &&
+         selectedCustomer.value &&
          selectedProducts.value.length > 0 &&
          reportDate.value &&
          region.value &&
