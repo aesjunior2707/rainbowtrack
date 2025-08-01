@@ -1,5 +1,5 @@
 <template>
-  <div class="relative">
+  <div class="relative language-selector-container">
     <button
       @click="showLanguages = !showLanguages"
       class="flex items-center space-x-2 px-3 py-2 text-sm text-gray-700 hover:text-primary-600 transition-colors"
@@ -45,10 +45,19 @@ const switchLanguage = (locale) => {
 
 // Close dropdown when clicking outside
 onMounted(() => {
-  document.addEventListener('click', (e) => {
-    if (!e.target.closest('.relative')) {
+  const handleClickOutside = (e) => {
+    if (!e.target.closest('.language-selector-container')) {
       showLanguages.value = false
     }
+  }
+
+  document.addEventListener('click', handleClickOutside)
+  document.addEventListener('touchstart', handleClickOutside)
+
+  // Clean up event listeners
+  onUnmounted(() => {
+    document.removeEventListener('click', handleClickOutside)
+    document.removeEventListener('touchstart', handleClickOutside)
   })
 })
 </script>
