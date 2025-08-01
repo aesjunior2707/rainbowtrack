@@ -43,17 +43,37 @@
           <!-- Competitor Information Card -->
           <div class="card p-6">
             <h4 class="text-lg font-semibold text-gray-900 mb-4">
-              Informações do Concorrente
+              Informações da Captura
             </h4>
-            <div class="bg-gradient-to-r from-primary-50 to-secondary-50 border border-primary-200 rounded-lg p-4">
-              <div class="flex items-center space-x-4">
-                <div class="bg-primary-600 rounded-full p-3">
-                  <Building2 class="w-6 h-6 text-white" />
+            <div class="space-y-4">
+              <!-- Concorrente -->
+              <div class="bg-gradient-to-r from-primary-50 to-secondary-50 border border-primary-200 rounded-lg p-4">
+                <div class="flex items-center space-x-4">
+                  <div class="bg-primary-600 rounded-full p-3">
+                    <Building2 class="w-6 h-6 text-white" />
+                  </div>
+                  <div>
+                    <h5 class="font-semibold text-gray-900">{{ competitorInfo.name }}</h5>
+                    <p class="text-sm text-gray-600">{{ competitorInfo.type }}</p>
+                  </div>
                 </div>
-                <div>
-                  <h5 class="font-semibold text-gray-900">{{ competitorInfo.name }}</h5>
-                  <p class="text-sm text-gray-600">{{ competitorInfo.type }}</p>
-                </div>
+              </div>
+
+              <!-- Cliente -->
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">
+                  <User class="w-4 h-4 inline mr-1" />
+                  Cliente
+                </label>
+                <input
+                  v-model="form.customerName"
+                  type="text"
+                  class="input-field"
+                  placeholder="Digite o nome do cliente (opcional)"
+                />
+                <p class="text-xs text-gray-500 mt-1">
+                  Cliente que será visitado ou que forneceu a informação
+                </p>
               </div>
             </div>
           </div>
@@ -295,7 +315,7 @@
 </template>
 
 <script setup>
-import { ArrowLeft, Building2, X } from 'lucide-vue-next'
+import { ArrowLeft, Building2, X, User } from 'lucide-vue-next'
 
 definePageMeta({
   middleware: 'auth'
@@ -331,6 +351,7 @@ const totalCaptureValue = computed(() => {
 
 const form = ref({
   reportDate: '',
+  customerName: '',
   region: '',
   state: '',
   paymentCondition: '',
@@ -385,6 +406,7 @@ const loadReport = () => {
     // Populate form with report data
     form.value = {
       reportDate: foundReport.reportDate,
+      customerName: foundReport.customerName || '',
       region: foundReport.region,
       state: foundReport.state,
       paymentCondition: foundReport.paymentCondition,

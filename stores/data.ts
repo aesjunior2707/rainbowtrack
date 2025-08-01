@@ -2,7 +2,68 @@ import { defineStore } from 'pinia'
 
 export const useDataStore = defineStore('data', {
   state: () => ({
-    customers: [],
+    customers: [
+      {
+        id: 1,
+        name: 'João Silva Agropecuária',
+        document: '123.456.789-10',
+        type: 'Pessoa Física',
+        region: 'Centro-Oeste',
+        city: 'Sorriso',
+        state: 'MT',
+        phone: '(65) 99999-1111',
+        email: 'joao@agropecuaria.com',
+        active: true
+      },
+      {
+        id: 2,
+        name: 'Fazenda Santa Clara Ltda',
+        document: '12.345.678/0001-90',
+        type: 'Pessoa Jurídica',
+        region: 'Sul',
+        city: 'Passo Fundo',
+        state: 'RS',
+        phone: '(54) 88888-2222',
+        email: 'contato@santaclara.com.br',
+        active: true
+      },
+      {
+        id: 3,
+        name: 'Cooperativa Agronegócio Verde',
+        document: '98.765.432/0001-11',
+        type: 'Cooperativa',
+        region: 'Sudeste',
+        city: 'Ribeirão Preto',
+        state: 'SP',
+        phone: '(16) 77777-3333',
+        email: 'vendas@cooperverde.coop.br',
+        active: true
+      },
+      {
+        id: 4,
+        name: 'Maria Costa Cultivos',
+        document: '987.654.321-00',
+        type: 'Pessoa Física',
+        region: 'Nordeste',
+        city: 'Barreiras',
+        state: 'BA',
+        phone: '(77) 66666-4444',
+        email: 'maria@cultivos.com',
+        active: true
+      },
+      {
+        id: 5,
+        name: 'Agronegócio Cerrado S/A',
+        document: '11.222.333/0001-44',
+        type: 'Pessoa Jurídica',
+        region: 'Centro-Oeste',
+        city: 'Primavera do Leste',
+        state: 'MT',
+        phone: '(66) 55555-5555',
+        email: 'comercial@cerradosa.com.br',
+        active: true
+      }
+    ],
     nextReportId: 8, // Track next available ID (starts at 8 since we have 7 initial reports)
 
     competitors: [
@@ -350,6 +411,10 @@ export const useDataStore = defineStore('data', {
       return this.products.find(p => p.id === id)
     },
 
+    getCustomerById(id: number) {
+      return this.customers.find(c => c.id === id)
+    },
+
     getProductsByCategory(category: string) {
       return this.products.filter(p => p.category === category)
     },
@@ -441,6 +506,17 @@ export const useDataStore = defineStore('data', {
           return this.competitors
         }
         return this.competitors.filter(competitor => competitor.region === userRegion)
+      }
+    },
+
+    getCustomersByUserRegion() {
+      return (userRegion: string, isAdmin: boolean) => {
+        if (isAdmin) {
+          return this.customers.filter(customer => customer.active)
+        }
+        return this.customers.filter(customer =>
+          customer.active && customer.region === userRegion
+        )
       }
     }
   }

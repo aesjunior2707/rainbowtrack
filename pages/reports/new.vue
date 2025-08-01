@@ -17,7 +17,7 @@
         </div>
 
         <form @submit.prevent="handleSubmit" class="space-y-6">
-          <!-- Competitor Selection -->
+          <!-- Competitor and Customer Selection -->
           <div class="card p-6">
             <h2 class="text-lg font-semibold text-gray-900 mb-4">
               Informações Básicas
@@ -48,6 +48,22 @@
                     Novo
                   </button>
                 </div>
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">
+                  <User class="w-4 h-4 inline mr-1" />
+                  Cliente
+                </label>
+                <input
+                  v-model="customerName"
+                  type="text"
+                  class="input-field"
+                  placeholder="Digite o nome do cliente (opcional)"
+                />
+                <p class="text-xs text-gray-500 mt-1">
+                  Cliente que será visitado ou que forneceu a informação
+                </p>
               </div>
             </div>
           </div>
@@ -329,7 +345,7 @@
 </template>
 
 <script setup>
-import { Plus, ArrowLeft, Search, Package, X } from 'lucide-vue-next'
+import { Plus, ArrowLeft, Search, Package, X, User } from 'lucide-vue-next'
 
 definePageMeta({
   middleware: 'auth'
@@ -343,6 +359,7 @@ const translationStore = useTranslationStore($pinia)
 const t = (key, params) => translationStore.t(key, params)
 
 const selectedCompetitor = ref('')
+const customerName = ref('')
 const selectedProducts = ref([])
 const reportDate = ref('')
 const region = ref('')
@@ -428,6 +445,7 @@ const handleSubmit = () => {
   // Create single report with multiple products
   const report = {
     competitorId: selectedCompetitor.value,
+    customerName: customerName.value || '',
     reportDate: reportDate.value,
     reportedBy: authStore.user.id,
     notes: notes.value,

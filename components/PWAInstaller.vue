@@ -70,7 +70,12 @@
 import { Download, X, RefreshCw } from 'lucide-vue-next'
 
 // Composables PWA
-const { isInstalled, canInstall, needsUpdate, updateServiceWorker } = usePWA()
+const { $pwa } = usePWA()
+
+// Create reactive references to PWA state
+const isInstalled = computed(() => $pwa?.isInstalled || false)
+const canInstall = computed(() => $pwa?.canInstall || false)
+const needsUpdate = computed(() => $pwa?.needsUpdate || $pwa?.needRefresh || false)
 
 const isOnline = ref(true)
 const deferredPrompt = ref(null)
@@ -156,10 +161,10 @@ const handleInstall = async () => {
   if (!process.client) return
 
   try {
-    if (deferredPrompt.value) {
+    if (deferredPrompt.value && typeof deferredPrompt.value.prompt === 'function') {
       // Usar o prompt nativo se disponível
       const result = await deferredPrompt.value.prompt()
-      const isAccepted = result.outcome === 'accepted'
+      const isAccepted = result?.outcome === 'accepted'
 
       if (isAccepted) {
         showInstallBanner.value = false
@@ -198,8 +203,8 @@ const dismissBanner = () => {
 const updateApp = async () => {
   if (process.client) {
     try {
-      if (typeof updateServiceWorker === 'function') {
-        await updateServiceWorker()
+      if ($pwa?.updateServiceWorker && typeof $pwa.updateServiceWorker === 'function') {
+        await $pwa.updateServiceWorker()
       } else {
         window.location.reload()
       }

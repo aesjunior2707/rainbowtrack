@@ -94,6 +94,16 @@
                 <h3 class="text-lg font-bold text-gray-900 mb-1">
                   {{ getCompetitorName(report.competitorId) }}
                 </h3>
+
+                <!-- Cliente -->
+                <div v-if="report.customerName" class="mb-3 p-2 bg-blue-50 border border-blue-200 rounded-lg">
+                  <div class="flex items-center space-x-2">
+                    <User class="w-4 h-4 text-blue-600" />
+                    <span class="text-sm text-blue-700 font-medium">Cliente:</span>
+                    <span class="text-sm text-blue-900 font-semibold">{{ report.customerName }}</span>
+                  </div>
+                </div>
+
                 <div class="flex items-center justify-between">
                   <div class="flex items-center space-x-2 text-sm text-gray-600">
                     <MapPin class="w-4 h-4" />
