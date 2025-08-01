@@ -220,9 +220,7 @@ onMounted(() => {
 
   nextTick(() => {
     try {
-      if (initPWA && typeof initPWA === 'function') {
-        initPWA()
-      }
+      setupInstallPrompt()
       setupAutoInstall()
     } catch (error) {
       console.error('Error in onMounted:', error)
