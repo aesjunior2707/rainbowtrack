@@ -270,13 +270,6 @@ onMounted(() => {
     try {
       setupInstallPrompt()
       setupAutoInstall()
-
-      // Verifica se deve mostrar o banner imediatamente
-      setTimeout(() => {
-        if (!unref(isInstalled) && (deferredPrompt.value || unref(canInstall))) {
-          showInstallBanner.value = true
-        }
-      }, 2000) // Aguarda 2 segundos para garantir que tudo esteja carregado
     } catch (error) {
       console.error('Error in onMounted:', error)
     }
