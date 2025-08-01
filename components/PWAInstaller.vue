@@ -170,14 +170,18 @@ const setupAutoInstall = () => {
 
 // Install PWA with banner management
 const handleInstall = async () => {
-  if (!process.client) return
+  if (!process.client || !deferredPrompt.value) return
 
   try {
-    const success = await installPWA()
-    if (success) {
+    const result = await deferredPrompt.value.prompt()
+    const isAccepted = result.outcome === 'accepted'
+
+    if (isAccepted) {
       showInstallBanner.value = false
       localStorage.removeItem('pwa-install-dismissed')
     }
+
+    deferredPrompt.value = null
   } catch (error) {
     console.error('Error handling install:', error)
   }
