@@ -293,6 +293,15 @@
 
           <!-- Submit Buttons -->
           <div class="flex justify-end space-x-4">
+            <!-- Botão de teste temporário -->
+            <button
+              type="button"
+              @click="testMultipleReports"
+              class="bg-red-500 hover:bg-red-600 text-white font-semibold py-3 px-6 rounded-lg transition-colors"
+            >
+              🧪 Teste 3 Relatórios
+            </button>
+
             <NuxtLink
               to="/reports"
               class="btn-outline"
