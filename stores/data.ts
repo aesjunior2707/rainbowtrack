@@ -270,7 +270,7 @@ export const useDataStore = defineStore('data', {
         verified: true,
         region: 'REG002',
         state: 'MG',
-        paymentCondition: 'SAFRA_2024',
+        paymentCondition: 'SAFRA_2026',
 
         currencyId: 1,
         products: [
