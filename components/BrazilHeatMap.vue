@@ -212,6 +212,16 @@ const stateNames = {
 
 // Chart state
 const chartReady = ref(false)
+const chartError = ref(false)
+
+// Fallback tooltip state
+const fallbackTooltip = ref({
+  visible: false,
+  x: 0,
+  y: 0,
+  state: '',
+  count: 0
+})
 
 // Calculate captures by state
 const stateData = computed(() => {
