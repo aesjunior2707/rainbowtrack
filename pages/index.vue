@@ -126,9 +126,10 @@
                     v-model="selectedMapType"
                     class="border border-gray-300 rounded-md px-3 py-2 text-sm focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
                   >
-                    <option value="chart">Dashboard Profissional</option>
-                    <option value="heat">Mapa de Calor TreeMap</option>
-                    <option value="geo">Mapa Geográfico D3</option>
+                    <option value="pro">🗺️ Mapa Geográfico Pro</option>
+                    <option value="chart">📊 Dashboard Profissional</option>
+                    <option value="heat">🔥 Mapa de Calor TreeMap</option>
+                    <option value="geo">🌍 Mapa Geográfico D3</option>
                   </select>
                 </div>
               </div>
