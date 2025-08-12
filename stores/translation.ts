@@ -338,7 +338,13 @@ export const useTranslationStore = defineStore('translation', {
           quick_actions: 'Acciones Rápidas',
           new_report: 'Nueva Captura',
           price_trends: 'Tendencias de Precios',
-          market_analysis: 'Análisis de Mercado'
+          market_analysis: 'Análisis de Mercado',
+          market_intelligence: 'Análisis de Inteligencia de Mercado • Datos Consolidados',
+          geographic_analysis: 'Análisis Geoespacial',
+          select_visualization: 'Seleccione la visualización para análisis estratégico',
+          visualization: 'Visualización',
+          geographic_distribution: 'Distribución Geográfica',
+          density_analysis: 'Análisis de Densidad'
         },
         reports: {
           title: 'Capturas',
@@ -432,7 +438,7 @@ export const useTranslationStore = defineStore('translation', {
           remember: '记住我',
           forgot_password: '忘记密码？',
           loading: '加载中...',
-          invalid_credentials: '用户名或密��无效',
+          invalid_credentials: '用户名或密码无效',
           login_failed: '登录失败。请重试。',
           demo_users: '演示用户：',
           logout: '退出'
