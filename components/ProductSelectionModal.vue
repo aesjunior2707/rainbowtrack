@@ -147,13 +147,29 @@
             </button>
           </div>
 
+          <!-- Currency Selection -->
+          <div class="mb-4">
+            <label class="block text-sm font-medium text-gray-700 mb-2">
+              Moeda *
+            </label>
+            <select v-model="selectedCurrency" class="w-full px-3 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+              <option
+                v-for="currency in props.dataStore.currencies"
+                :key="currency.id"
+                :value="currency.id"
+              >
+                {{ currency.symbol }} - {{ currency.name }}
+              </option>
+            </select>
+          </div>
+
           <!-- Price Input -->
           <div>
             <label class="block text-sm font-medium text-gray-700 mb-2">
               Preço do Concorrente *
             </label>
             <div class="relative">
-              <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">R$</span>
+              <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">{{ getCurrencySymbol(selectedCurrency) }}</span>
               <input
                 v-model="competitorPrice"
                 type="number"
@@ -172,7 +188,7 @@
       <div class="p-4 border-t space-y-3">
         <button
           @click="confirmSelection"
-          :disabled="!selectedProduct || !competitorPrice"
+          :disabled="!selectedProduct || !competitorPrice || !selectedCurrency"
           class="w-full py-3 px-4 bg-primary-600 text-white rounded-xl font-medium disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
         >
           Confirmar Produto
@@ -204,6 +220,7 @@ const selectedCategory = ref('defensivos')
 const productSearch = ref('')
 const selectedProduct = ref(null)
 const competitorPrice = ref('')
+const selectedCurrency = ref(1) // Default to BRL
 
 const categories = ['defensivos', 'seeds', 'fertilizers', 'inoculants', 'biologicals']
 
@@ -245,11 +262,17 @@ const selectProduct = (product) => {
   })
 }
 
+const getCurrencySymbol = (currencyId) => {
+  const currency = props.dataStore.getCurrencyById(currencyId)
+  return currency ? currency.symbol : 'R$'
+}
+
 const confirmSelection = () => {
-  if (selectedProduct.value && competitorPrice.value) {
+  if (selectedProduct.value && competitorPrice.value && selectedCurrency.value) {
     emit('product-selected', {
       product: selectedProduct.value,
-      competitorPrice: parseFloat(competitorPrice.value)
+      competitorPrice: parseFloat(competitorPrice.value),
+      currencyId: selectedCurrency.value
     })
   }
 }
@@ -258,7 +281,15 @@ const confirmSelection = () => {
 watch(() => props.dataStore, () => {
   selectedProduct.value = null
   competitorPrice.value = ''
+  selectedCurrency.value = 1 // Reset to BRL
   productSearch.value = ''
   selectedCategory.value = 'defensivos'
 }, { immediate: true })
+
+// Reset selected currency when closing product selection
+watch(selectedProduct, (newVal) => {
+  if (!newVal) {
+    selectedCurrency.value = 1 // Reset to BRL
+  }
+})
 </script>
