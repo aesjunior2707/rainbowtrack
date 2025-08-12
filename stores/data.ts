@@ -64,7 +64,7 @@ export const useDataStore = defineStore('data', {
         active: true
       }
     ],
-    nextReportId: 18, // Track next available ID (updated for new reports)
+    nextReportId: 48, // Track next available ID (updated for new reports)
 
     competitors: [
       {
@@ -574,6 +574,619 @@ export const useDataStore = defineStore('data', {
           {
             productId: 6,
             competitorPrice: 128.90
+          }
+        ]
+      },
+      // Mais capturas dos representantes
+      {
+        id: 18,
+        competitorId: 3,
+        reportDate: '2025-02-11',
+        reportedBy: 4, // Gilberto Silva
+        notes: 'Cliente fiel ao concorrente, difícil conversão',
+        verified: true,
+        region: 'Cerrado Norte',
+        state: 'GO',
+        paymentCondition: '30_DIAS',
+        currencyId: 1,
+        products: [
+          {
+            productId: 3,
+            competitorPrice: 154.80
+          }
+        ]
+      },
+      {
+        id: 19,
+        competitorId: 4,
+        reportDate: '2025-02-12',
+        reportedBy: 5, // Raphael Siqueira
+        notes: 'Preço agressivo para conquistar market share',
+        verified: false,
+        region: 'Cerrado Norte',
+        state: 'MT',
+        paymentCondition: '270_DIAS',
+        currencyId: 1,
+        products: [
+          {
+            productId: 1,
+            competitorPrice: 141.90
+          },
+          {
+            productId: 4,
+            competitorPrice: 129.80
+          }
+        ]
+      },
+      {
+        id: 20,
+        competitorId: 1,
+        reportDate: '2025-02-13',
+        reportedBy: 6, // Layson Costa
+        notes: 'Produto com boa performance técnica',
+        verified: true,
+        region: 'Cerrado Norte',
+        state: 'BA',
+        paymentCondition: 'SAFRA_2026',
+        currencyId: 1,
+        products: [
+          {
+            productId: 7,
+            competitorPrice: 98.60
+          }
+        ]
+      },
+      {
+        id: 21,
+        competitorId: 2,
+        reportDate: '2025-02-14',
+        reportedBy: 9, // Giovani Cavalari
+        notes: 'Concorrência acirrada na região Centro-Oeste',
+        verified: false,
+        region: 'Cerrado Centro',
+        state: 'MS',
+        paymentCondition: '360_DIAS',
+        currencyId: 1,
+        products: [
+          {
+            productId: 2,
+            competitorPrice: 87.40
+          },
+          {
+            productId: 5,
+            competitorPrice: 74.20
+          },
+          {
+            productId: 9,
+            competitorPrice: 108.50
+          }
+        ]
+      },
+      {
+        id: 22,
+        competitorId: 3,
+        reportDate: '2025-02-15',
+        reportedBy: 10, // Marcus Palomares
+        notes: 'Estratégia de preços diferenciada por região',
+        verified: true,
+        region: 'Cerrado Centro',
+        state: 'GO',
+        paymentCondition: 'A_VISTA',
+        currencyId: 1,
+        products: [
+          {
+            productId: 6,
+            competitorPrice: 122.70
+          }
+        ]
+      },
+      {
+        id: 23,
+        competitorId: 4,
+        reportDate: '2025-02-16',
+        reportedBy: 11, // Leonardo Alexandrino
+        notes: 'Cliente interessado em mudança de marca',
+        verified: false,
+        region: 'Cerrado Centro',
+        state: 'MT',
+        paymentCondition: '90_DIAS',
+        currencyId: 1,
+        products: [
+          {
+            productId: 8,
+            competitorPrice: 65.90
+          },
+          {
+            productId: 1,
+            competitorPrice: 146.30
+          }
+        ]
+      },
+      {
+        id: 24,
+        competitorId: 1,
+        reportDate: '2025-02-17',
+        reportedBy: 12, // Felipe Lima
+        notes: 'Parceria técnica bem estabelecida',
+        verified: true,
+        region: 'Cerrado Centro',
+        state: 'GO',
+        paymentCondition: '120_DIAS',
+        currencyId: 1,
+        products: [
+          {
+            productId: 3,
+            competitorPrice: 158.90
+          }
+        ]
+      },
+      {
+        id: 25,
+        competitorId: 2,
+        reportDate: '2025-02-18',
+        reportedBy: 13, // Ricsandrelly Vilela
+        notes: 'Oferta promocional de fim de safra',
+        verified: false,
+        region: 'Cerrado Centro',
+        state: 'MS',
+        paymentCondition: 'SAFRINHA_2026',
+        currencyId: 1,
+        products: [
+          {
+            productId: 4,
+            competitorPrice: 131.50
+          },
+          {
+            productId: 7,
+            competitorPrice: 96.80
+          }
+        ]
+      },
+      {
+        id: 26,
+        competitorId: 3,
+        reportDate: '2025-02-19',
+        reportedBy: 15, // Eduardo Martelli
+        notes: 'Aplicação específica para cana-de-açúcar',
+        verified: true,
+        region: 'Cana',
+        state: 'SP',
+        paymentCondition: '60_DIAS',
+        currencyId: 1,
+        products: [
+          {
+            productId: 2,
+            competitorPrice: 89.70
+          }
+        ]
+      },
+      {
+        id: 27,
+        competitorId: 4,
+        reportDate: '2025-02-20',
+        reportedBy: 16, // Artur Cunha
+        notes: 'Competição direta em herbicidas',
+        verified: false,
+        region: 'Cana',
+        state: 'SP',
+        paymentCondition: '150_DIAS',
+        currencyId: 1,
+        products: [
+          {
+            productId: 8,
+            competitorPrice: 67.30
+          },
+          {
+            productId: 9,
+            competitorPrice: 110.40
+          }
+        ]
+      },
+      {
+        id: 28,
+        competitorId: 1,
+        reportDate: '2025-02-21',
+        reportedBy: 17, // Adriano Oliani
+        notes: 'Programa de fidelidade muito atrativo',
+        verified: true,
+        region: 'Cana',
+        state: 'SP',
+        paymentCondition: '180_DIAS',
+        currencyId: 1,
+        products: [
+          {
+            productId: 5,
+            competitorPrice: 77.90
+          }
+        ]
+      },
+      {
+        id: 29,
+        competitorId: 2,
+        reportDate: '2025-02-22',
+        reportedBy: 19, // Pamela Andrade
+        notes: 'Tecnologia diferenciada no produto',
+        verified: false,
+        region: 'Cana',
+        state: 'MG',
+        paymentCondition: '210_DIAS',
+        currencyId: 1,
+        products: [
+          {
+            productId: 1,
+            competitorPrice: 144.70
+          },
+          {
+            productId: 6,
+            competitorPrice: 126.50
+          }
+        ]
+      },
+      {
+        id: 30,
+        competitorId: 3,
+        reportDate: '2025-02-23',
+        reportedBy: 20, // Eric Arantes
+        notes: 'Mercado em crescimento para biológicos',
+        verified: true,
+        region: 'Cana',
+        state: 'GO',
+        paymentCondition: '240_DIAS',
+        currencyId: 1,
+        products: [
+          {
+            productId: 3,
+            competitorPrice: 161.20
+          }
+        ]
+      },
+      {
+        id: 31,
+        competitorId: 4,
+        reportDate: '2025-02-24',
+        reportedBy: 21, // Ricardo Gonçalves
+        notes: 'Forte presença no varejo especializado',
+        verified: false,
+        region: 'Cana',
+        state: 'SP',
+        paymentCondition: 'A_VISTA',
+        currencyId: 1,
+        products: [
+          {
+            productId: 4,
+            competitorPrice: 133.80
+          },
+          {
+            productId: 8,
+            competitorPrice: 69.10
+          }
+        ]
+      },
+      {
+        id: 32,
+        competitorId: 1,
+        reportDate: '2025-02-25',
+        reportedBy: 22, // Letieri Augusto
+        notes: 'Suporte técnico diferenciado',
+        verified: true,
+        region: 'Cana',
+        state: 'MG',
+        paymentCondition: '30_DIAS',
+        currencyId: 1,
+        products: [
+          {
+            productId: 7,
+            competitorPrice: 99.80
+          }
+        ]
+      },
+      {
+        id: 33,
+        competitorId: 2,
+        reportDate: '2025-02-26',
+        reportedBy: 24, // João Neto
+        notes: 'Expansão para novos territórios',
+        verified: false,
+        region: 'MT',
+        state: 'MT',
+        paymentCondition: '60_DIAS',
+        currencyId: 1,
+        products: [
+          {
+            productId: 2,
+            competitorPrice: 92.30
+          },
+          {
+            productId: 5,
+            competitorPrice: 75.60
+          }
+        ]
+      },
+      {
+        id: 34,
+        competitorId: 3,
+        reportDate: '2025-02-27',
+        reportedBy: 25, // Fernando Souza
+        notes: 'Política de descontos por volume',
+        verified: true,
+        region: 'MT',
+        state: 'MT',
+        paymentCondition: '90_DIAS',
+        currencyId: 1,
+        products: [
+          {
+            productId: 9,
+            competitorPrice: 105.90
+          }
+        ]
+      },
+      {
+        id: 35,
+        competitorId: 4,
+        reportDate: '2025-02-28',
+        reportedBy: 27, // Willian Quinteiro
+        notes: 'Inovação constante em formulações',
+        verified: false,
+        region: 'MT',
+        state: 'MT',
+        paymentCondition: '120_DIAS',
+        currencyId: 1,
+        products: [
+          {
+            productId: 1,
+            competitorPrice: 147.50
+          },
+          {
+            productId: 3,
+            competitorPrice: 162.80
+          },
+          {
+            productId: 6,
+            competitorPrice: 127.90
+          }
+        ]
+      },
+      {
+        id: 36,
+        competitorId: 1,
+        reportDate: '2025-03-01',
+        reportedBy: 28, // Thiago Silva
+        notes: 'Relacionamento de longo prazo com o cliente',
+        verified: true,
+        region: 'MT',
+        state: 'MT',
+        paymentCondition: '150_DIAS',
+        currencyId: 1,
+        products: [
+          {
+            productId: 4,
+            competitorPrice: 134.90
+          }
+        ]
+      },
+      {
+        id: 37,
+        competitorId: 2,
+        reportDate: '2025-03-02',
+        reportedBy: 29, // Antonio Neto
+        notes: 'Estratégia de penetração em novos clientes',
+        verified: false,
+        region: 'MT',
+        state: 'MT',
+        paymentCondition: '180_DIAS',
+        currencyId: 1,
+        products: [
+          {
+            productId: 7,
+            competitorPrice: 101.20
+          },
+          {
+            productId: 8,
+            competitorPrice: 70.40
+          }
+        ]
+      },
+      {
+        id: 38,
+        competitorId: 3,
+        reportDate: '2025-03-03',
+        reportedBy: 30, // Luciano Juchem
+        notes: 'Parceria estratégica com distribuidores',
+        verified: true,
+        region: 'MT',
+        state: 'MT',
+        paymentCondition: 'SAFRA_2026',
+        currencyId: 1,
+        products: [
+          {
+            productId: 2,
+            competitorPrice: 88.50
+          }
+        ]
+      },
+      {
+        id: 39,
+        competitorId: 4,
+        reportDate: '2025-03-04',
+        reportedBy: 32, // Lucas Calixto
+        notes: 'Adaptação às condições climáticas do Sul',
+        verified: false,
+        region: 'Sul',
+        state: 'RS',
+        paymentCondition: '210_DIAS',
+        currencyId: 1,
+        products: [
+          {
+            productId: 5,
+            competitorPrice: 78.80
+          },
+          {
+            productId: 9,
+            competitorPrice: 113.60
+          }
+        ]
+      },
+      {
+        id: 40,
+        competitorId: 1,
+        reportDate: '2025-03-05',
+        reportedBy: 33, // Rodrigo Wolfman
+        notes: 'Excelente performance em condições adversas',
+        verified: true,
+        region: 'Sul',
+        state: 'SC',
+        paymentCondition: '240_DIAS',
+        currencyId: 1,
+        products: [
+          {
+            productId: 1,
+            competitorPrice: 149.90
+          }
+        ]
+      },
+      {
+        id: 41,
+        competitorId: 2,
+        reportDate: '2025-03-06',
+        reportedBy: 34, // Rodrigo Marcondes
+        notes: 'Tendência de alta nos preços regionais',
+        verified: false,
+        region: 'Sul',
+        state: 'PR',
+        paymentCondition: '270_DIAS',
+        currencyId: 1,
+        products: [
+          {
+            productId: 3,
+            competitorPrice: 164.50
+          },
+          {
+            productId: 6,
+            competitorPrice: 129.70
+          }
+        ]
+      },
+      {
+        id: 42,
+        competitorId: 3,
+        reportDate: '2025-03-07',
+        reportedBy: 35, // Marcela Rodrigues
+        notes: 'Foco em sustentabilidade e eficiência',
+        verified: true,
+        region: 'Sul',
+        state: 'RS',
+        paymentCondition: '360_DIAS',
+        currencyId: 1,
+        products: [
+          {
+            productId: 4,
+            competitorPrice: 137.40
+          }
+        ]
+      },
+      {
+        id: 43,
+        competitorId: 4,
+        reportDate: '2025-03-08',
+        reportedBy: 36, // Leandro Almeida
+        notes: 'Programa de capacitação para aplicadores',
+        verified: false,
+        region: 'Sul',
+        state: 'SC',
+        paymentCondition: 'A_VISTA',
+        currencyId: 1,
+        products: [
+          {
+            productId: 7,
+            competitorPrice: 102.80
+          },
+          {
+            productId: 8,
+            competitorPrice: 71.90
+          }
+        ]
+      },
+      {
+        id: 44,
+        competitorId: 1,
+        reportDate: '2025-03-09',
+        reportedBy: 38, // Ricardo Leite
+        notes: 'Primeiro contato na região KA',
+        verified: true,
+        region: 'KA',
+        state: 'BA',
+        paymentCondition: '30_DIAS',
+        currencyId: 1,
+        products: [
+          {
+            productId: 2,
+            competitorPrice: 90.60
+          }
+        ]
+      },
+      {
+        id: 45,
+        competitorId: 2,
+        reportDate: '2025-03-10',
+        reportedBy: 39, // Jose Barbosa
+        notes: 'Mercado em desenvolvimento na região',
+        verified: false,
+        region: 'KA',
+        state: 'PE',
+        paymentCondition: '60_DIAS',
+        currencyId: 1,
+        products: [
+          {
+            productId: 5,
+            competitorPrice: 76.30
+          },
+          {
+            productId: 1,
+            competitorPrice: 145.20
+          }
+        ]
+      },
+      {
+        id: 46,
+        competitorId: 3,
+        reportDate: '2025-03-11',
+        reportedBy: 40, // Nilson Liasch
+        notes: 'Adaptação para culturas regionais específicas',
+        verified: true,
+        region: 'KA',
+        state: 'AL',
+        paymentCondition: '90_DIAS',
+        currencyId: 1,
+        products: [
+          {
+            productId: 9,
+            competitorPrice: 107.50
+          }
+        ]
+      },
+      {
+        id: 47,
+        competitorId: 4,
+        reportDate: '2025-03-12',
+        reportedBy: 41, // Fábio Taniguti
+        notes: 'Investimento em canais digitais de vendas',
+        verified: false,
+        region: 'KA',
+        state: 'CE',
+        paymentCondition: '120_DIAS',
+        currencyId: 1,
+        products: [
+          {
+            productId: 3,
+            competitorPrice: 160.80
+          },
+          {
+            productId: 4,
+            competitorPrice: 139.10
+          },
+          {
+            productId: 8,
+            competitorPrice: 72.60
           }
         ]
       }
