@@ -1,0 +1,413 @@
+<template>
+  <div>
+    <AppLayout>
+      <div class="space-y-6">
+        <!-- Header -->
+        <div class="flex justify-between items-center">
+          <h1 class="text-2xl font-bold text-gray-900">
+            {{ t('reports.title') }}
+          </h1>
+          <NuxtLink
+            to="/reports/new"
+            class="btn-primary"
+          >
+            <Plus class="w-4 h-4 mr-2" />
+            {{ t('reports.new_report') }}
+          </NuxtLink>
+        </div>
+
+        <!-- Filter and Search -->
+        <div class="card p-4">
+          <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <div>
+              <input
+                v-model="searchTerm"
+                type="text"
+                placeholder="Pesquisar..."
+                class="input-field"
+              />
+            </div>
+            <div>
+              <select v-model="filterCompetitor" class="input-field">
+                <option value="">{{ t('reports.all_competitors') }}</option>
+                <option
+                  v-for="competitor in dataStore.competitors"
+                  :key="competitor.id"
+                  :value="competitor.id"
+                >
+                  {{ competitor.name }}
+                </option>
+              </select>
+            </div>
+            <div>
+              <select v-model="filterRegion" class="input-field">
+                <option value="">{{ t('reports.all_regions') }}</option>
+                <option
+                  v-for="region in uniqueRegions"
+                  :key="region"
+                  :value="region"
+                >
+                  {{ region }}
+                </option>
+              </select>
+            </div>
+            <div>
+              <select v-model="filterVerified" class="input-field">
+                <option value="">{{ t('reports.all_status') }}</option>
+                <option value="true">{{ t('reports.verified') }}</option>
+                <option value="false">{{ t('reports.pending') }}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Reports Cards -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div
+            v-for="report in filteredReports"
+            :key="report.id"
+            class="card hover:shadow-lg transition-all duration-200 overflow-hidden"
+          >
+            <!-- Header com Status e Data -->
+            <div class="bg-gradient-to-r from-primary-50 to-secondary-50 px-4 py-3 border-b">
+              <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-2">
+                  <span
+                    class="inline-flex items-center px-2 py-1 text-xs font-medium rounded-full"
+                    :class="report.verified ? 'bg-green-100 text-green-700' : 'bg-orange-100 text-orange-700'"
+                  >
+                    <CheckCircle v-if="report.verified" class="w-3 h-3 mr-1" />
+                    <Clock v-else class="w-3 h-3 mr-1" />
+                    {{ report.verified ? 'Verificado' : 'Pendente' }}
+                  </span>
+                </div>
+                <span class="text-xs text-gray-600">
+                  {{ formatDate(report.reportDate) }}
+                </span>
+              </div>
+            </div>
+
+            <!-- Conteúdo Principal -->
+            <div class="p-4">
+              <!-- Concorrente em Destaque -->
+              <div class="mb-3">
+                <h3 class="text-lg font-bold text-gray-900 mb-1">
+                  {{ getCompetitorName(report.competitorId) }}
+                </h3>
+
+                <!-- Cliente -->
+                <div v-if="report.customerName" class="mb-3 p-2 bg-blue-50 border border-blue-200 rounded-lg">
+                  <div class="flex items-center space-x-2">
+                    <User class="w-4 h-4 text-blue-600" />
+                    <span class="text-sm text-blue-700 font-medium">Cliente:</span>
+                    <span class="text-sm text-blue-900 font-semibold">{{ report.customerName }}</span>
+                  </div>
+                </div>
+
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center space-x-2 text-sm text-gray-600">
+                    <MapPin class="w-4 h-4" />
+                    <span>{{ report.state || report.region }}</span>
+                  </div>
+                  <span class="text-xs text-primary-600 font-medium">
+                    {{ getProductCount(report) }} produto{{ getProductCount(report) > 1 ? 's' : '' }}
+                  </span>
+                </div>
+              </div>
+
+              <!-- Lista de Produtos -->
+              <div class="space-y-2 mb-3">
+                <!-- Mostrar apenas os primeiros 2 produtos -->
+                <div
+                  v-for="(productItem, index) in getReportProducts(report).slice(0, 2)"
+                  :key="`${report.id}-${productItem.productId}-${index}`"
+                  class="bg-gray-50 rounded-lg p-3"
+                >
+                  <div class="flex justify-between items-center">
+                    <div class="flex-1">
+                      <h4 class="font-medium text-gray-900 text-sm">
+                        {{ getProductName(productItem.productId) }}
+                      </h4>
+                      <p class="text-xs text-gray-500">
+                        {{ getProductBrand(productItem.productId) }}
+                      </p>
+                    </div>
+                    <div class="text-right">
+                      <p class="font-bold text-primary-600">
+                        {{ getCurrencySymbol(report.currencyId) }} {{ formatPrice(productItem.competitorPrice) }}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Indicador de produtos restantes -->
+                <div v-if="getProductCount(report) > 2" class="bg-gradient-to-r from-gray-100 to-gray-50 rounded-lg p-3 border border-gray-200">
+                  <div class="flex items-center justify-center space-x-2">
+                    <Package class="w-4 h-4 text-gray-600" />
+                    <span class="text-sm font-medium text-gray-700">
+                      + {{ getProductCount(report) - 2 }} {{ getProductCount(report) - 2 === 1 ? 'produto adicional' : 'produtos adicionais' }}
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+
+
+              <!-- Observações (se houver) -->
+              <div v-if="report.notes" class="text-xs text-gray-600 bg-blue-50 rounded p-2 mb-3 border-l-2 border-blue-200">
+                <p class="italic">"{{ truncateText(report.notes, 60) }}"</p>
+              </div>
+            </div>
+
+            <!-- Footer com Ações -->
+            <div class="px-4 py-3 bg-gray-50 border-t">
+              <div class="flex items-center justify-between">
+                <div class="text-xs text-gray-500">
+                  <User class="w-3 h-3 inline mr-1" />
+                  {{ getReporterName(report.reportedBy) }}
+                </div>
+                <div class="flex items-center space-x-1">
+                  <button
+                    @click="handleViewReport(report)"
+                    class="p-1.5 text-primary-600 hover:text-primary-900 hover:bg-primary-100 rounded transition-colors"
+                    :title="isAdmin && !report.verified ? 'Verificar Captura' : 'Visualizar Detalhes'"
+                  >
+                    <Eye class="w-4 h-4" />
+                  </button>
+                  <NuxtLink
+                    v-if="isAdmin || report.reportedBy === authStore.user?.id"
+                    :to="`/reports/edit/${report.id}`"
+                    class="p-1.5 text-gray-500 hover:text-gray-700 hover:bg-gray-200 rounded transition-colors"
+                    title="Editar"
+                  >
+                    <Edit class="w-4 h-4" />
+                  </NuxtLink>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Empty State -->
+        <div v-if="filteredReports.length === 0" class="text-center py-12">
+          <FileText class="w-12 h-12 text-gray-400 mx-auto mb-4" />
+          <p class="text-gray-500">{{ t('reports.no_reports') }}</p>
+          <NuxtLink
+            to="/reports/new"
+            class="btn-primary mt-4 inline-flex items-center"
+          >
+            <Plus class="w-4 h-4 mr-2" />
+            {{ t('reports.create_first') }}
+          </NuxtLink>
+        </div>
+      </div>
+
+      <!-- Animated Notification -->
+      <AnimatedNotification
+        :show="showSuccessNotification"
+        type="success"
+        :message="successMessage"
+        @close="showSuccessNotification = false"
+      />
+
+      <!-- Verification Modal -->
+      <VerifyReportModal
+        v-if="showVerifyModal && selectedReport"
+        :report="selectedReportForModal"
+        @close="showVerifyModal = false"
+        @verified="handleReportVerified"
+      />
+
+
+    </AppLayout>
+  </div>
+</template>
+
+<script setup>
+import { Plus, Eye, Edit, FileText, CheckCircle, Clock, MapPin, User, Package } from 'lucide-vue-next'
+
+definePageMeta({
+  middleware: 'auth'
+})
+
+const { $pinia } = useNuxtApp()
+const dataStore = useDataStore($pinia)
+const authStore = useAuthStore($pinia)
+const translationStore = useTranslationStore($pinia)
+
+const t = (key, params) => translationStore.t(key, params)
+
+const searchTerm = ref('')
+const filterCompetitor = ref('')
+const filterRegion = ref('')
+const filterVerified = ref('')
+const showVerifyModal = ref(false)
+const selectedReport = ref(null)
+const showSuccessNotification = ref(false)
+const successMessage = ref('')
+
+const isAdmin = computed(() => authStore.user?.role === 'admin')
+
+const uniqueRegions = computed(() => {
+  const regions = [...new Set(dataStore.priceReports.map(r => r.region))]
+  return regions.filter(Boolean)
+})
+
+const filteredReports = computed(() => {
+  let reports = dataStore.priceReports
+
+  if (searchTerm.value) {
+    const term = searchTerm.value.toLowerCase()
+    reports = reports.filter(report => {
+      // Search in competitor name
+      const competitor = getCompetitorName(report.competitorId).toLowerCase()
+      if (competitor.includes(term)) return true
+
+      // Search in product names (support both formats)
+      const products = getReportProducts(report)
+      return products.some(productItem => {
+        const productName = getProductName(productItem.productId).toLowerCase()
+        return productName.includes(term)
+      })
+    })
+  }
+
+  if (filterCompetitor.value) {
+    reports = reports.filter(r => r.competitorId === parseInt(filterCompetitor.value))
+  }
+
+  if (filterRegion.value) {
+    reports = reports.filter(r => r.region === filterRegion.value)
+  }
+
+  if (filterVerified.value !== '') {
+    reports = reports.filter(r => r.verified === (filterVerified.value === 'true'))
+  }
+
+  return reports.sort((a, b) => new Date(b.reportDate).getTime() - new Date(a.reportDate).getTime())
+})
+
+const getCompetitorName = (competitorId) => {
+  const competitor = dataStore.getCompetitorById(competitorId)
+  return competitor ? competitor.name : 'Concorrente Desconhecido'
+}
+
+const getProductName = (productId) => {
+  const product = dataStore.getProductById(productId)
+  return product ? product.name : 'Produto Desconhecido'
+}
+
+const getProductBrand = (productId) => {
+  const product = dataStore.getProductById(productId)
+  return product ? product.brand : 'Marca Desconhecida'
+}
+
+const getProductCount = (report) => {
+  // Support both old and new format
+  if (report.products && Array.isArray(report.products)) {
+    return report.products.length
+  }
+  return 1 // Old format has single product
+}
+
+const getReportProducts = (report) => {
+  // Support both old and new format
+  if (report.products && Array.isArray(report.products)) {
+    return report.products
+  }
+  // Convert old format to new format for display
+  return [{
+    productId: report.productId,
+    competitorPrice: report.competitorPrice
+  }]
+}
+
+
+const getCurrencySymbol = (currencyId) => {
+  const currency = dataStore.getCurrencyById(currencyId)
+  return currency ? currency.symbol : 'R$'
+}
+
+const getReporterName = (reporterId) => {
+  const user = authStore.users.find(u => u.id === reporterId)
+  return user ? user.name : 'Desconhecido'
+}
+
+const formatDate = (dateString) => {
+  if (!dateString) return ''
+  const date = new Date(dateString)
+  return date.toLocaleDateString('pt-BR')
+}
+
+const formatPrice = (price) => {
+  if (!price) return '0,00'
+  return new Intl.NumberFormat('pt-BR', {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  }).format(price)
+}
+
+
+
+const getPaymentConditionText = (condition) => {
+  const conditions = {
+    'SAFRA_2026': 'Safra 2026',
+    'SAFRINHA_2026': 'Safrinha 2026',
+    'A_VISTA': 'A vista',
+    '30_DIAS': '30 dias',
+    '60_DIAS': '60 dias',
+    '90_DIAS': '90 dias',
+    '120_DIAS': '120 dias',
+    '150_DIAS': '150 dias',
+    '180_DIAS': '180 dias',
+    '210_DIAS': '210 dias',
+    '240_DIAS': '240 dias',
+    '270_DIAS': '270 dias',
+    '360_DIAS': '360 dias'
+  }
+  return conditions[condition] || condition
+}
+
+
+const truncateText = (text, maxLength) => {
+  if (!text) return ''
+  return text.length > maxLength ? text.substring(0, maxLength) + '...' : text
+}
+
+const selectedReportForModal = computed(() => {
+  if (!selectedReport.value) return null
+
+  return {
+    ...selectedReport.value,
+    competitorName: getCompetitorName(selectedReport.value.competitorId),
+    currencySymbol: getCurrencySymbol(selectedReport.value.currencyId)
+  }
+})
+
+const handleViewReport = (report) => {
+  // Se for admin e o relatório não estiver verificado, abre modal de verificação
+  if (isAdmin.value && !report.verified) {
+    selectedReport.value = report
+    showVerifyModal.value = true
+  } else {
+    // Caso contrário, apenas visualiza (aqui você pode implementar uma modal de visualização)
+    console.log('Visualizar relatório:', report)
+  }
+}
+
+const handleReportVerified = (reportId) => {
+  dataStore.verifyPriceReport(reportId, authStore.user.id)
+  showVerifyModal.value = false
+  selectedReport.value = null
+
+  // Mostrar notificação de sucesso
+  successMessage.value = 'Captura verificada com sucesso!'
+  showSuccessNotification.value = true
+  setTimeout(() => {
+    showSuccessNotification.value = false
+  }, 4000)
+}
+
+
+
+</script>
