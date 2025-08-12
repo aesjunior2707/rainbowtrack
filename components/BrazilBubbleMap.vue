@@ -203,9 +203,9 @@ const loadBrazilGeoJSON = async (L) => {
     // Add GeoJSON layer
     geoJsonLayer = L.geoJSON(geoJsonData, {
       style: (feature) => {
-        const stateCode = feature.properties.state_code || feature.properties.SIGLA || feature.properties.sigla
+        const stateCode = feature.properties.sigla || feature.properties.SIGLA || feature.properties.state_code
         const count = stateData.value[stateCode] || 0
-        
+
         return {
           fillColor: getStateColor(count),
           weight: 2,
@@ -216,8 +216,8 @@ const loadBrazilGeoJSON = async (L) => {
         }
       },
       onEachFeature: (feature, layer) => {
-        const stateCode = feature.properties.state_code || feature.properties.SIGLA || feature.properties.sigla
-        const stateName = feature.properties.name || feature.properties.ESTADO || feature.properties.nome || getStateName(stateCode)
+        const stateCode = feature.properties.sigla || feature.properties.SIGLA || feature.properties.state_code
+        const stateName = feature.properties.nome || feature.properties.name || feature.properties.ESTADO || getStateName(stateCode)
         const count = stateData.value[stateCode] || 0
         
         // Bind popup
