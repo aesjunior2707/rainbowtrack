@@ -301,10 +301,11 @@ const addBubbleMarkers = (L) => {
 // Update map when data changes
 const updateMap = async () => {
   if (!map || typeof window === 'undefined') return
-  
+
   try {
-    const L = await import('leaflet')
-    
+    const { $leaflet } = useNuxtApp()
+    const L = $leaflet || (await import('leaflet')).default
+
     // Update GeoJSON styling
     if (geoJsonLayer) {
       geoJsonLayer.eachLayer((layer) => {
@@ -321,10 +322,10 @@ const updateMap = async () => {
         })
       })
     }
-    
+
     // Update bubble markers
-    addBubbleMarkers(L.default)
-    
+    addBubbleMarkers(L)
+
   } catch (error) {
     console.error('Error updating map:', error)
   }
