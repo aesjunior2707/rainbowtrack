@@ -13,7 +13,7 @@
         v-if="!isOnline"
         class="fixed top-0 left-0 right-0 bg-red-500 text-white text-center py-2 text-sm font-medium z-[9999] safe-top"
       >
-        📡 Modo offline - Algumas funcionalidades podem estar limitadas
+        📡 {{ t('pwa.offline_mode') }}
       </div>
     </Transition>
 
@@ -25,7 +25,7 @@
             <div class="animate-pulse">
               <div class="w-16 h-16 bg-primary-200 rounded-full mx-auto mb-4"></div>
               <div class="text-primary-600 font-semibold">Rainbow Track</div>
-              <div class="text-gray-500 text-sm mt-2">Carregando...</div>
+              <div class="text-gray-500 text-sm mt-2">{{ t('common.loading') }}</div>
             </div>
           </div>
         </div>
@@ -36,6 +36,10 @@
 
 <script setup>
 // Global setup
+const { $pinia } = useNuxtApp()
+const translationStore = useTranslationStore($pinia)
+
+const t = (key, params) => translationStore.t(key, params)
 useHead({
   title: 'Rainbow Track - Inteligência Competitiva',
   meta: [

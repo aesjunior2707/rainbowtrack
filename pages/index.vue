@@ -13,7 +13,7 @@
                 {{ t('dashboard.welcome', { name: authStore.user?.name }) }}
               </p>
               <p class="text-sm text-primary-600 mt-1">
-                Sistema de inteligência competitiva ativo
+                {{ t('dashboard.market_intelligence') }}
               </p>
             </ClientOnly>
           </div>
@@ -109,10 +109,35 @@
           </div>
         </div>
 
-        <!-- Admin-only Brazil Bubble Map -->
+        <!-- Admin-only Brazil Maps -->
         <ClientOnly>
           <div v-if="authStore.user?.role === 'admin'">
-            <BrazilBubbleMap />
+            <!-- Map Selection -->
+            <div class="mb-6 card p-4">
+              <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                <div>
+                  <h3 class="text-lg font-semibold text-gray-900">{{ t('dashboard.geographic_analysis') }}</h3>
+                  <p class="text-sm text-gray-600">{{ t('dashboard.select_visualization') }}</p>
+                </div>
+
+                <div class="flex items-center gap-3">
+                  <label class="text-sm font-medium text-gray-700">{{ t('dashboard.visualization') }}:</label>
+                  <select
+                    v-model="selectedMapType"
+                    class="border border-gray-300 rounded-md px-3 py-2 text-sm focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                  >
+                    <option value="bubble">📍 {{ t('dashboard.geographic_distribution') }}</option>
+                    <option value="heat">📊 {{ t('dashboard.density_analysis') }}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Dynamic Map Component -->
+            <div>
+              <BrazilBubbleMap v-if="selectedMapType === 'bubble'" />
+              <BrazilHeatMap v-else-if="selectedMapType === 'heat'" />
+            </div>
           </div>
         </ClientOnly>
       </div>
@@ -148,6 +173,9 @@ const dataStore = useDataStore($pinia)
 const translationStore = useTranslationStore($pinia)
 
 const t = (key, params) => translationStore.t(key, params)
+
+// Map selection state
+const selectedMapType = ref('bubble')
 
 const recentReports = computed(() => {
   return dataStore.getRecentPriceReports(5)

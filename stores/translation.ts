@@ -39,7 +39,13 @@ export const useTranslationStore = defineStore('translation', {
           quick_actions: 'Ações Rápidas',
           new_report: 'Nova Captura',
           price_trends: 'Tendências de Preços',
-          market_analysis: 'Análise de Mercado'
+          market_analysis: 'Análise de Mercado',
+          market_intelligence: 'Inteligência de Preços • Monitoramento Competitivo',
+          geographic_analysis: 'Análise Geoespacial',
+          select_visualization: 'Selecione a visualização para análise estratégica',
+          visualization: 'Visualização',
+          geographic_distribution: 'Distribuição Geográfica',
+          density_analysis: 'Análise de Densidade'
         },
         reports: {
           title: 'Capturas',
@@ -72,7 +78,7 @@ export const useTranslationStore = defineStore('translation', {
           region: 'Região',
           contact: 'Contato',
           phone: 'Telefone',
-          market_share: 'Participação de Mercado (%)',
+          market_share: 'Participa��ão de Mercado (%)',
           report_count: 'Capturas Coletadas',
           no_competitors: 'Nenhum concorrente encontrado',
           select_region: 'Selecionar Região',
@@ -118,6 +124,33 @@ export const useTranslationStore = defineStore('translation', {
           total: 'Total',
           date: 'Data',
           actions: 'Ações'
+        },
+        maps: {
+          territorial_distribution: 'Distribuição Territorial de Capturas Competitivas',
+          competitive_density: 'Análise de Densidade Competitiva por Região',
+          no_data: 'Sem dados',
+          low_density: 'Baixa densidade',
+          medium_density: 'Densidade média',
+          high_density: 'Alta densidade',
+          total_volume: 'Volume Total',
+          consolidated_volume: 'Volume Consolidado',
+          active_regions: 'Regiões Ativas',
+          operating_regions: 'Regiões em Operação',
+          regional_leader: 'Líder Regional',
+          featured_region: 'Região de Destaque',
+          performance_index: 'Índice de Performance',
+          efficiency_indicator: 'Indicador de Eficiência',
+          heat_map_brazil: 'Mapa de Calor - Brasil',
+          strategic_analysis: 'Análise estratégica de performance territorial',
+          detailed_breakdown: 'Breakdown Regional Detalhado',
+          captures: 'Capturas',
+          participation: 'Participação'
+        },
+        pwa: {
+          install_title: 'Instalar Rainbow Track',
+          install_description: 'Acesso rápido sem navegador',
+          install: 'Instalar',
+          offline_mode: 'Modo offline - Algumas funcionalidades podem estar limitadas'
         }
       },
       'en': {
@@ -155,7 +188,13 @@ export const useTranslationStore = defineStore('translation', {
           quick_actions: 'Quick Actions',
           new_report: 'New Capture',
           price_trends: 'Price Trends',
-          market_analysis: 'Market Analysis'
+          market_analysis: 'Market Analysis',
+          market_intelligence: 'Pricing Intelligence • Competitive Monitoring',
+          geographic_analysis: 'Geospatial Analysis',
+          select_visualization: 'Select visualization for strategic analysis',
+          visualization: 'Visualization',
+          geographic_distribution: 'Geographic Distribution',
+          density_analysis: 'Density Analysis'
         },
         reports: {
           title: 'Captures',
@@ -235,6 +274,33 @@ export const useTranslationStore = defineStore('translation', {
           total: 'Total',
           date: 'Date',
           actions: 'Actions'
+        },
+        maps: {
+          territorial_distribution: 'Territorial Distribution of Competitive Captures',
+          competitive_density: 'Competitive Density Analysis by Region',
+          no_data: 'No data',
+          low_density: 'Low density',
+          medium_density: 'Medium density',
+          high_density: 'High density',
+          total_volume: 'Total Volume',
+          consolidated_volume: 'Consolidated Volume',
+          active_regions: 'Active Regions',
+          operating_regions: 'Operating Regions',
+          regional_leader: 'Regional Leader',
+          featured_region: 'Featured Region',
+          performance_index: 'Performance Index',
+          efficiency_indicator: 'Efficiency Indicator',
+          heat_map_brazil: 'Heat Map - Brazil',
+          strategic_analysis: 'Strategic analysis of territorial performance',
+          detailed_breakdown: 'Detailed Regional Breakdown',
+          captures: 'Captures',
+          participation: 'Participation'
+        },
+        pwa: {
+          install_title: 'Install Rainbow Track',
+          install_description: 'Quick access without browser',
+          install: 'Install',
+          offline_mode: 'Offline mode - Some features may be limited'
         }
       },
       'es': {
@@ -272,7 +338,13 @@ export const useTranslationStore = defineStore('translation', {
           quick_actions: 'Acciones Rápidas',
           new_report: 'Nueva Captura',
           price_trends: 'Tendencias de Precios',
-          market_analysis: 'Análisis de Mercado'
+          market_analysis: 'Análisis de Mercado',
+          market_intelligence: 'Inteligencia de Precios • Monitoreo Competitivo',
+          geographic_analysis: 'Análisis Geoespacial',
+          select_visualization: 'Seleccione la visualización para análisis estratégico',
+          visualization: 'Visualización',
+          geographic_distribution: 'Distribución Geográfica',
+          density_analysis: 'Análisis de Densidad'
         },
         reports: {
           title: 'Capturas',
@@ -352,6 +424,33 @@ export const useTranslationStore = defineStore('translation', {
           total: 'Total',
           date: 'Fecha',
           actions: 'Acciones'
+        },
+        maps: {
+          territorial_distribution: 'Distribución Territorial de Capturas Competitivas',
+          competitive_density: 'Análisis de Densidad Competitiva por Región',
+          no_data: 'Sin datos',
+          low_density: 'Baja densidad',
+          medium_density: 'Densidad media',
+          high_density: 'Alta densidad',
+          total_volume: 'Volumen Total',
+          consolidated_volume: 'Volumen Consolidado',
+          active_regions: 'Regiones Activas',
+          operating_regions: 'Regiones en Operación',
+          regional_leader: 'Líder Regional',
+          featured_region: 'Región Destacada',
+          performance_index: 'Índice de Rendimiento',
+          efficiency_indicator: 'Indicador de Eficiencia',
+          heat_map_brazil: 'Mapa de Calor - Brasil',
+          strategic_analysis: 'Análisis estratégico del rendimiento territorial',
+          detailed_breakdown: 'Desglose Regional Detallado',
+          captures: 'Capturas',
+          participation: 'Participación'
+        },
+        pwa: {
+          install_title: 'Instalar Rainbow Track',
+          install_description: 'Acceso rápido sin navegador',
+          install: 'Instalar',
+          offline_mode: 'Modo offline - Algunas funciones pueden estar limitadas'
         }
       },
       'zh': {
@@ -389,7 +488,13 @@ export const useTranslationStore = defineStore('translation', {
           quick_actions: '快速操作',
           new_report: '新捕获',
           price_trends: '价格趋势',
-          market_analysis: '市场分析'
+          market_analysis: '市场分析',
+          market_intelligence: '定价情报 • 竞争监控',
+          geographic_analysis: '地理空间分析',
+          select_visualization: '选择可视化进行战略分析',
+          visualization: '可视化',
+          geographic_distribution: '地理分布',
+          density_analysis: '密度分析'
         },
         reports: {
           title: '捕获',
@@ -468,6 +573,33 @@ export const useTranslationStore = defineStore('translation', {
           total: '总计',
           date: '日期',
           actions: '操作'
+        },
+        maps: {
+          territorial_distribution: '竞争捕获的领土分布',
+          competitive_density: '按地区的竞争密度分析',
+          no_data: '无数据',
+          low_density: '低密度',
+          medium_density: '���等密度',
+          high_density: '高密度',
+          total_volume: '总量',
+          consolidated_volume: '综合量',
+          active_regions: '活跃地区',
+          operating_regions: '运营地区',
+          regional_leader: '地区领导者',
+          featured_region: '特色地区',
+          performance_index: '性能指数',
+          efficiency_indicator: '效率指标',
+          heat_map_brazil: '热力图 - 巴西',
+          strategic_analysis: '领土绩效战略分析',
+          detailed_breakdown: '详细区域细分',
+          captures: '捕获',
+          participation: '参与'
+        },
+        pwa: {
+          install_title: '安装 Rainbow Track',
+          install_description: '无需浏览器快速访问',
+          install: '安装',
+          offline_mode: '离线模式 - 某些功能可能受限'
         }
       }
     }

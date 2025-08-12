@@ -3,7 +3,7 @@
     <div class="card p-6">
       <h2 class="text-lg font-semibold text-gray-900 mb-4 flex items-center">
         <MapPin class="w-5 h-5 mr-2 text-primary-600" />
-        Capturas por Estado - Mapa do Brasil
+        {{ t('maps.territorial_distribution') }}
       </h2>
       
       <div class="relative w-full">
@@ -11,19 +11,19 @@
         <div class="mb-4 flex flex-wrap items-center gap-4 text-sm">
           <div class="flex items-center gap-2">
             <div class="w-3 h-3 rounded-full bg-gray-300"></div>
-            <span class="text-gray-600">Sem capturas</span>
+            <span class="text-gray-600">{{ t('maps.no_data') }}</span>
           </div>
           <div class="flex items-center gap-2">
             <div class="w-3 h-3 rounded-full bg-primary-200"></div>
-            <span class="text-gray-600">1-3 capturas</span>
+            <span class="text-gray-600">{{ t('maps.low_density') }}</span>
           </div>
           <div class="flex items-center gap-2">
             <div class="w-4 h-4 rounded-full bg-primary-400"></div>
-            <span class="text-gray-600">4-8 capturas</span>
+            <span class="text-gray-600">{{ t('maps.medium_density') }}</span>
           </div>
           <div class="flex items-center gap-2">
             <div class="w-5 h-5 rounded-full bg-primary-600"></div>
-            <span class="text-gray-600">9+ capturas</span>
+            <span class="text-gray-600">{{ t('maps.high_density') }}</span>
           </div>
         </div>
 
@@ -36,19 +36,19 @@
         <div class="mt-6 grid grid-cols-2 md:grid-cols-4 gap-4">
           <div class="text-center p-3 bg-primary-50 rounded-lg">
             <div class="text-2xl font-bold text-primary-600">{{ totalCaptures }}</div>
-            <div class="text-sm text-gray-600">Total de Capturas</div>
+            <div class="text-sm text-gray-600">{{ t('maps.total_volume') }}</div>
           </div>
           <div class="text-center p-3 bg-secondary-50 rounded-lg">
             <div class="text-2xl font-bold text-secondary-500">{{ activeStates }}</div>
-            <div class="text-sm text-gray-600">Estados Ativos</div>
+            <div class="text-sm text-gray-600">{{ t('maps.active_regions') }}</div>
           </div>
           <div class="text-center p-3 bg-blue-50 rounded-lg">
             <div class="text-2xl font-bold text-blue-600">{{ topState.state }}</div>
-            <div class="text-sm text-gray-600">Estado Líder</div>
+            <div class="text-sm text-gray-600">{{ t('maps.regional_leader') }}</div>
           </div>
           <div class="text-center p-3 bg-purple-50 rounded-lg">
             <div class="text-2xl font-bold text-purple-600">{{ averagePerState.toFixed(1) }}</div>
-            <div class="text-sm text-gray-600">Média por Estado</div>
+            <div class="text-sm text-gray-600">{{ t('maps.performance_index') }}</div>
           </div>
         </div>
       </div>
@@ -59,7 +59,11 @@
 <script setup>
 import { MapPin } from 'lucide-vue-next'
 
+const { $pinia } = useNuxtApp()
 const dataStore = useDataStore()
+const translationStore = useTranslationStore($pinia)
+
+const t = (key, params) => translationStore.t(key, params)
 
 // All Brazilian states
 const brazilianStates = [
