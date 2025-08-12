@@ -316,9 +316,9 @@ const updateMap = async () => {
     if (geoJsonLayer) {
       geoJsonLayer.eachLayer((layer) => {
         const feature = layer.feature
-        const stateCode = feature.properties.state_code || feature.properties.SIGLA || feature.properties.sigla
+        const stateCode = feature.properties.sigla || feature.properties.SIGLA || feature.properties.state_code
         const count = stateData.value[stateCode] || 0
-        
+
         layer.setStyle({
           fillColor: getStateColor(count),
           weight: 2,
