@@ -40,7 +40,7 @@
           </div>
           <div class="text-center p-3 bg-secondary-50 rounded-lg">
             <div class="text-2xl font-bold text-secondary-500">{{ activeStates }}</div>
-            <div class="text-sm text-gray-600">Estados Ativos</div>
+            <div class="text-sm text-gray-600">Regiões Ativas</div>
           </div>
           <div class="text-center p-3 bg-blue-50 rounded-lg">
             <div class="text-2xl font-bold text-blue-600">{{ topState.state }}</div>
