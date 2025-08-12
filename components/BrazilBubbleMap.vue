@@ -44,7 +44,7 @@
           </div>
           <div class="text-center p-3 bg-blue-50 rounded-lg">
             <div class="text-2xl font-bold text-blue-600">{{ topState.state }}</div>
-            <div class="text-sm text-gray-600">Líder Regional</div>
+            <div class="text-sm text-gray-600">{{ t('maps.regional_leader') }}</div>
           </div>
           <div class="text-center p-3 bg-purple-50 rounded-lg">
             <div class="text-2xl font-bold text-purple-600">{{ averagePerState.toFixed(1) }}</div>
