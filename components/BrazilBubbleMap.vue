@@ -23,7 +23,7 @@
           </div>
           <div class="flex items-center gap-2">
             <div class="w-5 h-5 rounded-full bg-primary-600"></div>
-            <span class="text-gray-600">9+ capturas</span>
+            <span class="text-gray-600">Alta densidade</span>
           </div>
         </div>
 
