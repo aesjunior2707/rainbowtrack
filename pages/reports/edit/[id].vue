@@ -135,15 +135,6 @@
               </div>
             </div>
 
-            <!-- Total da Captura -->
-            <div v-if="form.products.length > 1" class="bg-primary-50 border border-primary-200 rounded-lg p-4 mt-4">
-              <div class="flex justify-between items-center">
-                <span class="text-sm font-medium text-primary-900">Total da Captura:</span>
-                <span class="text-xl font-bold text-primary-600">
-                  {{ selectedCurrencySymbol }} {{ formatPrice(totalCaptureValue) }}
-                </span>
-              </div>
-            </div>
           </div>
 
           <!-- Details Card -->
@@ -250,24 +241,6 @@
                 </select>
               </div>
 
-              <div>
-                <label class="block text-sm font-medium text-gray-700 mb-2">
-                  Forma de Pagamento
-                </label>
-                <select v-model="form.paymentMethod" class="input-field" required>
-                  <option value="">Selecione a forma</option>
-                  <option value="DINHEIRO">Dinheiro</option>
-                  <option value="PIX">PIX</option>
-                  <option value="TRANSFERENCIA">Transferência Bancária</option>
-                  <option value="BOLETO">Boleto Bancário</option>
-                  <option value="CHEQUE">Cheque</option>
-                  <option value="CARTAO_CREDITO">Cartão de Crédito</option>
-                  <option value="CARTAO_DEBITO">Cartão de Débito</option>
-                  <option value="DEPOSITO">Depósito Bancário</option>
-                  <option value="DOCUMENTO">Documento/Duplicata</option>
-                  <option value="OUTRO">Outro</option>
-                </select>
-              </div>
 
               <div class="md:col-span-2">
                 <label class="block text-sm font-medium text-gray-700 mb-2">
@@ -345,9 +318,6 @@ const selectedCurrencySymbol = computed(() => {
   return currency ? currency.symbol : 'R$'
 })
 
-const totalCaptureValue = computed(() => {
-  return form.value.products.reduce((total, product) => total + product.competitorPrice, 0)
-})
 
 const form = ref({
   reportDate: '',
@@ -355,7 +325,6 @@ const form = ref({
   region: '',
   state: '',
   paymentCondition: '',
-  paymentMethod: '',
   currencyId: '',
   notes: '',
   products: []
@@ -410,7 +379,6 @@ const loadReport = () => {
       region: foundReport.region,
       state: foundReport.state,
       paymentCondition: foundReport.paymentCondition,
-      paymentMethod: foundReport.paymentMethod,
       currencyId: foundReport.currencyId,
       notes: foundReport.notes || '',
       products: [...foundReport.products] // Copy products array
