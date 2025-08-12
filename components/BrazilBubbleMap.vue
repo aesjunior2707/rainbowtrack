@@ -50,6 +50,7 @@
               style="transform-origin: center; animation: pulse 2s ease-in-out infinite"
               @mouseenter="showTooltip($event, 'MT', stateData.MT)"
               @mouseleave="hideTooltip"
+              @click="showStateDetails('MT', stateData.MT)"
             />
             <text x="360" y="285" text-anchor="middle" class="text-xs font-semibold fill-white">
               MT
