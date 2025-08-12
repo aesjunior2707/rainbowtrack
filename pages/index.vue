@@ -13,7 +13,7 @@
                 {{ t('dashboard.welcome', { name: authStore.user?.name }) }}
               </p>
               <p class="text-sm text-primary-600 mt-1">
-                Análise de Market Intelligence • Dados Consolidados
+                {{ t('dashboard.market_intelligence') }}
               </p>
             </ClientOnly>
           </div>
