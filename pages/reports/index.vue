@@ -351,19 +351,16 @@ const formatPrice = (price) => {
 
 const getPaymentConditionText = (condition) => {
   const conditions = {
-    'A_VISTA': 'À Vista',
-    'BOLETO_30': 'Boleto 30d',
-    'BOLETO_60': 'Boleto 60d',
-    'BOLETO_90': 'Boleto 90d',
-    'BOLETO_120': 'Boleto 120d',
+    'AVISTA': 'À Vista',
+    '30_DIAS': '30 Dias',
+    '60_DIAS': '60 Dias',
+    '90_DIAS': '90 Dias',
+    '120_DIAS': '120 Dias',
+    '150_DIAS': '150 Dias',
+    '180_DIAS': '180 Dias',
     'POS_COLHEITA': 'Pós-Colheita',
     'SAFRA': 'Safra',
-    'BARTER': 'Barter',
-    'FINANCIAMENTO': 'Financiamento',
-    'PARCELA_MENSAL': 'Parcelado',
-    'CHEQUE_PRE': 'Cheque Pré',
-    'CARTAO_CREDITO': 'Cartão Crédito',
-    'OUTRO': 'Outro'
+    'BARTER': 'Barter'
   }
   return conditions[condition] || condition
 }
