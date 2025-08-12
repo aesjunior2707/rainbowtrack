@@ -25,7 +25,7 @@
             <div class="flex items-center justify-between">
               <div>
                 <div class="text-2xl font-bold">{{ activeStates }}</div>
-                <div class="text-secondary-100 text-sm">Estados Ativos</div>
+                <div class="text-secondary-100 text-sm">Regiões em Operação</div>
               </div>
               <div class="bg-white bg-opacity-20 p-3 rounded-lg">
                 <MapPin class="w-6 h-6 text-white" />
