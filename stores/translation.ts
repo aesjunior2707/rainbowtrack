@@ -488,13 +488,19 @@ export const useTranslationStore = defineStore('translation', {
           quick_actions: '快速操作',
           new_report: '新捕获',
           price_trends: '价格趋势',
-          market_analysis: '市场分析'
+          market_analysis: '市场分析',
+          market_intelligence: '市场情报分析 • 综合数据',
+          geographic_analysis: '地理空间分析',
+          select_visualization: '选择可视化进行战略分析',
+          visualization: '可视化',
+          geographic_distribution: '地理分布',
+          density_analysis: '密度分析'
         },
         reports: {
           title: '捕获',
           new_report: '新捕获',
           report_number: '捕获 #{id}',
-          report_date: '捕获日期：',
+          report_date: '捕���日期：',
           competitor: '竞争对手：',
           product: '产品：',
           region: '地区：',
