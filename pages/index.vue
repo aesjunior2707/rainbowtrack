@@ -109,10 +109,10 @@
           </div>
         </div>
 
-        <!-- Admin-only Brazil Bubble Map -->
+        <!-- Admin-only Brazil Heat Map -->
         <ClientOnly>
           <div v-if="authStore.user?.role === 'admin'">
-            <BrazilBubbleMap />
+            <BrazilHeatMap />
           </div>
         </ClientOnly>
       </div>
