@@ -138,7 +138,8 @@
 
             <!-- Dynamic Map Component -->
             <div>
-              <BrazilProMap v-if="selectedMapType === 'pro'" />
+              <BrazilRealMap v-if="selectedMapType === 'real'" />
+              <BrazilProMap v-else-if="selectedMapType === 'pro'" />
               <BrazilChartMap v-else-if="selectedMapType === 'chart'" />
               <BrazilHeatMap v-else-if="selectedMapType === 'heat'" />
               <BrazilGeoMap v-else-if="selectedMapType === 'geo'" />
