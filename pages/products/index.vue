@@ -51,7 +51,6 @@
                 </div>
               </div>
               <p class="text-primary-600 font-medium">{{ product.brand }}</p>
-              <p class="text-sm text-gray-500">{{ product.packaging }}</p>
             </div>
             
             <div class="space-y-3 text-sm">
