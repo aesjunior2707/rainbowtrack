@@ -150,8 +150,8 @@ const formatDate = (dateString) => {
 
 const getPaymentConditionText = (condition) => {
   const conditions = {
-    'SAFRA_2024': 'Safra 2024',
-    'SAFRINHA_2024': 'Safrinha 2024',
+    'SAFRA_2026': 'Safra 2026',
+    'SAFRINHA_2026': 'Safrinha 2026',
     'A_VISTA': 'A vista',
     '30_DIAS': '30 dias',
     '60_DIAS': '60 dias',
