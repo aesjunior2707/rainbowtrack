@@ -424,6 +424,33 @@ export const useTranslationStore = defineStore('translation', {
           total: 'Total',
           date: 'Fecha',
           actions: 'Acciones'
+        },
+        maps: {
+          territorial_distribution: 'Distribución Territorial de Capturas Competitivas',
+          competitive_density: 'Análisis de Densidad Competitiva por Región',
+          no_data: 'Sin datos',
+          low_density: 'Baja densidad',
+          medium_density: 'Densidad media',
+          high_density: 'Alta densidad',
+          total_volume: 'Volumen Total',
+          consolidated_volume: 'Volumen Consolidado',
+          active_regions: 'Regiones Activas',
+          operating_regions: 'Regiones en Operación',
+          regional_leader: 'Líder Regional',
+          featured_region: 'Región Destacada',
+          performance_index: 'Índice de Rendimiento',
+          efficiency_indicator: 'Indicador de Eficiencia',
+          heat_map_brazil: 'Mapa de Calor - Brasil',
+          strategic_analysis: 'Análisis estratégico del rendimiento territorial',
+          detailed_breakdown: 'Desglose Regional Detallado',
+          captures: 'Capturas',
+          participation: 'Participación'
+        },
+        pwa: {
+          install_title: 'Instalar Rainbow Track',
+          install_description: 'Acceso rápido sin navegador',
+          install: 'Instalar',
+          offline_mode: 'Modo offline - Algunas funciones pueden estar limitadas'
         }
       },
       'zh': {
