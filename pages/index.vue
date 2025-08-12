@@ -176,6 +176,9 @@ const translationStore = useTranslationStore($pinia)
 
 const t = (key, params) => translationStore.t(key, params)
 
+// Map selection state
+const selectedMapType = ref('chart')
+
 const recentReports = computed(() => {
   return dataStore.getRecentPriceReports(5)
 })
