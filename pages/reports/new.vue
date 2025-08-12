@@ -223,16 +223,19 @@
                 </label>
                 <select v-model="paymentCondition" class="input-field" required>
                   <option value="">Selecione a condição</option>
-                  <option value="AVISTA">À Vista</option>
-                  <option value="30_DIAS">30 Dias</option>
-                  <option value="60_DIAS">60 Dias</option>
-                  <option value="90_DIAS">90 Dias</option>
-                  <option value="120_DIAS">120 Dias</option>
-                  <option value="150_DIAS">150 Dias</option>
-                  <option value="180_DIAS">180 Dias</option>
-                  <option value="POS_COLHEITA">Pós-Colheita</option>
-                  <option value="SAFRA">Safra</option>
-                  <option value="BARTER">Barter</option>
+                  <option value="SAFRA_2024">Safra 2024</option>
+                  <option value="SAFRINHA_2024">Safrinha 2024</option>
+                  <option value="A_VISTA">�� vista</option>
+                  <option value="30_DIAS">30 dias</option>
+                  <option value="60_DIAS">60 dias</option>
+                  <option value="90_DIAS">90 dias</option>
+                  <option value="120_DIAS">120 dias</option>
+                  <option value="150_DIAS">150 dias</option>
+                  <option value="180_DIAS">180 dias</option>
+                  <option value="210_DIAS">210 dias</option>
+                  <option value="240_DIAS">240 dias</option>
+                  <option value="270_DIAS">270 dias</option>
+                  <option value="360_DIAS">360 dias</option>
                 </select>
               </div>
 
