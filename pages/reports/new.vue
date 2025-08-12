@@ -225,7 +225,7 @@
                   <option value="">Selecione a condição</option>
                   <option value="SAFRA_2024">Safra 2024</option>
                   <option value="SAFRINHA_2024">Safrinha 2024</option>
-                  <option value="A_VISTA">�� vista</option>
+                  <option value="A_VISTA">A vista</option>
                   <option value="30_DIAS">30 dias</option>
                   <option value="60_DIAS">60 dias</option>
                   <option value="90_DIAS">90 dias</option>
