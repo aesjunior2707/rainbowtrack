@@ -93,7 +93,7 @@
                 <div class="flex justify-between items-start mb-4">
                   <div class="flex-1">
                     <h5 class="font-semibold text-gray-900">{{ getProductName(productItem.productId) }}</h5>
-                    <p class="text-sm text-gray-600">{{ getProductBrand(productItem.productId) }} • {{ getProductPackaging(productItem.productId) }}</p>
+                    <p class="text-sm text-gray-600">{{ getProductBrand(productItem.productId) }}</p>
                     <p class="text-xs text-gray-500 mt-1">{{ getProductDescription(productItem.productId) }}</p>
                     
                     <!-- Registered Crops -->
@@ -341,10 +341,6 @@ const getProductBrand = (productId) => {
   return product ? product.brand : 'Marca Desconhecida'
 }
 
-const getProductPackaging = (productId) => {
-  const product = dataStore.getProductById(productId)
-  return product ? product.packaging : 'Não informado'
-}
 
 const getProductDescription = (productId) => {
   const product = dataStore.getProductById(productId)
