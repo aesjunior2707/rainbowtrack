@@ -40,13 +40,14 @@
             
             <!-- State bubbles with data -->
             <!-- Mato Grosso (MT) -->
-            <circle 
-              :cx="360" 
-              :cy="280" 
+            <circle
+              :cx="360"
+              :cy="280"
               :r="getBubbleSize(stateData.MT)"
               :fill="getBubbleColor(stateData.MT)"
               :opacity="0.8"
-              class="cursor-pointer transition-all duration-200 hover:opacity-100"
+              class="cursor-pointer transition-all duration-300 hover:opacity-100 hover:scale-110"
+              style="transform-origin: center; animation: pulse 2s ease-in-out infinite"
               @mouseenter="showTooltip($event, 'MT', stateData.MT)"
               @mouseleave="hideTooltip"
             />
