@@ -491,7 +491,7 @@ export const useTranslationStore = defineStore('translation', {
           market_analysis: '市场分析',
           market_intelligence: '市场情报分析 • 综合数据',
           geographic_analysis: '地理空间分析',
-          select_visualization: '选择可视化进行战略分析',
+          select_visualization: '选择可视化进��战略分析',
           visualization: '可视化',
           geographic_distribution: '地理分布',
           density_analysis: '密度分析'
@@ -500,7 +500,7 @@ export const useTranslationStore = defineStore('translation', {
           title: '捕获',
           new_report: '新捕获',
           report_number: '捕获 #{id}',
-          report_date: '捕���日期：',
+          report_date: '捕获日期：',
           competitor: '竞争对手：',
           product: '产品：',
           region: '地区：',
@@ -528,7 +528,7 @@ export const useTranslationStore = defineStore('translation', {
           contact: '联系方式',
           phone: '电话',
           market_share: '市场份额 (%)',
-          report_count: '收集的捕获',
+          report_count: '��集的捕获',
           no_competitors: '未找到竞争对手',
           select_region: '选择地区',
           search_placeholder: '搜索竞争对手...',
@@ -573,6 +573,33 @@ export const useTranslationStore = defineStore('translation', {
           total: '总计',
           date: '日期',
           actions: '操作'
+        },
+        maps: {
+          territorial_distribution: '竞争捕获的领土分布',
+          competitive_density: '按地区的竞争密度分析',
+          no_data: '无数据',
+          low_density: '低密度',
+          medium_density: '中等密度',
+          high_density: '高密度',
+          total_volume: '总量',
+          consolidated_volume: '综合量',
+          active_regions: '活跃地区',
+          operating_regions: '运营地区',
+          regional_leader: '地区领导者',
+          featured_region: '特色地区',
+          performance_index: '性能指数',
+          efficiency_indicator: '效率指标',
+          heat_map_brazil: '热力图 - 巴西',
+          strategic_analysis: '领土绩效战略分析',
+          detailed_breakdown: '详细区域细分',
+          captures: '捕获',
+          participation: '参与'
+        },
+        pwa: {
+          install_title: '安装 Rainbow Track',
+          install_description: '无需浏览器快速访问',
+          install: '安装',
+          offline_mode: '离线模式 - 某些功能可能受限'
         }
       }
     }
