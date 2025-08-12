@@ -54,27 +54,50 @@
           >
             <div class="flex justify-between items-start">
               <div class="flex-1">
-                <h3 class="font-semibold text-gray-900 mb-1">{{ product.name }}</h3>
-                <p class="text-sm text-gray-600 mb-2">{{ product.brand }}</p>
+                <div class="flex items-center justify-between mb-2">
+                  <h3 class="font-semibold text-gray-900">{{ product.name }}</h3>
+                  <span 
+                    v-if="product.isMainCompetitor"
+                    class="inline-flex items-center px-2 py-1 text-xs font-medium bg-red-100 text-red-800 rounded-full"
+                  >
+                    <AlertCircle class="w-3 h-3 mr-1" />
+                    Main
+                  </span>
+                </div>
                 
+                <div class="space-y-1 mb-3">
+                  <p class="text-sm text-gray-600">
+                    <span class="font-medium">Marca:</span> {{ product.brand }}
+                  </p>
+                  <p class="text-sm text-gray-600" v-if="product.competitorProduct">
+                    <span class="font-medium">Concorrente:</span> {{ product.competitorProduct }}
+                  </p>
+                </div>
+                
+                <!-- Category Badge -->
+                <div class="flex items-center space-x-2 mb-3">
+                  <span class="inline-flex items-center px-2 py-1 text-xs font-medium bg-blue-100 text-blue-800 rounded-full">
+                    {{ getCategoryName(product.category) }}
+                  </span>
+                  <span class="text-xs text-gray-500">{{ product.packaging }}</span>
+                </div>
+
                 <!-- Crops -->
-                <div class="flex flex-wrap gap-1 mb-3">
+                <div class="flex flex-wrap gap-1">
                   <span
-                    v-for="crop in product.registeredCrops.slice(0, 3)"
+                    v-for="crop in product.registeredCrops.slice(0, 2)"
                     :key="crop"
                     class="inline-block px-2 py-1 text-xs bg-secondary-100 text-secondary-800 rounded"
                   >
                     {{ crop }}
                   </span>
                   <span
-                    v-if="product.registeredCrops.length > 3"
+                    v-if="product.registeredCrops.length > 2"
                     class="inline-block px-2 py-1 text-xs bg-gray-100 text-gray-600 rounded"
                   >
-                    +{{ product.registeredCrops.length - 3 }}
+                    +{{ product.registeredCrops.length - 2 }}
                   </span>
                 </div>
-
-
               </div>
 
               <!-- Selection indicator -->
@@ -102,9 +125,20 @@
       <div v-if="selectedProduct" class="border-t bg-gray-50 p-4 space-y-4">
         <div class="bg-white rounded-xl p-4 border border-primary-200">
           <div class="flex items-center justify-between mb-3">
-            <div>
-              <h4 class="font-semibold text-gray-900">{{ selectedProduct.name }}</h4>
+            <div class="flex-1">
+              <div class="flex items-center space-x-2 mb-1">
+                <h4 class="font-semibold text-gray-900">{{ selectedProduct.name }}</h4>
+                <span 
+                  v-if="selectedProduct.isMainCompetitor"
+                  class="inline-flex items-center px-2 py-1 text-xs font-medium bg-red-100 text-red-800 rounded-full"
+                >
+                  Main
+                </span>
+              </div>
               <p class="text-sm text-gray-600">{{ selectedProduct.brand }}</p>
+              <p class="text-xs text-gray-500" v-if="selectedProduct.competitorProduct">
+                Concorrente: {{ selectedProduct.competitorProduct }}
+              </p>
             </div>
             <button
               @click="selectedProduct = null; competitorPrice = ''"
@@ -156,7 +190,7 @@
 </template>
 
 <script setup>
-import { X, Search, Package, Check } from 'lucide-vue-next'
+import { X, Search, Package, Check, AlertCircle } from 'lucide-vue-next'
 
 const props = defineProps({
   dataStore: {
@@ -167,18 +201,20 @@ const props = defineProps({
 
 const emit = defineEmits(['close', 'product-selected'])
 
-const selectedCategory = ref('fungicides')
+const selectedCategory = ref('defensivos')
 const productSearch = ref('')
 const selectedProduct = ref(null)
 const competitorPrice = ref('')
 
-const categories = ['fungicides', 'insecticides', 'herbicides']
+const categories = ['defensivos', 'seeds', 'fertilizers', 'inoculants', 'biologicals']
 
 const getCategoryName = (category) => {
   const names = {
-    fungicides: 'Fungicidas',
-    insecticides: 'Inseticidas',
-    herbicides: 'Herbicidas'
+    defensivos: 'Defensivos',
+    seeds: 'Sementes',
+    fertilizers: 'Fertilizantes',
+    inoculants: 'Inoculantes',
+    biologicals: 'Biológicos'
   }
   return names[category] || category
 }
@@ -191,6 +227,7 @@ const filteredProducts = computed(() => {
     products = products.filter(product => 
       product.name.toLowerCase().includes(search) ||
       product.brand.toLowerCase().includes(search) ||
+      product.competitorProduct?.toLowerCase().includes(search) ||
       product.registeredCrops.some(crop => crop.toLowerCase().includes(search))
     )
   }
@@ -209,13 +246,6 @@ const selectProduct = (product) => {
   })
 }
 
-const formatPrice = (price) => {
-  return new Intl.NumberFormat('pt-BR', {
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2
-  }).format(price)
-}
-
 const confirmSelection = () => {
   if (selectedProduct.value && competitorPrice.value) {
     emit('product-selected', {
@@ -230,6 +260,6 @@ watch(() => props.dataStore, () => {
   selectedProduct.value = null
   competitorPrice.value = ''
   productSearch.value = ''
-  selectedCategory.value = 'fungicides'
+  selectedCategory.value = 'defensivos'
 }, { immediate: true })
 </script>
