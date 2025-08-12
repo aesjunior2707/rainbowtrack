@@ -16,6 +16,8 @@
     "@vite-pwa/nuxt": "^1.0.4",
     "@vueuse/nuxt": "^13.5.0",
     "apexcharts": "^5.3.3",
+    "chart.js": "^4.5.0",
+    "chartjs-chart-geo": "^4.3.4",
     "d3-geo": "^3.1.1",
     "d3-scale": "^4.0.2",
     "d3-selection": "^3.0.0",
