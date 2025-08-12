@@ -232,7 +232,7 @@ export const useDataStore = defineStore('data', {
         verified: false,
         region: 'REG001',
         state: 'SP',
-        paymentCondition: '60_DIAS',
+        paymentCondition: 'A_VISTA',
 
         currencyId: 1,
         products: [
@@ -327,7 +327,7 @@ export const useDataStore = defineStore('data', {
         verified: false,
         region: 'REG001',
         state: 'SP',
-        paymentCondition: '60_DIAS',
+        paymentCondition: 'A_VISTA',
 
         currencyId: 1,
         products: [
