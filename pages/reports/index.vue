@@ -151,24 +151,7 @@
                 </div>
               </div>
 
-              <!-- Total da Captura -->
-              <div v-if="getProductCount(report) > 1" class="bg-primary-50 border border-primary-200 rounded-lg p-3 mb-3">
-                <div class="flex justify-between items-center">
-                  <span class="text-sm font-medium text-primary-900">Total da Captura:</span>
-                  <span class="text-lg font-bold text-primary-600">
-                    {{ getCurrencySymbol(report.currencyId) }} {{ formatPrice(getTotalCaptureValue(report)) }}
-                  </span>
-                </div>
-              </div>
 
-              <!-- Condições de Pagamento (apenas para admin) -->
-              <div v-if="isAdmin && (report.paymentCondition || report.paymentMethod)" class="text-xs text-gray-500 mb-3">
-                <div class="flex items-center space-x-2">
-                  <CreditCard class="w-3 h-3" />
-                  <span>{{ getPaymentConditionText(report.paymentCondition) }}</span>
-                  <span v-if="report.paymentMethod">• {{ getPaymentMethodText(report.paymentMethod) }}</span>
-                </div>
-              </div>
 
               <!-- Observações (se houver) -->
               <div v-if="report.notes" class="text-xs text-gray-600 bg-blue-50 rounded p-2 mb-3 border-l-2 border-blue-200">
@@ -241,7 +224,7 @@
 </template>
 
 <script setup>
-import { Plus, Eye, Edit, FileText, CheckCircle, Clock, MapPin, CreditCard, User, Package } from 'lucide-vue-next'
+import { Plus, Eye, Edit, FileText, CheckCircle, Clock, MapPin, User, Package } from 'lucide-vue-next'
 
 definePageMeta({
   middleware: 'auth'
@@ -339,10 +322,6 @@ const getReportProducts = (report) => {
   }]
 }
 
-const getTotalCaptureValue = (report) => {
-  const products = getReportProducts(report)
-  return products.reduce((total, product) => total + product.competitorPrice, 0)
-}
 
 const getCurrencySymbol = (currencyId) => {
   const currency = dataStore.getCurrencyById(currencyId)
@@ -389,21 +368,6 @@ const getPaymentConditionText = (condition) => {
   return conditions[condition] || condition
 }
 
-const getPaymentMethodText = (method) => {
-  const methods = {
-    'DINHEIRO': 'Dinheiro',
-    'PIX': 'PIX',
-    'TRANSFERENCIA': 'Transferência',
-    'BOLETO': 'Boleto',
-    'CHEQUE': 'Cheque',
-    'CARTAO_CREDITO': 'Cartão Crédito',
-    'CARTAO_DEBITO': 'Cartão Débito',
-    'DEPOSITO': 'Depósito',
-    'DOCUMENTO': 'Documento',
-    'OUTRO': 'Outro'
-  }
-  return methods[method] || method
-}
 
 const truncateText = (text, maxLength) => {
   if (!text) return ''
