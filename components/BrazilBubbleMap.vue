@@ -36,7 +36,7 @@
         <div class="mt-6 grid grid-cols-2 md:grid-cols-4 gap-4">
           <div class="text-center p-3 bg-primary-50 rounded-lg">
             <div class="text-2xl font-bold text-primary-600">{{ totalCaptures }}</div>
-            <div class="text-sm text-gray-600">Total de Capturas</div>
+            <div class="text-sm text-gray-600">Volume Total</div>
           </div>
           <div class="text-center p-3 bg-secondary-50 rounded-lg">
             <div class="text-2xl font-bold text-secondary-500">{{ activeStates }}</div>
