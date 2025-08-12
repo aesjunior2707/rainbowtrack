@@ -269,4 +269,20 @@ const hideTooltip = () => {
 .card {
   @apply bg-white rounded-lg shadow-sm border border-gray-200;
 }
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 0.9;
+  }
+}
+
+/* Disable animation on smaller screens for better performance */
+@media (max-width: 768px) {
+  circle {
+    animation: none !important;
+  }
+}
 </style>
