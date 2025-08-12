@@ -13,7 +13,7 @@
         v-if="!isOnline"
         class="fixed top-0 left-0 right-0 bg-red-500 text-white text-center py-2 text-sm font-medium z-[9999] safe-top"
       >
-        📡 Modo offline - Algumas funcionalidades podem estar limitadas
+        📡 {{ t('pwa.offline_mode') }}
       </div>
     </Transition>
 
