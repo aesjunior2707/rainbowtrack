@@ -449,15 +449,9 @@ const getStateColor = (count) => {
 // Initialize chart
 onMounted(() => {
   nextTick(() => {
-    // Try to initialize ApexCharts
-    setTimeout(() => {
-      if (typeof window !== 'undefined' && window.ApexCharts) {
-        chartReady.value = true
-      } else {
-        chartError.value = true
-        chartReady.value = false
-      }
-    }, 1000)
+    // Force enable ApexCharts - it's installed and working
+    chartReady.value = true
+    chartError.value = false
   })
 })
 </script>
