@@ -420,10 +420,41 @@ const chartSeries = computed(() => {
   }]
 })
 
+// Helper functions for fallback
+const showTooltip = (state, count, event) => {
+  const rect = event.target.getBoundingClientRect()
+  fallbackTooltip.value = {
+    visible: true,
+    x: rect.left + rect.width / 2,
+    y: rect.top,
+    state,
+    count
+  }
+}
+
+const hideTooltip = () => {
+  fallbackTooltip.value.visible = false
+}
+
+const getStateColor = (count) => {
+  if (count === 0) return '#e2e8f0'
+  if (count <= 3) return '#99f6e4'
+  if (count <= 8) return '#2dd4bf'
+  return '#006E68'
+}
+
 // Initialize chart
 onMounted(() => {
   nextTick(() => {
-    chartReady.value = true
+    // Try to initialize ApexCharts
+    setTimeout(() => {
+      if (typeof window !== 'undefined' && window.ApexCharts) {
+        chartReady.value = true
+      } else {
+        chartError.value = true
+        chartReady.value = false
+      }
+    }, 1000)
   })
 })
 </script>
