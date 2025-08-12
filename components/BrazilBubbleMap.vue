@@ -15,7 +15,7 @@
           </div>
           <div class="flex items-center gap-2">
             <div class="w-3 h-3 rounded-full bg-primary-200"></div>
-            <span class="text-gray-600">1-3 capturas</span>
+            <span class="text-gray-600">Baixa densidade</span>
           </div>
           <div class="flex items-center gap-2">
             <div class="w-4 h-4 rounded-full bg-primary-400"></div>
