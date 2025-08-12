@@ -49,7 +49,7 @@
             <div class="flex items-center justify-between">
               <div>
                 <div class="text-2xl font-bold">{{ averagePerState.toFixed(1) }}</div>
-                <div class="text-purple-100 text-sm">Indicador de Eficiência</div>
+                <div class="text-purple-100 text-sm">{{ t('maps.efficiency_indicator') }}</div>
               </div>
               <div class="bg-white bg-opacity-20 p-3 rounded-lg">
                 <BarChart3 class="w-6 h-6 text-white" />
