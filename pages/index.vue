@@ -121,13 +121,13 @@
                 </div>
 
                 <div class="flex items-center gap-3">
-                  <label class="text-sm font-medium text-gray-700">Visualização:</label>
+                  <label class="text-sm font-medium text-gray-700">{{ t('dashboard.visualization') }}:</label>
                   <select
                     v-model="selectedMapType"
                     class="border border-gray-300 rounded-md px-3 py-2 text-sm focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
                   >
-                    <option value="bubble">📍 Distribuição Geográfica</option>
-                    <option value="heat">📊 Análise de Densidade</option>
+                    <option value="bubble">📍 {{ t('dashboard.geographic_distribution') }}</option>
+                    <option value="heat">📊 {{ t('dashboard.density_analysis') }}</option>
                   </select>
                 </div>
               </div>
