@@ -134,7 +134,7 @@
                     </div>
                     <div class="text-right">
                       <p class="font-bold text-primary-600">
-                        {{ getCurrencySymbol(report.currencyId) }} {{ formatPrice(productItem.competitorPrice) }}
+                        {{ getCurrencySymbol(productItem.currencyId || report.currencyId || 1) }} {{ formatPrice(productItem.competitorPrice) }}
                       </p>
                     </div>
                   </div>
@@ -318,7 +318,8 @@ const getReportProducts = (report) => {
   // Convert old format to new format for display
   return [{
     productId: report.productId,
-    competitorPrice: report.competitorPrice
+    competitorPrice: report.competitorPrice,
+    currencyId: report.currencyId || 1 // Default to BRL for old format
   }]
 }
 
