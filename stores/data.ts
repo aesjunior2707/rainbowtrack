@@ -64,7 +64,7 @@ export const useDataStore = defineStore('data', {
         active: true
       }
     ],
-    nextReportId: 19,
+    nextReportId: 21,
 
     competitors: [
       {
