@@ -151,6 +151,16 @@
                 </div>
               </div>
 
+              <!-- Total da Captura -->
+              <div v-if="getProductCount(report) > 1" class="bg-primary-50 border border-primary-200 rounded-lg p-3 mb-3">
+                <div class="flex justify-between items-center">
+                  <span class="text-sm font-medium text-primary-900">Total da Captura:</span>
+                  <span class="text-lg font-bold text-primary-600">
+                    {{ getCurrencySymbol(report.currencyId) }} {{ formatPrice(getTotalCaptureValue(report)) }}
+                  </span>
+                </div>
+              </div>
+
               <!-- Condições de Pagamento (apenas para admin) -->
               <div v-if="isAdmin && report.paymentCondition" class="text-xs text-gray-500 mb-3">
                 <div class="flex items-center space-x-2">
