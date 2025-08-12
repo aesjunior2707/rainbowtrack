@@ -233,7 +233,6 @@ export const useDataStore = defineStore('data', {
         region: 'REG001',
         state: 'SP',
         paymentCondition: 'BOLETO_60',
-        paymentMethod: 'BOLETO',
         currencyId: 1,
         products: [
           {
@@ -252,7 +251,6 @@ export const useDataStore = defineStore('data', {
         region: 'REG001',
         state: 'GO',
         paymentCondition: 'A_VISTA',
-        paymentMethod: 'PIX',
         currencyId: 1,
         products: [
           {
@@ -271,7 +269,6 @@ export const useDataStore = defineStore('data', {
         region: 'REG002',
         state: 'MG',
         paymentCondition: 'POS_COLHEITA',
-        paymentMethod: 'TRANSFERENCIA',
         currencyId: 1,
         products: [
           {
@@ -290,7 +287,6 @@ export const useDataStore = defineStore('data', {
         region: 'REG001',
         state: 'PR',
         paymentCondition: 'BOLETO_90',
-        paymentMethod: 'BOLETO',
         currencyId: 1,
         products: [
           {
@@ -309,7 +305,6 @@ export const useDataStore = defineStore('data', {
         region: 'REG002',
         state: 'RS',
         paymentCondition: 'BARTER',
-        paymentMethod: 'DOCUMENTO',
         currencyId: 1,
         products: [
           {
@@ -328,7 +323,6 @@ export const useDataStore = defineStore('data', {
         region: 'REG001',
         state: 'SP',
         paymentCondition: 'BOLETO_60',
-        paymentMethod: 'BOLETO',
         currencyId: 1,
         products: [
           {
@@ -363,7 +357,6 @@ export const useDataStore = defineStore('data', {
         region: 'REG001',
         state: 'MG',
         paymentCondition: 'A_VISTA',
-        paymentMethod: 'PIX',
         currencyId: 1,
         products: [
           {
