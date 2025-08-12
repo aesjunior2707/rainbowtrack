@@ -115,21 +115,39 @@
                   </div>
                 </div>
 
-                <!-- Price Input -->
-                <div class="bg-white border-2 border-primary-200 rounded-lg p-4">
-                  <label class="block text-sm font-medium text-gray-700 mb-2">
-                    Preço do Concorrente
-                  </label>
-                  <div class="flex items-center space-x-2">
-                    <span class="text-lg font-semibold text-primary-600">{{ selectedCurrencySymbol }}</span>
-                    <input
-                      v-model.number="productItem.competitorPrice"
-                      type="number"
-                      step="0.01"
-                      min="0"
-                      class="input-field flex-1 text-lg font-semibold"
-                      required
-                    />
+                <!-- Currency and Price Input -->
+                <div class="bg-white border-2 border-primary-200 rounded-lg p-4 space-y-4">
+                  <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">
+                      Moeda
+                    </label>
+                    <select v-model="productItem.currencyId" class="input-field" required>
+                      <option value="">Selecione a moeda</option>
+                      <option
+                        v-for="currency in currencies"
+                        :key="currency.id"
+                        :value="currency.id"
+                      >
+                        {{ currency.symbol }} - {{ currency.name }}
+                      </option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">
+                      Preço do Concorrente
+                    </label>
+                    <div class="flex items-center space-x-2">
+                      <span class="text-lg font-semibold text-primary-600">{{ getProductCurrencySymbol(productItem.currencyId) }}</span>
+                      <input
+                        v-model.number="productItem.competitorPrice"
+                        type="number"
+                        step="0.01"
+                        min="0"
+                        class="input-field flex-1 text-lg font-semibold"
+                        required
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
@@ -203,21 +221,6 @@
                 </select>
               </div>
 
-              <div>
-                <label class="block text-sm font-medium text-gray-700 mb-2">
-                  Moeda
-                </label>
-                <select v-model="form.currencyId" class="input-field" required>
-                  <option value="">Selecione a moeda</option>
-                  <option
-                    v-for="currency in currencies"
-                    :key="currency.id"
-                    :value="currency.id"
-                  >
-                    {{ currency.symbol }} - {{ currency.name }}
-                  </option>
-                </select>
-              </div>
 
               <div>
                 <label class="block text-sm font-medium text-gray-700 mb-2">
@@ -313,10 +316,10 @@ const competitorInfo = computed(() => {
   return competitor || { name: 'Concorrente Desconhecido', type: 'Não informado' }
 })
 
-const selectedCurrencySymbol = computed(() => {
-  const currency = dataStore.getCurrencyById(form.value.currencyId)
+const getProductCurrencySymbol = (currencyId) => {
+  const currency = dataStore.getCurrencyById(currencyId)
   return currency ? currency.symbol : 'R$'
-})
+}
 
 
 const form = ref({
@@ -325,7 +328,6 @@ const form = ref({
   region: '',
   state: '',
   paymentCondition: '',
-  currencyId: '',
   notes: '',
   products: []
 })
@@ -368,16 +370,28 @@ const loadReport = () => {
   if (foundReport) {
     report.value = foundReport
     
-    // Populate form with report data
+    // Populate form with report data and ensure products have currency
+    const products = foundReport.products ? [...foundReport.products] : [{
+      productId: foundReport.productId,
+      competitorPrice: foundReport.competitorPrice,
+      currencyId: foundReport.currencyId || 1 // Default to BRL for old format
+    }]
+
+    // Ensure all products have currencyId
+    products.forEach(product => {
+      if (!product.currencyId) {
+        product.currencyId = foundReport.currencyId || 1 // Default to BRL
+      }
+    })
+
     form.value = {
       reportDate: foundReport.reportDate,
       customerName: foundReport.customerName || '',
       region: foundReport.region,
       state: foundReport.state,
       paymentCondition: foundReport.paymentCondition,
-      currencyId: foundReport.currencyId,
       notes: foundReport.notes || '',
-      products: [...foundReport.products] // Copy products array
+      products: products
     }
   }
   
