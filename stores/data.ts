@@ -64,7 +64,7 @@ export const useDataStore = defineStore('data', {
         active: true
       }
     ],
-    nextReportId: 48, // Track next available ID (updated for new reports)
+    nextReportId: 48,
 
     competitors: [
       {
@@ -134,7 +134,7 @@ export const useDataStore = defineStore('data', {
     ],
 
     products: [
-      // Defensivos
+      // Produtos baseados exatamente na imagem fornecida
       {
         id: 1,
         name: 'Acept',
@@ -148,8 +148,8 @@ export const useDataStore = defineStore('data', {
       },
       {
         id: 2,
-        name: 'Acept Advanced',
-        category: 'defensivos', 
+        name: 'Acept',
+        category: 'defensivos',
         brand: 'Acept',
         packaging: '500ml',
         registeredCrops: ['Soja', 'Feijão'],
@@ -162,47 +162,102 @@ export const useDataStore = defineStore('data', {
         name: 'Actynite',
         category: 'defensivos',
         brand: 'Actynite',
-        packaging: '1L', 
+        packaging: '1L',
         registeredCrops: ['Soja', 'Algodão'],
         description: 'Fungicida preventivo',
-        competitorProduct: 'Acre SC AR',
-        isMainCompetitor: false
+        competitorProduct: 'Actaramid Nortox 200 SC',
+        isMainCompetitor: true
       },
       {
         id: 4,
-        name: 'Actynite Pro',
+        name: 'Actynite',
         category: 'defensivos',
         brand: 'Actynite',
         packaging: '500ml',
         registeredCrops: ['Cana', 'Milho'],
         description: 'Fungicida curativo',
+        competitorProduct: 'Acre SC AR',
+        isMainCompetitor: false
+      },
+      {
+        id: 5,
+        name: 'Actynite',
+        category: 'defensivos',
+        brand: 'Actynite',
+        packaging: '2L',
+        registeredCrops: ['Soja', 'Feijão'],
+        description: 'Fungicida sistêmico',
         competitorProduct: 'Genéricos',
         isMainCompetitor: true
       },
       {
-        id: 5,
+        id: 6,
         name: 'Acronise',
         category: 'defensivos',
         brand: 'Acronise',
         packaging: '1L',
         registeredCrops: ['Milho', 'Sorgo'],
         description: 'Herbicida pós-emergente',
-        competitorProduct: 'Eloncas',
+        competitorProduct: 'Suerte',
         isMainCompetitor: true
       },
       {
-        id: 6,
+        id: 7,
+        name: 'Acronise',
+        category: 'defensivos',
+        brand: 'Acronise',
+        packaging: '500ml',
+        registeredCrops: ['Soja', 'Algodão'],
+        description: 'Herbicida seletivo',
+        competitorProduct: 'Eloncas',
+        isMainCompetitor: false
+      },
+      {
+        id: 8,
         name: 'Acolahar',
         category: 'defensivos',
         brand: 'Acolahar',
         packaging: '1L',
         registeredCrops: ['Café', 'Citros'],
         description: 'Inseticida acaricida',
+        competitorProduct: 'Genéricos',
+        isMainCompetitor: false
+      },
+      {
+        id: 9,
+        name: 'Acolahar',
+        category: 'defensivos',
+        brand: 'Acolahar',
+        packaging: '2L',
+        registeredCrops: ['Frutas', 'Hortaliças'],
+        description: 'Controle de ácaros',
         competitorProduct: 'Viterre',
         isMainCompetitor: false
       },
       {
-        id: 7,
+        id: 10,
+        name: 'Acolahar',
+        category: 'defensivos',
+        brand: 'Acolahar',
+        packaging: '500ml',
+        registeredCrops: ['Todas as culturas'],
+        description: 'Acaricida concentrado',
+        competitorProduct: 'Ozires',
+        isMainCompetitor: true
+      },
+      {
+        id: 11,
+        name: 'Acolahmat',
+        category: 'defensivos',
+        brand: 'Acolahmat',
+        packaging: '1L',
+        registeredCrops: ['Soja', 'Milho'],
+        description: 'Herbicida total',
+        competitorProduct: 'Genéricos',
+        isMainCompetitor: false
+      },
+      {
+        id: 12,
         name: 'Acelerador',
         category: 'defensivos',
         brand: 'Acelerador',
@@ -213,7 +268,18 @@ export const useDataStore = defineStore('data', {
         isMainCompetitor: false
       },
       {
-        id: 8,
+        id: 13,
+        name: 'Acelerador',
+        category: 'defensivos',
+        brand: 'Acelerador',
+        packaging: '1L',
+        registeredCrops: ['Soja', 'Milho', 'Algodão'],
+        description: 'Adjuvante adesivo',
+        competitorProduct: 'Compound',
+        isMainCompetitor: true
+      },
+      {
+        id: 14,
         name: 'Aviculture',
         category: 'defensivos',
         brand: 'Aviculture',
@@ -223,9 +289,8 @@ export const useDataStore = defineStore('data', {
         competitorProduct: 'Genéricos',
         isMainCompetitor: false
       },
-      // Sementes
       {
-        id: 9,
+        id: 15,
         name: 'Alvorada 500 SC Rainbow',
         category: 'seeds',
         brand: 'Alvorada',
@@ -236,83 +301,47 @@ export const useDataStore = defineStore('data', {
         isMainCompetitor: false
       },
       {
-        id: 10,
-        name: 'Alvorada Wag Rainbow',
+        id: 16,
+        name: 'Alvorada 500 SC Rainbow',
         category: 'seeds',
         brand: 'Alvorada',
         packaging: '80000 sementes',
+        registeredCrops: ['Milho'],
+        description: 'Híbrido super precoce',
+        competitorProduct: 'Villamil SC',
+        isMainCompetitor: true
+      },
+      {
+        id: 17,
+        name: 'Alvorada Wag Rainbow',
+        category: 'seeds',
+        brand: 'Alvorada',
+        packaging: '60000 sementes',
         registeredCrops: ['Milho'],
         description: 'Milho para silagem',
         competitorProduct: 'MegaB8',
         isMainCompetitor: true
       },
-      // Fertilizantes
       {
-        id: 11,
-        name: 'Bovitec',
-        category: 'fertilizers',
-        brand: 'Bovitec',
-        packaging: '25kg',
-        registeredCrops: ['Pastagem'],
-        description: 'Fertilizante para pastagem',
-        competitorProduct: 'Genéricos',
-        isMainCompetitor: false
-      },
-      {
-        id: 12,
-        name: 'Bovitec Premium',
-        category: 'fertilizers',
-        brand: 'Bovitec',
-        packaging: '50kg',
-        registeredCrops: ['Bovinos'],
-        description: 'Suplemento bovino',
-        competitorProduct: 'Mineral SC',
+        id: 18,
+        name: 'Alvorada Wag Rainbow',
+        category: 'seeds',
+        brand: 'Alvorada',
+        packaging: '80000 sementes',
+        registeredCrops: ['Milho'],
+        description: 'Milho alta produtividade',
+        competitorProduct: 'Compass',
         isMainCompetitor: true
       },
-      // Inoculantes
       {
-        id: 13,
-        name: 'Bionema',
-        category: 'inoculants',
-        brand: 'Bionema',
-        packaging: '1L',
-        registeredCrops: ['Soja'],
-        description: 'Inoculante para soja',
-        competitorProduct: 'Nitrosoil SC',
-        isMainCompetitor: false
-      },
-      {
-        id: 14,
-        name: 'Bionema Plus',
-        category: 'inoculants',
-        brand: 'Bionema',
-        packaging: '500ml',
-        registeredCrops: ['Feijão'],
-        description: 'Inoculante leguminosas',
+        id: 19,
+        name: 'Alvorada Wag Rainbow',
+        category: 'seeds',
+        brand: 'Alvorada',
+        packaging: '100000 sementes',
+        registeredCrops: ['Milho'],
+        description: 'Milho super',
         competitorProduct: 'Genéricos',
-        isMainCompetitor: true
-      },
-      // Biológicos
-      {
-        id: 15,
-        name: 'Bicontrol',
-        category: 'biologicals',
-        brand: 'Bicontrol',
-        packaging: '1L',
-        registeredCrops: ['Soja', 'Milho'],
-        description: 'Controle biológico',
-        competitorProduct: 'Genéricos',
-        isMainCompetitor: false
-      },
-      {
-        id: 16,
-        name: 'Bicontrol Pro',
-        category: 'biologicals',
-        brand: 'Bicontrol',
-        packaging: '500ml',
-        registeredCrops: ['Hortaliças'],
-        description: 'Biodefensivo',
-        competitorProduct: 'Fahran',
         isMainCompetitor: true
       }
     ],
