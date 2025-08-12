@@ -112,7 +112,7 @@
                       <div class="text-sm">
                         <span class="text-gray-600">Preço Concorrente:</span>
                         <span class="ml-2 font-semibold text-lg text-primary-600">
-                          R$ {{ formatPrice(item.competitorPrice) }}
+                          {{ getCurrencySymbol(item.currencyId) }} {{ formatPrice(item.competitorPrice) }}
                         </span>
                       </div>
                     </div>
@@ -239,23 +239,6 @@
                 </select>
               </div>
 
-
-              <div>
-                <label class="block text-sm font-medium text-gray-700 mb-2">
-                  Moeda
-                </label>
-                <select v-model="currency" class="input-field" required>
-                  <option value="">Selecione a moeda</option>
-                  <option
-                    v-for="curr in dataStore.currencies"
-                    :key="curr.id"
-                    :value="curr.id"
-                  >
-                    {{ curr.symbol }} - {{ curr.name }}
-                  </option>
-                </select>
-              </div>
-
               <div class="md:col-span-2">
                 <label class="block text-sm font-medium text-gray-700 mb-2">
                   {{ t('reports.notes') }}
@@ -328,7 +311,6 @@ const reportDate = ref('')
 const region = ref('')
 const state = ref('')
 const paymentCondition = ref('')
-const currency = ref('')
 const notes = ref('')
 const showNewCompetitorModal = ref(false)
 const showProductModal = ref(false)
@@ -340,13 +322,15 @@ const handleProductSelected = (productData) => {
   )
 
   if (existingIndex >= 0) {
-    // Update existing product price
+    // Update existing product price and currency
     selectedProducts.value[existingIndex].competitorPrice = productData.competitorPrice
+    selectedProducts.value[existingIndex].currencyId = productData.currencyId
   } else {
     // Add new product
     selectedProducts.value.push({
       product: productData.product,
-      competitorPrice: productData.competitorPrice
+      competitorPrice: productData.competitorPrice,
+      currencyId: productData.currencyId
     })
   }
 
@@ -362,6 +346,11 @@ const formatPrice = (price) => {
     minimumFractionDigits: 2,
     maximumFractionDigits: 2
   }).format(price)
+}
+
+const getCurrencySymbol = (currencyId) => {
+  const currency = dataStore.getCurrencyById(currencyId)
+  return currency ? currency.symbol : 'R$'
 }
 
 
@@ -380,8 +369,7 @@ const canSubmit = computed(() => {
          reportDate.value &&
          region.value &&
          state.value &&
-         paymentCondition.value &&
-         currency.value
+         paymentCondition.value
 })
 
 const handleCompetitorCreated = (competitor) => {
@@ -404,10 +392,10 @@ const handleSubmit = () => {
     region: region.value || 'Não informado',
     state: state.value,
     paymentCondition: paymentCondition.value,
-    currencyId: currency.value,
     products: selectedProducts.value.map(item => ({
       productId: item.product.id,
-      competitorPrice: item.competitorPrice
+      competitorPrice: item.competitorPrice,
+      currencyId: item.currencyId
     }))
   }
 
@@ -425,10 +413,5 @@ onMounted(() => {
     region.value = authStore.user.defaultRegion
   }
 
-  // Set default currency to BRL (Real Brasileiro)
-  const brlCurrency = dataStore.currencies.find(c => c.code === 'BRL')
-  if (brlCurrency) {
-    currency.value = brlCurrency.id
-  }
 })
 </script>
