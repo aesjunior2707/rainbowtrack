@@ -91,13 +91,14 @@
           
           <div class="p-6">
             <ClientOnly>
-              <VueApexCharts
-                v-if="chartReady"
-                type="treemap"
-                height="400"
-                :options="chartOptions"
-                :series="chartSeries"
-              />
+              <div v-if="chartReady">
+                <apexchart
+                  type="treemap"
+                  height="400"
+                  :options="chartOptions"
+                  :series="chartSeries"
+                />
+              </div>
               <div v-else class="h-96 flex items-center justify-center bg-gray-50 rounded-lg">
                 <div class="text-center">
                   <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600 mx-auto mb-4"></div>
