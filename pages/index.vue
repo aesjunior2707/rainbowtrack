@@ -13,7 +13,7 @@
                 {{ t('dashboard.welcome', { name: authStore.user?.name }) }}
               </p>
               <p class="text-sm text-primary-600 mt-1">
-                Sistema de inteligência competitiva ativo
+                Análise de Market Intelligence • Dados Consolidados
               </p>
             </ClientOnly>
           </div>
