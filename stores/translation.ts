@@ -42,7 +42,7 @@ export const useTranslationStore = defineStore('translation', {
           market_analysis: 'Análise de Mercado',
           market_intelligence: 'Inteligência de Preços • Monitoramento Competitivo',
           geographic_analysis: 'Análise Geoespacial',
-          select_visualization: 'Selecione a visualização para análise estrat��gica',
+          select_visualization: 'Selecione a visualização para análise estratégica',
           visualization: 'Visualização',
           geographic_distribution: 'Distribuição Geográfica',
           density_analysis: 'Análise de Densidade'
@@ -339,7 +339,7 @@ export const useTranslationStore = defineStore('translation', {
           new_report: 'Nueva Captura',
           price_trends: 'Tendencias de Precios',
           market_analysis: 'Análisis de Mercado',
-          market_intelligence: 'Análisis de Inteligencia de Mercado • Datos Consolidados',
+          market_intelligence: 'Inteligencia de Precios • Monitoreo Competitivo',
           geographic_analysis: 'Análisis Geoespacial',
           select_visualization: 'Seleccione la visualización para análisis estratégico',
           visualization: 'Visualización',
@@ -535,7 +535,7 @@ export const useTranslationStore = defineStore('translation', {
           all_types: '所有类型',
           all_regions: '所有地区',
           types: {
-            manufacturer: '制造���',
+            manufacturer: '制造商',
             distributor: '分销商',
             retailer: '零售商',
             cooperative: '合作社'
