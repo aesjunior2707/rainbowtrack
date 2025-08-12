@@ -386,8 +386,8 @@ const refreshData = () => {
   }, 1000)
 }
 
-// Render the SVG map
-const renderMap = () => {
+// Render the SVG map with Brazil outline
+const renderMap = async () => {
   if (!mapContainer.value) return
 
   // Clear existing content
@@ -397,31 +397,90 @@ const renderMap = () => {
   const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg')
   svg.setAttribute('width', '100%')
   svg.setAttribute('height', '100%')
-  svg.setAttribute('viewBox', '0 0 600 500')
+  svg.setAttribute('viewBox', '0 0 800 600')
   svg.style.background = 'linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%)'
 
-  // Add states
+  try {
+    // Load Brazil GeoJSON data
+    const response = await fetch('/brazil-simplified.json')
+    const geoData = await response.json()
+
+    // Simple projection function (Equirectangular)
+    const project = (lng, lat) => {
+      const x = (lng + 74) * 8 // Scale and offset for Brazil
+      const y = (5 - lat) * 8  // Scale and offset for Brazil
+      return [x, y]
+    }
+
+    // Draw Brazil outline
+    if (geoData.features && geoData.features[0]) {
+      const coordinates = geoData.features[0].geometry.coordinates[0]
+
+      let pathData = ''
+      coordinates.forEach((coord, index) => {
+        const [x, y] = project(coord[0], coord[1])
+        if (index === 0) {
+          pathData += `M ${x} ${y}`
+        } else {
+          pathData += ` L ${x} ${y}`
+        }
+      })
+      pathData += ' Z'
+
+      // Create Brazil outline path
+      const path = document.createElementNS('http://www.w3.org/2000/svg', 'path')
+      path.setAttribute('d', pathData)
+      path.setAttribute('fill', '#f8fafc')
+      path.setAttribute('stroke', '#64748b')
+      path.setAttribute('stroke-width', '2')
+      path.setAttribute('opacity', '0.8')
+      svg.appendChild(path)
+    }
+  } catch (error) {
+    console.warn('Could not load Brazil outline, using fallback')
+
+    // Fallback: Simple Brazil outline
+    const brazilOutline = document.createElementNS('http://www.w3.org/2000/svg', 'path')
+    brazilOutline.setAttribute('d', 'M150 100 L650 100 L680 150 L670 300 L650 400 L600 480 L400 500 L200 480 L150 400 L120 300 L130 200 Z')
+    brazilOutline.setAttribute('fill', '#f1f5f9')
+    brazilOutline.setAttribute('stroke', '#64748b')
+    brazilOutline.setAttribute('stroke-width', '2')
+    brazilOutline.setAttribute('opacity', '0.7')
+    svg.appendChild(brazilOutline)
+  }
+
+  // Project geographic coordinates to SVG coordinates
+  const projectCoord = (lat, lng) => {
+    // Convert lat/lng to SVG coordinates
+    const x = ((lng + 74) * 8)
+    const y = ((5 - lat) * 8)
+    return [Math.max(50, Math.min(750, x)), Math.max(50, Math.min(550, y))]
+  }
+
+  // Add state circles with geographic positioning
   Object.entries(brazilStates).forEach(([stateCode, coords]) => {
     const captureCount = stateData.value[stateCode] || 0
-    
+    const [x, y] = projectCoord(coords.lat, coords.lng)
+
     // State circle
     const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle')
-    circle.setAttribute('cx', coords.cx)
-    circle.setAttribute('cy', coords.cy)
-    circle.setAttribute('r', Math.max(8, Math.min(30, 8 + captureCount * 2)))
+    circle.setAttribute('cx', x)
+    circle.setAttribute('cy', y)
+    circle.setAttribute('r', Math.max(8, Math.min(25, 8 + captureCount * 1.5)))
     circle.setAttribute('fill', getStateColor(captureCount))
     circle.setAttribute('stroke', '#1f2937')
     circle.setAttribute('stroke-width', '2')
     circle.style.cursor = 'pointer'
     circle.style.transition = 'all 0.3s ease'
-    
+
     // Add hover effects
     circle.addEventListener('mouseenter', () => {
       circle.setAttribute('stroke-width', '3')
       circle.setAttribute('stroke', '#059669')
-      
+      circle.setAttribute('r', Math.max(10, Math.min(30, 10 + captureCount * 1.5)))
+
       const ranking = topStatesData.value.findIndex(([state]) => state === stateCode) + 1
-      
+
       hoveredState.value = {
         name: getStateName(stateCode),
         captures: captureCount,
@@ -429,28 +488,27 @@ const renderMap = () => {
         rank: ranking || 'N/A'
       }
     })
-    
+
     circle.addEventListener('mouseleave', () => {
       circle.setAttribute('stroke-width', '2')
       circle.setAttribute('stroke', '#1f2937')
+      circle.setAttribute('r', Math.max(8, Math.min(25, 8 + captureCount * 1.5)))
       hoveredState.value = null
     })
-    
+
     svg.appendChild(circle)
-    
+
     // State label
-    if (captureCount > 0) {
-      const text = document.createElementNS('http://www.w3.org/2000/svg', 'text')
-      text.setAttribute('x', coords.cx)
-      text.setAttribute('y', coords.cy + 4)
-      text.setAttribute('text-anchor', 'middle')
-      text.setAttribute('fill', captureCount > 8 ? 'white' : '#1f2937')
-      text.setAttribute('font-size', '12')
-      text.setAttribute('font-weight', 'bold')
-      text.textContent = stateCode
-      text.style.pointerEvents = 'none'
-      svg.appendChild(text)
-    }
+    const text = document.createElementNS('http://www.w3.org/2000/svg', 'text')
+    text.setAttribute('x', x)
+    text.setAttribute('y', y + 4)
+    text.setAttribute('text-anchor', 'middle')
+    text.setAttribute('fill', captureCount > 8 ? 'white' : '#1f2937')
+    text.setAttribute('font-size', '10')
+    text.setAttribute('font-weight', 'bold')
+    text.textContent = stateCode
+    text.style.pointerEvents = 'none'
+    svg.appendChild(text)
   })
 
   mapContainer.value.appendChild(svg)
