@@ -79,7 +79,6 @@
                   <span class="inline-flex items-center px-2 py-1 text-xs font-medium bg-blue-100 text-blue-800 rounded-full">
                     {{ getCategoryName(product.category) }}
                   </span>
-                  <span class="text-xs text-gray-500">{{ product.packaging }}</span>
                 </div>
 
                 <!-- Crops -->
