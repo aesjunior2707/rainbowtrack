@@ -78,6 +78,13 @@
         </div>
 
 
+        <!-- Admin-only Brazil Bubble Map -->
+        <ClientOnly>
+          <div v-if="authStore.user?.role === 'admin'">
+            <BrazilBubbleMap />
+          </div>
+        </ClientOnly>
+
         <!-- Quick Actions -->
         <div class="card p-6">
           <h2 class="text-lg font-semibold text-gray-900 mb-4">
