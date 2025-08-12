@@ -143,11 +143,6 @@ const getProductCount = () => {
   return getReportProducts().length
 }
 
-const getTotalValue = () => {
-  const products = getReportProducts()
-  return products.reduce((total, product) => total + product.competitorPrice, 0)
-}
-
 const formatPrice = (price) => {
   return new Intl.NumberFormat('pt-BR', {
     minimumFractionDigits: 2,

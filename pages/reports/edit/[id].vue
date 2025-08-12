@@ -327,10 +327,6 @@ const selectedCurrencySymbol = computed(() => {
   return currency ? currency.symbol : 'R$'
 })
 
-const totalCaptureValue = computed(() => {
-  return form.value.products.reduce((total, product) => total + product.competitorPrice, 0)
-})
-
 const form = ref({
   reportDate: '',
   customerName: '',

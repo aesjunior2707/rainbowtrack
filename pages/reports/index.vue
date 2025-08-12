@@ -338,11 +338,6 @@ const getReportProducts = (report) => {
   }]
 }
 
-const getTotalCaptureValue = (report) => {
-  const products = getReportProducts(report)
-  return products.reduce((total, product) => total + product.competitorPrice, 0)
-}
-
 const getCurrencySymbol = (currencyId) => {
   const currency = dataStore.getCurrencyById(currencyId)
   return currency ? currency.symbol : 'R$'
