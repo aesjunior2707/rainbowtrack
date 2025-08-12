@@ -159,7 +159,6 @@
 
 <script setup>
 import { MapPin, FileText, TrendingUp, BarChart3 } from 'lucide-vue-next'
-import VueApexCharts from 'vue3-apexcharts'
 
 const dataStore = useDataStore()
 
