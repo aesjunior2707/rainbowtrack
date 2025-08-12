@@ -36,6 +36,10 @@
 
 <script setup>
 // Global setup
+const { $pinia } = useNuxtApp()
+const translationStore = useTranslationStore($pinia)
+
+const t = (key, params) => translationStore.t(key, params)
 useHead({
   title: 'Rainbow Track - Inteligência Competitiva',
   meta: [
