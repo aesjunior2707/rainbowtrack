@@ -383,12 +383,6 @@ const formatPrice = (price) => {
   }).format(price)
 }
 
-const totalCaptureValue = computed(() => {
-  return selectedProducts.value.reduce((total, item) => {
-    return total + item.competitorPrice
-  }, 0)
-})
-
 const selectedCurrencySymbol = computed(() => {
   const curr = dataStore.getCurrencyById(currency.value)
   return curr ? curr.symbol : 'R$'
