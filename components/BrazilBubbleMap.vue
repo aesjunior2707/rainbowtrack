@@ -356,7 +356,4 @@ onUnmounted(() => {
 .card {
   @apply bg-white rounded-lg shadow-sm border border-gray-200;
 }
-
-/* Leaflet CSS - needs to be imported */
-@import 'leaflet/dist/leaflet.css';
 </style>
