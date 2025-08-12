@@ -134,7 +134,6 @@ const getProductCount = () => {
   return getReportProducts().length
 }
 
-
 const formatPrice = (price) => {
   return new Intl.NumberFormat('pt-BR', {
     minimumFractionDigits: 2,

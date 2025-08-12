@@ -151,6 +151,13 @@
                 </div>
               </div>
 
+              <!-- Condições de Pagamento (apenas para admin) -->
+              <div v-if="report.paymentCondition" class="text-xs text-gray-500 mb-3">
+                <div class="flex items-center space-x-2">
+                  <CreditCard class="w-3 h-3" />
+                  <span>{{ getPaymentConditionText(report.paymentCondition) }}</span>
+                </div>
+              </div>
 
 
               <!-- Observações (se houver) -->

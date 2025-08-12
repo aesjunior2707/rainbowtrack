@@ -355,9 +355,11 @@ export const useDataStore = defineStore('data', {
         reportedBy: 2,
         notes: 'Produto com boa aceitação no mercado',
         verified: false,
-        region: 'Cerrado Norte',
-        state: 'MT',
-        paymentCondition: '90_DIAS',
+
+        region: 'REG001',
+        state: 'SP',
+        paymentCondition: 'BOLETO_60',
+
         currencyId: 1,
         products: [
           {
@@ -375,13 +377,16 @@ export const useDataStore = defineStore('data', {
         verified: true,
         region: 'Cerrado Norte',
         state: 'GO',
+
         paymentCondition: 'SAFRA_2026',
         currencyId: 1,
         products: [
           {
             productId: 2,
+
             competitorPrice: 132.50
           },
+
           {
             productId: 5,
             competitorPrice: 95.80

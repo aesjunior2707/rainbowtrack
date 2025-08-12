@@ -365,6 +365,11 @@ const formatPrice = (price) => {
 }
 
 
+const selectedCurrencySymbol = computed(() => {
+  const curr = dataStore.getCurrencyById(currency.value)
+  return curr ? curr.symbol : 'R$'
+})
+
 
 const availableCompetitors = computed(() => {
   const userRegion = authStore.user?.defaultRegion
