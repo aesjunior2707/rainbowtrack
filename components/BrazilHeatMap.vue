@@ -91,7 +91,7 @@
           
           <div class="p-6">
             <ClientOnly>
-              <apexchart
+              <VueApexCharts
                 v-if="chartReady"
                 type="treemap"
                 height="400"
