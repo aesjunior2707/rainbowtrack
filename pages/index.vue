@@ -108,6 +108,13 @@
 
           </div>
         </div>
+
+        <!-- Admin-only Brazil Bubble Map -->
+        <ClientOnly>
+          <div v-if="authStore.user?.role === 'admin'">
+            <BrazilBubbleMap />
+          </div>
+        </ClientOnly>
       </div>
 
       <!-- PWA Installer -->

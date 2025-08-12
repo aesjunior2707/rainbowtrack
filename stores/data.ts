@@ -64,7 +64,7 @@ export const useDataStore = defineStore('data', {
         active: true
       }
     ],
-    nextReportId: 19,
+    nextReportId: 21,
 
     competitors: [
       {
@@ -1178,6 +1178,45 @@ export const useDataStore = defineStore('data', {
           {
             productId: 60, // Cleaner Xtra
             competitorPrice: 195.60
+          }
+        ]
+      },
+      // Additional test reports to show map reactivity
+      {
+        id: 19,
+        competitorId: 1,
+        reportDate: '2025-02-02',
+        reportedBy: 1, // Admin
+        customerName: 'Fazenda Acre Verde',
+        notes: 'Teste de captura no Acre',
+        verified: false,
+        region: 'Norte',
+        state: 'AC',
+        paymentCondition: '90_DIAS',
+        currencyId: 1,
+        products: [
+          {
+            productId: 1,
+            competitorPrice: 160.00
+          }
+        ]
+      },
+      {
+        id: 20,
+        competitorId: 2,
+        reportDate: '2025-02-02',
+        reportedBy: 1, // Admin
+        customerName: 'Cooperativa Mineira',
+        notes: 'Captura em Minas Gerais',
+        verified: true,
+        region: 'Sudeste',
+        state: 'MG',
+        paymentCondition: 'SAFRA_2026',
+        currencyId: 1,
+        products: [
+          {
+            productId: 5,
+            competitorPrice: 155.00
           }
         ]
       }
