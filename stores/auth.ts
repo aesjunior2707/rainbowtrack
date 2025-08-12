@@ -14,6 +14,15 @@ export const useAuthStore = defineStore('auth', {
         role: 'admin',
         defaultRegion: 'Brasil'
       },
+      {
+        id: 42,
+        username: 'leonardo.campos',
+        password: '123',
+        name: 'Leonardo Campos',
+        email: 'leonardo.campos@rainbow.com',
+        role: 'admin',
+        defaultRegion: 'Brasil'
+      },
       // Sales Rep Unif. - Cerrado Norte
       {
         id: 2,
