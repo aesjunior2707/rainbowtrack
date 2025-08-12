@@ -252,7 +252,7 @@ export const useDataStore = defineStore('data', {
         region: 'REG001',
         state: 'GO',
         paymentCondition: 'A_VISTA',
-        paymentMethod: 'PIX',
+
         currencyId: 1,
         products: [
           {
@@ -363,7 +363,7 @@ export const useDataStore = defineStore('data', {
         region: 'REG001',
         state: 'MG',
         paymentCondition: 'A_VISTA',
-        paymentMethod: 'PIX',
+
         currencyId: 1,
         products: [
           {
