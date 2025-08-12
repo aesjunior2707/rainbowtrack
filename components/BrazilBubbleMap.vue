@@ -137,15 +137,17 @@
           </svg>
 
           <!-- Tooltip -->
-          <div 
+          <div
             v-if="tooltip.show"
             ref="tooltipRef"
-            class="absolute bg-gray-900 text-white px-3 py-2 rounded-lg shadow-lg text-sm z-10 pointer-events-none"
-            :style="{ left: tooltip.x + 'px', top: tooltip.y + 'px' }"
+            class="absolute bg-gray-900 text-white px-3 py-2 rounded-lg shadow-lg text-sm z-10 pointer-events-none transform -translate-x-1/2 -translate-y-full"
+            :style="{ left: tooltip.x + 'px', top: (tooltip.y - 10) + 'px' }"
           >
             <div class="font-semibold">{{ tooltip.state }}</div>
             <div>{{ tooltip.count }} capturas</div>
             <div class="text-xs text-gray-300">{{ getPercentage(tooltip.count) }}% do total</div>
+            <!-- Arrow -->
+            <div class="absolute top-full left-1/2 transform -translate-x-1/2 border-l-4 border-r-4 border-t-4 border-transparent border-t-gray-900"></div>
           </div>
         </div>
 
