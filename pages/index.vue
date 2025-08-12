@@ -121,7 +121,7 @@
                 </div>
 
                 <div class="flex items-center gap-3">
-                  <label class="text-sm font-medium text-gray-700">Visualiza��ão:</label>
+                  <label class="text-sm font-medium text-gray-700">Visualização:</label>
                   <select
                     v-model="selectedMapType"
                     class="border border-gray-300 rounded-md px-3 py-2 text-sm focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
