@@ -67,6 +67,7 @@
               style="transform-origin: center; animation: pulse 2s ease-in-out infinite; animation-delay: 0.2s"
               @mouseenter="showTooltip($event, 'GO', stateData.GO)"
               @mouseleave="hideTooltip"
+              @click="showStateDetails('GO', stateData.GO)"
             />
             <text x="420" y="325" text-anchor="middle" class="text-xs font-semibold fill-white">
               GO
@@ -83,6 +84,7 @@
               style="transform-origin: center; animation: pulse 2s ease-in-out infinite; animation-delay: 0.4s"
               @mouseenter="showTooltip($event, 'MS', stateData.MS)"
               @mouseleave="hideTooltip"
+              @click="showStateDetails('MS', stateData.MS)"
             />
             <text x="340" y="385" text-anchor="middle" class="text-xs font-semibold fill-white">
               MS
@@ -99,6 +101,7 @@
               style="transform-origin: center; animation: pulse 2s ease-in-out infinite; animation-delay: 0.6s"
               @mouseenter="showTooltip($event, 'SP', stateData.SP)"
               @mouseleave="hideTooltip"
+              @click="showStateDetails('SP', stateData.SP)"
             />
             <text x="480" y="425" text-anchor="middle" class="text-xs font-semibold fill-white">
               SP
@@ -115,6 +118,7 @@
               style="transform-origin: center; animation: pulse 2s ease-in-out infinite; animation-delay: 0.8s"
               @mouseenter="showTooltip($event, 'RS', stateData.RS)"
               @mouseleave="hideTooltip"
+              @click="showStateDetails('RS', stateData.RS)"
             />
             <text x="420" y="525" text-anchor="middle" class="text-xs font-semibold fill-white">
               RS
@@ -131,6 +135,7 @@
               style="transform-origin: center; animation: pulse 2s ease-in-out infinite; animation-delay: 1s"
               @mouseenter="showTooltip($event, 'BA', stateData.BA)"
               @mouseleave="hideTooltip"
+              @click="showStateDetails('BA', stateData.BA)"
             />
             <text x="500" y="225" text-anchor="middle" class="text-xs font-semibold fill-white">
               BA
