@@ -118,7 +118,7 @@ const filteredProducts = computed(() => {
 const getCategoryColor = (category) => {
   const colors = {
     defensivos: 'bg-blue-100 text-blue-800',
-    seeds: 'bg-green-100 text-green-800'
+    fertilizers: 'bg-green-100 text-green-800'
   }
   return colors[category] || 'bg-gray-100 text-gray-800'
 }
