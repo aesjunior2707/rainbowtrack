@@ -261,35 +261,35 @@ const stateNames = {
   'SP': 'São Paulo', 'SE': 'Sergipe', 'TO': 'Tocantins'
 }
 
-// Simplified Brazil state geometry (for demo purposes)
+// Brazilian states coordinates with real geographic positioning
 const brazilStates = {
-  'MT': { cx: 350, cy: 280, captures: 0 },
-  'GO': { cx: 400, cy: 320, captures: 0 },
-  'MS': { cx: 360, cy: 350, captures: 0 },
-  'SP': { cx: 420, cy: 380, captures: 0 },
-  'MG': { cx: 450, cy: 350, captures: 0 },
-  'RS': { cx: 380, cy: 450, captures: 0 },
-  'SC': { cx: 400, cy: 420, captures: 0 },
-  'PR': { cx: 390, cy: 390, captures: 0 },
-  'RJ': { cx: 480, cy: 370, captures: 0 },
-  'ES': { cx: 490, cy: 340, captures: 0 },
-  'BA': { cx: 470, cy: 280, captures: 0 },
-  'SE': { cx: 520, cy: 250, captures: 0 },
-  'AL': { cx: 530, cy: 240, captures: 0 },
-  'PE': { cx: 520, cy: 220, captures: 0 },
-  'PB': { cx: 540, cy: 210, captures: 0 },
-  'RN': { cx: 550, cy: 200, captures: 0 },
-  'CE': { cx: 510, cy: 190, captures: 0 },
-  'PI': { cx: 480, cy: 200, captures: 0 },
-  'MA': { cx: 450, cy: 180, captures: 0 },
-  'TO': { cx: 420, cy: 230, captures: 0 },
-  'PA': { cx: 380, cy: 160, captures: 0 },
-  'AP': { cx: 380, cy: 120, captures: 0 },
-  'RR': { cx: 320, cy: 100, captures: 0 },
-  'AM': { cx: 280, cy: 160, captures: 0 },
-  'AC': { cx: 240, cy: 200, captures: 0 },
-  'RO': { cx: 300, cy: 220, captures: 0 },
-  'DF': { cx: 415, cy: 310, captures: 0 }
+  'AC': { lat: -9.0238, lng: -70.8120, captures: 0 },
+  'AL': { lat: -9.5713, lng: -36.7820, captures: 0 },
+  'AP': { lat: 1.4554, lng: -51.9045, captures: 0 },
+  'AM': { lat: -4.0097, lng: -63.1264, captures: 0 },
+  'BA': { lat: -12.5797, lng: -41.7007, captures: 0 },
+  'CE': { lat: -5.4984, lng: -39.3206, captures: 0 },
+  'DF': { lat: -15.7998, lng: -47.8645, captures: 0 },
+  'ES': { lat: -19.1834, lng: -40.3089, captures: 0 },
+  'GO': { lat: -15.827, lng: -49.8362, captures: 0 },
+  'MA': { lat: -4.9609, lng: -45.2744, captures: 0 },
+  'MT': { lat: -12.6819, lng: -56.9211, captures: 0 },
+  'MS': { lat: -20.7722, lng: -54.7852, captures: 0 },
+  'MG': { lat: -18.5122, lng: -44.5550, captures: 0 },
+  'PA': { lat: -3.9014, lng: -52.7539, captures: 0 },
+  'PB': { lat: -7.2399, lng: -36.7819, captures: 0 },
+  'PR': { lat: -24.8220, lng: -51.1690, captures: 0 },
+  'PE': { lat: -8.8137, lng: -36.9541, captures: 0 },
+  'PI': { lat: -8.5335, lng: -43.5939, captures: 0 },
+  'RJ': { lat: -22.9068, lng: -43.1729, captures: 0 },
+  'RN': { lat: -5.4026, lng: -36.9541, captures: 0 },
+  'RS': { lat: -30.0346, lng: -51.2177, captures: 0 },
+  'RO': { lat: -10.8800, lng: -63.0230, captures: 0 },
+  'RR': { lat: 1.9981, lng: -61.3300, captures: 0 },
+  'SC': { lat: -27.2423, lng: -50.2189, captures: 0 },
+  'SP': { lat: -23.5505, lng: -46.6333, captures: 0 },
+  'SE': { lat: -10.5741, lng: -37.3857, captures: 0 },
+  'TO': { lat: -10.1752, lng: -48.2982, captures: 0 }
 }
 
 // Calculate captures by state
