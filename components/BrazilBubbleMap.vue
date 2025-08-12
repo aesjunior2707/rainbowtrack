@@ -59,7 +59,11 @@
 <script setup>
 import { MapPin } from 'lucide-vue-next'
 
+const { $pinia } = useNuxtApp()
 const dataStore = useDataStore()
+const translationStore = useTranslationStore($pinia)
+
+const t = (key, params) => translationStore.t(key, params)
 
 // All Brazilian states
 const brazilianStates = [
