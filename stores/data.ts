@@ -233,7 +233,7 @@ export const useDataStore = defineStore('data', {
         region: 'REG001',
         state: 'SP',
         paymentCondition: 'BOLETO_60',
-        paymentMethod: 'BOLETO',
+
         currencyId: 1,
         products: [
           {
@@ -290,7 +290,7 @@ export const useDataStore = defineStore('data', {
         region: 'REG001',
         state: 'PR',
         paymentCondition: 'BOLETO_90',
-        paymentMethod: 'BOLETO',
+
         currencyId: 1,
         products: [
           {
@@ -328,7 +328,7 @@ export const useDataStore = defineStore('data', {
         region: 'REG001',
         state: 'SP',
         paymentCondition: 'BOLETO_60',
-        paymentMethod: 'BOLETO',
+
         currencyId: 1,
         products: [
           {
