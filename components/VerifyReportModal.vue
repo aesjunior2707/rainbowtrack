@@ -152,7 +152,7 @@ const getPaymentConditionText = (condition) => {
   const conditions = {
     'SAFRA_2024': 'Safra 2024',
     'SAFRINHA_2024': 'Safrinha 2024',
-    'A_VISTA': 'À vista',
+    'A_VISTA': 'A vista',
     '30_DIAS': '30 dias',
     '60_DIAS': '60 dias',
     '90_DIAS': '90 dias',
