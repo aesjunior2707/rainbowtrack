@@ -160,35 +160,28 @@ const getStateName = (stateCode) => {
 // Initialize map
 const initializeMap = async () => {
   if (typeof window === 'undefined') return
-  
+
   try {
-    // Dynamic import for client-side only
-    const L = await import('leaflet')
-    
-    // Fix for default markers
-    delete L.default.Icon.Default.prototype._getIconUrl
-    L.default.Icon.Default.mergeOptions({
-      iconRetinaUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon-2x.png',
-      iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon.png',
-      shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-shadow.png',
-    })
+    // Use Leaflet from plugin or dynamic import
+    const { $leaflet } = useNuxtApp()
+    const L = $leaflet || (await import('leaflet')).default
 
     // Initialize map
-    map = L.default.map('leaflet-map', {
+    map = L.map('leaflet-map', {
       center: [-14.2350, -51.9253], // Brazil center
       zoom: 4,
       zoomControl: true,
-      attributionControl: false
+      attributionControl: true
     })
 
     // Add tile layer
-    L.default.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '© OpenStreetMap contributors'
     }).addTo(map)
 
     // Load and display GeoJSON
-    await loadBrazilGeoJSON(L.default)
-    
+    await loadBrazilGeoJSON(L)
+
   } catch (error) {
     console.error('Error initializing map:', error)
   }
