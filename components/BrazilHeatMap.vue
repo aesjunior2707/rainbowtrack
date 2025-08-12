@@ -111,7 +111,7 @@
         <!-- Detailed State Analysis -->
         <div class="mt-6 bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
           <div class="p-4 border-b border-gray-100 bg-gray-50">
-            <h3 class="text-lg font-semibold text-gray-900">Análise Detalhada por Estado</h3>
+            <h3 class="text-lg font-semibold text-gray-900">Breakdown Regional Detalhado</h3>
           </div>
           
           <div class="p-6">
