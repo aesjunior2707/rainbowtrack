@@ -91,51 +91,13 @@
           
           <div class="p-6">
             <ClientOnly>
-              <div v-if="chartReady">
-                <apexchart
-                  type="treemap"
-                  height="400"
-                  :options="chartOptions"
-                  :series="chartSeries"
-                />
-              </div>
-              <div v-else-if="!chartReady && chartError" class="h-96 bg-gray-50 rounded-lg p-6">
-                <!-- Fallback TreeMap visualization -->
-                <div class="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 h-full">
-                  <div
-                    v-for="[state, count] in topStatesData.slice(0, 15)"
-                    :key="state"
-                    class="relative rounded-lg overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105"
-                    :style="{
-                      backgroundColor: getStateColor(count),
-                      height: `${Math.max(60, count * 20)}px`,
-                      minHeight: '60px'
-                    }"
-                    @mouseenter="showTooltip(state, count, $event)"
-                    @mouseleave="hideTooltip"
-                  >
-                    <div class="p-2 h-full flex flex-col justify-center items-center text-center">
-                      <div class="text-xs font-bold text-white drop-shadow-md">{{ state }}</div>
-                      <div class="text-lg font-bold text-white drop-shadow-md">{{ count }}</div>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Fallback Tooltip -->
-                <div
-                  v-if="fallbackTooltip.visible"
-                  class="absolute bg-white p-3 rounded-lg shadow-xl border border-gray-200 z-20 pointer-events-none"
-                  :style="{
-                    left: fallbackTooltip.x + 'px',
-                    top: fallbackTooltip.y + 'px',
-                    transform: 'translate(-50%, -100%)'
-                  }"
-                >
-                  <div class="font-bold">{{ getStateName(fallbackTooltip.state) }}</div>
-                  <div class="text-sm text-gray-600">{{ fallbackTooltip.count }} capturas</div>
-                  <div class="text-xs text-gray-500">{{ getPercentage(fallbackTooltip.count) }}% do total</div>
-                </div>
-              </div>
+              <apexchart
+                v-if="chartReady"
+                type="treemap"
+                height="400"
+                :options="chartOptions"
+                :series="chartSeries"
+              />
               <div v-else class="h-96 flex items-center justify-center bg-gray-50 rounded-lg">
                 <div class="text-center">
                   <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600 mx-auto mb-4"></div>
