@@ -23,7 +23,7 @@
           </div>
           <div class="flex items-center gap-2">
             <div class="w-5 h-5 rounded-full bg-primary-600"></div>
-            <span class="text-gray-600">Alta densidade</span>
+            <span class="text-gray-600">{{ t('maps.high_density') }}</span>
           </div>
         </div>
 
