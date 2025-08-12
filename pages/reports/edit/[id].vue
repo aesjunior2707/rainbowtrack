@@ -225,8 +225,8 @@
                 </label>
                 <select v-model="form.paymentCondition" class="input-field" required>
                   <option value="">Selecione a condição</option>
-                  <option value="SAFRA_2024">Safra 2024</option>
-                  <option value="SAFRINHA_2024">Safrinha 2024</option>
+                  <option value="SAFRA_2026">Safra 2026</option>
+                  <option value="SAFRINHA_2026">Safrinha 2026</option>
                   <option value="A_VISTA">A vista</option>
                   <option value="30_DIAS">30 dias</option>
                   <option value="60_DIAS">60 dias</option>
