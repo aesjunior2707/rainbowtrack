@@ -37,7 +37,7 @@
             <div class="flex items-center justify-between">
               <div>
                 <div class="text-2xl font-bold">{{ topState.state }}</div>
-                <div class="text-blue-100 text-sm">Estado Líder</div>
+                <div class="text-blue-100 text-sm">Região de Destaque</div>
               </div>
               <div class="bg-white bg-opacity-20 p-3 rounded-lg">
                 <TrendingUp class="w-6 h-6 text-white" />
