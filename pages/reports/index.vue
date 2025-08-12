@@ -351,16 +351,19 @@ const formatPrice = (price) => {
 
 const getPaymentConditionText = (condition) => {
   const conditions = {
-    'AVISTA': 'À Vista',
-    '30_DIAS': '30 Dias',
-    '60_DIAS': '60 Dias',
-    '90_DIAS': '90 Dias',
-    '120_DIAS': '120 Dias',
-    '150_DIAS': '150 Dias',
-    '180_DIAS': '180 Dias',
-    'POS_COLHEITA': 'Pós-Colheita',
-    'SAFRA': 'Safra',
-    'BARTER': 'Barter'
+    'SAFRA_2024': 'Safra 2024',
+    'SAFRINHA_2024': 'Safrinha 2024',
+    'A_VISTA': 'À vista',
+    '30_DIAS': '30 dias',
+    '60_DIAS': '60 dias',
+    '90_DIAS': '90 dias',
+    '120_DIAS': '120 dias',
+    '150_DIAS': '150 dias',
+    '180_DIAS': '180 dias',
+    '210_DIAS': '210 dias',
+    '240_DIAS': '240 dias',
+    '270_DIAS': '270 dias',
+    '360_DIAS': '360 dias'
   }
   return conditions[condition] || condition
 }
@@ -387,7 +390,7 @@ const handleViewReport = (report) => {
     selectedReport.value = report
     showVerifyModal.value = true
   } else {
-    // Caso contrário, apenas visualiza (aqui você pode implementar uma modal de visualização)
+    // Caso contr��rio, apenas visualiza (aqui você pode implementar uma modal de visualização)
     console.log('Visualizar relatório:', report)
   }
 }
