@@ -289,7 +289,7 @@ export const useDataStore = defineStore('data', {
         verified: false,
         region: 'REG001',
         state: 'PR',
-        paymentCondition: 'BOLETO_90',
+        paymentCondition: '90_DIAS',
 
         currencyId: 1,
         products: [
