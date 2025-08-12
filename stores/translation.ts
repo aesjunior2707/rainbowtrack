@@ -188,7 +188,13 @@ export const useTranslationStore = defineStore('translation', {
           quick_actions: 'Quick Actions',
           new_report: 'New Capture',
           price_trends: 'Price Trends',
-          market_analysis: 'Market Analysis'
+          market_analysis: 'Market Analysis',
+          market_intelligence: 'Market Intelligence Analysis • Consolidated Data',
+          geographic_analysis: 'Geospatial Analysis',
+          select_visualization: 'Select visualization for strategic analysis',
+          visualization: 'Visualization',
+          geographic_distribution: 'Geographic Distribution',
+          density_analysis: 'Density Analysis'
         },
         reports: {
           title: 'Captures',
