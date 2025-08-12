@@ -159,7 +159,11 @@
 <script setup>
 import { MapPin, FileText, TrendingUp, BarChart3 } from 'lucide-vue-next'
 
+const { $pinia } = useNuxtApp()
 const dataStore = useDataStore()
+const translationStore = useTranslationStore($pinia)
+
+const t = (key, params) => translationStore.t(key, params)
 
 // State names mapping
 const stateNames = {
