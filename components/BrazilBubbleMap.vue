@@ -255,11 +255,14 @@ const showTooltip = (event, state, count) => {
   tooltip.show = true
   tooltip.state = state
   tooltip.count = count
-  
-  // Get mouse position relative to the viewport
+
+  // Get position relative to the SVG container
   const rect = event.target.closest('svg').getBoundingClientRect()
-  tooltip.x = event.clientX - rect.left + 10
-  tooltip.y = event.clientY - rect.top - 10
+  const containerRect = event.target.closest('.relative').getBoundingClientRect()
+
+  // Position tooltip above the circle
+  tooltip.x = event.clientX - containerRect.left
+  tooltip.y = event.clientY - containerRect.top
 }
 
 const hideTooltip = () => {
