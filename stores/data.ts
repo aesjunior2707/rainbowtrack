@@ -29,7 +29,7 @@ export const useDataStore = defineStore('data', {
       },
       {
         id: 3,
-        name: 'Cooperativa Agroneg��cio Verde',
+        name: 'Cooperativa Agronegócio Verde',
         document: '98.765.432/0001-11',
         type: 'Cooperativa',
         region: 'Sudeste',
@@ -797,31 +797,75 @@ export const useDataStore = defineStore('data', {
     ],
 
     priceReports: [
-      // Samples with new product IDs
+      // Reports for Cerrado Norte users
       {
         id: 1,
         competitorId: 1,
-        reportDate: '2025-02-01',
-        reportedBy: 2,
-        notes: 'Produto com boa aceitação no mercado',
+        reportDate: '2025-01-15',
+        reportedBy: 2, // Felipe Tenorio
+        customerName: 'Fazenda São José',
+        notes: 'Acegol apresentando bom desempenho contra acetamiprid',
         verified: false,
         region: 'Cerrado Norte',
         state: 'MT',
-        paymentCondition: '90_DIAS',
+        paymentCondition: 'SAFRA_2026',
         currencyId: 1,
         products: [
           {
-            productId: 1,
-            competitorPrice: 148.00
+            productId: 1, // Acegol
+            competitorPrice: 165.00
           }
         ]
       },
       {
         id: 2,
         competitorId: 2,
-        reportDate: '2025-02-02',
-        reportedBy: 3,
-        notes: 'Preço competitivo na região',
+        reportDate: '2025-01-18',
+        reportedBy: 3, // Rodrigo Rocha
+        customerName: 'Agropecuária Bandeirantes',
+        notes: 'Preço competitivo para Acemip, cliente interessado',
+        verified: true,
+        region: 'Cerrado Norte',
+        state: 'GO',
+        paymentCondition: '90_DIAS',
+        currencyId: 1,
+        products: [
+          {
+            productId: 5, // Acemip
+            competitorPrice: 158.50
+          },
+          {
+            productId: 9, // Aceway
+            competitorPrice: 145.20
+          }
+        ]
+      },
+      {
+        id: 3,
+        competitorId: 1,
+        reportDate: '2025-01-20',
+        reportedBy: 4, // Gilberto Silva
+        customerName: 'Cooperativa Rural Verde',
+        notes: 'Adiconstar mostrando eficácia superior ao Priori Top',
+        verified: false,
+        region: 'Cerrado Norte',
+        state: 'MT',
+        paymentCondition: '120_DIAS',
+        currencyId: 1,
+        products: [
+          {
+            productId: 13, // Adiconstar
+            competitorPrice: 195.75
+          }
+        ]
+      },
+      {
+        id: 4,
+        competitorId: 3,
+        reportDate: '2025-01-22',
+        reportedBy: 5, // Raphael Siqueira
+        customerName: 'Fazenda Santa Clara',
+        notes: 'Ametrina 500 SC Rainbow com excelente residual',
         verified: true,
         region: 'Cerrado Norte',
         state: 'GO',
@@ -829,30 +873,311 @@ export const useDataStore = defineStore('data', {
         currencyId: 1,
         products: [
           {
-            productId: 2,
-            competitorPrice: 132.50
-          },
-          {
-            productId: 5,
-            competitorPrice: 95.80
+            productId: 17, // Ametrina 500 Sc Rainbow
+            competitorPrice: 88.90
           }
         ]
       },
       {
-        id: 3,
-        competitorId: 3,
-        reportDate: '2025-02-03',
-        reportedBy: 7,
-        notes: 'Oferta especial para grandes volumes',
+        id: 5,
+        competitorId: 2,
+        reportDate: '2025-01-25',
+        reportedBy: 6, // Layson Costa
+        customerName: 'Agronegócio Primavera',
+        notes: 'Besroute apresentou resultados impressionantes na soja',
         verified: false,
+        region: 'Cerrado Norte',
+        state: 'MT',
+        paymentCondition: '60_DIAS',
+        currencyId: 1,
+        products: [
+          {
+            productId: 38, // Besroute
+            competitorPrice: 125.30
+          },
+          {
+            productId: 43, // Besular
+            competitorPrice: 98.45
+          }
+        ]
+      },
+      // Reports for Cerrado Centro users
+      {
+        id: 6,
+        competitorId: 1,
+        reportDate: '2025-01-16',
+        reportedBy: 7, // Marcos Martins
+        customerName: 'Fazenda Dourados',
+        notes: 'Blowout eficiente na dessecação, cliente satisfeito',
+        verified: true,
+        region: 'Cerrado Centro',
+        state: 'MS',
+        paymentCondition: '90_DIAS',
+        currencyId: 1,
+        products: [
+          {
+            productId: 48, // Blowout
+            competitorPrice: 142.80
+          }
+        ]
+      },
+      {
+        id: 7,
+        competitorId: 3,
+        reportDate: '2025-01-19',
+        reportedBy: 8, // Ademir Borghi
+        customerName: 'Cooperativa Campo Grande',
+        notes: 'Cadilac superando Unizeb Gold em proteção',
+        verified: false,
+        region: 'Cerrado Centro',
+        state: 'MS',
+        paymentCondition: 'SAFRA_2026',
+        currencyId: 1,
+        products: [
+          {
+            productId: 53, // Cadilac
+            competitorPrice: 78.60
+          }
+        ]
+      },
+      {
+        id: 8,
+        competitorId: 2,
+        reportDate: '2025-01-21',
+        reportedBy: 9, // Giovani Cavalari
+        customerName: 'Agropecuária Horizonte',
+        notes: 'Captive com ótimo controle, preço interessante',
+        verified: true,
         region: 'Cerrado Centro',
         state: 'MT',
         paymentCondition: '120_DIAS',
         currencyId: 1,
         products: [
           {
-            productId: 3,
-            competitorPrice: 88.90
+            productId: 57, // Captive
+            competitorPrice: 186.40
+          }
+        ]
+      },
+      {
+        id: 9,
+        competitorId: 1,
+        reportDate: '2025-01-24',
+        reportedBy: 10, // Marcus Palomares
+        customerName: 'Fazenda Rio Verde',
+        notes: 'Cleaner Xtra demonstrando superioridade ao Bravonil SC',
+        verified: false,
+        region: 'Cerrado Centro',
+        state: 'GO',
+        paymentCondition: '150_DIAS',
+        currencyId: 1,
+        products: [
+          {
+            productId: 60, // Cleaner Xtra
+            competitorPrice: 203.15
+          }
+        ]
+      },
+      {
+        id: 10,
+        competitorId: 4,
+        reportDate: '2025-01-26',
+        reportedBy: 11, // Leonardo Alexandrino
+        customerName: 'Cooperativa Cerrado Sul',
+        notes: 'Atrazina 500 SC Rainbow com residual excelente',
+        verified: true,
+        region: 'Cerrado Centro',
+        state: 'MT',
+        paymentCondition: 'SAFRA_2026',
+        currencyId: 1,
+        products: [
+          {
+            productId: 34, // Atrazina 500 Sc Rainbow
+            competitorPrice: 92.75
+          },
+          {
+            productId: 30, // Atraer Wg
+            competitorPrice: 115.80
+          }
+        ]
+      },
+      // Reports for Cana users
+      {
+        id: 11,
+        competitorId: 2,
+        reportDate: '2025-01-17',
+        reportedBy: 14, // Gustavo Avila
+        customerName: 'Usina São Paulo',
+        notes: 'Atesalor Xtra eficaz no controle de pragas da cana',
+        verified: false,
+        region: 'Cana',
+        state: 'SP',
+        paymentCondition: '90_DIAS',
+        currencyId: 1,
+        products: [
+          {
+            productId: 26, // Atesalor Xtra
+            competitorPrice: 172.90
+          }
+        ]
+      },
+      {
+        id: 12,
+        competitorId: 3,
+        reportDate: '2025-01-23',
+        reportedBy: 15, // Eduardo Martelli
+        customerName: 'Cooperativa Canavieira',
+        notes: 'Arrantool universal, boa opção para diversas pragas',
+        verified: true,
+        region: 'Cana',
+        state: 'SP',
+        paymentCondition: '60_DIAS',
+        currencyId: 1,
+        products: [
+          {
+            productId: 25, // Arrantool
+            competitorPrice: 134.60
+          }
+        ]
+      },
+      // Reports for MT users
+      {
+        id: 13,
+        competitorId: 1,
+        reportDate: '2025-01-27',
+        reportedBy: 23, // Celso Junior
+        customerName: 'Fazenda Parecis',
+        notes: 'Boscalid apresentando excelente controle fúngico',
+        verified: false,
+        region: 'MT',
+        state: 'MT',
+        paymentCondition: 'SAFRA_2026',
+        currencyId: 1,
+        products: [
+          {
+            productId: 52, // Boscalid
+            competitorPrice: 245.80
+          }
+        ]
+      },
+      {
+        id: 14,
+        competitorId: 2,
+        reportDate: '2025-01-28',
+        reportedBy: 24, // João Neto
+        customerName: 'Agropecuária Tangará',
+        notes: 'Ametrina 800 WG Rainbow com ótima solubilidade',
+        verified: true,
+        region: 'MT',
+        state: 'MT',
+        paymentCondition: '120_DIAS',
+        currencyId: 1,
+        products: [
+          {
+            productId: 21, // Ametrina 800 Wg Rainbow
+            competitorPrice: 165.45
+          }
+        ]
+      },
+      // Reports for Sul users
+      {
+        id: 15,
+        competitorId: 3,
+        reportDate: '2025-01-29',
+        reportedBy: 31, // José Edberto
+        customerName: 'Cooperativa Tritícola',
+        notes: 'Produtos Rainbow com excelente aceitação no Sul',
+        verified: false,
+        region: 'Sul',
+        state: 'RS',
+        paymentCondition: '90_DIAS',
+        currencyId: 1,
+        products: [
+          {
+            productId: 1, // Acegol
+            competitorPrice: 158.30
+          },
+          {
+            productId: 5, // Acemip
+            competitorPrice: 151.75
+          }
+        ]
+      },
+      {
+        id: 16,
+        competitorId: 4,
+        reportDate: '2025-01-30',
+        reportedBy: 32, // Lucas Calixto
+        customerName: 'Agronegócio Gaúcho',
+        notes: 'Fertilizantes Besroute e Besular com resultados superiores',
+        verified: true,
+        region: 'Sul',
+        state: 'RS',
+        paymentCondition: 'SAFRA_2026',
+        currencyId: 1,
+        products: [
+          {
+            productId: 38, // Besroute
+            competitorPrice: 128.90
+          },
+          {
+            productId: 43, // Besular
+            competitorPrice: 102.35
+          }
+        ]
+      },
+      // Reports for KA users
+      {
+        id: 17,
+        competitorId: 1,
+        reportDate: '2025-01-31',
+        reportedBy: 37, // Filipe Campos
+        customerName: 'Fazenda Key Account',
+        notes: 'Portfolio completo Rainbow atendendo grandes produtores',
+        verified: false,
+        region: 'KA',
+        state: 'MT',
+        paymentCondition: '180_DIAS',
+        currencyId: 1,
+        products: [
+          {
+            productId: 13, // Adiconstar
+            competitorPrice: 189.50
+          },
+          {
+            productId: 17, // Ametrina 500 Sc Rainbow
+            competitorPrice: 86.75
+          },
+          {
+            productId: 48, // Blowout
+            competitorPrice: 138.25
+          }
+        ]
+      },
+      {
+        id: 18,
+        competitorId: 2,
+        reportDate: '2025-02-01',
+        reportedBy: 38, // Ricardo Leite
+        customerName: 'Grupo Agropecuário Nacional',
+        notes: 'Grandes volumes, preços especiais negociados',
+        verified: true,
+        region: 'KA',
+        state: 'GO',
+        paymentCondition: 'SAFRA_2026',
+        currencyId: 1,
+        products: [
+          {
+            productId: 53, // Cadilac
+            competitorPrice: 75.20
+          },
+          {
+            productId: 57, // Captive
+            competitorPrice: 179.80
+          },
+          {
+            productId: 60, // Cleaner Xtra
+            competitorPrice: 195.60
           }
         ]
       }
