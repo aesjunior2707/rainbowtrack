@@ -309,7 +309,7 @@ export const useDataStore = defineStore('data', {
         region: 'REG002',
         state: 'RS',
         paymentCondition: 'BARTER',
-        paymentMethod: 'DOCUMENTO',
+
         currencyId: 1,
         products: [
           {
