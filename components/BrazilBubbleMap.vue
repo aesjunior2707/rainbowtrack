@@ -48,7 +48,7 @@
           </div>
           <div class="text-center p-3 bg-purple-50 rounded-lg">
             <div class="text-2xl font-bold text-purple-600">{{ averagePerState.toFixed(1) }}</div>
-            <div class="text-sm text-gray-600">Índice de Performance</div>
+            <div class="text-sm text-gray-600">{{ t('maps.performance_index') }}</div>
           </div>
         </div>
       </div>
