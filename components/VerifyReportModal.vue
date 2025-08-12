@@ -52,15 +52,6 @@
             </div>
           </div>
 
-          <!-- Total if multiple products -->
-          <div v-if="getProductCount() > 1" class="mt-3 pt-3 border-t border-gray-200">
-            <div class="flex justify-between items-center">
-              <span class="font-medium text-gray-900">Total da Captura:</span>
-              <span class="text-xl font-bold text-primary-600">
-                {{ report.currencySymbol }} {{ formatPrice(getTotalValue()) }}
-              </span>
-            </div>
-          </div>
         </div>
 
         <!-- Additional Details -->
@@ -78,10 +69,6 @@
             <div>
               <span class="text-gray-600">Condição:</span>
               <span class="ml-2 font-medium">{{ getPaymentConditionText(report.paymentCondition) }}</span>
-            </div>
-            <div>
-              <span class="text-gray-600">Forma:</span>
-              <span class="ml-2 font-medium">{{ getPaymentMethodText(report.paymentMethod) }}</span>
             </div>
           </div>
           
@@ -147,10 +134,6 @@ const getProductCount = () => {
   return getReportProducts().length
 }
 
-const getTotalValue = () => {
-  const products = getReportProducts()
-  return products.reduce((total, product) => total + product.competitorPrice, 0)
-}
 
 const formatPrice = (price) => {
   return new Intl.NumberFormat('pt-BR', {
@@ -184,21 +167,6 @@ const getPaymentConditionText = (condition) => {
   return conditions[condition] || condition
 }
 
-const getPaymentMethodText = (method) => {
-  const methods = {
-    'DINHEIRO': 'Dinheiro',
-    'PIX': 'PIX',
-    'TRANSFERENCIA': 'Transferência',
-    'BOLETO': 'Boleto',
-    'CHEQUE': 'Cheque',
-    'CARTAO_CREDITO': 'Cartão Crédito',
-    'CARTAO_DEBITO': 'Cartão Débito',
-    'DEPOSITO': 'Depósito',
-    'DOCUMENTO': 'Documento',
-    'OUTRO': 'Outro'
-  }
-  return methods[method] || method
-}
 
 const handleVerify = () => {
   emit('verified', props.report.id)
