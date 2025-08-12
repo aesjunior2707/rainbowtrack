@@ -126,11 +126,8 @@
                     v-model="selectedMapType"
                     class="border border-gray-300 rounded-md px-3 py-2 text-sm focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
                   >
-                    <option value="real">🇧🇷 Mapa Real do Brasil</option>
-                    <option value="pro">🗺️ Mapa Geográfico Pro</option>
-                    <option value="chart">📊 Dashboard Profissional</option>
-                    <option value="heat">🔥 Mapa de Calor TreeMap</option>
-                    <option value="geo">🌍 Mapa Geográfico D3</option>
+                    <option value="bubble">🗺️ Mapa Original</option>
+                    <option value="heat">🔥 Mapa de Calor</option>
                   </select>
                 </div>
               </div>
@@ -138,11 +135,8 @@
 
             <!-- Dynamic Map Component -->
             <div>
-              <BrazilRealMap v-if="selectedMapType === 'real'" />
-              <BrazilProMap v-else-if="selectedMapType === 'pro'" />
-              <BrazilChartMap v-else-if="selectedMapType === 'chart'" />
+              <BrazilBubbleMap v-if="selectedMapType === 'bubble'" />
               <BrazilHeatMap v-else-if="selectedMapType === 'heat'" />
-              <BrazilGeoMap v-else-if="selectedMapType === 'geo'" />
             </div>
           </div>
         </ClientOnly>
