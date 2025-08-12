@@ -34,17 +34,33 @@
             <div class="mb-4">
               <div class="flex items-center justify-between mb-2">
                 <h3 class="text-lg font-semibold text-gray-900">{{ product.name }}</h3>
-                <span
-                  class="inline-block px-3 py-1 text-xs font-medium rounded-full"
-                  :class="getCategoryColor(product.category)"
-                >
-                  {{ getCategoryName(product.category) }}
-                </span>
+                <div class="flex items-center space-x-2">
+                  <span
+                    class="inline-block px-3 py-1 text-xs font-medium rounded-full"
+                    :class="getCategoryColor(product.category)"
+                  >
+                    {{ getCategoryName(product.category) }}
+                  </span>
+                  <span 
+                    v-if="product.isMainCompetitor"
+                    class="inline-flex items-center px-2 py-1 text-xs font-medium bg-red-100 text-red-800 rounded-full"
+                  >
+                    <AlertCircle class="w-3 h-3 mr-1" />
+                    Main
+                  </span>
+                </div>
               </div>
               <p class="text-primary-600 font-medium">{{ product.brand }}</p>
+              <p class="text-sm text-gray-500">{{ product.packaging }}</p>
             </div>
             
             <div class="space-y-3 text-sm">
+              <!-- Competitor Product -->
+              <div v-if="product.competitorProduct">
+                <span class="text-gray-600">Produto Concorrente:</span>
+                <p class="font-medium text-gray-900">{{ product.competitorProduct }}</p>
+              </div>
+              
               <div>
                 <span class="text-gray-600">Cultivos Registrados:</span>
                 <div class="flex flex-wrap gap-1 mt-1">
@@ -68,7 +84,7 @@
         <!-- Empty State -->
         <div v-if="filteredProducts.length === 0" class="text-center py-12">
           <Package class="w-12 h-12 text-gray-400 mx-auto mb-4" />
-          <p class="text-gray-500">No products found in this category</p>
+          <p class="text-gray-500">Nenhum produto encontrado nesta categoria</p>
         </div>
       </div>
     </AppLayout>
@@ -76,7 +92,7 @@
 </template>
 
 <script setup>
-import { Package } from 'lucide-vue-next'
+import { Package, AlertCircle } from 'lucide-vue-next'
 
 definePageMeta({
   middleware: 'auth'
@@ -85,14 +101,16 @@ definePageMeta({
 const { $pinia } = useNuxtApp()
 const dataStore = useDataStore($pinia)
 
-const selectedCategory = ref('fungicides')
-const categories = ['fungicides', 'insecticides', 'herbicides']
+const selectedCategory = ref('defensivos')
+const categories = ['defensivos', 'seeds', 'fertilizers', 'inoculants', 'biologicals']
 
 const getCategoryName = (category) => {
   const names = {
-    fungicides: 'Fungicidas',
-    insecticides: 'Inseticidas',
-    herbicides: 'Herbicidas'
+    defensivos: 'Defensivos',
+    seeds: 'Sementes',
+    fertilizers: 'Fertilizantes',
+    inoculants: 'Inoculantes',
+    biologicals: 'Biológicos'
   }
   return names[category] || category
 }
@@ -103,9 +121,11 @@ const filteredProducts = computed(() => {
 
 const getCategoryColor = (category) => {
   const colors = {
-    fungicides: 'bg-blue-100 text-blue-800',
-    insecticides: 'bg-red-100 text-red-800',
-    herbicides: 'bg-green-100 text-green-800'
+    defensivos: 'bg-blue-100 text-blue-800',
+    seeds: 'bg-green-100 text-green-800',
+    fertilizers: 'bg-yellow-100 text-yellow-800',
+    inoculants: 'bg-purple-100 text-purple-800',
+    biologicals: 'bg-teal-100 text-teal-800'
   }
   return colors[category] || 'bg-gray-100 text-gray-800'
 }
