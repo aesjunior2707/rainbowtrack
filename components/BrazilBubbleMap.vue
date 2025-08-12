@@ -56,73 +56,78 @@
             </text>
             
             <!-- Goiás (GO) -->
-            <circle 
-              :cx="420" 
-              :cy="320" 
+            <circle
+              :cx="420"
+              :cy="320"
               :r="getBubbleSize(stateData.GO)"
               :fill="getBubbleColor(stateData.GO)"
               :opacity="0.8"
-              class="cursor-pointer transition-all duration-200 hover:opacity-100"
+              class="cursor-pointer transition-all duration-300 hover:opacity-100 hover:scale-110"
+              style="transform-origin: center; animation: pulse 2s ease-in-out infinite; animation-delay: 0.2s"
               @mouseenter="showTooltip($event, 'GO', stateData.GO)"
               @mouseleave="hideTooltip"
             />
             <text x="420" y="325" text-anchor="middle" class="text-xs font-semibold fill-white">
               GO
             </text>
-            
+
             <!-- Mato Grosso do Sul (MS) -->
-            <circle 
-              :cx="340" 
-              :cy="380" 
+            <circle
+              :cx="340"
+              :cy="380"
               :r="getBubbleSize(stateData.MS)"
               :fill="getBubbleColor(stateData.MS)"
               :opacity="0.8"
-              class="cursor-pointer transition-all duration-200 hover:opacity-100"
+              class="cursor-pointer transition-all duration-300 hover:opacity-100 hover:scale-110"
+              style="transform-origin: center; animation: pulse 2s ease-in-out infinite; animation-delay: 0.4s"
               @mouseenter="showTooltip($event, 'MS', stateData.MS)"
               @mouseleave="hideTooltip"
             />
             <text x="340" y="385" text-anchor="middle" class="text-xs font-semibold fill-white">
               MS
             </text>
-            
+
             <!-- São Paulo (SP) -->
-            <circle 
-              :cx="480" 
-              :cy="420" 
+            <circle
+              :cx="480"
+              :cy="420"
               :r="getBubbleSize(stateData.SP)"
               :fill="getBubbleColor(stateData.SP)"
               :opacity="0.8"
-              class="cursor-pointer transition-all duration-200 hover:opacity-100"
+              class="cursor-pointer transition-all duration-300 hover:opacity-100 hover:scale-110"
+              style="transform-origin: center; animation: pulse 2s ease-in-out infinite; animation-delay: 0.6s"
               @mouseenter="showTooltip($event, 'SP', stateData.SP)"
               @mouseleave="hideTooltip"
             />
             <text x="480" y="425" text-anchor="middle" class="text-xs font-semibold fill-white">
               SP
             </text>
-            
+
             <!-- Rio Grande do Sul (RS) -->
-            <circle 
-              :cx="420" 
-              :cy="520" 
+            <circle
+              :cx="420"
+              :cy="520"
               :r="getBubbleSize(stateData.RS)"
               :fill="getBubbleColor(stateData.RS)"
               :opacity="0.8"
-              class="cursor-pointer transition-all duration-200 hover:opacity-100"
+              class="cursor-pointer transition-all duration-300 hover:opacity-100 hover:scale-110"
+              style="transform-origin: center; animation: pulse 2s ease-in-out infinite; animation-delay: 0.8s"
               @mouseenter="showTooltip($event, 'RS', stateData.RS)"
               @mouseleave="hideTooltip"
             />
             <text x="420" y="525" text-anchor="middle" class="text-xs font-semibold fill-white">
               RS
             </text>
-            
+
             <!-- Bahia (BA) -->
-            <circle 
-              :cx="500" 
-              :cy="220" 
+            <circle
+              :cx="500"
+              :cy="220"
               :r="getBubbleSize(stateData.BA)"
               :fill="getBubbleColor(stateData.BA)"
               :opacity="0.8"
-              class="cursor-pointer transition-all duration-200 hover:opacity-100"
+              class="cursor-pointer transition-all duration-300 hover:opacity-100 hover:scale-110"
+              style="transform-origin: center; animation: pulse 2s ease-in-out infinite; animation-delay: 1s"
               @mouseenter="showTooltip($event, 'BA', stateData.BA)"
               @mouseleave="hideTooltip"
             />
