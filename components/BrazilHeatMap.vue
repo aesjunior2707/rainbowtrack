@@ -422,11 +422,14 @@ const chartSeries = computed(() => {
 
 // Helper functions for fallback
 const showTooltip = (state, count, event) => {
+  const container = document.querySelector('.relative')
+  const containerRect = container?.getBoundingClientRect() || { left: 0, top: 0 }
   const rect = event.target.getBoundingClientRect()
+
   fallbackTooltip.value = {
     visible: true,
-    x: rect.left + rect.width / 2,
-    y: rect.top,
+    x: rect.left - containerRect.left + rect.width / 2,
+    y: rect.top - containerRect.top,
     state,
     count
   }
