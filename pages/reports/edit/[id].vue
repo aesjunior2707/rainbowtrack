@@ -186,7 +186,7 @@
                   <option value="MT">Mato Grosso</option>
                   <option value="MS">Mato Grosso do Sul</option>
                   <option value="MG">Minas Gerais</option>
-                  <option value="PA">Par��</option>
+                  <option value="PA">Pará</option>
                   <option value="PB">Paraíba</option>
                   <option value="PR">Paraná</option>
                   <option value="PE">Pernambuco</option>
@@ -227,7 +227,7 @@
                   <option value="">Selecione a condição</option>
                   <option value="SAFRA_2024">Safra 2024</option>
                   <option value="SAFRINHA_2024">Safrinha 2024</option>
-                  <option value="A_VISTA">À vista</option>
+                  <option value="A_VISTA">A vista</option>
                   <option value="30_DIAS">30 dias</option>
                   <option value="60_DIAS">60 dias</option>
                   <option value="90_DIAS">90 dias</option>
