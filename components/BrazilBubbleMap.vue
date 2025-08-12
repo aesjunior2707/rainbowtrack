@@ -269,6 +269,13 @@ const showTooltip = (event, state, count) => {
 const hideTooltip = () => {
   tooltip.show = false
 }
+
+const showStateDetails = (state, count) => {
+  if (count > 0) {
+    // Show alert with state details (could be replaced with a modal)
+    alert(`Estado: ${state}\nCapturas: ${count}\nPercentual: ${getPercentage(count)}% do total`)
+  }
+}
 </script>
 
 <style scoped>
