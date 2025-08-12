@@ -116,8 +116,8 @@
             <div class="mb-6 card p-4">
               <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                 <div>
-                  <h3 class="text-lg font-semibold text-gray-900">Análise Geoespacial</h3>
-                  <p class="text-sm text-gray-600">Selecione a visualização para análise estratégica</p>
+                  <h3 class="text-lg font-semibold text-gray-900">{{ t('dashboard.geographic_analysis') }}</h3>
+                  <p class="text-sm text-gray-600">{{ t('dashboard.select_visualization') }}</p>
                 </div>
 
                 <div class="flex items-center gap-3">
