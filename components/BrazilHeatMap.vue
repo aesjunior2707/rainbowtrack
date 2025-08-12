@@ -372,31 +372,6 @@ const chartSeries = computed(() => {
   }]
 })
 
-// Helper functions for fallback
-const showTooltip = (state, count, event) => {
-  const container = document.querySelector('.relative')
-  const containerRect = container?.getBoundingClientRect() || { left: 0, top: 0 }
-  const rect = event.target.getBoundingClientRect()
-
-  fallbackTooltip.value = {
-    visible: true,
-    x: rect.left - containerRect.left + rect.width / 2,
-    y: rect.top - containerRect.top,
-    state,
-    count
-  }
-}
-
-const hideTooltip = () => {
-  fallbackTooltip.value.visible = false
-}
-
-const getStateColor = (count) => {
-  if (count === 0) return '#e2e8f0'
-  if (count <= 3) return '#99f6e4'
-  if (count <= 8) return '#2dd4bf'
-  return '#006E68'
-}
 
 // Initialize chart
 onMounted(() => {
