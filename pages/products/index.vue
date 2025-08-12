@@ -102,15 +102,12 @@ const { $pinia } = useNuxtApp()
 const dataStore = useDataStore($pinia)
 
 const selectedCategory = ref('defensivos')
-const categories = ['defensivos', 'seeds', 'fertilizers', 'inoculants', 'biologicals']
+const categories = ['defensivos', 'seeds'] // Apenas as categorias que realmente temos
 
 const getCategoryName = (category) => {
   const names = {
     defensivos: 'Defensivos',
-    seeds: 'Sementes',
-    fertilizers: 'Fertilizantes',
-    inoculants: 'Inoculantes',
-    biologicals: 'Biológicos'
+    seeds: 'Sementes'
   }
   return names[category] || category
 }
@@ -122,10 +119,7 @@ const filteredProducts = computed(() => {
 const getCategoryColor = (category) => {
   const colors = {
     defensivos: 'bg-blue-100 text-blue-800',
-    seeds: 'bg-green-100 text-green-800',
-    fertilizers: 'bg-yellow-100 text-yellow-800',
-    inoculants: 'bg-purple-100 text-purple-800',
-    biologicals: 'bg-teal-100 text-teal-800'
+    seeds: 'bg-green-100 text-green-800'
   }
   return colors[category] || 'bg-gray-100 text-gray-800'
 }
