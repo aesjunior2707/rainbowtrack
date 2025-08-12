@@ -83,7 +83,7 @@
                 </div>
                 <div class="flex items-center gap-2">
                   <div class="w-4 h-4 rounded bg-primary-600"></div>
-                  <span class="text-gray-600">Alto</span>
+                  <span class="text-gray-600">{{ t('maps.high_density') }}</span>
                 </div>
               </div>
             </div>
