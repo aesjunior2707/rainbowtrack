@@ -71,7 +71,7 @@
               <div class="flex items-center gap-4 text-sm">
                 <div class="flex items-center gap-2">
                   <div class="w-4 h-4 rounded bg-gray-200"></div>
-                  <span class="text-gray-600">Sem dados</span>
+                  <span class="text-gray-600">{{ t('maps.no_data') }}</span>
                 </div>
                 <div class="flex items-center gap-2">
                   <div class="w-4 h-4 rounded bg-primary-200"></div>
