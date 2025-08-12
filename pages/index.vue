@@ -12,6 +12,9 @@
               <p class="text-gray-600">
                 {{ t('dashboard.welcome', { name: authStore.user?.name }) }}
               </p>
+              <p class="text-sm text-primary-600 mt-1">
+                Sistema de inteligência competitiva ativo 🌈
+              </p>
             </ClientOnly>
           </div>
           <div class="text-right">
