@@ -64,7 +64,7 @@ export const useDataStore = defineStore('data', {
         active: true
       }
     ],
-    nextReportId: 8, // Track next available ID (starts at 8 since we have 7 initial reports)
+    nextReportId: 18, // Track next available ID (updated for new reports)
 
     competitors: [
       {
@@ -369,6 +369,211 @@ export const useDataStore = defineStore('data', {
           {
             productId: 3,
             competitorPrice: 156.90
+          }
+        ]
+      },
+      // Capturas dos novos representantes
+      {
+        id: 8,
+        competitorId: 1,
+        reportDate: '2025-02-01',
+        reportedBy: 2, // Felipe Tenorio
+        notes: 'Cliente interessado em mudança de fornecedor',
+        verified: false,
+        region: 'Cerrado Norte',
+        state: 'MT',
+        paymentCondition: '90_DIAS',
+        currencyId: 1,
+        products: [
+          {
+            productId: 1,
+            competitorPrice: 148.00
+          }
+        ]
+      },
+      {
+        id: 9,
+        competitorId: 2,
+        reportDate: '2025-02-02',
+        reportedBy: 3, // Rodrigo Rocha
+        notes: 'Preço competitivo na região',
+        verified: true,
+        region: 'Cerrado Norte',
+        state: 'GO',
+        paymentCondition: 'SAFRA_2026',
+        currencyId: 1,
+        products: [
+          {
+            productId: 4,
+            competitorPrice: 132.50
+          },
+          {
+            productId: 7,
+            competitorPrice: 95.80
+          }
+        ]
+      },
+      {
+        id: 10,
+        competitorId: 3,
+        reportDate: '2025-02-03',
+        reportedBy: 7, // Marcos Martins
+        notes: 'Oferta especial para grandes volumes',
+        verified: false,
+        region: 'Cerrado Centro',
+        state: 'MT',
+        paymentCondition: '120_DIAS',
+        currencyId: 1,
+        products: [
+          {
+            productId: 2,
+            competitorPrice: 88.90
+          }
+        ]
+      },
+      {
+        id: 11,
+        competitorId: 4,
+        reportDate: '2025-02-04',
+        reportedBy: 14, // Gustavo Avila
+        notes: 'Produto para cultura de cana-de-açúcar',
+        verified: true,
+        region: 'Cana',
+        state: 'SP',
+        paymentCondition: '60_DIAS',
+        currencyId: 1,
+        products: [
+          {
+            productId: 5,
+            competitorPrice: 76.40
+          },
+          {
+            productId: 8,
+            competitorPrice: 68.20
+          }
+        ]
+      },
+      {
+        id: 12,
+        competitorId: 1,
+        reportDate: '2025-02-05',
+        reportedBy: 23, // Celso Junior
+        notes: 'Concorrente muito ativo na região MT',
+        verified: false,
+        region: 'MT',
+        state: 'MT',
+        paymentCondition: 'SAFRINHA_2026',
+        currencyId: 1,
+        products: [
+          {
+            productId: 6,
+            competitorPrice: 125.30
+          }
+        ]
+      },
+      {
+        id: 13,
+        competitorId: 2,
+        reportDate: '2025-02-06',
+        reportedBy: 31, // José Edberto
+        notes: 'Boa aceitação dos produtores na região Sul',
+        verified: true,
+        region: 'Sul',
+        state: 'RS',
+        paymentCondition: '150_DIAS',
+        currencyId: 1,
+        products: [
+          {
+            productId: 3,
+            competitorPrice: 159.70
+          },
+          {
+            productId: 9,
+            competitorPrice: 112.80
+          }
+        ]
+      },
+      {
+        id: 14,
+        competitorId: 3,
+        reportDate: '2025-02-07',
+        reportedBy: 37, // Filipe Campos
+        notes: 'Primeira captura na região KA',
+        verified: false,
+        region: 'KA',
+        state: 'BA',
+        paymentCondition: 'A_VISTA',
+        currencyId: 1,
+        products: [
+          {
+            productId: 1,
+            competitorPrice: 143.60
+          }
+        ]
+      },
+      {
+        id: 15,
+        competitorId: 4,
+        reportDate: '2025-02-08',
+        reportedBy: 8, // Ademir Borghi
+        notes: 'Capturas múltiplas para análise completa',
+        verified: true,
+        region: 'Cerrado Centro',
+        state: 'GO',
+        paymentCondition: '180_DIAS',
+        currencyId: 1,
+        products: [
+          {
+            productId: 4,
+            competitorPrice: 136.20
+          },
+          {
+            productId: 5,
+            competitorPrice: 79.50
+          },
+          {
+            productId: 8,
+            competitorPrice: 66.80
+          }
+        ]
+      },
+      {
+        id: 16,
+        competitorId: 1,
+        reportDate: '2025-02-09',
+        reportedBy: 18, // Elcio Daroz
+        notes: 'Setor sucroalcooleiro em expansão',
+        verified: false,
+        region: 'Cana',
+        state: 'SP',
+        paymentCondition: '210_DIAS',
+        currencyId: 1,
+        products: [
+          {
+            productId: 7,
+            competitorPrice: 103.40
+          }
+        ]
+      },
+      {
+        id: 17,
+        competitorId: 2,
+        reportDate: '2025-02-10',
+        reportedBy: 26, // Ronaldo Américo
+        notes: 'Farmer satisfeito com resultado',
+        verified: true,
+        region: 'MT',
+        state: 'MT',
+        paymentCondition: '240_DIAS',
+        currencyId: 1,
+        products: [
+          {
+            productId: 2,
+            competitorPrice: 91.30
+          },
+          {
+            productId: 6,
+            competitorPrice: 128.90
           }
         ]
       }
