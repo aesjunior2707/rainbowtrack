@@ -64,7 +64,7 @@
             <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
               <div>
                 <h3 class="text-lg font-semibold text-gray-900">Mapa de Calor - Brasil</h3>
-                <p class="text-sm text-gray-600">Distribuição geográfica das capturas competitivas</p>
+                <p class="text-sm text-gray-600">Análise estratégica de performance territorial</p>
               </div>
               
               <!-- Legend -->
