@@ -109,10 +109,37 @@
           </div>
         </div>
 
-        <!-- Admin-only Brazil Heat Map -->
+        <!-- Admin-only Brazil Maps -->
         <ClientOnly>
           <div v-if="authStore.user?.role === 'admin'">
-            <BrazilHeatMap />
+            <!-- Map Selection -->
+            <div class="mb-6 card p-4">
+              <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                <div>
+                  <h3 class="text-lg font-semibold text-gray-900">Visualizações Geográficas</h3>
+                  <p class="text-sm text-gray-600">Escolha o tipo de mapa para análise</p>
+                </div>
+
+                <div class="flex items-center gap-3">
+                  <label class="text-sm font-medium text-gray-700">Tipo de Mapa:</label>
+                  <select
+                    v-model="selectedMapType"
+                    class="border border-gray-300 rounded-md px-3 py-2 text-sm focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                  >
+                    <option value="chart">Dashboard Profissional</option>
+                    <option value="heat">Mapa de Calor TreeMap</option>
+                    <option value="geo">Mapa Geográfico D3</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Dynamic Map Component -->
+            <div>
+              <BrazilChartMap v-if="selectedMapType === 'chart'" />
+              <BrazilHeatMap v-else-if="selectedMapType === 'heat'" />
+              <BrazilGeoMap v-else-if="selectedMapType === 'geo'" />
+            </div>
           </div>
         </ClientOnly>
       </div>
