@@ -13,7 +13,7 @@
             <div class="flex items-center justify-between">
               <div>
                 <div class="text-2xl font-bold">{{ totalCaptures }}</div>
-                <div class="text-primary-100 text-sm">Volume Consolidado</div>
+                <div class="text-primary-100 text-sm">{{ t('maps.consolidated_volume') }}</div>
               </div>
               <div class="bg-white bg-opacity-20 p-3 rounded-lg">
                 <FileText class="w-6 h-6 text-white" />
