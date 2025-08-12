@@ -3,7 +3,7 @@
     <div class="card p-6">
       <h2 class="text-lg font-semibold text-gray-900 mb-4 flex items-center">
         <MapPin class="w-5 h-5 mr-2 text-primary-600" />
-        Análise de Densidade Competitiva por Região
+        {{ t('maps.competitive_density') }}
       </h2>
       
       <div class="relative w-full">
