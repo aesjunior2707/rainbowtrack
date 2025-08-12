@@ -146,25 +146,6 @@
             </div>
           </div>
 
-          <!-- Capture Summary -->
-          <div v-if="selectedProducts.length > 0" class="card p-6 bg-gradient-to-r from-primary-50 to-secondary-50 border-primary-200">
-            <div class="flex justify-between items-center">
-              <div>
-                <h3 class="text-lg font-semibold text-gray-900 mb-1">
-                  Resumo da Captura
-                </h3>
-                <p class="text-sm text-gray-600">
-                  {{ selectedProducts.length }} produto{{ selectedProducts.length > 1 ? 's' : '' }} selecionado{{ selectedProducts.length > 1 ? 's' : '' }}
-                </p>
-              </div>
-              <div class="text-right">
-                <p class="text-sm text-gray-600 mb-1">Valor Total</p>
-                <p class="text-2xl font-bold text-primary-600">
-                  {{ selectedCurrencySymbol }} {{ formatPrice(totalCaptureValue) }}
-                </p>
-              </div>
-            </div>
-          </div>
 
           <!-- Details -->
           <div class="card p-6">
@@ -258,24 +239,6 @@
                 </select>
               </div>
 
-              <div>
-                <label class="block text-sm font-medium text-gray-700 mb-2">
-                  Forma de Pagamento
-                </label>
-                <select v-model="paymentMethod" class="input-field" required>
-                  <option value="">Selecione a forma</option>
-                  <option value="DINHEIRO">Dinheiro</option>
-                  <option value="PIX">PIX</option>
-                  <option value="TRANSFERENCIA">Transferência Bancária</option>
-                  <option value="BOLETO">Boleto Bancário</option>
-                  <option value="CHEQUE">Cheque</option>
-                  <option value="CARTAO_CREDITO">Cartão de Crédito</option>
-                  <option value="CARTAO_DEBITO">Cartão de Débito</option>
-                  <option value="DEPOSITO">Depósito Bancário</option>
-                  <option value="DOCUMENTO">Documento/Duplicata</option>
-                  <option value="OUTRO">Outro</option>
-                </select>
-              </div>
 
               <div>
                 <label class="block text-sm font-medium text-gray-700 mb-2">
@@ -365,7 +328,6 @@ const reportDate = ref('')
 const region = ref('')
 const state = ref('')
 const paymentCondition = ref('')
-const paymentMethod = ref('')
 const currency = ref('')
 const notes = ref('')
 const showNewCompetitorModal = ref(false)
@@ -402,16 +364,7 @@ const formatPrice = (price) => {
   }).format(price)
 }
 
-const totalCaptureValue = computed(() => {
-  return selectedProducts.value.reduce((total, item) => {
-    return total + item.competitorPrice
-  }, 0)
-})
 
-const selectedCurrencySymbol = computed(() => {
-  const curr = dataStore.getCurrencyById(currency.value)
-  return curr ? curr.symbol : 'R$'
-})
 
 const availableCompetitors = computed(() => {
   const userRegion = authStore.user?.defaultRegion
@@ -428,7 +381,6 @@ const canSubmit = computed(() => {
          region.value &&
          state.value &&
          paymentCondition.value &&
-         paymentMethod.value &&
          currency.value
 })
 
@@ -452,7 +404,6 @@ const handleSubmit = () => {
     region: region.value || 'Não informado',
     state: state.value,
     paymentCondition: paymentCondition.value,
-    paymentMethod: paymentMethod.value,
     currencyId: currency.value,
     products: selectedProducts.value.map(item => ({
       productId: item.product.id,
