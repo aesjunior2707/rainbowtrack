@@ -24,11 +24,11 @@
         </div>
 
         <!-- Brazil Map with Bubbles -->
-        <div class="relative bg-gray-50 rounded-lg p-4 min-h-[500px] flex items-center justify-center">
-          <svg 
-            viewBox="0 0 800 600" 
+        <div class="relative bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg p-4 min-h-[400px] md:min-h-[500px] flex items-center justify-center overflow-hidden">
+          <svg
+            viewBox="0 0 800 600"
             class="w-full h-auto max-w-4xl"
-            style="filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.1))"
+            style="filter: drop-shadow(2px 2px 8px rgba(0,0,0,0.15))"
           >
             <!-- Brazil outline (simplified) -->
             <path 
