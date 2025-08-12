@@ -45,7 +45,7 @@
                 </div>
                 <div class="text-right">
                   <p class="text-lg font-bold text-primary-600">
-                    {{ report.currencySymbol }} {{ formatPrice(productItem.competitorPrice) }}
+                    {{ getCurrencySymbol(productItem.currencyId || 1) }} {{ formatPrice(productItem.competitorPrice) }}
                   </p>
                 </div>
               </div>
@@ -118,6 +118,11 @@ const getProductBrand = (productId) => {
   return product ? product.brand : 'Marca Desconhecida'
 }
 
+const getCurrencySymbol = (currencyId) => {
+  const currency = dataStore.getCurrencyById(currencyId)
+  return currency ? currency.symbol : 'R$'
+}
+
 const getReportProducts = () => {
   // Support both old and new format
   if (props.report.products && Array.isArray(props.report.products)) {
@@ -126,7 +131,8 @@ const getReportProducts = () => {
   // Convert old format to new format for display
   return [{
     productId: props.report.productId,
-    competitorPrice: props.report.competitorPrice
+    competitorPrice: props.report.competitorPrice,
+    currencyId: props.report.currencyId || 1 // Default to BRL for old format
   }]
 }
 

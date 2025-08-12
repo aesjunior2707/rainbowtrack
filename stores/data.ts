@@ -668,7 +668,7 @@ export const useDataStore = defineStore('data', {
         category: 'defensivos',
         brand: 'Blowout',
         packaging: '5L',
-        registeredCrops: ['Algodão'],
+        registeredCrops: ['Algod��o'],
         description: 'Dessecante de contato',
         competitorProduct: 'Helmoquat',
         isMainCompetitor: false
@@ -813,7 +813,8 @@ export const useDataStore = defineStore('data', {
         products: [
           {
             productId: 1, // Acegol
-            competitorPrice: 165.00
+            competitorPrice: 165.00,
+            currencyId: 1 // BRL
           }
         ]
       },
@@ -832,11 +833,13 @@ export const useDataStore = defineStore('data', {
         products: [
           {
             productId: 5, // Acemip
-            competitorPrice: 158.50
+            competitorPrice: 158.50,
+            currencyId: 1 // BRL
           },
           {
             productId: 9, // Aceway
-            competitorPrice: 145.20
+            competitorPrice: 145.20,
+            currencyId: 1 // BRL
           }
         ]
       },
@@ -855,7 +858,8 @@ export const useDataStore = defineStore('data', {
         products: [
           {
             productId: 13, // Adiconstar
-            competitorPrice: 195.75
+            competitorPrice: 195.75,
+            currencyId: 1 // BRL
           }
         ]
       },
@@ -874,7 +878,8 @@ export const useDataStore = defineStore('data', {
         products: [
           {
             productId: 17, // Ametrina 500 Sc Rainbow
-            competitorPrice: 88.90
+            competitorPrice: 88.90,
+            currencyId: 1 // BRL
           }
         ]
       },
@@ -893,11 +898,13 @@ export const useDataStore = defineStore('data', {
         products: [
           {
             productId: 38, // Besroute
-            competitorPrice: 125.30
+            competitorPrice: 125.30,
+            currencyId: 1 // BRL
           },
           {
             productId: 43, // Besular
-            competitorPrice: 98.45
+            competitorPrice: 98.45,
+            currencyId: 1 // BRL
           }
         ]
       },
@@ -917,7 +924,8 @@ export const useDataStore = defineStore('data', {
         products: [
           {
             productId: 48, // Blowout
-            competitorPrice: 142.80
+            competitorPrice: 142.80,
+            currencyId: 1 // BRL
           }
         ]
       },
@@ -936,7 +944,8 @@ export const useDataStore = defineStore('data', {
         products: [
           {
             productId: 53, // Cadilac
-            competitorPrice: 78.60
+            competitorPrice: 78.60,
+            currencyId: 1 // BRL
           }
         ]
       },
@@ -955,7 +964,8 @@ export const useDataStore = defineStore('data', {
         products: [
           {
             productId: 57, // Captive
-            competitorPrice: 186.40
+            competitorPrice: 186.40,
+            currencyId: 1 // BRL
           }
         ]
       },
@@ -974,7 +984,8 @@ export const useDataStore = defineStore('data', {
         products: [
           {
             productId: 60, // Cleaner Xtra
-            competitorPrice: 203.15
+            competitorPrice: 203.15,
+            currencyId: 1 // BRL
           }
         ]
       },
@@ -993,11 +1004,13 @@ export const useDataStore = defineStore('data', {
         products: [
           {
             productId: 34, // Atrazina 500 Sc Rainbow
-            competitorPrice: 92.75
+            competitorPrice: 92.75,
+            currencyId: 1 // BRL
           },
           {
             productId: 30, // Atraer Wg
-            competitorPrice: 115.80
+            competitorPrice: 115.80,
+            currencyId: 1 // BRL
           }
         ]
       },
@@ -1017,7 +1030,8 @@ export const useDataStore = defineStore('data', {
         products: [
           {
             productId: 26, // Atesalor Xtra
-            competitorPrice: 172.90
+            competitorPrice: 172.90,
+            currencyId: 1 // BRL
           }
         ]
       },
@@ -1036,7 +1050,8 @@ export const useDataStore = defineStore('data', {
         products: [
           {
             productId: 25, // Arrantool
-            competitorPrice: 134.60
+            competitorPrice: 134.60,
+            currencyId: 1 // BRL
           }
         ]
       },
@@ -1056,7 +1071,8 @@ export const useDataStore = defineStore('data', {
         products: [
           {
             productId: 52, // Boscalid
-            competitorPrice: 245.80
+            competitorPrice: 245.80,
+            currencyId: 1 // BRL
           }
         ]
       },
@@ -1075,7 +1091,8 @@ export const useDataStore = defineStore('data', {
         products: [
           {
             productId: 21, // Ametrina 800 Wg Rainbow
-            competitorPrice: 165.45
+            competitorPrice: 165.45,
+            currencyId: 1 // BRL
           }
         ]
       },
@@ -1095,11 +1112,13 @@ export const useDataStore = defineStore('data', {
         products: [
           {
             productId: 1, // Acegol
-            competitorPrice: 158.30
+            competitorPrice: 158.30,
+            currencyId: 1 // BRL
           },
           {
             productId: 5, // Acemip
-            competitorPrice: 151.75
+            competitorPrice: 151.75,
+            currencyId: 1 // BRL
           }
         ]
       },
@@ -1118,11 +1137,13 @@ export const useDataStore = defineStore('data', {
         products: [
           {
             productId: 38, // Besroute
-            competitorPrice: 128.90
+            competitorPrice: 128.90,
+            currencyId: 1 // BRL
           },
           {
             productId: 43, // Besular
-            competitorPrice: 102.35
+            competitorPrice: 102.35,
+            currencyId: 1 // BRL
           }
         ]
       },
@@ -1142,15 +1163,18 @@ export const useDataStore = defineStore('data', {
         products: [
           {
             productId: 13, // Adiconstar
-            competitorPrice: 189.50
+            competitorPrice: 189.50,
+            currencyId: 1 // BRL
           },
           {
             productId: 17, // Ametrina 500 Sc Rainbow
-            competitorPrice: 86.75
+            competitorPrice: 86.75,
+            currencyId: 1 // BRL
           },
           {
             productId: 48, // Blowout
-            competitorPrice: 138.25
+            competitorPrice: 138.25,
+            currencyId: 1 // BRL
           }
         ]
       },
@@ -1169,15 +1193,18 @@ export const useDataStore = defineStore('data', {
         products: [
           {
             productId: 53, // Cadilac
-            competitorPrice: 75.20
+            competitorPrice: 75.20,
+            currencyId: 1 // BRL
           },
           {
             productId: 57, // Captive
-            competitorPrice: 179.80
+            competitorPrice: 179.80,
+            currencyId: 1 // BRL
           },
           {
             productId: 60, // Cleaner Xtra
-            competitorPrice: 195.60
+            competitorPrice: 195.60,
+            currencyId: 1 // BRL
           }
         ]
       },
@@ -1197,7 +1224,8 @@ export const useDataStore = defineStore('data', {
         products: [
           {
             productId: 1,
-            competitorPrice: 160.00
+            competitorPrice: 160.00,
+            currencyId: 1 // BRL
           }
         ]
       },
@@ -1216,7 +1244,8 @@ export const useDataStore = defineStore('data', {
         products: [
           {
             productId: 5,
-            competitorPrice: 155.00
+            competitorPrice: 155.00,
+            currencyId: 1 // BRL
           }
         ]
       }
