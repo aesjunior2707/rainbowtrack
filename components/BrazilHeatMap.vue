@@ -63,8 +63,8 @@
           <div class="p-4 border-b border-gray-100 bg-gray-50">
             <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
               <div>
-                <h3 class="text-lg font-semibold text-gray-900">Mapa de Calor - Brasil</h3>
-                <p class="text-sm text-gray-600">Análise estratégica de performance territorial</p>
+                <h3 class="text-lg font-semibold text-gray-900">{{ t('maps.heat_map_brazil') }}</h3>
+                <p class="text-sm text-gray-600">{{ t('maps.strategic_analysis') }}</p>
               </div>
               
               <!-- Legend -->
