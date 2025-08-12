@@ -101,12 +101,12 @@ const { $pinia } = useNuxtApp()
 const dataStore = useDataStore($pinia)
 
 const selectedCategory = ref('defensivos')
-const categories = ['defensivos', 'seeds'] // Apenas as categorias que realmente temos
+const categories = ['defensivos', 'fertilizers'] // Categorias disponíveis
 
 const getCategoryName = (category) => {
   const names = {
     defensivos: 'Defensivos',
-    seeds: 'Sementes'
+    fertilizers: 'Fertilizantes'
   }
   return names[category] || category
 }
