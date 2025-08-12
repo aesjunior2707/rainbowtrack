@@ -271,7 +271,7 @@ export const useDataStore = defineStore('data', {
         region: 'REG002',
         state: 'MG',
         paymentCondition: 'POS_COLHEITA',
-        paymentMethod: 'TRANSFERENCIA',
+
         currencyId: 1,
         products: [
           {
