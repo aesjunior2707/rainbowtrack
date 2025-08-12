@@ -79,7 +79,7 @@
                 </div>
                 <div class="flex items-center gap-2">
                   <div class="w-4 h-4 rounded bg-primary-400"></div>
-                  <span class="text-gray-600">Médio</span>
+                  <span class="text-gray-600">{{ t('maps.medium_density') }}</span>
                 </div>
                 <div class="flex items-center gap-2">
                   <div class="w-4 h-4 rounded bg-primary-600"></div>
