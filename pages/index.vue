@@ -116,8 +116,8 @@
             <div class="mb-6 card p-4">
               <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                 <div>
-                  <h3 class="text-lg font-semibold text-gray-900">Visualizações Geográficas</h3>
-                  <p class="text-sm text-gray-600">Escolha o tipo de mapa para análise</p>
+                  <h3 class="text-lg font-semibold text-gray-900">Análise Geoespacial</h3>
+                  <p class="text-sm text-gray-600">Selecione a visualização para análise estratégica</p>
                 </div>
 
                 <div class="flex items-center gap-3">
