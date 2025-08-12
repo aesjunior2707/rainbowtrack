@@ -274,6 +274,33 @@ export const useTranslationStore = defineStore('translation', {
           total: 'Total',
           date: 'Date',
           actions: 'Actions'
+        },
+        maps: {
+          territorial_distribution: 'Territorial Distribution of Competitive Captures',
+          competitive_density: 'Competitive Density Analysis by Region',
+          no_data: 'No data',
+          low_density: 'Low density',
+          medium_density: 'Medium density',
+          high_density: 'High density',
+          total_volume: 'Total Volume',
+          consolidated_volume: 'Consolidated Volume',
+          active_regions: 'Active Regions',
+          operating_regions: 'Operating Regions',
+          regional_leader: 'Regional Leader',
+          featured_region: 'Featured Region',
+          performance_index: 'Performance Index',
+          efficiency_indicator: 'Efficiency Indicator',
+          heat_map_brazil: 'Heat Map - Brazil',
+          strategic_analysis: 'Strategic analysis of territorial performance',
+          detailed_breakdown: 'Detailed Regional Breakdown',
+          captures: 'Captures',
+          participation: 'Participation'
+        },
+        pwa: {
+          install_title: 'Install Rainbow Track',
+          install_description: 'Quick access without browser',
+          install: 'Install',
+          offline_mode: 'Offline mode - Some features may be limited'
         }
       },
       'es': {
@@ -405,7 +432,7 @@ export const useTranslationStore = defineStore('translation', {
           remember: '记住我',
           forgot_password: '忘记密码？',
           loading: '加载中...',
-          invalid_credentials: '用户名或密码无效',
+          invalid_credentials: '用户名或密��无效',
           login_failed: '登录失败。请重试。',
           demo_users: '演示用户：',
           logout: '退出'
