@@ -250,24 +250,6 @@
                 </select>
               </div>
 
-              <div>
-                <label class="block text-sm font-medium text-gray-700 mb-2">
-                  Forma de Pagamento
-                </label>
-                <select v-model="form.paymentMethod" class="input-field" required>
-                  <option value="">Selecione a forma</option>
-                  <option value="DINHEIRO">Dinheiro</option>
-                  <option value="PIX">PIX</option>
-                  <option value="TRANSFERENCIA">Transferência Bancária</option>
-                  <option value="BOLETO">Boleto Bancário</option>
-                  <option value="CHEQUE">Cheque</option>
-                  <option value="CARTAO_CREDITO">Cartão de Crédito</option>
-                  <option value="CARTAO_DEBITO">Cartão de Débito</option>
-                  <option value="DEPOSITO">Depósito Bancário</option>
-                  <option value="DOCUMENTO">Documento/Duplicata</option>
-                  <option value="OUTRO">Outro</option>
-                </select>
-              </div>
 
               <div class="md:col-span-2">
                 <label class="block text-sm font-medium text-gray-700 mb-2">
@@ -355,7 +337,6 @@ const form = ref({
   region: '',
   state: '',
   paymentCondition: '',
-  paymentMethod: '',
   currencyId: '',
   notes: '',
   products: []
@@ -410,7 +391,6 @@ const loadReport = () => {
       region: foundReport.region,
       state: foundReport.state,
       paymentCondition: foundReport.paymentCondition,
-      paymentMethod: foundReport.paymentMethod,
       currencyId: foundReport.currencyId,
       notes: foundReport.notes || '',
       products: [...foundReport.products] // Copy products array

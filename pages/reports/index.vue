@@ -162,11 +162,10 @@
               </div>
 
               <!-- Condições de Pagamento (apenas para admin) -->
-              <div v-if="isAdmin && (report.paymentCondition || report.paymentMethod)" class="text-xs text-gray-500 mb-3">
+              <div v-if="isAdmin && report.paymentCondition" class="text-xs text-gray-500 mb-3">
                 <div class="flex items-center space-x-2">
                   <CreditCard class="w-3 h-3" />
                   <span>{{ getPaymentConditionText(report.paymentCondition) }}</span>
-                  <span v-if="report.paymentMethod">• {{ getPaymentMethodText(report.paymentMethod) }}</span>
                 </div>
               </div>
 
@@ -389,21 +388,6 @@ const getPaymentConditionText = (condition) => {
   return conditions[condition] || condition
 }
 
-const getPaymentMethodText = (method) => {
-  const methods = {
-    'DINHEIRO': 'Dinheiro',
-    'PIX': 'PIX',
-    'TRANSFERENCIA': 'Transferência',
-    'BOLETO': 'Boleto',
-    'CHEQUE': 'Cheque',
-    'CARTAO_CREDITO': 'Cartão Crédito',
-    'CARTAO_DEBITO': 'Cartão Débito',
-    'DEPOSITO': 'Depósito',
-    'DOCUMENTO': 'Documento',
-    'OUTRO': 'Outro'
-  }
-  return methods[method] || method
-}
 
 const truncateText = (text, maxLength) => {
   if (!text) return ''

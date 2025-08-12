@@ -79,10 +79,6 @@
               <span class="text-gray-600">Condição:</span>
               <span class="ml-2 font-medium">{{ getPaymentConditionText(report.paymentCondition) }}</span>
             </div>
-            <div>
-              <span class="text-gray-600">Forma:</span>
-              <span class="ml-2 font-medium">{{ getPaymentMethodText(report.paymentMethod) }}</span>
-            </div>
           </div>
           
           <div v-if="report.notes" class="mt-3 pt-3 border-t border-gray-200">
@@ -184,21 +180,6 @@ const getPaymentConditionText = (condition) => {
   return conditions[condition] || condition
 }
 
-const getPaymentMethodText = (method) => {
-  const methods = {
-    'DINHEIRO': 'Dinheiro',
-    'PIX': 'PIX',
-    'TRANSFERENCIA': 'Transferência',
-    'BOLETO': 'Boleto',
-    'CHEQUE': 'Cheque',
-    'CARTAO_CREDITO': 'Cartão Crédito',
-    'CARTAO_DEBITO': 'Cartão Débito',
-    'DEPOSITO': 'Depósito',
-    'DOCUMENTO': 'Documento',
-    'OUTRO': 'Outro'
-  }
-  return methods[method] || method
-}
 
 const handleVerify = () => {
   emit('verified', props.report.id)
