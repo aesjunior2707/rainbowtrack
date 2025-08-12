@@ -11,7 +11,7 @@
         <div class="mb-4 flex flex-wrap items-center gap-4 text-sm">
           <div class="flex items-center gap-2">
             <div class="w-3 h-3 rounded-full bg-gray-300"></div>
-            <span class="text-gray-600">Sem dados</span>
+            <span class="text-gray-600">{{ t('maps.no_data') }}</span>
           </div>
           <div class="flex items-center gap-2">
             <div class="w-3 h-3 rounded-full bg-primary-200"></div>
