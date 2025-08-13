@@ -33,7 +33,7 @@
           >
             <div class="mb-4">
               <div class="flex items-center justify-between mb-2">
-                <h3 class="text-lg font-semibold text-gray-900">{{ product.name }}</h3>
+                <h3 class="text-lg font-semibold text-gray-900">{{ product.competitorProduct || product.name }}</h3>
                 <div class="flex items-center space-x-2">
                   <span
                     class="inline-block px-3 py-1 text-xs font-medium rounded-full"
@@ -41,7 +41,7 @@
                   >
                     {{ getCategoryName(product.category) }}
                   </span>
-                  <span 
+                  <span
                     v-if="product.isMainCompetitor"
                     class="inline-flex items-center px-2 py-1 text-xs font-medium bg-red-100 text-red-800 rounded-full"
                   >
@@ -52,12 +52,12 @@
               </div>
               <p class="text-primary-600 font-medium">{{ product.brand }}</p>
             </div>
-            
+
             <div class="space-y-3 text-sm">
-              <!-- Competitor Product -->
+              <!-- Rainbow Product -->
               <div v-if="product.competitorProduct">
-                <span class="text-gray-600">Produto Concorrente:</span>
-                <p class="font-medium text-gray-900">{{ product.competitorProduct }}</p>
+                <span class="text-gray-600">Produto Rainbow:</span>
+                <p class="font-medium text-gray-900">{{ product.name }}</p>
               </div>
               
               <div>
