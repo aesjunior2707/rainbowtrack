@@ -329,6 +329,7 @@ const saving = ref(false)
 const report = ref(null)
 const showSuccessNotification = ref(false)
 const hasAttemptedSubmit = ref(false)
+const showValidationModal = ref(false)
 
 const currencies = computed(() => dataStore.currencies)
 
