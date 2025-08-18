@@ -300,6 +300,7 @@ const paymentCondition = ref('')
 const notes = ref('')
 const showProductModal = ref(false)
 const hasAttemptedSubmit = ref(false)
+const showValidationModal = ref(false)
 
 const handleProductSelected = (productData) => {
   // Check if product already exists
