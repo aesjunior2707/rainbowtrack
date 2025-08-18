@@ -92,10 +92,13 @@
               >
                 <div class="flex justify-between items-start mb-4">
                   <div class="flex-1">
-                    <h5 class="font-semibold text-gray-900">{{ getProductName(productItem.productId) }}</h5>
+                    <h5 class="font-semibold text-gray-900">{{ getProductCompetitorName(productItem.productId) }}</h5>
                     <p class="text-sm text-gray-600">{{ getProductBrand(productItem.productId) }}</p>
+                    <p class="text-xs text-gray-500" v-if="getProductCompetitorName(productItem.productId) !== getProductName(productItem.productId)">
+                      Produto Rainbow: {{ getProductName(productItem.productId) }}
+                    </p>
                     <p class="text-xs text-gray-500 mt-1">{{ getProductDescription(productItem.productId) }}</p>
-                    
+
                     <!-- Registered Crops -->
                     <div class="flex flex-wrap gap-1 mt-3">
                       <span
