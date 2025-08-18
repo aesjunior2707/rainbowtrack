@@ -308,6 +308,11 @@ const getProductBrand = (productId) => {
   return product ? product.brand : 'Marca Desconhecida'
 }
 
+const getProductCompetitorName = (productId) => {
+  const product = dataStore.getProductById(productId)
+  return product ? (product.competitorProduct || product.name) : 'Produto Desconhecido'
+}
+
 const getProductCount = (report) => {
   // Support both old and new format
   if (report.products && Array.isArray(report.products)) {
