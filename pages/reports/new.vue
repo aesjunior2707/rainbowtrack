@@ -268,6 +268,7 @@
               <button
                 type="submit"
                 class="btn-primary"
+                :class="{ 'opacity-60': !canSubmit }"
               >
                 {{ t('reports.confirm_report') }}
               </button>
