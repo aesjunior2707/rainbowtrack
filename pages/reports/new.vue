@@ -381,17 +381,9 @@ const canSubmit = computed(() => {
 const handleSubmit = () => {
   hasAttemptedSubmit.value = true
 
-  if (selectedProducts.value.length === 0) {
-    return
-  }
-
-  // Check if all Generics products have company name
-  const hasInvalidGenerics = selectedProducts.value.some(item => {
-    return item.product.competitorProduct === 'Generics' &&
-           (!item.competitorCompany || item.competitorCompany.trim() === '')
-  })
-
-  if (hasInvalidGenerics) {
+  // Check if form is valid
+  if (!canSubmit.value) {
+    showValidationModal.value = true
     return
   }
 
