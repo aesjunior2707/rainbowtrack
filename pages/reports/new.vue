@@ -343,6 +343,23 @@ const getCurrencySymbol = (currencyId) => {
 
 
 
+const validationInfo = computed(() => {
+  const genericsWithoutCompany = selectedProducts.value
+    .filter(item =>
+      item.product.competitorProduct === 'Generics' &&
+      (!item.competitorCompany || item.competitorCompany.trim() === '')
+    )
+    .map(item => item.product.competitorProduct || item.product.name)
+
+  return {
+    reportDate: !!reportDate.value,
+    state: !!state.value,
+    paymentCondition: !!paymentCondition.value,
+    hasProducts: selectedProducts.value.length > 0,
+    genericsWithoutCompany
+  }
+})
+
 const canSubmit = computed(() => {
   const hasRequiredFields = selectedProducts.value.length > 0 &&
                            reportDate.value &&
