@@ -360,6 +360,16 @@ const getProductName = (productId) => {
   return product ? product.name : 'Produto Desconhecido'
 }
 
+const getProductCompetitorName = (productId) => {
+  const product = dataStore.getProductById(productId)
+  return product ? (product.competitorProduct || product.name) : 'Produto Desconhecido'
+}
+
+const getProductCompetitorProduct = (productId) => {
+  const product = dataStore.getProductById(productId)
+  return product ? product.competitorProduct : null
+}
+
 const getProductBrand = (productId) => {
   const product = dataStore.getProductById(productId)
   return product ? product.brand : 'Marca Desconhecida'
