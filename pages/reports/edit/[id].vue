@@ -344,6 +344,35 @@ const getProductCurrencySymbol = (currencyId) => {
   return currency ? currency.symbol : 'R$'
 }
 
+const validationInfo = computed(() => {
+  if (!form.value) return {
+    reportDate: false,
+    state: false,
+    paymentCondition: false,
+    hasProducts: false,
+    genericsWithoutCompany: []
+  }
+
+  const genericsWithoutCompany = form.value.products
+    .filter(item => {
+      const product = dataStore.getProductById(item.productId)
+      return product?.competitorProduct === 'Generics' &&
+             (!item.competitorCompany || item.competitorCompany.trim() === '')
+    })
+    .map(item => {
+      const product = dataStore.getProductById(item.productId)
+      return product?.competitorProduct || product?.name || 'Produto Desconhecido'
+    })
+
+  return {
+    reportDate: !!form.value.reportDate,
+    state: !!form.value.state,
+    paymentCondition: !!form.value.paymentCondition,
+    hasProducts: form.value.products.length > 0,
+    genericsWithoutCompany
+  }
+})
+
 
 const form = ref({
   reportDate: '',
