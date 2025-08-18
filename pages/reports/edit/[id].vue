@@ -406,13 +406,18 @@ const loadReport = () => {
     const products = foundReport.products ? [...foundReport.products] : [{
       productId: foundReport.productId,
       competitorPrice: foundReport.competitorPrice,
-      currencyId: foundReport.currencyId || 1 // Default to BRL for old format
+      currencyId: foundReport.currencyId || 1, // Default to BRL for old format
+      competitorCompany: foundReport.competitorCompany || null
     }]
 
-    // Ensure all products have currencyId
+    // Ensure all products have currencyId and competitorCompany for Generics
     products.forEach(product => {
       if (!product.currencyId) {
         product.currencyId = foundReport.currencyId || 1 // Default to BRL
+      }
+      // Initialize competitorCompany if it doesn't exist
+      if (!product.hasOwnProperty('competitorCompany')) {
+        product.competitorCompany = null
       }
     })
 
