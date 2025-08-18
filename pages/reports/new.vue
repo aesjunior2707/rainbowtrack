@@ -17,39 +17,12 @@
         </div>
 
         <form @submit.prevent="handleSubmit" class="space-y-6">
-          <!-- Competitor and Customer Selection -->
+          <!-- Customer Selection -->
           <div class="card p-6">
             <h2 class="text-lg font-semibold text-gray-900 mb-4">
               Informações Básicas
             </h2>
             <div class="grid grid-cols-1 gap-4">
-              <div>
-                <label class="block text-sm font-medium text-gray-700 mb-2">
-                  {{ t('reports.select_competitor') }}
-                </label>
-                <div class="flex space-x-2">
-                  <select v-model="selectedCompetitor" class="input-field flex-1" required>
-                    <option value="">{{ t('reports.select_competitor') }}</option>
-                    <option
-                      v-for="competitor in availableCompetitors"
-                      :key="competitor.id"
-                      :value="competitor.id"
-                    >
-                      {{ competitor.name }} - {{ competitor.type }}
-                    </option>
-                  </select>
-                  <button
-                    v-if="authStore.user?.role === 'admin'"
-                    type="button"
-                    @click="showNewCompetitorModal = true"
-                    class="btn-secondary whitespace-nowrap"
-                  >
-                    <Plus class="w-4 h-4 mr-1" />
-                    Novo
-                  </button>
-                </div>
-              </div>
-
               <div>
                 <label class="block text-sm font-medium text-gray-700 mb-2">
                   <User class="w-4 h-4 inline mr-1" />
