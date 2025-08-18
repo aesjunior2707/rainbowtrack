@@ -55,7 +55,7 @@
             <div class="flex justify-between items-start">
               <div class="flex-1">
                 <div class="flex items-center justify-between mb-2">
-                  <h3 class="font-semibold text-gray-900">{{ product.competitorProduct || product.name }}</h3>
+                  <h3 class="font-semibold text-gray-900">{{ product.competitorProduct}}</h3>
                   <span
                     v-if="product.isMainCompetitor"
                     class="inline-flex items-center px-2 py-1 text-xs font-medium bg-red-100 text-red-800 rounded-full"
@@ -69,8 +69,8 @@
                   <p class="text-sm text-gray-600">
                     <span class="font-medium">Marca:</span> {{ product.brand }}
                   </p>
-                  <p class="text-sm text-gray-600" v-if="product.competitorProduct">
-                    <span class="font-medium">Concorrente:</span> {{ product.name }}
+                  <p class="text-sm text-gray-600">
+                    {{ product.name }}
                   </p>
                 </div>
                 
