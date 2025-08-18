@@ -1,6 +1,22 @@
 <template>
-  <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-[9999]" @click="$emit('close')">
-    <div class="bg-white w-full max-w-md mx-4 rounded-2xl shadow-2xl" @click.stop>
+  <Transition
+    enter-active-class="transition-all duration-300 ease-out"
+    enter-from-class="opacity-0"
+    enter-to-class="opacity-100"
+    leave-active-class="transition-all duration-200 ease-in"
+    leave-from-class="opacity-100"
+    leave-to-class="opacity-0"
+  >
+    <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-[9999]" @click="$emit('close')">
+      <Transition
+        enter-active-class="transition-all duration-300 ease-out"
+        enter-from-class="scale-95 opacity-0"
+        enter-to-class="scale-100 opacity-100"
+        leave-active-class="transition-all duration-200 ease-in"
+        leave-from-class="scale-100 opacity-100"
+        leave-to-class="scale-95 opacity-0"
+      >
+        <div class="bg-white w-full max-w-md mx-4 rounded-2xl shadow-2xl" @click.stop>
       <!-- Header -->
       <div class="flex items-center justify-between p-6 border-b border-gray-200">
         <div class="flex items-center space-x-3">
@@ -160,8 +176,10 @@
           </button>
         </div>
       </div>
+        </div>
+      </Transition>
     </div>
-  </div>
+  </Transition>
 </template>
 
 <script setup>
