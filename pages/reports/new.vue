@@ -397,13 +397,17 @@ const canSubmit = computed(() => {
 })
 
 const handleSubmit = () => {
+  console.log('handleSubmit called - canSubmit:', canSubmit.value)
   hasAttemptedSubmit.value = true
 
   // Check if form is valid
   if (!canSubmit.value) {
+    console.log('Form invalid, showing modal')
     showValidationModal.value = true
     return
   }
+
+  console.log('Form valid, proceeding with save')
 
   // Create single report with multiple products
   const report = {
