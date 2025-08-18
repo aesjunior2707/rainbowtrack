@@ -367,19 +367,26 @@ const canSubmit = computed(() => {
   return hasRequiredFields && allGenericsHaveCompany
 })
 
-const handleCompetitorCreated = (competitor) => {
-  selectedCompetitor.value = competitor.id
-  showNewCompetitorModal.value = false
-}
-
 const handleSubmit = () => {
+  hasAttemptedSubmit.value = true
+
   if (selectedProducts.value.length === 0) {
+    return
+  }
+
+  // Check if all Generics products have company name
+  const hasInvalidGenerics = selectedProducts.value.some(item => {
+    return item.product.competitorProduct === 'Generics' &&
+           (!item.competitorCompany || item.competitorCompany.trim() === '')
+  })
+
+  if (hasInvalidGenerics) {
     return
   }
 
   // Create single report with multiple products
   const report = {
-    competitorId: selectedCompetitor.value,
+    competitorId: 1, // Default competitor ID since it's now determined by product
     customerName: customerName.value || '',
     reportDate: reportDate.value,
     reportedBy: authStore.user.id,
@@ -390,7 +397,8 @@ const handleSubmit = () => {
     products: selectedProducts.value.map(item => ({
       productId: item.product.id,
       competitorPrice: item.competitorPrice,
-      currencyId: item.currencyId
+      currencyId: item.currencyId,
+      competitorCompany: item.competitorCompany || null
     }))
   }
 
