@@ -118,6 +118,24 @@
                   </div>
                 </div>
 
+                <!-- Generic Company Field -->
+                <div v-if="getProductCompetitorProduct(productItem.productId) === 'Generics'" class="bg-yellow-50 border-2 border-yellow-200 rounded-lg p-4 mb-4">
+                  <label class="block text-sm font-medium text-gray-700 mb-2">
+                    Nome da Empresa Concorrente *
+                  </label>
+                  <input
+                    v-model="productItem.competitorCompany"
+                    type="text"
+                    class="input-field"
+                    :class="{ 'border-red-500': !productItem.competitorCompany && hasAttemptedSubmit }"
+                    placeholder="Digite o nome da empresa concorrente"
+                    required
+                  />
+                  <p v-if="!productItem.competitorCompany && hasAttemptedSubmit" class="text-red-500 text-xs mt-1">
+                    Este campo é obrigatório para produtos Generics
+                  </p>
+                </div>
+
                 <!-- Currency and Price Input -->
                 <div class="bg-white border-2 border-primary-200 rounded-lg p-4 space-y-4">
                   <div>
