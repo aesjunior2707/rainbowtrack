@@ -68,8 +68,11 @@
                   <div class="flex-1">
                     <div class="flex items-start justify-between mb-2">
                       <div>
-                        <h3 class="font-semibold text-gray-900">{{ item.product.name }}</h3>
+                        <h3 class="font-semibold text-gray-900">{{ item.product.competitorProduct || item.product.name }}</h3>
                         <p class="text-sm text-gray-600">{{ item.product.brand }}</p>
+                        <p class="text-xs text-gray-500" v-if="item.product.competitorProduct">
+                          Produto Rainbow: {{ item.product.name }}
+                        </p>
                       </div>
                       <button
                         type="button"
@@ -78,6 +81,24 @@
                       >
                         <X class="w-4 h-4 text-gray-400" />
                       </button>
+                    </div>
+
+                    <!-- Generic Company Field -->
+                    <div v-if="item.product.competitorProduct === 'Generics'" class="mt-3 mb-3">
+                      <label class="block text-sm font-medium text-gray-700 mb-2">
+                        Nome da Empresa Concorrente *
+                      </label>
+                      <input
+                        v-model="item.competitorCompany"
+                        type="text"
+                        class="input-field"
+                        :class="{ 'border-red-500': !item.competitorCompany && hasAttemptedSubmit }"
+                        placeholder="Digite o nome da empresa concorrente"
+                        required
+                      />
+                      <p v-if="!item.competitorCompany && hasAttemptedSubmit" class="text-red-500 text-xs mt-1">
+                        Este campo é obrigatório para produtos Generics
+                      </p>
                     </div>
 
                     <!-- Price Display -->
