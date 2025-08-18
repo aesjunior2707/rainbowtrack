@@ -465,17 +465,32 @@ const loadReport = () => {
   loading.value = false
 }
 
+const canSave = computed(() => {
+  if (!form.value) return false
+
+  const hasRequiredFields = form.value.reportDate &&
+                           form.value.state &&
+                           form.value.paymentCondition &&
+                           form.value.products.length > 0
+
+  // Check if all Generics products have company name
+  const allGenericsHaveCompany = form.value.products.every(item => {
+    const product = dataStore.getProductById(item.productId)
+    if (product?.competitorProduct === 'Generics') {
+      return item.competitorCompany && item.competitorCompany.trim() !== ''
+    }
+    return true
+  })
+
+  return hasRequiredFields && allGenericsHaveCompany
+})
+
 const handleSubmit = () => {
   hasAttemptedSubmit.value = true
 
-  // Check if all Generics products have company name
-  const hasInvalidGenerics = form.value.products.some(item => {
-    const product = dataStore.getProductById(item.productId)
-    return product?.competitorProduct === 'Generics' &&
-           (!item.competitorCompany || item.competitorCompany.trim() === '')
-  })
-
-  if (hasInvalidGenerics) {
+  // Check if form is valid
+  if (!canSave.value) {
+    showValidationModal.value = true
     return
   }
 
