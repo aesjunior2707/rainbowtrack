@@ -184,17 +184,19 @@ const props = defineProps({
 const emit = defineEmits(['close'])
 
 const progress = computed(() => {
-  const total = 4 + props.validation.genericsWithoutCompany.length
+  const basicFields = 4 // reportDate, state, paymentCondition, hasProducts
+  const genericsFields = props.validation.genericsWithoutCompany.length
+  const total = basicFields + genericsFields
+
   let completed = 0
-  
+
   if (props.validation.reportDate) completed++
   if (props.validation.state) completed++
   if (props.validation.paymentCondition) completed++
   if (props.validation.hasProducts) completed++
-  
-  // For generics, we count them as "not completed" if they're in the list
-  // So we don't add anything here since they're already counted in the total
-  
-  return Math.round((completed / total) * 100)
+
+  // Generics without company are NOT completed, so we don't add them to completed count
+
+  return total > 0 ? Math.round((completed / total) * 100) : 100
 })
 </script>
