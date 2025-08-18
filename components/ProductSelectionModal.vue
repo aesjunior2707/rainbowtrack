@@ -55,8 +55,8 @@
             <div class="flex justify-between items-start">
               <div class="flex-1">
                 <div class="flex items-center justify-between mb-2">
-                  <h3 class="font-semibold text-gray-900">{{ product.name }}</h3>
-                  <span 
+                  <h3 class="font-semibold text-gray-900">{{ product.competitorProduct || product.name }}</h3>
+                  <span
                     v-if="product.isMainCompetitor"
                     class="inline-flex items-center px-2 py-1 text-xs font-medium bg-red-100 text-red-800 rounded-full"
                   >
@@ -64,13 +64,13 @@
                     Main
                   </span>
                 </div>
-                
+
                 <div class="space-y-1 mb-3">
                   <p class="text-sm text-gray-600">
                     <span class="font-medium">Marca:</span> {{ product.brand }}
                   </p>
                   <p class="text-sm text-gray-600" v-if="product.competitorProduct">
-                    <span class="font-medium">Concorrente:</span> {{ product.competitorProduct }}
+                    <span class="font-medium">Concorrente:</span> {{ product.name }}
                   </p>
                 </div>
                 
@@ -126,8 +126,8 @@
           <div class="flex items-center justify-between mb-3">
             <div class="flex-1">
               <div class="flex items-center space-x-2 mb-1">
-                <h4 class="font-semibold text-gray-900">{{ selectedProduct.name }}</h4>
-                <span 
+                <h4 class="font-semibold text-gray-900">{{ selectedProduct.competitorProduct || selectedProduct.name }}</h4>
+                <span
                   v-if="selectedProduct.isMainCompetitor"
                   class="inline-flex items-center px-2 py-1 text-xs font-medium bg-red-100 text-red-800 rounded-full"
                 >
@@ -136,7 +136,7 @@
               </div>
               <p class="text-sm text-gray-600">{{ selectedProduct.brand }}</p>
               <p class="text-xs text-gray-500" v-if="selectedProduct.competitorProduct">
-                Concorrente: {{ selectedProduct.competitorProduct }}
+                Concorrente: {{ selectedProduct.name }}
               </p>
             </div>
             <button

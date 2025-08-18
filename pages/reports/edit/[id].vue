@@ -92,10 +92,13 @@
               >
                 <div class="flex justify-between items-start mb-4">
                   <div class="flex-1">
-                    <h5 class="font-semibold text-gray-900">{{ getProductName(productItem.productId) }}</h5>
+                    <h5 class="font-semibold text-gray-900">{{ getProductCompetitorName(productItem.productId) }}</h5>
                     <p class="text-sm text-gray-600">{{ getProductBrand(productItem.productId) }}</p>
+                    <p class="text-xs text-gray-500" v-if="getProductCompetitorName(productItem.productId) !== getProductName(productItem.productId)">
+                      Produto Rainbow: {{ getProductName(productItem.productId) }}
+                    </p>
                     <p class="text-xs text-gray-500 mt-1">{{ getProductDescription(productItem.productId) }}</p>
-                    
+
                     <!-- Registered Crops -->
                     <div class="flex flex-wrap gap-1 mt-3">
                       <span
@@ -113,6 +116,24 @@
                       </span>
                     </div>
                   </div>
+                </div>
+
+                <!-- Generic Company Field -->
+                <div v-if="getProductCompetitorProduct(productItem.productId) === 'Generics'" class="bg-yellow-50 border-2 border-yellow-200 rounded-lg p-4 mb-4">
+                  <label class="block text-sm font-medium text-gray-700 mb-2">
+                    Nome da Empresa Concorrente *
+                  </label>
+                  <input
+                    v-model="productItem.competitorCompany"
+                    type="text"
+                    class="input-field"
+                    :class="{ 'border-red-500': !productItem.competitorCompany && hasAttemptedSubmit }"
+                    placeholder="Digite o nome da empresa concorrente"
+                    required
+                  />
+                  <p v-if="!productItem.competitorCompany && hasAttemptedSubmit" class="text-red-500 text-xs mt-1">
+                    Este campo é obrigatório para produtos Generics
+                  </p>
                 </div>
 
                 <!-- Currency and Price Input -->
@@ -260,21 +281,32 @@
           </div>
 
           <!-- Action Buttons -->
-          <div class="flex justify-end space-x-4 pt-4 border-t">
-            <NuxtLink
-              to="/reports"
-              class="btn-outline"
-            >
-              Cancelar
-            </NuxtLink>
+          <div class="flex justify-between items-center pt-4 border-t">
             <button
-              type="submit"
-              class="btn-primary"
-              :disabled="saving"
+              v-if="!canSave"
+              type="button"
+              @click="showValidationModal = true"
+              class="text-sm text-primary-600 hover:text-primary-700 underline flex items-center"
             >
-              <span v-if="saving">Salvando...</span>
-              <span v-else>Salvar Alterações</span>
+              <AlertTriangle class="w-4 h-4 mr-1" />
+              Ver o que falta para salvar
             </button>
+            <div class="flex space-x-4 ml-auto">
+              <NuxtLink
+                to="/reports"
+                class="btn-outline"
+              >
+                Cancelar
+              </NuxtLink>
+              <button
+                type="submit"
+                class="btn-primary"
+                :disabled="saving"
+              >
+                <span v-if="saving">Salvando...</span>
+                <span v-else>Salvar Alterações</span>
+              </button>
+            </div>
           </div>
         </form>
       </div>
@@ -286,12 +318,19 @@
         message="Captura atualizada com sucesso!"
         @close="showSuccessNotification = false"
       />
+
+      <!-- Validation Error Modal -->
+      <ValidationErrorModal
+        v-if="showValidationModal"
+        :validation="validationInfo"
+        @close="showValidationModal = false"
+      />
     </AppLayout>
   </div>
 </template>
 
 <script setup>
-import { ArrowLeft, Building2, X, User } from 'lucide-vue-next'
+import { ArrowLeft, Building2, X, User, AlertTriangle } from 'lucide-vue-next'
 
 definePageMeta({
   middleware: 'auth'
@@ -307,6 +346,8 @@ const loading = ref(true)
 const saving = ref(false)
 const report = ref(null)
 const showSuccessNotification = ref(false)
+const hasAttemptedSubmit = ref(false)
+const showValidationModal = ref(false)
 
 const currencies = computed(() => dataStore.currencies)
 
@@ -320,6 +361,35 @@ const getProductCurrencySymbol = (currencyId) => {
   const currency = dataStore.getCurrencyById(currencyId)
   return currency ? currency.symbol : 'R$'
 }
+
+const validationInfo = computed(() => {
+  if (!form.value) return {
+    reportDate: false,
+    state: false,
+    paymentCondition: false,
+    hasProducts: false,
+    genericsWithoutCompany: []
+  }
+
+  const genericsWithoutCompany = form.value.products
+    .filter(item => {
+      const product = dataStore.getProductById(item.productId)
+      return product?.competitorProduct === 'Generics' &&
+             (!item.competitorCompany || item.competitorCompany.trim() === '')
+    })
+    .map(item => {
+      const product = dataStore.getProductById(item.productId)
+      return product?.competitorProduct || product?.name || 'Produto Desconhecido'
+    })
+
+  return {
+    reportDate: !!form.value.reportDate,
+    state: !!form.value.state,
+    paymentCondition: !!form.value.paymentCondition,
+    hasProducts: form.value.products.length > 0,
+    genericsWithoutCompany
+  }
+})
 
 
 const form = ref({
@@ -336,6 +406,16 @@ const form = ref({
 const getProductName = (productId) => {
   const product = dataStore.getProductById(productId)
   return product ? product.name : 'Produto Desconhecido'
+}
+
+const getProductCompetitorName = (productId) => {
+  const product = dataStore.getProductById(productId)
+  return product ? (product.competitorProduct || product.name) : 'Produto Desconhecido'
+}
+
+const getProductCompetitorProduct = (productId) => {
+  const product = dataStore.getProductById(productId)
+  return product ? product.competitorProduct : null
 }
 
 const getProductBrand = (productId) => {
@@ -374,13 +454,18 @@ const loadReport = () => {
     const products = foundReport.products ? [...foundReport.products] : [{
       productId: foundReport.productId,
       competitorPrice: foundReport.competitorPrice,
-      currencyId: foundReport.currencyId || 1 // Default to BRL for old format
+      currencyId: foundReport.currencyId || 1, // Default to BRL for old format
+      competitorCompany: foundReport.competitorCompany || null
     }]
 
-    // Ensure all products have currencyId
+    // Ensure all products have currencyId and competitorCompany for Generics
     products.forEach(product => {
       if (!product.currencyId) {
         product.currencyId = foundReport.currencyId || 1 // Default to BRL
+      }
+      // Initialize competitorCompany if it doesn't exist
+      if (!product.hasOwnProperty('competitorCompany')) {
+        product.competitorCompany = null
       }
     })
 
@@ -398,18 +483,46 @@ const loadReport = () => {
   loading.value = false
 }
 
+const canSave = computed(() => {
+  if (!form.value) return false
+
+  const hasRequiredFields = form.value.reportDate &&
+                           form.value.state &&
+                           form.value.paymentCondition &&
+                           form.value.products.length > 0
+
+  // Check if all Generics products have company name
+  const allGenericsHaveCompany = form.value.products.every(item => {
+    const product = dataStore.getProductById(item.productId)
+    if (product?.competitorProduct === 'Generics') {
+      return item.competitorCompany && item.competitorCompany.trim() !== ''
+    }
+    return true
+  })
+
+  return hasRequiredFields && allGenericsHaveCompany
+})
+
 const handleSubmit = () => {
+  hasAttemptedSubmit.value = true
+
+  // Check if form is valid
+  if (!canSave.value) {
+    showValidationModal.value = true
+    return
+  }
+
   saving.value = true
-  
+
   try {
     const updatedReport = {
       ...report.value,
       ...form.value,
       editedAt: new Date().toISOString()
     }
-    
+
     dataStore.updatePriceReport(updatedReport.id, updatedReport)
-    
+
     showSuccessNotification.value = true
     setTimeout(() => {
       showSuccessNotification.value = false

@@ -17,39 +17,12 @@
         </div>
 
         <form @submit.prevent="handleSubmit" class="space-y-6">
-          <!-- Competitor and Customer Selection -->
+          <!-- Customer Selection -->
           <div class="card p-6">
             <h2 class="text-lg font-semibold text-gray-900 mb-4">
               Informações Básicas
             </h2>
             <div class="grid grid-cols-1 gap-4">
-              <div>
-                <label class="block text-sm font-medium text-gray-700 mb-2">
-                  {{ t('reports.select_competitor') }}
-                </label>
-                <div class="flex space-x-2">
-                  <select v-model="selectedCompetitor" class="input-field flex-1" required>
-                    <option value="">{{ t('reports.select_competitor') }}</option>
-                    <option
-                      v-for="competitor in availableCompetitors"
-                      :key="competitor.id"
-                      :value="competitor.id"
-                    >
-                      {{ competitor.name }} - {{ competitor.type }}
-                    </option>
-                  </select>
-                  <button
-                    v-if="authStore.user?.role === 'admin'"
-                    type="button"
-                    @click="showNewCompetitorModal = true"
-                    class="btn-secondary whitespace-nowrap"
-                  >
-                    <Plus class="w-4 h-4 mr-1" />
-                    Novo
-                  </button>
-                </div>
-              </div>
-
               <div>
                 <label class="block text-sm font-medium text-gray-700 mb-2">
                   <User class="w-4 h-4 inline mr-1" />
@@ -95,8 +68,11 @@
                   <div class="flex-1">
                     <div class="flex items-start justify-between mb-2">
                       <div>
-                        <h3 class="font-semibold text-gray-900">{{ item.product.name }}</h3>
+                        <h3 class="font-semibold text-gray-900">{{ item.product.competitorProduct || item.product.name }}</h3>
                         <p class="text-sm text-gray-600">{{ item.product.brand }}</p>
+                        <p class="text-xs text-gray-500" v-if="item.product.competitorProduct">
+                          Produto Rainbow: {{ item.product.name }}
+                        </p>
                       </div>
                       <button
                         type="button"
@@ -105,6 +81,24 @@
                       >
                         <X class="w-4 h-4 text-gray-400" />
                       </button>
+                    </div>
+
+                    <!-- Generic Company Field -->
+                    <div v-if="item.product.competitorProduct === 'Generics'" class="mt-3 mb-3">
+                      <label class="block text-sm font-medium text-gray-700 mb-2">
+                        Nome da Empresa Concorrente *
+                      </label>
+                      <input
+                        v-model="item.competitorCompany"
+                        type="text"
+                        class="input-field"
+                        :class="{ 'border-red-500': !item.competitorCompany && hasAttemptedSubmit }"
+                        placeholder="Digite o nome da empresa concorrente"
+                        required
+                      />
+                      <p v-if="!item.competitorCompany && hasAttemptedSubmit" class="text-red-500 text-xs mt-1">
+                        Este campo é obrigatório para produtos Generics
+                      </p>
                     </div>
 
                     <!-- Price Display -->
@@ -254,30 +248,34 @@
           </div>
 
           <!-- Submit Buttons -->
-          <div class="flex justify-end space-x-4">
-            <NuxtLink
-              to="/reports"
-              class="btn-outline"
-            >
-              {{ t('reports.cancel') }}
-            </NuxtLink>
+          <div class="flex justify-between items-center">
             <button
-              type="submit"
-              class="btn-primary"
-              :disabled="!canSubmit"
+              type="button"
+              @click="showValidationModal = true"
+              class="text-sm text-primary-600 hover:text-primary-700 underline flex items-center"
+              :class="{ 'opacity-50': canSubmit }"
             >
-              {{ t('reports.confirm_report') }}
+              <AlertTriangle class="w-4 h-4 mr-1" />
+              Ver o que falta para salvar
             </button>
+            <div class="flex space-x-4 ml-auto">
+              <NuxtLink
+                to="/reports"
+                class="btn-outline"
+              >
+                {{ t('reports.cancel') }}
+              </NuxtLink>
+              <button
+                type="submit"
+                class="btn-primary"
+                :class="{ 'opacity-60': !canSubmit }"
+              >
+                {{ t('reports.confirm_report') }}
+              </button>
+            </div>
           </div>
         </form>
       </div>
-
-      <!-- New Competitor Modal -->
-      <NewCompetitorModal
-        v-if="showNewCompetitorModal"
-        @close="showNewCompetitorModal = false"
-        @competitor-created="handleCompetitorCreated"
-      />
 
       <!-- Product Selection Modal -->
       <ProductSelectionModal
@@ -286,12 +284,19 @@
         @close="showProductModal = false"
         @product-selected="handleProductSelected"
       />
+
+      <!-- Validation Error Modal -->
+      <ValidationErrorModal
+        v-if="showValidationModal"
+        :validation="validationInfo"
+        @close="showValidationModal = false"
+      />
     </AppLayout>
   </div>
 </template>
 
 <script setup>
-import { Plus, ArrowLeft, Search, Package, X, User } from 'lucide-vue-next'
+import { Plus, ArrowLeft, Package, X, User, AlertTriangle } from 'lucide-vue-next'
 
 definePageMeta({
   middleware: 'auth'
@@ -304,7 +309,6 @@ const translationStore = useTranslationStore($pinia)
 
 const t = (key, params) => translationStore.t(key, params)
 
-const selectedCompetitor = ref('')
 const customerName = ref('')
 const selectedProducts = ref([])
 const reportDate = ref('')
@@ -312,8 +316,9 @@ const region = ref('')
 const state = ref('')
 const paymentCondition = ref('')
 const notes = ref('')
-const showNewCompetitorModal = ref(false)
 const showProductModal = ref(false)
+const hasAttemptedSubmit = ref(false)
+const showValidationModal = ref(false)
 
 const handleProductSelected = (productData) => {
   // Check if product already exists
@@ -330,7 +335,8 @@ const handleProductSelected = (productData) => {
     selectedProducts.value.push({
       product: productData.product,
       competitorPrice: productData.competitorPrice,
-      currencyId: productData.currencyId
+      currencyId: productData.currencyId,
+      competitorCompany: productData.product.competitorProduct === 'Generics' ? '' : null
     })
   }
 
@@ -355,36 +361,57 @@ const getCurrencySymbol = (currencyId) => {
 
 
 
-const availableCompetitors = computed(() => {
-  const userRegion = authStore.user?.defaultRegion
-  const isAdmin = authStore.user?.role === 'admin'
-  return dataStore.getCompetitorsByUserRegion(userRegion, isAdmin)
+const validationInfo = computed(() => {
+  const genericsWithoutCompany = selectedProducts.value
+    .filter(item =>
+      item.product.competitorProduct === 'Generics' &&
+      (!item.competitorCompany || item.competitorCompany.trim() === '')
+    )
+    .map(item => item.product.competitorProduct || item.product.name)
+
+  return {
+    reportDate: !!reportDate.value,
+    state: !!state.value,
+    paymentCondition: !!paymentCondition.value,
+    hasProducts: selectedProducts.value.length > 0,
+    genericsWithoutCompany
+  }
 })
-
-
 
 const canSubmit = computed(() => {
-  return selectedCompetitor.value &&
-         selectedProducts.value.length > 0 &&
-         reportDate.value &&
-         region.value &&
-         state.value &&
-         paymentCondition.value
+  const hasRequiredFields = selectedProducts.value.length > 0 &&
+                           reportDate.value &&
+                           region.value &&
+                           state.value &&
+                           paymentCondition.value
+
+  // Check if all Generics products have company name
+  const allGenericsHaveCompany = selectedProducts.value.every(item => {
+    if (item.product.competitorProduct === 'Generics') {
+      return item.competitorCompany && item.competitorCompany.trim() !== ''
+    }
+    return true
+  })
+
+  return hasRequiredFields && allGenericsHaveCompany
 })
 
-const handleCompetitorCreated = (competitor) => {
-  selectedCompetitor.value = competitor.id
-  showNewCompetitorModal.value = false
-}
-
 const handleSubmit = () => {
-  if (selectedProducts.value.length === 0) {
+  console.log('handleSubmit called - canSubmit:', canSubmit.value)
+  hasAttemptedSubmit.value = true
+
+  // Check if form is valid
+  if (!canSubmit.value) {
+    console.log('Form invalid, showing modal')
+    showValidationModal.value = true
     return
   }
 
+  console.log('Form valid, proceeding with save')
+
   // Create single report with multiple products
   const report = {
-    competitorId: selectedCompetitor.value,
+    competitorId: 1, // Default competitor ID since it's now determined by product
     customerName: customerName.value || '',
     reportDate: reportDate.value,
     reportedBy: authStore.user.id,
@@ -395,7 +422,8 @@ const handleSubmit = () => {
     products: selectedProducts.value.map(item => ({
       productId: item.product.id,
       competitorPrice: item.competitorPrice,
-      currencyId: item.currencyId
+      currencyId: item.currencyId,
+      competitorCompany: item.competitorCompany || null
     }))
   }
 

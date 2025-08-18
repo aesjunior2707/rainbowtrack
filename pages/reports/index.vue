@@ -126,10 +126,16 @@
                   <div class="flex justify-between items-center">
                     <div class="flex-1">
                       <h4 class="font-medium text-gray-900 text-sm">
-                        {{ getProductName(productItem.productId) }}
+                        {{ getProductCompetitorName(productItem.productId) }}
+                        <span v-if="productItem.competitorCompany" class="text-xs text-gray-600">
+                          ({{ productItem.competitorCompany }})
+                        </span>
                       </h4>
                       <p class="text-xs text-gray-500">
                         {{ getProductBrand(productItem.productId) }}
+                      </p>
+                      <p v-if="getProductCompetitorName(productItem.productId) !== getProductName(productItem.productId)" class="text-xs text-gray-400">
+                        Rainbow: {{ getProductName(productItem.productId) }}
                       </p>
                     </div>
                     <div class="text-right">
@@ -300,6 +306,11 @@ const getProductName = (productId) => {
 const getProductBrand = (productId) => {
   const product = dataStore.getProductById(productId)
   return product ? product.brand : 'Marca Desconhecida'
+}
+
+const getProductCompetitorName = (productId) => {
+  const product = dataStore.getProductById(productId)
+  return product ? (product.competitorProduct || product.name) : 'Produto Desconhecido'
 }
 
 const getProductCount = (report) => {
