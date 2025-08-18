@@ -349,21 +349,22 @@ const getCurrencySymbol = (currencyId) => {
 
 
 
-const availableCompetitors = computed(() => {
-  const userRegion = authStore.user?.defaultRegion
-  const isAdmin = authStore.user?.role === 'admin'
-  return dataStore.getCompetitorsByUserRegion(userRegion, isAdmin)
-})
-
-
-
 const canSubmit = computed(() => {
-  return selectedCompetitor.value &&
-         selectedProducts.value.length > 0 &&
-         reportDate.value &&
-         region.value &&
-         state.value &&
-         paymentCondition.value
+  const hasRequiredFields = selectedProducts.value.length > 0 &&
+                           reportDate.value &&
+                           region.value &&
+                           state.value &&
+                           paymentCondition.value
+
+  // Check if all Generics products have company name
+  const allGenericsHaveCompany = selectedProducts.value.every(item => {
+    if (item.product.competitorProduct === 'Generics') {
+      return item.competitorCompany && item.competitorCompany.trim() !== ''
+    }
+    return true
+  })
+
+  return hasRequiredFields && allGenericsHaveCompany
 })
 
 const handleCompetitorCreated = (competitor) => {
