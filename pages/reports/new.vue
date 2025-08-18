@@ -298,7 +298,6 @@ const translationStore = useTranslationStore($pinia)
 
 const t = (key, params) => translationStore.t(key, params)
 
-const selectedCompetitor = ref('')
 const customerName = ref('')
 const selectedProducts = ref([])
 const reportDate = ref('')
@@ -306,8 +305,8 @@ const region = ref('')
 const state = ref('')
 const paymentCondition = ref('')
 const notes = ref('')
-const showNewCompetitorModal = ref(false)
 const showProductModal = ref(false)
+const hasAttemptedSubmit = ref(false)
 
 const handleProductSelected = (productData) => {
   // Check if product already exists
