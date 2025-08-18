@@ -307,6 +307,13 @@
         message="Captura atualizada com sucesso!"
         @close="showSuccessNotification = false"
       />
+
+      <!-- Validation Error Modal -->
+      <ValidationErrorModal
+        v-if="showValidationModal"
+        :validation="validationInfo"
+        @close="showValidationModal = false"
+      />
     </AppLayout>
   </div>
 </template>
