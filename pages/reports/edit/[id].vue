@@ -436,17 +436,30 @@ const loadReport = () => {
 }
 
 const handleSubmit = () => {
+  hasAttemptedSubmit.value = true
+
+  // Check if all Generics products have company name
+  const hasInvalidGenerics = form.value.products.some(item => {
+    const product = dataStore.getProductById(item.productId)
+    return product?.competitorProduct === 'Generics' &&
+           (!item.competitorCompany || item.competitorCompany.trim() === '')
+  })
+
+  if (hasInvalidGenerics) {
+    return
+  }
+
   saving.value = true
-  
+
   try {
     const updatedReport = {
       ...report.value,
       ...form.value,
       editedAt: new Date().toISOString()
     }
-    
+
     dataStore.updatePriceReport(updatedReport.id, updatedReport)
-    
+
     showSuccessNotification.value = true
     setTimeout(() => {
       showSuccessNotification.value = false
