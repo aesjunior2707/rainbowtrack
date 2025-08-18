@@ -268,7 +268,6 @@
               <button
                 type="submit"
                 class="btn-primary"
-                :disabled="!canSubmit"
               >
                 {{ t('reports.confirm_report') }}
               </button>
