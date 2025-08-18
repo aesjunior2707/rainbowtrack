@@ -248,20 +248,31 @@
           </div>
 
           <!-- Submit Buttons -->
-          <div class="flex justify-end space-x-4">
-            <NuxtLink
-              to="/reports"
-              class="btn-outline"
-            >
-              {{ t('reports.cancel') }}
-            </NuxtLink>
+          <div class="flex justify-between items-center">
             <button
-              type="submit"
-              class="btn-primary"
-              :disabled="!canSubmit"
+              v-if="!canSubmit"
+              type="button"
+              @click="showValidationModal = true"
+              class="text-sm text-primary-600 hover:text-primary-700 underline flex items-center"
             >
-              {{ t('reports.confirm_report') }}
+              <AlertTriangle class="w-4 h-4 mr-1" />
+              Ver o que falta para salvar
             </button>
+            <div class="flex space-x-4 ml-auto">
+              <NuxtLink
+                to="/reports"
+                class="btn-outline"
+              >
+                {{ t('reports.cancel') }}
+              </NuxtLink>
+              <button
+                type="submit"
+                class="btn-primary"
+                :disabled="!canSubmit"
+              >
+                {{ t('reports.confirm_report') }}
+              </button>
+            </div>
           </div>
         </form>
       </div>
