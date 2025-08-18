@@ -250,10 +250,10 @@
           <!-- Submit Buttons -->
           <div class="flex justify-between items-center">
             <button
-              v-if="!canSubmit"
               type="button"
               @click="showValidationModal = true"
               class="text-sm text-primary-600 hover:text-primary-700 underline flex items-center"
+              :class="{ 'opacity-50': canSubmit }"
             >
               <AlertTriangle class="w-4 h-4 mr-1" />
               Ver o que falta para salvar
