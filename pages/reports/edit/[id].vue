@@ -281,21 +281,32 @@
           </div>
 
           <!-- Action Buttons -->
-          <div class="flex justify-end space-x-4 pt-4 border-t">
-            <NuxtLink
-              to="/reports"
-              class="btn-outline"
-            >
-              Cancelar
-            </NuxtLink>
+          <div class="flex justify-between items-center pt-4 border-t">
             <button
-              type="submit"
-              class="btn-primary"
-              :disabled="saving"
+              v-if="!canSave"
+              type="button"
+              @click="showValidationModal = true"
+              class="text-sm text-primary-600 hover:text-primary-700 underline flex items-center"
             >
-              <span v-if="saving">Salvando...</span>
-              <span v-else>Salvar Alterações</span>
+              <AlertTriangle class="w-4 h-4 mr-1" />
+              Ver o que falta para salvar
             </button>
+            <div class="flex space-x-4 ml-auto">
+              <NuxtLink
+                to="/reports"
+                class="btn-outline"
+              >
+                Cancelar
+              </NuxtLink>
+              <button
+                type="submit"
+                class="btn-primary"
+                :disabled="saving"
+              >
+                <span v-if="saving">Salvando...</span>
+                <span v-else>Salvar Alterações</span>
+              </button>
+            </div>
           </div>
         </form>
       </div>
