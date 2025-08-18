@@ -323,7 +323,8 @@ const handleProductSelected = (productData) => {
     selectedProducts.value.push({
       product: productData.product,
       competitorPrice: productData.competitorPrice,
-      currencyId: productData.currencyId
+      currencyId: productData.currencyId,
+      competitorCompany: productData.product.competitorProduct === 'Generics' ? '' : null
     })
   }
 
