@@ -7,7 +7,7 @@
     leave-from-class="opacity-100"
     leave-to-class="opacity-0"
   >
-    <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-[9999]" @click="$emit('close')">
+    <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-[99999]" @click="$emit('close')" style="z-index: 99999 !important;">
       <Transition
         enter-active-class="transition-all duration-300 ease-out"
         enter-from-class="scale-95 opacity-0"
