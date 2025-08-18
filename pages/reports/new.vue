@@ -273,6 +273,13 @@
         @close="showProductModal = false"
         @product-selected="handleProductSelected"
       />
+
+      <!-- Validation Error Modal -->
+      <ValidationErrorModal
+        v-if="showValidationModal"
+        :validation="validationInfo"
+        @close="showValidationModal = false"
+      />
     </AppLayout>
   </div>
 </template>
