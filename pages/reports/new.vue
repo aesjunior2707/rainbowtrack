@@ -266,13 +266,6 @@
         </form>
       </div>
 
-      <!-- New Competitor Modal -->
-      <NewCompetitorModal
-        v-if="showNewCompetitorModal"
-        @close="showNewCompetitorModal = false"
-        @competitor-created="handleCompetitorCreated"
-      />
-
       <!-- Product Selection Modal -->
       <ProductSelectionModal
         v-if="showProductModal"
